@@ -10,4 +10,4 @@ const studentSchema = new mongoose.Schema({
     grad_yr: { type: Number, required: true }
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Student", studentSchema);
