@@ -5,7 +5,7 @@ import {ApiResponse} from '../utils/ApiResponse.js'
 export const createReferral = asyncHandler(async(req,res)=>{
      
     const user = req.user
-    // console.log("REFROUTE",user)
+    console.log("REFROUTE",user)
 
     if(user.role !== "ALUMNI")
         throw new ApiError(400,"Not authorized to publish a referral")

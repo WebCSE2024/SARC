@@ -4,6 +4,7 @@ import { students } from "../randomdata/student.random.js";
 import { Prof } from "../models/prof.models.js";
 import { ApiError } from "../utils/ApiError.js";
 import { Alumni } from "../models/alumni.models.js";
+import { Student } from "../models/student.models.js";
 
 const currArray=alumni
 export const setUser=async(req,res,next)=>{
