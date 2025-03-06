@@ -10,7 +10,7 @@ const referralSchema = new mongoose.Schema({
         type:Date,
         required:[true,"Deadline is needed"],
         validate:{
-            validator:(value)=> !isNaN(new Date(value).getTime),
+            validator:(value)=> !isNaN(new Date(value).getTime()),
             message:"Invalid date format"
         },
     },
@@ -18,8 +18,7 @@ const referralSchema = new mongoose.Schema({
         type:String,
         trim:true,
         required:true,
-        minlength:10,
-        maxlength:200
+        
     },
     job_profile:{
         type:String,
