@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { dbConnection } from './src/controllers/dbConnection.js'
+import { dbConnection } from './src/config/dbConnection.js'
 import { app } from './app.js'
 
 dotenv.config({
