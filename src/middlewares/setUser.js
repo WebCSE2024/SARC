@@ -2,6 +2,7 @@ import { profs } from "../randomdata/prof.random.js";
 import {alumni} from '../randomdata/alumni.random.js'
 import { students } from "../randomdata/student.random.js";
 import { Prof } from "../models/prof.models.js";
+
 import { ApiError } from "../utils/ApiError.js";
 import { Alumni } from "../models/alumni.models.js";
 import { Student } from "../models/student.models.js";
@@ -21,4 +22,3 @@ export const setUser=async(req,res,next)=>{
         throw new ApiError(400,"No user found")        
     }
 }
-
