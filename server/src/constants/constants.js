@@ -1,0 +1,1 @@
+export const REDIS_CACHE_EXPIRY=60*20

@@ -5,4 +5,5 @@ const redis = new Redis({
   port: 6379,
 });
 
-export default redis;
+const client = new Redis()
+export  {redis,client};
