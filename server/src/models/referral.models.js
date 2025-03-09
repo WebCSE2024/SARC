@@ -21,7 +21,7 @@ const referralSchema = new mongoose.Schema({
         
     },
     referral_id:{
-        type:Number,
+        type:String,
         required:true,
         unique:true
     },
@@ -31,7 +31,7 @@ const referralSchema = new mongoose.Schema({
     },
     added_by:{
         type:mongoose.Schema.Types.ObjectId,
-        
+        ref:'Alumni'
     }
 },{timestamps:true})
 
