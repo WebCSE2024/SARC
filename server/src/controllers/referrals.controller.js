@@ -68,7 +68,7 @@ export const getAllReferrals = asyncHandler(async(req,res)=>{
     if(!allReferrals)
          throw new ApiError(400,"Refrrals list not found")
     
-    await client.set('referral-list',JSON.stringify(allReferrals),"EX",REDIS_CACHE_EXPIRY)
+    await client.set('referral-list',JSON.stringify(allReferrals),'EX', REDIS_CACHE_EXPIRY)
 
     return res.status(200).json(
         new ApiResponse(200,allReferrals,"List of all referrals")
@@ -203,7 +203,7 @@ export const getReferralDetails=asyncHandler(async(req,res)=>{
         throw new ApiError(400,'no referral data exist for the referralID')
 
 
-    await client.set(`referral:${referralId}`,JSON.stringify(referralData),"EX",REDIS_CACHE_EXPIRY)
+    await client.set(`referral:${referralId}`, JSON.stringify(referralData),'EX', REDIS_CACHE_EXPIRY);
     return res.status(200).json(
         new ApiResponse(200,referralData,'data fetched successfully')
     )
@@ -214,8 +214,8 @@ export const getMyReferrals = asyncHandler(async (req, res) => {
   
     if (!userId) throw new ApiError(400, "No user exists");
   
-    const cacheKey = `myreferral:${userId}`;
-    const cacheResult = await client.get(cacheKey);
+    // const cacheKey = `myreferral:${userId}`;
+    const cacheResult = await client.get(`myreferral:${userId}`);
   
     if (cacheResult) {
       return res
@@ -243,7 +243,7 @@ export const getMyReferrals = asyncHandler(async (req, res) => {
       },
     ]);
   
-    await client.set(cacheKey, JSON.stringify(result), "EX", REDIS_CACHE_EXPIRY);
+    await client.set(`myreferral:${userId}`, JSON.stringify(result), 'EX', REDIS_CACHE_EXPIRY);
   
     return res.status(200).json(new ApiResponse(200, result, "Referral details fetched successfully"));
   });
