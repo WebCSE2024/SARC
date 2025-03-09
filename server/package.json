@@ -17,6 +17,7 @@
     "ioredis": "^5.6.0",
     "mongodb": "^6.14.2",
     "mongoose": "^8.12.1",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "uuid": "^11.1.0"
   }
 }
