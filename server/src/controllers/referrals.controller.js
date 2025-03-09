@@ -42,9 +42,12 @@ export const createReferral = asyncHandler(async(req,res)=>{
 export const getAllReferrals = asyncHandler(async(req,res)=>{
 
     const allReferrals = await Referral.find({}).select('-_id');
-    if(allReferrals.length === 0 || !allReferrals)
+    if(!allReferrals)
          throw new ApiError(400,"Refrrals list not found")
-    
+    if(allReferrals.length === 0)
+        return res.status(200).json(
+           new ApiResponse(200,allReferrals,"No referral found")
+    )    
     return res.status(200).json(
         new ApiResponse(200,allReferrals,"List of all referrals")
     )

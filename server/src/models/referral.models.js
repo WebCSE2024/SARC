@@ -20,6 +20,11 @@ const referralSchema = new mongoose.Schema({
         required:true,
         
     },
+    referral_id:{
+        type:Number,
+        required:true,
+        unique:true
+    },
     job_profile:{
         type:String,
         required:true,
