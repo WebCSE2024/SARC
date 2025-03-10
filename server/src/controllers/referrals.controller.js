@@ -4,7 +4,7 @@ import { Referral } from "../models/referral.models.js";
 import {ApiResponse} from '../utils/ApiResponse.js'
 import { client } from "../connections/redisConnection.js";
 import { v4 as uuidv4 } from "uuid";
-import {REDIS_CACHE_EXPIRY} from '../constants/constants.js'
+import {REDIS_CACHE_EXPIRY_REFERRAL} from '../constants/constants.js'
 import { ApplyReferral } from "../models/applyReferral.models.js";
 import mongoose from "mongoose";
 
@@ -47,7 +47,8 @@ export const createReferral = asyncHandler(async(req,res)=>{
         throw new ApiError(500,"Referral not generated")
 
     await client.del('referral-list');
-
+    await client.del(`myreferral:${user._id}`)
+    
     const createdReferral = await Referral.findById(referral._id).select('-_id -added_by')
     return res.status(201).json(
         new ApiResponse(201,createdReferral,"Referral created successfully")
@@ -68,7 +69,7 @@ export const getAllReferrals = asyncHandler(async(req,res)=>{
     if(!allReferrals)
          throw new ApiError(400,"Refrrals list not found")
     
-    await client.set('referral-list',JSON.stringify(allReferrals),'EX', REDIS_CACHE_EXPIRY)
+    await client.set('referral-list',JSON.stringify(allReferrals),'EX', REDIS_CACHE_EXPIRY_REFERRAL)
 
     return res.status(200).json(
         new ApiResponse(200,allReferrals,"List of all referrals")
@@ -203,7 +204,7 @@ export const getReferralDetails=asyncHandler(async(req,res)=>{
         throw new ApiError(400,'no referral data exist for the referralID')
 
 
-    await client.set(`referral:${referralId}`, JSON.stringify(referralData),'EX', REDIS_CACHE_EXPIRY);
+    await client.set(`referral:${referralId}`, JSON.stringify(referralData),'EX', REDIS_CACHE_EXPIRY_REFERRAL);
     return res.status(200).json(
         new ApiResponse(200,referralData,'data fetched successfully')
     )
@@ -220,7 +221,7 @@ export const getMyReferrals = asyncHandler(async (req, res) => {
     if (cacheResult) {
       return res
         .status(200)
-        .json(new ApiResponse(200, JSON.parse(cacheResult), "Referral details fetched successfully"));
+        .json(new ApiResponse(200, JSON.parse(cacheResult), "Referral details fetched successfully from redis"));
     }
   
     if (req.user.role !== "ALUMNI") throw new ApiError(403, "Unauthorized");
@@ -243,7 +244,28 @@ export const getMyReferrals = asyncHandler(async (req, res) => {
       },
     ]);
   
-    await client.set(`myreferral:${userId}`, JSON.stringify(result), 'EX', REDIS_CACHE_EXPIRY);
+    await client.set(`myreferral:${userId}`, JSON.stringify(result), 'EX', REDIS_CACHE_EXPIRY_REFERRAL);
   
     return res.status(200).json(new ApiResponse(200, result, "Referral details fetched successfully"));
   });
+
+export const deleteReferral = asyncHandler(async(req,res)=>{
+    const refid=req.params.refid
+
+    if(!refid)
+      throw new ApiError(400,'Referral-ID not available')
+
+    await client.del(`referral/:${refid}`)
+
+    const response=await Referral.deleteOne({
+        referral_id:refid
+
+    })
+
+    if(!response)
+       throw new ApiError(400,'can not delete the referral')
+
+    return res.status(200).json(
+        new ApiResponse(200,null,'referral deleted successfully')
+    )
+})
