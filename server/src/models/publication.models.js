@@ -1,17 +1,18 @@
 import mongoose from 'mongoose';
 
 const PublicationSchema = new mongoose.Schema({
-  prof: {
+  publisher: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Prof',
     required: true
   },
   publicationURL: {
     type: String,
     required: true
   },
-  pagesToShow:{
-    type:Number,
+  publicationId:{
+    type:String,
+    unique:true,
     required:true
   }
 }, { timestamps: true });

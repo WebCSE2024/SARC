@@ -6,7 +6,7 @@ const router=Router()
 router.post('/create-referral',setUser,createReferral)
 router.get('/referral-list',getAllReferrals)
 router.post('/apply/:referralId',setUser,applyReferral)
-router.post('/get-referral-data/:referralId',setUser,getReferralDetails)
-router.post('/get-my-referral',setUser,getMyReferrals,)
+router.post('/:referralId',setUser,getReferralDetails)
+router.post('/get-my-referral',setUser,getMyReferrals)
 
 export default router
