@@ -1,7 +1,7 @@
 import cors from 'cors'
 import { errorHandler } from './src/middlewares/errorhandler.js';
-import  {setUser}  from './src/middlewares/setUser.js';
 import referralRouter from './src/routes/referral.routes.js'
+import eventRouter from './src/routes/event.routes.js'
 import express from 'express'
 
 const app= express()
@@ -17,7 +17,10 @@ app.get('/',(req,res)=>{
 app.get('/api',(req,res)=>{
     res.send('hello from server api')
 })
+
+
 app.use('/api/referral',referralRouter)
+app.use('/api/event',eventRouter)
 
 app.use(errorHandler)
 export {app}
