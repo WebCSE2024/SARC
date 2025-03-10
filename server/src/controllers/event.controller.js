@@ -1,6 +1,6 @@
 import { deleteFromCloudinary, uploadOnCloudinary } from '../connections/coludinaryConnection.js'
 import { client } from '../connections/redisConnection.js'
-import { REDIS_CACHE_EXPIRY_EVENTS } from '../constants/constants.js'
+import { REDIS_CACHE_EXPIRY_PUBLICATIONS } from '../constants/constants.js'
 import {Event} from '../models/event.models.js'
 import { ApiError } from '../utils/ApiError.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
@@ -28,7 +28,7 @@ export const createEvent = asyncHandler(async (req, res) => {
 
     const img_url = await uploadOnCloudinary(event_img)
 
-    if (event_img && !img_url?.url) throw new ApiError(400, 'cloudinary upload failed')
+    if (event_img && img_url && !img_url?.url) throw new ApiError(400, 'cloudinary upload failed')
 
     console.log('EVENTREG', img_url)
     const eventId=generateReferralId()
@@ -121,7 +121,7 @@ export const getAllEvents=asyncHandler(async(req,res)=>{
     if(!response)
         throw new ApiError(400,'no events found')
 
-    await client.set('events-list',JSON.stringify(response),'EX',REDIS_CACHE_EXPIRY_EVENTS)
+    await client.set('events-list',JSON.stringify(response),'EX',REDIS_CACHE_EXPIRY_PUBLICATIONS)
     return res.status(200).json(
         new ApiResponse(200,response,'event-list fetched successfully')
     )
@@ -130,14 +130,14 @@ export const getAllEvents=asyncHandler(async(req,res)=>{
 export const getEventDetails=asyncHandler(async(req,res)=>{
     
     const eventid=req.params.eventid
-    
+
     if(!eventid)
         throw new ApiError(400,'Event-ID not available')
 
     const cacheResult = await client.get(`event:${eventid}`)
     if(cacheResult)
         return res.status(200).json(
-           new ApiResponse(200,JSON.parse(cacheResult),'all events fetched successfully')
+           new ApiResponse(200,JSON.parse(cacheResult),'event details fetched successfully')
         ) 
     
         const event_data = await Event.aggregate([
@@ -171,7 +171,7 @@ export const getEventDetails=asyncHandler(async(req,res)=>{
             }
         ])
         
-        await client.set(`event:${eventid}`,JSON.stringify(event_data),'EX',REDIS_CACHE_EXPIRY_EVENTS)
+        await client.set(`event:${eventid}`,JSON.stringify(event_data),'EX',REDIS_CACHE_EXPIRY_PUBLICATIONS)
         return res.status(200).json(new ApiResponse(200, event_data, 'event data fetched successfully'))
     
 })
@@ -187,10 +187,10 @@ export const deleteEvent = asyncHandler(async(req,res)=>{
         eventId:eventid
 
     })
-
+     
     if(!response)
        throw new ApiError(400,'can not delete the event')
-
+    
     return res.status(200).json(
         new ApiResponse(200,null,'event deleted successfully')
     )

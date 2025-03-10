@@ -2,6 +2,7 @@ import cors from 'cors'
 import { errorHandler } from './src/middlewares/errorhandler.js';
 import referralRouter from './src/routes/referral.routes.js'
 import eventRouter from './src/routes/event.routes.js'
+import publicationRouter from './src/routes/publications.routes.js'
 import express from 'express'
 
 const app= express()
@@ -21,6 +22,8 @@ app.get('/api',(req,res)=>{
 
 app.use('/api/referral',referralRouter)
 app.use('/api/event',eventRouter)
+app.use('/api/publication',publicationRouter)
+
 
 app.use(errorHandler)
 export {app}

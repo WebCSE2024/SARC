@@ -41,3 +41,26 @@ export const deleteFromCloudinary = async (publicId) => {
     return null;
   }
 };
+
+
+export const uploadOnCloudinaryPublication = async(localFilePath)=>{
+  try {  
+
+    if(!localFilePath) return null
+
+    const response=await cloudinary.uploader.upload(
+        localFilePath,{
+            resource_type:'raw',
+            
+        }
+    )
+
+    console.log('file saved on cloudinary ',response.url)
+
+    fs.unlinkSync(localFilePath)
+    return response
+} catch (error) {
+    fs.unlinkSync(localFilePath)
+    return null
+}
+}

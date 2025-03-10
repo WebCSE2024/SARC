@@ -12,7 +12,7 @@ export const setUser=async(req,res,next)=>{
    
     const idx=Math.floor(Math.random()*15)
     const currUser=currArray[idx]
-    console.log(currUser)
+    console.log('setuser',currUser)
     try {
         const user=await Prof.findOne({email:currUser.email})
         req.user=user
