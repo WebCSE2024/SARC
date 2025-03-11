@@ -1,33 +1,72 @@
-# SARC BACKEND
-## Overview
-The Backend is for the SARC website of CSE society,IIT ISM Dhanbad. All the related logics can be found inside the SERVER folder.
-The backend is built with NodeJs, ExpressJs, MongoDB as database and Redis as cache database, cloudinary as cloud storage for images and pdfs uploaded and docker . 
+# SARC Backend
 
-## User Types and Verification
-There are 3-types of users Proffesors, Students and Alumni. For now we have taken some random user data (stored in "randomdata" folder) and also they are in MongoDB .
-For now the user is set through "setUser", a middleware that can be replaced by a authentication middleware with CSES authentication and LinkedIn verification.
+## Overview
+The SARC backend is designed for the CSE Society website of IIT (ISM) Dhanbad. All backend logic is implemented within the `SERVER` folder. The system is built using **Node.js**, **Express.js**, and **MongoDB** for database management. Additionally, **Redis** is used for caching, **Cloudinary** handles cloud storage for images and PDFs, and the application is containerized using **Docker** for seamless deployment.
+
+## User Roles & Authentication
+
+### User Types
+The system supports three types of users:
+
+- **Professors**
+- **Students**
+- **Alumni**
+
+### Authentication
+Currently, user data is stored in MongoDB, with sample datasets available in the `randomdata` folder. Authentication is handled through a middleware called `setUser`, which can be replaced with a robust authentication mechanism using **CSES authentication** and **LinkedIn verification**.
 
 ## Features
-There are mostly 3 features as of now.
 
 ### Events
-The events can be published by PROFESSORS(Admin). The events can be created by giving title, a description, registration URL, Person-in-charge and an event bg-image(optional). Event will be created with a   
-eventid(not the mongoodb object-id). The events can be listed, the data about a particular event with its eventid can be extracted and can be deleted.
+- **Created by:** Professors (Admins)
+- Professors can publish events by providing:
+  - Title
+  - Description
+  - Registration URL
+  - Person-in-Charge (FIC)
+  - Optional event background image
+- Each event is assigned a **unique event ID** (not MongoDB’s ObjectId).
+- Supported operations:
+  - Create an event
+  - Retrieve all events
+  - Get event details by ID
+  - Delete an event
 
 ### Referrals
-Referrals can be published by ALUMNI with informations like job-profile, company, deadline of application and eligibility. The referral will be created with a referral-id.  All the referral releted jobs like
-list-down all referrals, apply referral(for students only), get-referraldetails with applicants(for the publisher), get-my-referrallist(for publisher) and delete referral(for publisher)can be done with request
-to specified routes.
+- **Created by:** Alumni
+- Alumni can publish job referrals with:
+  - Job profile
+  - Company
+  - Application deadline
+  - Eligibility criteria
+- Supported operations:
+  - List all referrals
+  - Apply for referrals (students only)
+  - Get referral details (for publisher)
+  - Fetch publisher’s referrals
+  - Delete referral (for publisher)
 
 ### Publications
-Publications can be published by PROFESSORS. It is just a upload of the pdf and specify the number of pages to be displayed. The frontend will extract those pages, make a new-pdf (these can be done using
-pdf-lib) and send to backend. All the above  discussed CRUD operations can be done with publications also with specified routes with the publication-id (if required).
+- **Created by:** Professors
+- Professors can upload **PDF publications**, specifying the number of pages to be displayed.
+- The frontend extracts the specified pages using **PDF-lib**, generates a new PDF, and sends it to the backend.
+- Supported operations:
+  - Upload a publication
+  - List all publications
+  - Retrieve a publication
+  - Delete a publication
 
-## Custom classes for Errors and Responses
-Custom classes ApiError and ApiResponse are created for the server in utils. ApiError is just a class extended from JS Error class and Error-handler middleware at the end catches all the error and convert 
-them to a reponse to return. AsynchHandler is a higher-order function that does the async function jobs of try-catch. So no need of try-catch in the controllers.
+## Error Handling & Custom Response Classes
 
-# Routes
+### ApiError
+- A custom error-handling class extending JavaScript's built-in `Error` class.
+- Works with a centralized **Error Handler Middleware**, which catches and formats all errors before sending responses.
+
+### ApiResponse
+- A structured response format to ensure consistency across API responses.
+
+### AsyncHandler
+- A higher-order function to handle asynchronous operations without the need for repetitive `try-catch` blocks in controllers.
 
 
 # Publication API Endpoints
