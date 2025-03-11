@@ -6,7 +6,7 @@ const router=Router()
 
 router.post('/create-publication',upload.single('publication_pdf'),setUser,createPublication)
 router.get('/publication-list',getAllPublications)
-router.get('/:publicationid',setUser,getPublicationDetails)
+router.get('/:publicationid',getPublicationDetails)
 router.delete('/delete/:publicationid',setUser,deletePublication)
 router.post('/get-my-publications',setUser,getMyPublications)
 
