@@ -9,6 +9,7 @@ dotenv.config({
 
 const PORT=process.env.PORT || 8001
 
+// this is an experimental, checking for working/possible violations of permissions
 
 dbConnection()
     .then(() => {
