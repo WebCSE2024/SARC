@@ -29,8 +29,8 @@ const HackathonCard = () => {
                 </p>
             </div>
 
-            {/* <HackathonPoster imageUrl={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvGVNKFKB3h0ay5aBrx-YVN_FcDgH6uf_lpjiGNtTpg1DOaTmRxca2WVB07obEBgS-CRQ&usqp=CAU`}/> */}
-            <HackathonPoster />
+            <HackathonPoster imageUrl={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvGVNKFKB3h0ay5aBrx-YVN_FcDgH6uf_lpjiGNtTpg1DOaTmRxca2WVB07obEBgS-CRQ&usqp=CAU`}/>
+            {/* <HackathonPoster /> */}
 
             {/*  add href for pdf link here! */}
             <a href='/' className="rulebook" >

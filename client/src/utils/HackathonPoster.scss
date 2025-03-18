@@ -1,5 +1,17 @@
 .HackathonPoster {
     &.NoImg {
+        .HackathonPoster{
+            .detailsWrapper{
+                box-shadow: 0px 4px 4px 0px #0000001A;
+                width: 768px;
+                height: 303px;
+                top: 1045px;
+                left: 3078px;
+                border-radius: 12px;
+                display: flex;
+
+            }
+        }
         .PosterImg {
             display: none;
         }
@@ -12,6 +24,7 @@
             width: 237px;
             height: 303px;
             object-fit: cover;
+            
 
         }
     }
@@ -104,7 +117,6 @@
                 height: 90px;
                 top: 21px;
                 left: 268px;
-
             }
         }
 
