@@ -57,7 +57,7 @@
         border-radius: 12px;
         margin-top: 20px;
 
-        background-image: url('../assets/EventBg.png');
+        background-image: url('../../../assets/EventBg.png');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -198,17 +198,14 @@
                 color: #2F295F;
             }
         }
-
-        .LikeShare {
-            display: flex;
-        }
-
+        
         margin-top: 72px;
-
+        
     }
 }
 
 .LikeShare {
+    display: flex;
     width: 388.0010986328125px;
     height: 41px;
     gap: 199px;

@@ -1,0 +1,233 @@
+.header-navbar {
+    background-color: #ffffff;
+    padding: 0;
+    /* Remove padding */
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 109px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20.8px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+
+}
+
+.header-navbar nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    /* Remove padding */
+    position: relative;
+}
+
+.header-navbar .left-side {
+    position: fixed;
+    /* Changed from absolute to fixed */
+    left: 0;
+    top: 0;
+    /* Align to top */
+    z-index: 2;
+    height: 109px;
+    /* Match header-navbar height */
+    display: flex;
+    align-items: flex-start;
+    /* Align to top instead of center */
+    padding: 0;
+    width: auto;
+    margin: 0;
+}
+
+.header-navbar .right-side {
+    position: absolute;
+    right: 0;
+    z-index: 2;
+}
+
+.header-navbar .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.header-navbar h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #000000;
+}
+
+.header-navbar a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.header-navbar .logo {
+    height: 109px;
+    /* Match header-navbar height exactly */
+    width: auto;
+    object-fit: cover;
+    /* Changed from contain to cover */
+    display: block;
+    /* Remove any extra space */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Make sign-up button text white by using more specific selector */
+.header-navbar a.signup-btn {
+    color: #ffffff;
+
+    text-decoration: none;
+}
+
+.header-navbar a.signup-btn:hover {
+    background-color: #057CD5;
+    color: #ffffff;
+    text-decoration: none;
+
+    box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.25);
+}
+
+.header-navbar .nav-links a:hover,  .header-navbar .nav-links li .active{
+    /* text-decoration: underline;
+    font-weight: bolder; */
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20.8px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    /* text-decoration-offset: 0%; */
+    text-decoration-thickness: 0%;
+
+}
+
+.signup-btn {
+    padding: 0.5rem 1.5rem;
+
+    background-color: #057CD5;
+    border: none;
+    border-radius: 25px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.signup-btn:hover {
+    background-color: #0052cc;
+    color: #ffffff;
+    text-decoration: none !important;
+}
+
+.news-dropdown {
+    position: relative;
+}
+
+.dropdown-menu,
+.news-dropdown:hover .dropdown-menu {
+    display: none;
+}
+
+.news-submenu {
+    /* position: sticky; */
+    top: 109px;
+    left: 0;
+    right: 0;
+    /* background-color: #ffffff; */
+    background-color: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 20.8px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+
+}
+
+.submenu-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    /* background-color: #ffffff; */
+    /* background: #F2F6FF; */
+    background: none;
+
+    justify-content: flex-start;
+    /* Changed from center to flex-start */
+    gap: 1.5rem;
+    /* Reduced gap */
+    margin-left: 20px;
+    /* Add margin to move items to the right of the logo */
+}
+
+.submenu-content a {
+    color: #000000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    /* Added transparent border */
+    font-size: 0.9rem;
+}
+
+.submenu-content a:hover{
+    color: #2d00f5;
+    border-color: #2d00f5;
+    /* Change border color on hover */
+    text-decoration: none;
+}
+
+.submenu-content .active{
+    color: #2d00f5;
+    border-color: #2d00f5;
+    /* Change border color on hover */
+    text-decoration: none;
+
+}
+
+.dropdown-menu li {
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-menu a {
+    color: #000000;
+    text-decoration: none;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    color: #664ed1;
+    text-decoration: none;
+}

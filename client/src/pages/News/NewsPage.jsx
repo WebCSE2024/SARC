@@ -1,6 +1,6 @@
 import React from 'react'
-import EventsCard from '../components/EventsCard'
-import HackathonCard from '../components/HackathonCard'
+import EventsCard from './NewsCards/EventsCard'
+import HackathonCard from './NewsCards/HackathonCard'
 import './NewsPage.scss'
 
 const EventsPage = () => {

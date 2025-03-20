@@ -1,0 +1,123 @@
+.footer {
+    background-color: #1a1a1a;
+    padding: 2rem 0;
+    width: 100%;
+    margin-top: auto;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;  /* Added horizontal padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4rem;
+}
+
+.footer-logo {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-start;
+    margin-right: 130px;
+}
+
+.footer-logo .logo {
+    height: 120px;  /* Increased from 80px */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;  /* Optional: smooth scaling */
+}
+
+.footer-links {
+    display: flex;
+    gap: 4rem;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.footer-section h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.footer-section h5 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-weight: lighter;  /* Changed from default bold to normal */
+    font-size: 1rem;     /* Optional: adjust size if needed */
+}
+
+.footer-section a {
+    color: rgba(255, 255, 255, 0.87);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+}
+
+.footer-section a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    width: 100%;
+    margin: 2rem auto 0;  /* Added top margin */
+    padding: 1rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    font-size: smaller;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 0.9rem;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 1rem;  /* Reduced gap between links */
+}
+
+.footer-bottom-links a {
+    color: rgba(255, 255, 255, 0.87);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: lighter;
+}
+
+.footer-bottom-links a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.footer-icons {
+    margin-left: auto;  /* Push icons to the right */
+    display: flex;
+    gap: 1.5rem;  /* Increased gap between icons */
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 1.2rem;  /* Increased icon size */
+}
+
+.footer-icons svg {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.footer-icons svg:hover {
+    color: #ffffff;
+}

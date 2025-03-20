@@ -1,7 +1,9 @@
 .HackathonPoster {
+
+
     &.NoImg {
-        .HackathonPoster{
-            .detailsWrapper{
+        .HackathonPoster {
+            .detailsWrapper {
                 box-shadow: 0px 4px 4px 0px #0000001A;
                 width: 768px;
                 height: 303px;
@@ -9,9 +11,9 @@
                 left: 3078px;
                 border-radius: 12px;
                 display: flex;
-
             }
         }
+
         .PosterImg {
             display: none;
         }
@@ -19,32 +21,74 @@
 
     &.posterPresent {
         display: flex;
+        border-radius: 12px;
+        box-shadow: 0px 4px 4px 0px #0000001A;
+
 
         .PosterImg {
             width: 237px;
             height: 303px;
             object-fit: cover;
-            
+            box-sizing: border-box;
+        }
 
+        .detailsWrapper {
+            padding: 20px 0;
+            padding-left: 0px;
+            padding-right: 16px;
         }
     }
 
     .Hack-info {
         width: 768px;
-        height: 278px;
+        height: 303px;
         // top: 200px;
         // left: 36px;
         border-radius: 12px;
-        margin-top: 20px;
-        padding: 30px;
+        // margin-top: 0px;
+        // padding: 20px;
         box-sizing: border-box;
         color: #fff;
+        display: flex;
+        gap: 20px;
 
         &.NoImg {
-            background-image: url('../assets/EventBg.png');
+            background-image: url('../../../assets/EventBg.png');
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
+
+            .detailsWrapper {
+                flex: 1;
+            }
+
+            .posterContainer {
+                width: 0px;
+                height: 0px;
+            }
+            .heading .Registeration{
+                background: #FFF;
+                a {
+                color: #000;}
+            }
+        }
+
+        .posterContainer {
+            width: 237px;
+            height: 303px;
+
+
+            .PosterImg {
+                // width: 100%;
+                // height: auto;
+                object-fit: cover;
+                border-radius: 12px 0 0 12px;
+            }
+        }
+
+        .detailsWrapper {
+            flex: 1; // Allow this to take remaining space
+            min-width: 0; // Prevent text overflow
         }
 
         .heading {
@@ -86,8 +130,10 @@
                 justify-content: center;
                 align-items: center;
                 box-sizing: border-box;
-                background-color: #fff;
+                // background-color: #fff;
                 gap: 10px;
+
+                background: linear-gradient(270deg, #000A52 0%, #010A53 42.62%, #3A45B2 100%);
 
 
                 a {
@@ -102,21 +148,35 @@
                     height: 21px;
                     box-sizing: border-box;
 
-
                     text-decoration: none;
-                    color: #000;
+                    color: #FFF;
                 }
-
             }
         }
 
         &.posterPresent {
+            width: 768px;
+            height: 303px;
+            top: 1045px;
+            left: 3078px;
+            border-radius: 12px;
+            padding: 0px;
+            margin: 0px;
+
+            background: none;
+            color: #000;
+
+            .heading .Registeration a {
+                color: #FFF;
+            }
+
+
             .HackathonTitle {
                 // color: aqua;
                 width: 336px;
                 height: 90px;
-                top: 21px;
-                left: 268px;
+                // top: 21px;
+                // left: 268px;
             }
         }
 
@@ -129,14 +189,12 @@
                 top: 104px;
                 left: 68px;
 
-
                 font-family: "Inter", sans-serif;
                 font-weight: 400;
                 font-size: 14px;
                 line-height: 20.8px;
                 letter-spacing: 2%;
                 vertical-align: middle;
-
 
                 b {
                     margin-left: 5px;
@@ -146,8 +204,16 @@
                     line-height: 20.8px;
                     // letter-spacing: 2%;
                     vertical-align: middle;
-
                 }
+
+            }
+
+            &.posterPresent {
+                width: 397px;
+                height: 173px;
+                top: 111px;
+                left: 258px;
+                box-sizing: border-box;
 
             }
 
@@ -165,7 +231,6 @@
 
                     margin-top: 34px;
                     margin-bottom: 10px;
-
                 }
 
                 .pic-otherDetails {
@@ -175,7 +240,6 @@
                     line-height: 20.8px;
                     letter-spacing: 2%;
                     vertical-align: middle;
-
                 }
             }
         }

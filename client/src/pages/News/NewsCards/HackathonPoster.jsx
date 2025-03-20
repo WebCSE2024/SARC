@@ -2,11 +2,12 @@ import React from 'react'
 import './HackathonPoster.scss'
 
 const HackathonPoster = ({ imageUrl }) => {
-    console.log(imageUrl);
     return (
-        <div className={`HackathonPoster ${imageUrl == undefined ? `NoImg` : `posterPresent`}`}>
-            <div className={`Hack-info ${imageUrl == undefined ? `NoImg` : `posterPresent`}`}>
-                {/* <img className='PosterImg' src={imageUrl} alt="" srcset="" /> */}
+        <div className={`HackathonPoster ${imageUrl == undefined ? 'NoImg' : 'posterPresent'}`}>
+            <div className={`Hack-info ${imageUrl == undefined ? 'NoImg' : 'posterPresent'}`}>
+                <div className="posterContainer">
+                    {imageUrl && <img className='PosterImg' src={imageUrl} alt="Hackathon Poster" />}
+                </div>
                 <div className="detailsWrapper">
                     <div className="heading">
                         <span className='HackathonTitle'><span className='HackathonType'> <span className="color">HackX 2025</span> :</span> National Level Hackathon</span>
@@ -30,7 +31,6 @@ const HackathonPoster = ({ imageUrl }) => {
                         </div>
                     </ul>
                 </div>
-
             </div>
         </div>
     )
