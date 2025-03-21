@@ -1,0 +1,94 @@
+.AchievementsCard {
+    width: 817px;
+    // height: 773px;
+    border-radius: 16px;
+    margin: 0 auto;
+    background: #FFFFFF;
+
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #7A7983;
+
+    padding: 30px 0px;
+    box-sizing: border-box;
+
+    .title {
+        margin: 0 auto;
+        // width: 284;
+        min-height: 29px;
+        top: 27px;
+        left: 267px;
+        font-family: Inter, sans-serif;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
+        color: #0B1571;
+
+        margin-bottom: 21px;
+
+    }
+
+    .titleSeperator {
+        margin-left: 21px;
+        margin-right: 21px;
+    }
+
+    .desc {
+        width: 817px;
+        // height: 240;
+        top: 82px;
+        gap: 8px;
+        padding-top: 20px;
+        padding-right: 40px;
+        padding-bottom: 20px;
+        padding-left: 40px;
+        box-sizing: border-box;
+
+        p {
+            margin-bottom: 8px;
+        }
+
+        p:last-child {
+            margin-bottom: 0px;
+        }
+    }
+
+    .slideShow {
+        width: 671px;
+        // height: 312px;
+        top: 342px;
+        left: 76px;
+        // border-radi/us: 24px;
+
+        margin: 0 auto;
+
+        overflow-x: scroll;
+        display: flex;
+        flex-wrap: nowrap;
+        
+        scroll-snap-type: mandatory;
+        scroll-snap-align: center;
+
+        .SlideShowImage {
+            width: 671px;
+            height: 312px;
+            padding: auto;
+            // border-radius: 24px;
+            scroll-snap-align: center;
+
+        }
+
+
+    }
+
+    .LikeShare-wrappper {
+        padding-left: 28px;
+    }
+}

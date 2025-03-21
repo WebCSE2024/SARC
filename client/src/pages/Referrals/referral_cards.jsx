@@ -1,6 +1,7 @@
 import React from "react";
 import "./referral_cards.css";
-import pic from "../assets/photo.png";
+// import profilePic from "../../assets/NoProfileImg.png";
+import ProfileHeader from "../../utils/profileHeader";
 
 
 const ReferralCard = () => {
@@ -8,10 +9,11 @@ const ReferralCard = () => {
         <div className="card-container">
             <div className="top-block">
                 {/* Header Section */}
-                <div className="profile">
+                <ProfileHeader />
+                {/* <div className="profile">
                     <div className="profile-box">
                     <div className="photo">
-                        <img src={pic} alt="PHOTO" width="56" height="56" />
+                        <img src={profilePic} alt="PHOTO" width="56" height="56" />
                     </div>
                     <div className="details">
                         <h6>John Doe</h6>
@@ -34,7 +36,7 @@ const ReferralCard = () => {
                     
 
                     </div>
-                </div>
+                </div> */}
 
 
             </div>

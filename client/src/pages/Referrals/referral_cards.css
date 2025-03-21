@@ -12,7 +12,8 @@
     padding-left: 16px;
     gap: 17px;
     background: #FFFFFF;
-    margin-left: 350px;
+    /* margin-left: 350px; */
+    margin: 0 auto;
     box-sizing: border-box;
 
 }
@@ -41,13 +42,12 @@ height: 56px;
 border-radius: 999px;
 
 }
-
-.photo {
+.card-container .photo img {
     width: 56px;
     height: 56px;
     border-radius: 999px;
     /* Makes image circular */
-    z-index: 1000;
+    overflow: hidden;
 }
 
 
