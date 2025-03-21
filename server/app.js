@@ -15,14 +15,14 @@ app.get('/',(req,res)=>{
     res.send('hello from server')
 })
 //api routes
-app.get('/api',(req,res)=>{
+app.get('/sarc/v0/api',(req,res)=>{
     res.send('hello from server api')
 })
 
 
-app.use('/api/referral',referralRouter)
-app.use('/api/event',eventRouter)
-app.use('/api/publication',publicationRouter)
+app.use('/sarc/v0/api/referral',referralRouter)
+app.use('/sarc/v0/api/event',eventRouter)
+app.use('/sarc/v0/api/publication',publicationRouter)
 
 
 app.use(errorHandler)

@@ -2,11 +2,12 @@ import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/AsyncHandler.js";
 import { Referral } from "../models/referral.models.js";
 import {ApiResponse} from '../utils/ApiResponse.js'
-import { client } from "../connections/redisConnection.js";
+// import { client } from "../connections/redisConnection.js";
 import { v4 as uuidv4 } from "uuid";
 import {REDIS_CACHE_EXPIRY_REFERRAL} from '../constants/constants.js'
 import { ApplyReferral } from "../models/applyReferral.models.js";
 import mongoose from "mongoose";
+
 
 const generateReferralId = () => {
     return uuidv4().replace(/-/g, "").substring(0, 7);
@@ -21,35 +22,47 @@ export const createReferral = asyncHandler(async(req,res)=>{
         throw new ApiError(400,"Not authorized to publish a referral")
 
     const {
-        company_name,
+        companyName,
         deadline,
-        eligibility,
-        job_profile,
-        added_by=req.user._id,
-        
+        eligibleYears,
+        jobProfile,
+        experience,
+        stipend,
+        duration,
+        description,
+        worksite,
+        location
+          
     }=req.body;
 
-    if(!company_name || !deadline || !eligibility || !job_profile || !added_by ){
+    if(!companyName || !deadline || !eligibleYears || !jobProfile ||!location || !experience || !stipend || !duration || !description || !worksite  ){
         throw new ApiError(400,"All fields are required ")
     }
     const referral_id=generateReferralId()
-
+    
     const referral = await  Referral.create({
-        company_name,
-        job_profile,
-        deadline,
-        eligibility,
-        added_by,
-        referral_id:referral_id
+      companyName,
+      deadline,
+      eligibleYears,
+      jobProfile,
+      addedBy:req.user._id,
+      experience,
+      stipend,
+      duration,
+      description,
+      worksite,
+      location,
+      status:'pending',
+      referralId:referral_id
     })
    
     if(!referral)
         throw new ApiError(500,"Referral not generated")
 
-    await client.del('referral-list');
-    await client.del(`myreferral:${user._id}`)
+    // await client.del('referral-list');
+    // await client.del(`myreferral:${user._id}`)
     
-    const createdReferral = await Referral.findById(referral._id).select('-_id -added_by')
+    const createdReferral = await Referral.findById(referral._id).select('-_id -addedBy')
     return res.status(201).json(
         new ApiResponse(201,createdReferral,"Referral created successfully")
     )
@@ -57,22 +70,108 @@ export const createReferral = asyncHandler(async(req,res)=>{
 
 export const getAllReferrals = asyncHandler(async(req,res)=>{
     
-    const cacheReferral=await client.get('referral-list')
-    if(cacheReferral)
-        return res.status(200).send(
-             new ApiResponse(200,JSON.parse(cacheReferral),"referral list ")
-        )
+    // const cacheReferral=await client.get('referral-list')
+    // if(cacheReferral)
+    //     return res.status(200).send(
+    //          new ApiResponse(200,JSON.parse(cacheReferral),"referral list ")
+    //     )
+   
 
 
-    const allReferrals = await Referral.find({}).select('-_id');
+    const allReferrals = await Referral.aggregate([
+      {
+        $lookup: {
+          from: 'alumnis',
+          localField: 'addedBy',
+          foreignField: '_id',
+          as: 'addedBy'
+        }
+      },
+      {
+        $project: {
+    
+    
+          _id:0,
+          __v:0,
+          'addedBy._id':0,
+          'addedBy.password':0,
+          'addedBy.isVerified':0
+          
+        }
+      }
+    ])
     
     if(!allReferrals)
          throw new ApiError(400,"Refrrals list not found")
     
-    await client.set('referral-list',JSON.stringify(allReferrals),'EX', REDIS_CACHE_EXPIRY_REFERRAL)
-
+    // await client.set('referral-list',JSON.stringify(allReferrals),'EX', REDIS_CACHE_EXPIRY_REFERRAL)
+    
+     
     return res.status(200).json(
         new ApiResponse(200,allReferrals,"List of all referrals")
+    )
+})
+
+export const toggleReferralState = asyncHandler(async(req,res)=>{
+
+  if(req.user.role !== 'PROFESSOR') 
+    throw new ApiError(400,'Unauthorized')
+
+  const {referralId,status} = req.query
+  if(!referralId || !status)
+    throw new ApiError(400,'Data incomplete')
+
+  const referral = await Referral.findOne({
+    referralId:referralId
+  })
+  if(!referral)
+    throw new ApiError(400,'Referral not found')
+
+  referral.status = status
+  await referral.save()
+  const updatedReferral = await Referral.findById(referralId,status)
+
+  if(!updatedReferral)
+    throw new ApiError(400,'Referral not updated')
+
+  return res.status(200).json(
+    new ApiResponse(200,null,'Referral status updated')
+  )
+})
+
+export  const  getActiveReferrals = asyncHandler(async(req,res)=>{
+    const activeReferrals = await Referral.aggregate([
+      {
+        $match: {
+          status: 'active'
+        }
+      },
+      {
+        $lookup: {
+          from: 'alumnis',
+          localField: 'addedBy',
+          foreignField: '_id',
+          as: 'addedBy'
+        }
+      },
+      {
+        $project: {
+    
+    
+          _id:0,
+          __v:0,
+          'addedBy._id':0,
+          'addedBy.password':0,
+          'addedBy.isVerified':0
+          
+        }
+      }
+    ])
+    if(!activeReferrals)
+        throw new ApiError(400,'No active referrals found')
+    
+    return res.status(200).json(
+        new ApiResponse(200,activeReferrals,'List of active referrals')
     )
 })
 
@@ -82,14 +181,18 @@ export const applyReferral= asyncHandler(async(req,res)=>{
     if(!referralId)
         throw new ApiError(400,'Referral-ID not available')
     console.log('ALLGOOD1')
-
+    console.log(referralId)
     const referral=await Referral.findOne({
-        referral_id:referralId
+        referralId:referralId
     })
     console.log('ALLGOOD2')
     if(!referral)
         throw new ApiError(400,'Referral does not exist')
-    
+
+    if(referral.status !== 'active'){
+      throw new ApiError(400,'Referral is not active yet')
+    }
+
     if(!req.user)
         throw new ApiError(400,'Unauthenticated')
 
@@ -97,6 +200,10 @@ export const applyReferral= asyncHandler(async(req,res)=>{
         throw new ApiError(400,'Unauthorized')
     
     // console.log(referral._id)
+
+    if(referral.eligibleYears.indexOf(req.user.grad_yr) === -1)
+        throw new ApiError(400,'Not eligible for this referral')
+
     const existsApplication = await ApplyReferral.findOne({
         applied_by: new mongoose.Types.ObjectId(req.user._id),
         referral_id: new mongoose.Types.ObjectId(referral._id)
@@ -104,6 +211,9 @@ export const applyReferral= asyncHandler(async(req,res)=>{
     
    if(existsApplication)
       throw new ApiError(400,'Already applied for referral')
+    
+   if(Date.now() > Date.parse(referral.deadline))
+      throw new ApiError(400,'Deadline for application has passed')
 
     const apply_ref = await ApplyReferral.create({
          
@@ -128,14 +238,14 @@ export const getReferralDetails=asyncHandler(async(req,res)=>{
     if(!referralId)
         throw new ApiError(400,'Referral-ID not available')
     
-    const cacheReferral=await client.get(`referral:${referralId}`)
-    if(cacheReferral)
-        return res.status(200).send(
-             new ApiResponse(200,JSON.parse(cacheReferral),"referral list ")
-        )
+    // const cacheReferral=await client.get(`referral:${referralId}`)
+    // if(cacheReferral)
+    //     return res.status(200).send(
+    //          new ApiResponse(200,JSON.parse(cacheReferral),"referral list ")
+    //     )
 
     const referral=await Referral.findOne({
-        referral_id:referralId
+        referralId:referralId
     })
 
     if(!referral)
@@ -144,13 +254,13 @@ export const getReferralDetails=asyncHandler(async(req,res)=>{
     if(!req.user)
         throw new ApiError(400,'Unauthenticated')
 
-    if(req.user.role !=='ALUMNI' )
-        throw new ApiError(400,'Unauthorized')
+    // if(req.user.role !=='ALUMNI' )
+    //     throw new ApiError(400,'Unauthorized')
 
     const referralData =  await Referral.aggregate([
         {
             $match: {
-                referral_id: referralId 
+                referralId: referralId 
               }
         },
         {
@@ -178,10 +288,18 @@ export const getReferralDetails=asyncHandler(async(req,res)=>{
         {
           $group: {
             _id: "$_id",
-            referral_id: { $first: "$referral_id" },
-            company_name: { $first: "$company_name" },
-            job_profile: { $first: "$job_profile" },
+            referralId: { $first: "$referralId" },
+            companyName: { $first: "$companyName" },
+            jobProfile: { $first: "$jobProfile" },
             deadline: { $first: "$deadline" },
+            experience: { $first: "$experience" },
+            stipend: { $first: "$stipend" },
+            location: { $first: "$location" },
+            duration: { $first: "$duration" },
+            description: { $first: "$description" },
+            worksite: { $first: "$worksite" },
+            status: { $first: "$status" },
+            message: { $first: "$message" },
             applicants: {
               $push: {
                 full_name: "$student_details.full_name",
@@ -204,50 +322,89 @@ export const getReferralDetails=asyncHandler(async(req,res)=>{
         throw new ApiError(400,'no referral data exist for the referralID')
 
 
-    await client.set(`referral:${referralId}`, JSON.stringify(referralData),'EX', REDIS_CACHE_EXPIRY_REFERRAL);
+    // await client.set(`referral:${referralId}`, JSON.stringify(referralData),'EX', REDIS_CACHE_EXPIRY_REFERRAL);
     return res.status(200).json(
         new ApiResponse(200,referralData,'data fetched successfully')
     )
 })
 
 export const getMyReferrals = asyncHandler(async (req, res) => {
-    const userId = req.user._id;
-  
-    if (!userId) throw new ApiError(400, "No user exists");
-  
-    // const cacheKey = `myreferral:${userId}`;
-    const cacheResult = await client.get(`myreferral:${userId}`);
-  
-    if (cacheResult) {
-      return res
-        .status(200)
-        .json(new ApiResponse(200, JSON.parse(cacheResult), "Referral details fetched successfully from redis"));
-    }
-  
-    if (req.user.role !== "ALUMNI") throw new ApiError(403, "Unauthorized");
-  
-    const result = await Referral.aggregate([
-      {
-        $match: {
-          added_by: new mongoose.Types.ObjectId(userId),
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          job_profile: 1,
-          deadline: 1,
-          company_name: 1,
-          eligibility: 1,
-          referral_id:1
-        },
-      },
-    ]);
-  
-    await client.set(`myreferral:${userId}`, JSON.stringify(result), 'EX', REDIS_CACHE_EXPIRY_REFERRAL);
-  
-    return res.status(200).json(new ApiResponse(200, result, "Referral details fetched successfully"));
-  });
+    const userid = req.user._id;
+    console.log(userid)
+    if(!userid)
+        throw new ApiError(400,'User-ID not available')
+
+    // const cacheReferral=await client.get(`myreferral:${userid}`)
+    // if(cacheReferral)
+    //     return res.status(200).send(
+    //          new ApiResponse(200,JSON.parse(cacheReferral),"referral list ")
+    //     )
+    if(req.user.role !== 'ALUMNI')
+        throw new ApiError(400,'Unauthorized')
+
+    const myReferrals = await Referral.aggregate([    
+        {
+            $match: {
+              addedBy: new mongoose.Types.ObjectId(userid)
+            }
+          },
+          {
+            $lookup: {
+              from: "applyreferrals",
+              localField: "_id",
+              foreignField: "referral_id",
+              as: "application_list"
+            }
+          },
+          {
+            $unwind: "$application_list"
+          },
+          {
+            $lookup: {
+              from: "students",
+              localField: "application_list.applied_by",
+              foreignField: "_id",
+              as: "student_details"
+            }
+          },
+          {
+            $unwind: "$student_details"
+          },
+          {
+            $group: {
+              _id: "$_id",
+              referralId: { $first: "$referralId" },
+              companyName: { $first: "$companyName" },
+              jobProfile: { $first: "$jobProfile" },
+              deadline: { $first: "$deadline" },
+              experience: { $first: "$experience" },
+              stipend: { $first: "$stipend" },
+              location: { $first: "$location" },
+              duration: { $first: "$duration" },
+              description: { $first: "$description" },
+              worksite: { $first: "$worksite" },
+              status: { $first: "$status" },
+              message: { $first: "$message" },
+              applicants: {
+                $push: {
+                  full_name: "$student_details.full_name",
+                  linkedIn: "$student_details.linkedIn",
+                  email: "$student_details.email",
+                  grad_yr: "$student_details.grad_yr"
+                }
+              }
+            }
+          },
+          {
+            $project: {
+              _id: 0
+            }
+          }
+    ])
+
+
+  }); //  need to test
+
 
 export const deleteReferral = asyncHandler(async(req,res)=>{
     const refid=req.params.refid
@@ -269,3 +426,4 @@ export const deleteReferral = asyncHandler(async(req,res)=>{
         new ApiResponse(200,null,'referral deleted successfully')
     )
 })
+

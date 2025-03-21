@@ -1,5 +1,5 @@
 import { deleteFromCloudinary, uploadOnCloudinary } from '../connections/coludinaryConnection.js'
-import { client } from '../connections/redisConnection.js'
+// import { client } from '../connections/redisConnection.js'
 import { REDIS_CACHE_EXPIRY_PUBLICATIONS } from '../constants/constants.js'
 import {Event} from '../models/event.models.js'
 import { ApiError } from '../utils/ApiError.js'

@@ -7,14 +7,14 @@ import { ApiError } from "../utils/ApiError.js";
 import { Alumni } from "../models/alumni.models.js";
 import { Student } from "../models/student.models.js";
 
-const currArray=profs
+const currArray=alumni
 export const setUser=async(req,res,next)=>{
    
     const idx=Math.floor(Math.random()*15)
     const currUser=currArray[idx]
     console.log('setuser',currUser)
     try {
-        const user=await Prof.findOne({email:currUser.email})
+        const user=await Alumni.findOne({email:currUser.email})
         req.user=user
         console.log(req.user)
         next()
