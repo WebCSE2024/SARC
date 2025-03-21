@@ -13,10 +13,11 @@ import AchievementsCard from './pages/News/NewsCards/AchievementsCard'
 const App = () => {
   return (
     <div className='app'>
-      <Header />
-      <h2  >EVENTS:</h2>
-      <h3>Achievements:</h3>
+      
+      
+      <h2>Achievements:</h2>
       <AchievementsCard />
+      <h2  >Events:</h2>
       <EventsPage/>
 
       <h2>Referrals:</h2>
@@ -26,7 +27,7 @@ const App = () => {
       <h2>Publications:</h2>
       <PublicationsCard />
 
-      <Footer />
+   
       
     </div>
   )
