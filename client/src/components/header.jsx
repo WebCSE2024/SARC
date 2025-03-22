@@ -11,7 +11,7 @@ const Header = () => {
       <header className="header-navbar">
         <nav>
           <div className="left-side">
-            <Link to="/">
+            <Link to="/" onClick={closeNewsMenu}>
               <img src={topBarLogo} alt="Landing Page Logo" className="logo" />
             </Link>
           </div>
