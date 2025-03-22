@@ -427,3 +427,34 @@ export const deleteReferral = asyncHandler(async(req,res)=>{
     )
 })
 
+export const removeApplication = asyncHandler(async(req,res)=>{
+    const refid=req.params.refid
+    const applied_by=req.params.applied_by
+
+    if(!refid || !appid)
+        throw new ApiError(400,'Referral-ID or Application-ID not available')
+
+    // await client.del(`referral/:${refid}`)
+    // await client.del(`application/:${appid}`)
+   
+    const existsApplication = await ApplyReferral.findOne({
+        referral_id:refid,
+        applied_by:applied_by
+    })
+
+    if(!existsApplication)
+        throw new ApiError(400,'No such application exist')
+
+    const response=await ApplyReferral.deleteOne({
+        referral_id:refid,
+        applied_by:applied_by
+    })
+
+    if(!response)
+        throw new ApiError(400,'can not delete the application')
+
+    return res.status(200).json(
+        new ApiResponse(200,null,'application deleted successfully')
+    )
+}   
+)
