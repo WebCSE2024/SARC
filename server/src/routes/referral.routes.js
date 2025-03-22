@@ -8,7 +8,7 @@ router.get('/referral-list',getAllReferrals)
 router.patch('/toggle-status',setUser,toggleReferralState)
 router.post('/apply/:referralId',setUser,applyReferral)
 router.post('/:referralId',setUser,getReferralDetails)
-router.post('/get-my-referral',setUser,getMyReferrals)
+router.get('/get-my-referral',setUser,getMyReferrals)
 router.get('/active',getActiveReferrals)
 
 export default router
