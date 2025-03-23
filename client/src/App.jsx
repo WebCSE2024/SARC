@@ -16,15 +16,17 @@ const App = () => {
   return (
     <div className='app'>
       <Header />
-
       <ProfilePage />
       {/* <HomePage /> */}
 
       <LoginPage />
 
       <h2  >EVENTS:</h2>
+
       <h3>Achievements:</h3>
       <AchievementsCard />
+
+        <h2  >Events:</h2>
       <EventsPage/>
 
       <h2>Referrals:</h2>
@@ -34,7 +36,7 @@ const App = () => {
       <h2>Publications:</h2>
       <PublicationsCard />
 
-      <Footer />
+   
       
     </div>
   )

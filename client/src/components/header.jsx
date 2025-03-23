@@ -1,62 +1,47 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link
 import topBarLogo from "../assets/top_bar.png";
 import "./header.css";
 
 const Header = () => {
   const [showNewsMenu, setShowNewsMenu] = useState(false);
-
+  const closeNewsMenu = () => setShowNewsMenu(false);
   return (
     <>
       <header className="header-navbar">
         <nav>
           <div className="left-side">
-            <a href="/" className="LogoNav">
-              {/* Header Logo and name */}
-              {/* <img src={topBarLogo} alt="Landing Page Logo" className="logo" /> */}
-              
-              {/* svg for website logo */}
-              <svg className="LogoSvg" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="28" y="46" width="8" height="8" rx="4" fill="#057CD5" fillOpacity="0.31" stroke="#057CD5" strokeWidth="2" />
-                <rect x="28" y="10" width="8" height="8" rx="4" fill="#057CD5" fillOpacity="0.31" stroke="#057CD5" strokeWidth="2" />
-                <rect x="17.8756" y="35.5359" width="8" height="8" rx="4" transform="rotate(60 17.8756 35.5359)" fill="#057CD5" fillOpacity="0.31" stroke="#057CD5" strokeWidth="2" />
-                <rect x="49.0526" y="17.5359" width="8" height="8" rx="4" transform="rotate(60 49.0526 17.5359)" fill="#057CD5" fillOpacity="0.31" stroke="#057CD5" strokeWidth="2" />
-                <rect x="21.8756" y="21.5359" width="8" height="8" rx="4" transform="rotate(120 21.8756 21.5359)" fill="#057CD5" fillOpacity="0.31" stroke="#057CD5" strokeWidth="2" />
-                <rect x="53.0526" y="39.5359" width="8" height="8" rx="4" transform="rotate(120 53.0526 39.5359)" fill="#057CD5" fillOpacity="0.31" stroke="#057CD5" strokeWidth="2" />
-                <path fillRule="evenodd" clipRule="evenodd" d="M32.5 20.5C32.5 20.2239 32.2761 20 32 20C31.7239 20 31.5 20.2239 31.5 20.5V22.5134C31.5 22.7851 31.7283 23 32 23C32.2717 23 32.5 22.7851 32.5 22.5134V20.5ZM39.9667 26.8231C39.7313 26.959 39.6592 27.2637 39.7954 27.499C39.9313 27.734 40.2316 27.8248 40.4667 27.6891L42.2093 26.683C42.4484 26.5449 42.5304 26.2391 42.3923 26C42.2542 25.7609 41.9484 25.6789 41.7093 25.817L39.9667 26.8231ZM40.4667 36.3109C40.2316 36.1752 39.9313 36.266 39.7954 36.501C39.6592 36.7363 39.7313 37.041 39.9667 37.1769L41.7093 38.183C41.9484 38.3211 42.2542 38.2391 42.3923 38C42.5304 37.7609 42.4484 37.4551 42.2093 37.317L40.4667 36.3109ZM32.5 41.4866C32.5 41.2149 32.2717 41 32 41C31.7283 41 31.5 41.2149 31.5 41.4866V43.5C31.5 43.7761 31.7239 44 32 44C32.2761 44 32.5 43.7761 32.5 43.5V41.4866ZM24.0333 37.1769C24.2687 37.041 24.3408 36.7363 24.2046 36.501C24.0686 36.266 23.7684 36.1752 23.5333 36.3109L21.7907 37.317C21.5516 37.4551 21.4696 37.7609 21.6077 38C21.7458 38.2391 22.0516 38.3211 22.2907 38.183L24.0333 37.1769ZM23.5333 27.6891C23.7684 27.8248 24.0686 27.734 24.2046 27.499C24.3408 27.2637 24.2687 26.959 24.0333 26.8231L22.2907 25.817C22.0516 25.6789 21.7458 25.7609 21.6077 26C21.4696 26.2391 21.5516 26.5449 21.7907 26.683L23.5333 27.6891Z" fill="#057CD5" />
-                <rect x="25" y="25" width="14" height="14" rx="7" fill="#057CD5" />
-              </svg>
 
-              <span className="WebsiteName" style={{ letterSpacing: -2 }}>
-                {/* Svg for website Name */}
-                <svg width="67" height="24" viewBox="0 0 67 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7.504 8.024L12.656 11.256C19.376 15.096 17.68 23.288 8.912 23.288C6.576 23.288 4.816 22.168 3.696 21.048C3.664 21.048 3.632 21.016 3.6 20.984C2.8 20.248 2.736 23 2.736 23H2.416L2.384 14.264H2.992C2.992 14.264 2.896 22.68 8.912 22.68C11.472 22.68 13.776 21.304 13.776 17.784C13.776 14.648 11.28 13.688 9.84 12.792L6.064 10.392C0.944 7.512 2.16 0.439999 9.616 0.439999C12.016 0.439999 13.68 1.592 14.736 2.648C15.6 3.64 15.696 0.695999 15.696 0.695999H16.016V9.464H15.408C15.408 9.464 15.568 1.048 9.616 1.048C7.536 1.048 5.712 2.744 5.712 4.856C5.712 6.584 6.704 7.512 7.504 8.024ZM21.2145 14.68L27.4865 14.712L24.1265 2.712L21.2145 14.68ZM16.4465 23L16.5105 22.68C16.5105 22.68 18.5585 22.328 19.0065 19.896L23.1665 3.704C23.5185 1.944 22.5585 1.272 22.0145 1.048C21.7585 0.952 21.5985 0.919998 21.5985 0.919998L21.5025 0.599998H28.2865L28.3825 0.919998C28.3825 0.919998 26.4625 1.24 27.1345 3.704L31.4545 19.896C32.1265 22.328 34.2065 22.68 34.2065 22.68L34.3025 23H27.6785L27.5825 22.68C27.5825 22.68 29.5025 22.328 28.8305 19.896L27.7425 15.384H20.9905L19.8385 19.896C19.4225 22.328 21.3425 22.68 21.3425 22.68L21.3105 23H16.4465ZM49.275 6.2C49.275 6.2 49.563 12.024 43.771 12.024L40.635 11.992L43.195 12.856L47.867 20.28C49.339 22.616 50.811 22.68 50.811 22.68V23H46.171L40.059 11.992L40.027 19.896C40.059 22.36 42.043 22.68 42.043 22.68V23H35.259V22.68C35.451 22.648 37.051 22.296 37.243 20.312V2.84C37.051 1.016 35.259 0.919998 35.259 0.919998V0.599998H37.243H42.459C47.675 0.599998 49.179 3.832 49.275 6.2ZM42.523 11.512C46.875 11.512 46.619 6.04 46.619 6.04V5.976C46.619 1.144 42.075 1.144 42.075 1.144H40.027V11.512H42.523ZM64.688 4.472C63.824 2.36 61.52 1.048 59.152 1.048C52.88 1.048 53.264 11.8 53.264 11.8C53.264 11.8 52.752 22.52 59.152 22.52C62.16 22.52 64.688 19.64 66.192 15.64V19.032C64.88 21.112 62.96 23.096 59.152 23.096C49.776 23.096 50.384 11.896 50.384 11.896C50.384 11.896 49.84 0.471998 59.152 0.471998C61.296 0.471998 63.248 1.112 64.784 2.616C65.584 3.256 65.808 0.599998 65.808 0.599998H66.128V9.4H65.552C65.552 9.4 65.392 6.392 64.688 4.472Z" fill="black" />
-                </svg>
+            <Link to="/" onClick={closeNewsMenu}>
+              <img src={topBarLogo} alt="Landing Page Logo" className="logo" />
+            </Link>
 
-              </span>
 
-            </a>
           </div>
           <ul className="nav-links">
-            <li><a href="#publications">Publications</a></li>
-            <li><a href="#referrals">Referrals</a></li>
-            <li>
-              <a className="active" href="#" onClick={(e) => {
-                e.preventDefault();
-                setShowNewsMenu(!showNewsMenu);
-              }}>News</a>
+            <li><Link to="/publications" onClick={closeNewsMenu}>Publications</Link></li>
+            <li><Link to="/referrals" onClick={closeNewsMenu}>Referrals</Link></li>
+            <li><Link
+    to="/news"
+    className={showNewsMenu ? "active" : ""}
+    onClick={() => setShowNewsMenu(!showNewsMenu)}
+  >
+    News
+  </Link>
             </li>
           </ul>
           <div className="right-side">
-            <a href="#signup" className="signup-btn">Sign in</a>
+            <Link to="/signup" className="signup-btn" onClick={closeNewsMenu}>Sign in</Link>
           </div>
         </nav>
       </header>
+
       {showNewsMenu && (
         <div className="news-submenu">
           <div className="submenu-content">
-            <a href="#achievements">Achievements</a>
-            <a className="active" href="#events">Events</a>
-            <a href="#seminars">Seminars</a>
+            <Link to="/achievements">Achievements</Link>
+            <Link to="/events">Events</Link>
+            <Link to="/seminars">Seminars</Link>
           </div>
         </div>
       )}
