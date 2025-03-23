@@ -11,9 +11,12 @@ const Header = () => {
       <header className="header-navbar">
         <nav>
           <div className="left-side">
+
             <Link to="/" onClick={closeNewsMenu}>
               <img src={topBarLogo} alt="Landing Page Logo" className="logo" />
             </Link>
+
+
           </div>
           <ul className="nav-links">
             <li><Link to="/publications" onClick={closeNewsMenu}>Publications</Link></li>

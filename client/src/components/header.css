@@ -24,7 +24,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     width: 100%;
     margin: 0 auto;
     padding: 0;
@@ -33,7 +33,7 @@
 }
 
 .header-navbar .left-side {
-    position: fixed;
+    position: sticky;
     /* Changed from absolute to fixed */
     left: 0;
     top: 0;
@@ -51,7 +51,7 @@
 
 .header-navbar .right-side {
     position: absolute;
-    right: 0;
+    right: 10px;
     z-index: 2;
 }
 
@@ -81,21 +81,42 @@
     transition: all 0.3s ease;
 }
 
-.header-navbar .logo {
+.header-navbar .left-side .LogoNav {
+    position: relative;
+    height: 100%;
+    margin-left: 48px;
+
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+}
+
+.header-navbar .left-side .LogoSvg {
+    margin-right: 16px;
+}
+
+.header-navbar .left-side .WebsiteName {
+    font-family: Perandory;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 100%;
+    /* letter-spacing: 0%; */
+    vertical-align: middle;
+}
+
+/* .header-navbar .logo {
     height: 109px;
-    /* Match header-navbar height exactly */
     width: auto;
     object-fit: cover;
-    /* Changed from contain to cover */
     display: block;
-    /* Remove any extra space */
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0;
     margin: 0;
     padding: 0;
-}
+} */
 
 /* Make sign-up button text white by using more specific selector */
 .header-navbar a.signup-btn {
@@ -112,7 +133,8 @@
     box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.25);
 }
 
-.header-navbar .nav-links a:hover,  .header-navbar .nav-links li .active{
+.header-navbar .nav-links a:hover,
+.header-navbar .nav-links li .active {
     /* text-decoration: underline;
     font-weight: bolder; */
     font-family: Inter;
@@ -201,14 +223,14 @@
     font-size: 0.9rem;
 }
 
-.submenu-content a:hover{
+.submenu-content a:hover {
     color: #2d00f5;
     border-color: #2d00f5;
     /* Change border color on hover */
     text-decoration: none;
 }
 
-.submenu-content .active{
+.submenu-content .active {
     color: #2d00f5;
     border-color: #2d00f5;
     /* Change border color on hover */
