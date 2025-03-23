@@ -1,3 +1,17 @@
+@keyframes likeAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 .LikeShare {
     display: flex;
     width: 388.0010986328125px;

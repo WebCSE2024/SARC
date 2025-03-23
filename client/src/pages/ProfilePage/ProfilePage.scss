@@ -1,0 +1,320 @@
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+
+    .profile-header {
+        width: 803px;
+        height: 490px;
+        margin: 0 auto;
+        top: 142px;
+        left: 319px;
+        border-radius: 25px;
+        border-width: 1px;
+
+
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-bottom: 24px;
+
+        border: 1px solid #000000;
+
+        .cover-photo {
+            height: 200px;
+            //   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-image: url('../../assets/ProfileBg.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .profile-info {
+            // padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            // gap: 24px;
+            margin-left: 24px;
+
+            .profile-picture {
+                width: 152px;
+                height: 152px;
+                // top: 97px;
+                // left: 24px;
+                border-radius: 999px;
+                border: 4px solid white;
+                margin-top: -104px;
+
+            }
+
+            .basic-info {
+                padding-top: 20px;
+
+                h1 {
+                    font-family: Inter;
+                    font-weight: 600;
+                    font-size: 24px;
+                    line-height: 100%;
+                    letter-spacing: 0%;
+                    vertical-align: middle;
+
+                    height: 21px;
+                    margin-bottom: 10px;
+                    // font-size: 2rem;
+                    color: #000;
+
+                }
+
+                .title {
+                    font-family: Inter, sans-serif;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 100%;
+                    letter-spacing: 0%;
+                    vertical-align: middle;
+
+                    color: #000;
+                    // font-size: 1.2rem;
+                    // margin: 8px 0;
+                }
+
+                .location {
+                    color: #718096;
+                    margin: 8px 0;
+                }
+
+                .social-links {
+                    position: relative;
+                    top: 20px;
+                    display: flex;
+                    gap: 16px;
+                    margin-top: 16px;
+                    width: 150px;
+                    justify-content: space-between;
+
+                    a {
+                        color: #4a5568;
+                        font-size: 1.5rem;
+                        transition: color 0.2s ease;
+
+
+                        &:hover {
+                            color: #667eea;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .profile-content {
+        display: grid;
+        gap: 24px;
+
+        section {
+            width: 803px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #000000;
+            font-family: Inter;
+            
+            box-sizing: border-box;
+
+            h2 {
+                font-family: Inter;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 100%;
+                letter-spacing: 0%;
+                vertical-align: middle;
+
+                color: #000;
+                margin-top: 0;
+                margin-bottom: 16px;
+                // font-size: 1.5rem;
+                // border-bottom: 2px solid #e2e8f0;
+                padding-bottom: 8px;
+            }
+        }
+
+        .education-item,
+        .experience-item {
+            margin-bottom: 16px;
+
+            h3 {
+                color: #4a5568;
+                margin: 0 0 8px 0;
+            }
+
+            p {
+                color: #718096;
+                margin: 4px 0;
+            }
+
+            ul {
+                margin: 8px 0;
+                padding-left: 20px;
+                color: #718096;
+
+                li {
+                    margin-bottom: 4px;
+                }
+            }
+        }
+
+        // .skills-grid {
+        //     display: flex;
+        //     flex-wrap: wrap;
+        //     gap: 12px;
+
+        //     .skill-tag {
+        //         background-color: #edf2f7;
+        //         color: #4a5568;
+        //         padding: 8px 16px;
+        //         border-radius: 20px;
+        //         font-size: 0.9rem;
+        //         transition: all 0.2s ease;
+
+        //         &:hover {
+        //             background-color: #667eea;
+        //             color: white;
+        //             transform: translateY(-2px);
+        //         }
+        //     }
+        // }
+    }
+}
+
+.experience, .education {
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    h2 {
+        font-size: 20px;
+        color: #1a1a1a;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .experience-item, .education-item {
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+
+        &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    .exp-header, .edu-header {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+
+        .company-logo, .institute-logo {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 999px;
+            overflow: hidden;
+
+            border: 1px solid #0000004F;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+        }
+
+        .exp-details, .edu-details {
+            flex: 1;
+
+            h3 {
+                font-size: 16px;
+                font-weight: 600;
+                color: #1a1a1a;
+                margin-bottom: 4px;
+            }
+
+            .company-name, .degree {
+                font-size: 14px;
+                color: #1a1a1a;
+                margin-bottom: 4px;
+            }
+
+            .duration, .location, .grades {
+                font-size: 14px;
+                color: #666666;
+                margin-bottom: 2px;
+            }
+        }
+    }
+
+    .exp-description {
+        padding-left: 64px;
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin: 0;
+
+            li {
+                color: #666666;
+                font-size: 14px;
+                margin-bottom: 8px;
+                line-height: 1.5;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 12px;
+
+        .profile-header {
+            .profile-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+
+                .profile-picture {
+                    margin-top: -50px;
+                }
+            }
+        }
+    }
+
+    .experience, .education {
+        .exp-description {
+            padding-left: 0;
+        }
+
+        .exp-header, .edu-header {
+            flex-direction: column;
+            gap: 12px;
+
+            .company-logo, .institute-logo {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+}

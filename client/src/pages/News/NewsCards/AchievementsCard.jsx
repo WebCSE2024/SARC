@@ -13,7 +13,7 @@ const AchievementsCard = () => {
         const imagePath = new URL(path, import.meta.url).href;
         gallery.push(imagePath);
     }
-    console.log("gallery:", gallery);
+    // console.log("gallery:", gallery);
 
     return (
         <div className='AchievementsCard'>

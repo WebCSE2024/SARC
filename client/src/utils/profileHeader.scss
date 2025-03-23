@@ -1,3 +1,17 @@
+@keyframes checkedAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 .accountDetails {
     width: 757px;
     height: 56px;
@@ -113,6 +127,7 @@
             transition: fill 0.2s ease-in-out;
             stroke-width: 5px;
             stroke: #8D91B0;
+            animation: checkedAnimation 0.4s ease forwards;
             
             height: 24px;
             width: 18px;

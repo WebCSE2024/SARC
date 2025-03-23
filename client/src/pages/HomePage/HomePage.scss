@@ -1,0 +1,38 @@
+.HomePage {
+    .tagline {
+        margin: 200px auto;
+        margin-bottom: 99px;
+
+        max-width: 1187px;
+        // height: 152px;
+        top: 355px;
+        left: 127px;
+
+        font-family: "New York Extra Large";
+        font-weight: 400;
+        font-style: italic;
+        font-size: 64px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
+
+    }
+
+    .DisplayImg {
+        width: 980px;
+        height: 536px;
+        top: 606px;
+        left: 230px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+
+        margin-left: auto;
+        margin-right: auto;
+        
+        display: flex;
+        justify-content: center;
+
+        background-color:cadetblue;
+    }
+}
