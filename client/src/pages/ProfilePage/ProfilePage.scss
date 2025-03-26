@@ -1,12 +1,12 @@
 .profile-container {
-    max-width: 1200px;
+    // max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f8f9fa;
 
     .profile-header {
         width: 803px;
-        height: 490px;
+        // height: 490px;
         margin: 0 auto;
         top: 142px;
         left: 319px;
@@ -19,6 +19,9 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         margin-bottom: 24px;
+
+        padding-bottom: 20px;
+        box-sizing: border-box;
 
         border: 1px solid #000000;
 
@@ -52,6 +55,7 @@
 
             .basic-info {
                 padding-top: 20px;
+                // padding-bottom: 20px;
 
                 h1 {
                     font-family: Inter;
@@ -105,6 +109,31 @@
                             color: #667eea;
                         }
                     }
+                }
+            }
+
+            .post-referral-btn {
+                font-family: Inter,sans-sherif;
+
+                position: absolute;
+                right: 24px;
+                top: 24px;
+                padding: 10px 20px;
+                background-color: #0059ff;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+
+                &:hover {
+                    background-color: #0048ce;
+                }
+
+                &:active {
+                    transform: translateY(1px);
                 }
             }
         }
@@ -315,6 +344,14 @@
                 width: 40px;
                 height: 40px;
             }
+        }
+    }
+
+    .profile-info {
+        .post-referral-btn {
+            position: static;
+            margin-top: 16px;
+            width: 100%;
         }
     }
 }

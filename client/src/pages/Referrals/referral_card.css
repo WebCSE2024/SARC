@@ -13,17 +13,20 @@
     gap: 17px;
     background: #FFFFFF;
     /* margin-left: 350px; */
-    margin: 0 auto;
+    margin: 40px auto;
     box-sizing: border-box;
+
+    box-shadow: 4px 4px 12px 0px #0000001A;
+
 
 }
 
 .top-block {
     display: flex;
     width: 802px;
-height: 76px;
-gap: 10px;
-padding: 10px;
+    height: 76px;
+    gap: 10px;
+    padding: 10px;
 
     box-sizing: border-box;
 }
@@ -31,17 +34,19 @@ padding: 10px;
 .profile {
     display: flex;
     width: 782px;
-height: 56px;
+    height: 56px;
 
     box-sizing: border-box;
 }
-.profile-box{
+
+.profile-box {
     display: flex;
     width: 650px;
-height: 56px;
-border-radius: 999px;
+    height: 56px;
+    border-radius: 999px;
 
 }
+
 .card-container .photo img {
     width: 56px;
     height: 56px;
@@ -86,31 +91,34 @@ border-radius: 999px;
     box-sizing: border-box;
 }
 
-.bookmark{
+.bookmark {
     display: flex;
-   width: 132px;
-   height: 56px;
+    width: 132px;
+    height: 56px;
 }
-.bookmark-box{
+
+.bookmark-box {
     display: flex;
     justify-content: center;
     width: 38px;
-height: 44px;
-border-radius: 6px;
-/*margin-left: 69px;*/
-margin-right: 25px;
-margin-bottom: 12px;
-align-items: center;
-padding: 10px;
-background: #FFFFFF;
-box-shadow: 0px 6px 12px 0px #00000026;
+    height: 44px;
+    border-radius: 6px;
+    /*margin-left: 69px;*/
+    margin-right: 25px;
+    margin-bottom: 12px;
+    align-items: center;
+    padding: 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 6px 12px 0px #00000026;
 
 }
-.book-icon{
+
+.book-icon {
     width: 18px;
-height: 24px;
+    height: 24px;
 
 }
+
 .company {
     display: flex;
     flex-direction: column;
@@ -126,13 +134,13 @@ height: 24px;
     gap: 10px;
     padding: 10px;
     font-family: Inter;
-font-weight: 500px;
-font-size: 16px;
-line-height: 24px;
-letter-spacing: 0%;
-vertical-align: middle;
-color: #7A7983;
-box-sizing: border-box;
+    font-weight: 500px;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #7A7983;
+    box-sizing: border-box;
 
 
 }
@@ -210,7 +218,7 @@ box-sizing: border-box;
 
 .post-description {
     width: 737px;
-height: 100px;
+    height: 100px;
     font-family: Inter;
     font-weight: 500px;
     font-size: 16px;
@@ -221,28 +229,29 @@ height: 100px;
     box-sizing: border-box;
 }
 
-.requirements{
+.requirements {
     width: 737px;
-height: 137px;
-padding-bottom: 17px;
-border-bottom-width: 1px;
-border-bottom: 1px solid #CBCCD8;
-box-sizing: border-box;
-}
-.subtitle{
-    width: 737px;
-height: 24px;
-font-family: Inter;
-font-weight: 500;
-font-size: 14px;
-line-height: 24px;
-letter-spacing: 0%;
-vertical-align: middle;
-color: #000000;
-box-sizing: border-box;
+    height: 137px;
+    padding-bottom: 17px;
+    border-bottom-width: 1px;
+    border-bottom: 1px solid #CBCCD8;
+    box-sizing: border-box;
 }
 
-.requirements-list{
+.subtitle {
+    width: 737px;
+    height: 24px;
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #000000;
+    box-sizing: border-box;
+}
+
+.requirements-list {
     width: 737px;
     height: 92px;
     gap: 10px;
@@ -254,121 +263,125 @@ box-sizing: border-box;
     line-height: 24px;
     letter-spacing: 0%;
     vertical-align: middle;
-color: #7A7983;
-box-sizing: border-box;
+    color: #7A7983;
+    box-sizing: border-box;
 }
 
-.job-details{
+.job-details {
     width: 252px;
     display: flex;
     flex-direction: column;
-height: 118px;
-gap: 10px;
-padding: 10px;
-font-family: Inter;
-font-weight: 500px;
-font-size: 12px;
-line-height: 14px;
-letter-spacing: 0%;
-vertical-align: middle;
-color:#000000;
+    height: 118px;
+    gap: 10px;
+    padding: 10px;
+    font-family: Inter;
+    font-weight: 500px;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #000000;
 
 
 }
 
 .detail1,
 .detail2,
-.detail3{
+.detail3 {
     display: flex;
     gap: 10px;
 }
-.job-text{
+
+.job-text {
     font-family: Inter;
-font-weight: 500px;
-font-size: 14px;
-line-height: 14px;
-letter-spacing: 0%;
-vertical-align: middle;
-color: #7A7983;
+    font-weight: 500px;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #7A7983;
 
 }
 
-.contact-details{
+.contact-details {
     display: flex;
-    gap:164px;
+    gap: 164px;
 }
-.phone-number{
+
+.phone-number {
     display: flex;
     width: 169px;
-height: 41px;
-margin-left: 71px;
+    height: 41px;
+    margin-left: 71px;
 
 }
 
-.img-phone{
+.img-phone {
     width: 40px;
-height: 40px;
-gap: 10px;
-padding: 10px;
+    height: 40px;
+    gap: 10px;
+    padding: 10px;
 
 }
-.number{
+
+.number {
     width: 141px;
-height: 41px;
-gap: 10px;
-padding: 10px;
+    height: 41px;
+    gap: 10px;
+    padding: 10px;
 
 }
-.number-text{
+
+.number-text {
     width: 121px;
-height: 21px;
-font-family: Inter;
-font-weight: 400px;
-font-size: 14px;
-line-height: 20.8px;
-letter-spacing: 2%;
-vertical-align: middle;
-color: #000000;
+    height: 21px;
+    font-family: Inter;
+    font-weight: 400px;
+    font-size: 14px;
+    line-height: 20.8px;
+    letter-spacing: 2%;
+    vertical-align: middle;
+    color: #000000;
 
 
 }
 
-.email{
+.email {
     display: flex;
     width: 203px;
-height: 41px;
+    height: 41px;
 
 }
 
-.emailpic{
+.emailpic {
     width: 24px;
-height: 18px;
-top: 11.5px;
-color: #8D91B0;
-border: 1px solid #8D91B0;
-border-radius: 2px;
-margin-top: 11.5px;
-margin-bottom: 11.5px;
+    height: 18px;
+    top: 11.5px;
+    color: #8D91B0;
+    border: 1px solid #8D91B0;
+    border-radius: 2px;
+    margin-top: 11.5px;
+    margin-bottom: 11.5px;
 
 }
 
-.emailid{
+.emailid {
     width: 185px;
-height: 41px;
-gap: 10px;
-padding: 10px;
+    height: 41px;
+    gap: 10px;
+    padding: 10px;
 
 }
-.id{
+
+.id {
     width: 165px;
-height: 21px;
-font-family: Inter;
-font-weight: 400px;
-font-size: 14px;
-line-height: 20.8px;
-letter-spacing: 2%;
-vertical-align: middle;
-color: #000000;
+    height: 21px;
+    font-family: Inter;
+    font-weight: 400px;
+    font-size: 14px;
+    line-height: 20.8px;
+    letter-spacing: 2%;
+    vertical-align: middle;
+    color: #000000;
 
 }
-

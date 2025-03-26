@@ -2,6 +2,11 @@ import React from 'react'
 import './HackathonPoster.scss'
 
 const HackathonPoster = ({ imageUrl }) => {
+
+    // console.log(imageUrl.posterImg);
+    // if(imageUrl!= undefined && imageUrl.length==undefined)  imageUrl=undefined;
+    imageUrl=imageUrl.posterImg;
+    
     return (
         <div className={`HackathonPoster ${imageUrl == undefined ? 'NoImg' : 'posterPresent'}`}>
             <div className={`Hack-info ${imageUrl == undefined ? 'NoImg' : 'posterPresent'}`}>
@@ -26,7 +31,8 @@ const HackathonPoster = ({ imageUrl }) => {
                             <div className='pic-otherDetails'>
                                 {/*  add email and phone number here */}
                                 <p>{`emailId@iitism.ac.in`}</p>
-                                <p>Ph: +91 {`98765 43211`}</p>
+                                {/* <p>Ph: +91 {`98765 43211`}</p> */}
+                                <p className='prize-pool'>Prize: <b>$5,000</b></p>
                             </div>
                         </div>
                     </ul>

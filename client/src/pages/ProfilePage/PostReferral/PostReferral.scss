@@ -1,0 +1,109 @@
+.post-referral-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    font-family: Inter,sans-serif;
+
+    h2 {
+        color: #1a1a1a;
+        margin-bottom: 1.5rem;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .referral-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            label {
+                font-size: 14px;
+                font-weight: 500;
+                color: #4a4a4a;
+
+                &::after {
+                    content: "*";
+                    color: #e41e3f;
+                    margin-left: 4px;
+                }
+
+                &[for="stipend"]::after,
+                &[for="companyWebsite"]::after,
+                &[for="phone"]::after {
+                    content: "";
+                }
+            }
+
+            input, textarea {
+                padding: 12px;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                font-size: 14px;
+                transition: border-color 0.3s ease;
+
+                &:focus {
+                    outline: none;
+                    border-color: #2196F3;
+                }
+
+                &::placeholder {
+                    color: #999;
+                }
+            }
+
+            textarea {
+                resize: vertical;
+                min-height: 100px;
+            }
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            margin-top: 1rem;
+            padding: 12px 24px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #1976D2;
+            }
+
+            &:active {
+                transform: translateY(1px);
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .post-referral-container {
+        padding: 1rem;
+        margin: 1rem;
+
+        .referral-form {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}

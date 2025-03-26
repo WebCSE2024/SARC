@@ -12,17 +12,31 @@
     }
 }
 
+.HackathonCardOuter {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-wrap: wrap;
+
+    margin: 40px auto;
+
+    .commentsCardWrapper{
+        width: 400px;
+    }
+}
+
 .HackathonCard {
     box-sizing: border-box;
     width: 843px;
     height: 734px;
     border-radius: 16px;
-    margin-left: auto;
-    margin-right: auto;
     padding: 35px;
     box-sizing: border-box;
 
     background-color: #fff;
+
+    box-shadow: 4px 4px 12px 0px #0000001A;
+
 
     .HackathonDesc {
         width: 783px;
@@ -168,11 +182,11 @@
                     letter-spacing: 2%;
                     vertical-align: middle;
 
-                    width: 285px;
+                    // width: 285px;
                     height: 21px;
 
-                    margin-top: 34px;
-                    margin-bottom: 10px;
+                    margin-top: 15px;
+                    margin-bottom: 0px;
 
                 }
 
@@ -184,6 +198,11 @@
                     letter-spacing: 2%;
                     vertical-align: middle;
 
+
+                    .prize-pool {
+                        margin-top: 20px;
+                        font-size: 20px;
+                    }
                 }
             }
         }
@@ -248,10 +267,12 @@
             display: flex;
         }
 
-        
+
 
     }
 }
+
+
 
 .LikeShare {
     width: 388.0010986328125px;

@@ -4,8 +4,15 @@ import profileImg from '../../assets/NoProfileImg.png'
 import experienceLogo from '../../assets/MainLogo.svg'
 import eduLogo from '../../assets/TempImages/wallpaperflare.com_wallpaper (1).jpg'
 import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
+    const navigate = useNavigate();
+
+    const handlePostReferral = () => {
+        navigate('/PostReferrals');
+    };
+
     return (
         <div className="profile-container">
             <div className="profile-header">
@@ -20,13 +27,19 @@ const ProfilePage = () => {
                         <h1>John Doe</h1>
                         <p className="title">Computer Science Student, IIT (ISM) Dhanbad</p>
                         <p className="location">Dhanbad, Jharkhand</p>
-                        {/* <div className="social-links">
+{/* <div className="social-links">
               <a href="#"><FaLinkedin /></a>
               <a href="#"><FaGithub /></a>
               <a href="mailto:example@email.com"><FaEnvelope /></a>
               <a href="tel:+1234567890"><FaPhone /></a>
             </div> */}
                     </div>
+                    <button 
+                        className="post-referral-btn"
+                        onClick={handlePostReferral}
+                    >
+                        Post Referral
+                    </button>
                 </div>
             </div>
 

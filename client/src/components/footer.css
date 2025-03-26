@@ -11,14 +11,17 @@
     padding-top: 72px;
     box-sizing: border-box;
 
-    height: 500px;
+    /* height: 500px; */
+    height: 370px;
 }
 
 .footer-container {
     max-width: 1200px;
     width: 83%;
     margin: 0 auto;
-    margin-bottom: 192px;
+    /* margin-bottom: 192px; */
+    margin-bottom: 60px;
+
     /* padding: 0 2rem;   */
     /* Added horizontal padding */
     /* padding: 0 125px; */

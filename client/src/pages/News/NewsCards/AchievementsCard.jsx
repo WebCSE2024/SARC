@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './AchievementsCard.scss'
 import LikeShareArea from '../../../utils/LikeShareArea'
+import CommentSection from './Comments/commentSection'
 
 // import pics from '../../../assets/TempImages'
 
 const AchievementsCard = () => {
+    const imagesWrapperRef = useRef(null);
 
     const modules = import.meta.glob('../../../assets/TempImages/*.{png,jpg,jpeg}');
     const gallery = [];
@@ -15,36 +17,69 @@ const AchievementsCard = () => {
     }
     // console.log("gallery:", gallery);
 
+
+    const handleLeftScroll = () => {
+        if (imagesWrapperRef.current) {
+            imagesWrapperRef.current.scrollLeft -= 671;
+        }
+    }
+
+    const handleRightScroll = () => {
+        if (imagesWrapperRef.current) {
+            imagesWrapperRef.current.scrollLeft += 671;
+        }
+    }
+
     return (
-        <div className='AchievementsCard'>
-            <h2 className="title">
-                Some_achievement_title
-            </h2>
-            <hr className='titleSeperator' />
-            <div className="desc">
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi at aspernatur atque sed commodi, obcaecati quod suscipit quibusdam et dolore doloremque. Dolorum voluptatibus nihil laudantium? Quisquam, eveniet illum? Eos, cupiditate.
-                </p>
+        <div className="AchievementsCardOuter">
+            
+            <div className='AchievementsCard'>
+                <h2 className="title">
+                    Some_achievement_title
+                </h2>
+                <hr className='titleSeperator' />
+                <div className="desc">
+                    <p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi at aspernatur atque sed commodi, obcaecati quod suscipit quibusdam et dolore doloremque. Dolorum voluptatibus nihil laudantium? Quisquam, eveniet illum? Eos, cupiditate.
+                    </p>
 
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem facilis architecto molestiae. Corrupti, sit cupiditate recusandae accusamus odio ipsum dicta obcaecati eaque, quam aliquam ratione excepturi inventore eum velit omnis.
-                </p>
-            </div>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem facilis architecto molestiae. Corrupti, sit cupiditate recusandae accusamus odio ipsum dicta obcaecati eaque, quam aliquam ratione excepturi inventore eum velit omnis.
+                    </p>
+                </div>
 
-            <div className="slideShow">
 
-                {gallery.map((image, index) => (
-                    <div className="SlideShowImage">
-                        <img key={index} src={image} alt={`Image ${index}`} />
+                <div className="slideShow">
+
+                    <div className="scroll-btn scrollLeft" onClick={handleLeftScroll}>
+                        <svg className='scrollSvg left' xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#5B729E"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" /></svg>
                     </div>
-                ))}
+
+                    {/* This ref is helpful in differentiating images-wrappers of 
+                    different achievementsCard renderings */}
+                    <div className="images-wrapper" ref={imagesWrapperRef}>
+                        {gallery.map((image, index) => (
+                            <div key={index} className={`SlideShowImage ${index}thImage`}>
+                                <img src={image} alt={`Image ${index}`} />
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="scroll-btn scrollRight" onClick={handleRightScroll}>
+                        <svg className='scrollSvg right' xmlns="http://www.w3.org/2000/svg" height="10.61px" viewBox="0 -960 960 960" width="6.14px" fill="#5B729E"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" /></svg>
+                    </div>
+
+                </div>
+
+                <div className="LikeShare-wrappper">
+                    <LikeShareArea />
+                </div>
 
             </div>
-
-            <div className="LikeShare-wrappper">
-                <LikeShareArea />
+        
+            <div className="commentsCardWrapper">
+                <CommentSection />
             </div>
-
         </div>
     )
 }

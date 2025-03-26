@@ -1,43 +1,56 @@
 import React from 'react'
-import EventsPage from './pages/News/NewsPage'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import './App.css'
 
+import EventsPage from './pages/News/EventsPage.jsx'
+import PublicationsCard from './pages/PublicationsPage/PublicationsCard'
+import ReferralCard from './pages/Referrals/referral_card.jsx'
+import ReferralPage from './pages/Referrals/ReferralPage.jsx';
+// import AchievementsCard from './pages/News/NewsCards/AchievementsCard'
+import Achievements from './pages/News/AchievementsPage.jsx'
+// import News from './pages/News/EventsPage.jsx'
+import SeminarsPage from './pages/News/SeminarsPage.jsx';
 import Header from './components/header'
 import Footer from './components/footer'
 
-import ProfilePage from './pages/ProfilePage/ProfilePage'
 import HomePage from './pages/HomePage/HomePage'
 import LoginPage from './pages/LoginPage'
-import PublicationsCard from './pages/PublicationsPage/PublicationsCard'
-import Referral_card from './pages/Referrals/referral_cards'
-import AchievementsCard from './pages/News/NewsCards/AchievementsCard'
+import ProfilePage from './pages/ProfilePage/ProfilePage'
+
+
+import PostReferral from './pages/ProfilePage/PostReferral/PostReferral';
 
 const App = () => {
   return (
     <div className='app'>
-      <Header />
-      <ProfilePage />
-      {/* <HomePage /> */}
+      <BrowserRouter>
+        <Header /> 
+        {/* Stays on all pages */}
+        {/* <PostReferral /> */}
+        
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/achievements" element={<Achievements />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/referrals" element={<ReferralPage />} />
+          <Route path="/publications" element={<PublicationsCard />} />
+          <Route path="/news" element={<Navigate to="/events" />} />
+          <Route path="/signup" element={<LoginPage/>} />
+          <Route path="/profile" element={<ProfilePage/>} />
+          <Route path="/seminars" element={<SeminarsPage/>} />
+          <Route path="/PostReferrals" element={<PostReferral/>} />
+          
+          {/* Temporary Redirects */}
+          {/* <Route path="/seminars" element={<Navigate to="/" />} /> */}
 
-      <LoginPage />
-
-      <h2  >EVENTS:</h2>
-
-      <h3>Achievements:</h3>
-      <AchievementsCard />
-
-        <h2  >Events:</h2>
-      <EventsPage/>
-
-      <h2>Referrals:</h2>
-      <Referral_card/>
+          {/* 404 Not Found */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        <Footer /> {/* Stays on all pages */}
+      </BrowserRouter>
 
 
-      <h2>Publications:</h2>
-      <PublicationsCard />
 
-   
-      
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import "./referral_cards.css";
+import "./referral_card.css";
 // import profilePic from "../../assets/NoProfileImg.png";
 import ProfileHeader from "../../utils/profileHeader";
 
@@ -9,7 +9,7 @@ const ReferralCard = () => {
         <div className="card-container">
             <div className="top-block">
                 {/* Header Section */}
-                <ProfileHeader />
+                <ProfileHeader  eventId={`referral-id:${10}`}/>
                 {/* <div className="profile">
                     <div className="profile-box">
                     <div className="photo">

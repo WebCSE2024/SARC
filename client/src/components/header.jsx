@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Import Link
-import topBarLogo from "../assets/top_bar.png";
+// import topBarLogo from "../assets/top_bar.png";
+import sarcLogo from "../assets/MainLogo.svg";
 import "./header.css";
 
 const Header = () => {
@@ -10,24 +11,26 @@ const Header = () => {
     <>
       <header className="header-navbar">
         <nav>
-          <div className="left-side">
 
-            <Link to="/" onClick={closeNewsMenu}>
-              <img src={topBarLogo} alt="Landing Page Logo" className="logo" />
-            </Link>
+          <Link to="/" onClick={closeNewsMenu}>
+            <div className="left-side">
+              {/* <img src={topBarLogo} alt="Landing Page Logo" className="logo" /> */}
+              <img src={sarcLogo} alt="Landing Page Logo" className="logo" />
+              <div className="LogoTitle">SARC</div>
+            </div>
+          </Link>
 
 
-          </div>
           <ul className="nav-links">
             <li><Link to="/publications" onClick={closeNewsMenu}>Publications</Link></li>
             <li><Link to="/referrals" onClick={closeNewsMenu}>Referrals</Link></li>
             <li><Link
-    to="/news"
-    className={showNewsMenu ? "active" : ""}
-    onClick={() => setShowNewsMenu(!showNewsMenu)}
-  >
-    News
-  </Link>
+              to="/news"
+              className={showNewsMenu ? "active" : ""}
+              onClick={() => setShowNewsMenu(!showNewsMenu)}
+            >
+              News
+            </Link>
             </li>
           </ul>
           <div className="right-side">

@@ -1,193 +1,208 @@
+.eventCardOuter {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-wrap: wrap;
 
-.eventCard {
-    box-sizing: border-box;
-    width: 843px;
-    height: 690px;
-    border-radius: 16px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 35px;
-    box-sizing: border-box;
+    margin: 40px auto;
 
-    background-color: #fff;
-
-    .eventDesc {
-        width: 783px;
-        height: 92px;
-        top: 112px;
-        left: 31px;
-        padding: 10px;
-        gap: 10px;
-        box-sizing: border-box;
-
-        padding-top: 30px;
-
-        p {
-            width: 763px;
-            height: 72px;
-            font-family: "Inter", sans-serif;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 24px;
-            letter-spacing: 0%;
-            vertical-align: middle;
-            color: #7A7983;
-
-        }
+    .commentsCardWrapper {
+        // background-color: #2196F3;
+        width: 400px;
     }
 
-    .Talk-info {
-        width: 768px;
-        height: 278px;
-        // top: 200px;
-        // left: 36px;
-        border-radius: 12px;
-        margin-top: 20px;
-
-        background-image: url('../../../assets/EventBg.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        padding: 30px;
+    .eventCard {
         box-sizing: border-box;
-        color: #fff;
+        width: 843px;
+        height: 690px;
+        border-radius: 16px;
+        // margin: 40px auto;
+        padding: 35px;
+        box-sizing: border-box;
 
-        .heading {
-            display: flex;
-            justify-content: space-between;
+        background-color: #fff;
 
-            .eventTitle {
-                font-family: Calibri;
-                font-weight: 400;
-                font-size: 28px;
+        box-shadow: 4px 4px 12px 0px #0000001A;
+
+
+        .eventDesc {
+            width: 783px;
+            height: 92px;
+            top: 112px;
+            left: 31px;
+            padding: 10px;
+            gap: 10px;
+            box-sizing: border-box;
+
+            padding-top: 30px;
+
+            p {
+                width: 763px;
+                height: 72px;
+                font-family: "Inter", sans-serif;
+                font-weight: 500;
+                font-size: 16px;
                 line-height: 24px;
                 letter-spacing: 0%;
                 vertical-align: middle;
+                color: #7A7983;
 
-                .eventType {
+            }
+        }
+
+        .Talk-info {
+            width: 768px;
+            height: 278px;
+            // top: 200px;
+            // left: 36px;
+            border-radius: 12px;
+            margin-top: 20px;
+
+            background-image: url('../../../assets/EventBg.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 30px;
+            box-sizing: border-box;
+            color: #fff;
+
+            .heading {
+                display: flex;
+                justify-content: space-between;
+
+                .eventTitle {
                     font-family: Calibri;
-                    font-weight: 700;
+                    font-weight: 400;
                     font-size: 28px;
                     line-height: 24px;
                     letter-spacing: 0%;
                     vertical-align: middle;
-                    // .color{
-                    //     color: ;
-                    // }
+
+                    .eventType {
+                        font-family: Calibri;
+                        font-weight: 700;
+                        font-size: 28px;
+                        line-height: 24px;
+                        letter-spacing: 0%;
+                        vertical-align: middle;
+                        // .color{
+                        //     color: ;
+                        // }
+                    }
+                }
+
+                .seatBooking {
+                    width: 121px;
+                    height: 45px;
+                    top: 19px;
+                    left: 617px;
+                    border-radius: 24px;
+                    padding-top: 12px;
+                    padding-right: 16px;
+                    padding-bottom: 12px;
+                    padding-left: 16px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    box-sizing: border-box;
+                    background-color: #fff;
+                    gap: 10px;
+
+
+                    a {
+                        font-family: Inter, sans-serif;
+                        font-weight: 400;
+                        font-size: 15px;
+                        line-height: 20.8px;
+                        letter-spacing: 0%;
+                        vertical-align: middle;
+                        text-align: center;
+                        width: 89px;
+                        height: 21px;
+                        box-sizing: border-box;
+
+
+                        text-decoration: none;
+                        color: #000;
+                    }
+
                 }
             }
 
-            .seatBooking {
-                width: 121px;
-                height: 45px;
-                top: 19px;
-                left: 617px;
-                border-radius: 24px;
-                padding-top: 12px;
-                padding-right: 16px;
-                padding-bottom: 12px;
-                padding-left: 16px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                box-sizing: border-box;
-                background-color: #fff;
-                gap: 10px;
+            .talk-Desc {
+                li {
+                    list-style-type: none;
 
+                    width: 194px;
+                    height: 21px;
+                    top: 104px;
+                    left: 68px;
+
+
+                    font-family: "Inter", sans-serif;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 20.8px;
+                    letter-spacing: 2%;
+                    vertical-align: middle;
+
+
+                    b {
+                        margin-left: 5px;
+                        font-family: "Inter", sans-serif;
+                        font-weight: 600;
+                        font-size: 16px;
+                        line-height: 20.8px;
+                        // letter-spacing: 2%;
+                        vertical-align: middle;
+
+                    }
+
+                }
+
+                p {
+                    padding-top: 5px;
+                    width: calc(184px + 161px);
+                    height: 21px;
+                    font-family: "Inter", sans-serif;
+                    font-weight: 300;
+                    font-size: 14px;
+                    line-height: 20.8px;
+                    letter-spacing: 2%;
+                    vertical-align: middle;
+
+
+                }
+            }
+        }
+
+        .eventEnd {
+            width: 768px;
+            height: 108px;
+            top: 550px;
+            left: 30px;
+            gap: 12px;
+
+            .Volunteer {
+                font-family: Inter;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20.8px;
+                letter-spacing: 2%;
+                vertical-align: middle;
+                text-transform: capitalize;
+                color: #7A7983;
+
+                margin-bottom: 22px;
 
                 a {
-                    font-family: Inter,sans-serif;
-                    font-weight: 400;
-                    font-size: 15px;
-                    line-height: 20.8px;
-                    letter-spacing: 0%;
-                    vertical-align: middle;
-                    text-align: center;
-                    width: 89px;
-                    height: 21px;
-                    box-sizing: border-box;
-                    
-
-                    text-decoration: none;
-                    color: #000;
+                    color: #2F295F;
                 }
-
             }
+
+            margin-top: 72px;
+
         }
-
-        .talk-Desc {
-            li {
-                list-style-type: none;
-
-                width: 194px;
-                height: 21px;
-                top: 104px;
-                left: 68px;
-
-
-                font-family: "Inter", sans-serif;
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 20.8px;
-                letter-spacing: 2%;
-                vertical-align: middle;
-
-
-                b {
-                    margin-left: 5px;
-                    font-family: "Inter", sans-serif;
-                    font-weight: 600;
-                    font-size: 16px;
-                    line-height: 20.8px;
-                    // letter-spacing: 2%;
-                    vertical-align: middle;
-
-                }
-
-            }
-
-            p {
-                padding-top: 5px;
-                width: calc(184px + 161px);
-                height: 21px;
-                font-family: "Inter", sans-serif;
-                font-weight: 300;
-                font-size: 14px;
-                line-height: 20.8px;
-                letter-spacing: 2%;
-                vertical-align: middle;
-
-
-            }
-        }
-    }
-
-    .eventEnd {
-        width: 768px;
-        height: 108px;
-        top: 550px;
-        left: 30px;
-        gap: 12px;
-
-        .Volunteer {
-            font-family: Inter;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 20.8px;
-            letter-spacing: 2%;
-            vertical-align: middle;
-            text-transform: capitalize;
-            color: #7A7983;
-            
-            margin-bottom: 22px;
-            
-            a{
-                color: #2F295F;
-            }
-        }
-        
-        margin-top: 72px;
-        
     }
 }
 
@@ -229,8 +244,9 @@
             }
         }
     }
-    
-    .likeTxt, .shareTxt {
+
+    .likeTxt,
+    .shareTxt {
         // width: 52px;
         height: 41px;
         gap: 10px;
@@ -248,16 +264,19 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
         box-sizing: border-box;
     }
-    .likeTxt{
-        width:52px;
+
+    .likeTxt {
+        width: 52px;
     }
-    .shareTxt{
+
+    .shareTxt {
         width: 65px;
     }
-    .share{
+
+    .share {
         display: flex;
         align-items: center;
         gap: 4px;
@@ -270,10 +289,10 @@
             background-color: rgba(0, 0, 0, 0.05);
         }
 
-        .share-icon{
+        .share-icon {
             fill: #8D91B0;
             stroke-width: 2px;
-            stroke:  #8D91B0;
+            stroke: #8D91B0;
         }
     }
 }
