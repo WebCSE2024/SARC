@@ -21,66 +21,71 @@
         gap: 7px;
         margin-bottom: 5px;
 
-        .profile {
-            display: flex;
-            // width: 343px;
-            width: 243px;
-            height: 38.125px;
-            box-sizing: border-box;
-
-            .photo {
-                width: 28px;
-                height: 28px;
-                border-radius: 499.5px;
-                overflow: hidden;
-                box-sizing: border-box;
-            }
-
-            .profile-desc {
-                // width: 305px;
-                width: 205px;
-                height: 38.125;
-                left: 37.93px;
-                gap: 6px;
-                margin-left: 9.93px;
-
-                .name {
-                    // width: 304.48211669921875px;
-                    width: 205px;
-                    height: 11.0625px;
-                    font-family: Inter;
-                    font-weight: 600px;
-                    font-size: 14px;
-                    line-height: 100%;
-                    letter-spacing: 0%;
-                    vertical-align: middle;
-                    color: #000000;
-
-
-                }
-
-                .description {
-                    // width: 304.48211669921875px;
-                    width: 205px;
-                    height: 11.0625px;
-                    font-family: Inter;
-                    font-weight: 300px;
-                    font-size: 12px;
-                    line-height: 100%;
-                    letter-spacing: 0%;
-                    vertical-align: middle;
-                    color: #5C5757;
-                    margin-top: 6px;
-
-
-
-                }
-
-
-            }
-
-
+        .profileInfoHeader{
+            border: 2px red solid;
+            // scale: 0.5;
         }
+
+        // .profile {
+        //     display: flex;
+        //     // width: 343px;
+        //     width: 243px;
+        //     height: 38.125px;
+        //     box-sizing: border-box;
+
+        //     .photo {
+        //         width: 28px;
+        //         height: 28px;
+        //         border-radius: 499.5px;
+        //         overflow: hidden;
+        //         box-sizing: border-box;
+        //     }
+
+        //     .profile-desc {
+        //         // width: 305px;
+        //         width: 205px;
+        //         height: 38.125;
+        //         left: 37.93px;
+        //         gap: 6px;
+        //         margin-left: 9.93px;
+
+        //         .name {
+        //             // width: 304.48211669921875px;
+        //             width: 205px;
+        //             height: 11.0625px;
+        //             font-family: Inter;
+        //             font-weight: 600px;
+        //             font-size: 14px;
+        //             line-height: 100%;
+        //             letter-spacing: 0%;
+        //             vertical-align: middle;
+        //             color: #000000;
+
+
+        //         }
+
+        //         .description {
+        //             // width: 304.48211669921875px;
+        //             width: 205px;
+        //             height: 11.0625px;
+        //             font-family: Inter;
+        //             font-weight: 300px;
+        //             font-size: 12px;
+        //             line-height: 100%;
+        //             letter-spacing: 0%;
+        //             vertical-align: middle;
+        //             color: #5C5757;
+        //             margin-top: 6px;
+
+
+
+        //         }
+
+
+        //     }
+
+
+        // }
 
         .comment {
             display: flex;

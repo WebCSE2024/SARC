@@ -2,7 +2,7 @@ import React from 'react'
 import EventsCard from './NewsCards/EventsCard'
 import HackathonCard from './NewsCards/HackathonCard'
 import './EventsPage.scss'
-import FloatingBookmark from '../../utils/Filtering/FloatingBookmark'
+// import FloatingBookmark from '../../utils/Filtering/FloatingBookmark'
 import SearchBox from '../../utils/Filtering/SearchBox'
 
 // import TempTestCard from './TempTestCard'
@@ -13,7 +13,7 @@ const EventsPage = () => {
       
       <SearchBox />
 
-      <FloatingBookmark elementId={`event-${123}`} />
+      {/* <FloatingBookmark elementId={`event-${123}`} /> */}
       {/* <TempTestCard /> */}
 
       {/* <h3>Hackathon:</h3> */}

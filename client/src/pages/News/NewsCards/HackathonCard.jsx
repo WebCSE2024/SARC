@@ -5,8 +5,9 @@ import ProfileHeader from '../../../utils/profileHeader'
 // import bkmark from '../assets/Bookmark.svg'
 // import PdfSvg from '../../assets/RuleBook.svg'
 import PdfSvg from '../../../assets/RuleBook.svg'
-import CommentSection from './Comments/commentSection'
-
+// import CommentSection from './Comments/commentSection'
+// import CommentsArea from './Comments/CommentsArea'
+import CommentsArea from './Comments/CommentsArea'
 
 const HackathonCard = (posterImg) => {
     const [isLiked, setIsLiked] = useState(false);
@@ -134,7 +135,8 @@ c-30 33 -34 35 -96 35 -67 0 -199 -21 -289 -46 -28 -8 -59 -14 -70 -14 -10 0
             </div>
 
             <div className="commentsCardWrapper">
-                <CommentSection />
+                {/* <CommentSection /> */}
+                <CommentsArea />
             </div>
         </div>
     )

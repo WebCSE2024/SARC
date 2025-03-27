@@ -2,12 +2,14 @@ import React from 'react'
 import "./comment.scss";
 
 import pic from "../../../../assets/NoProfileImg.png"
+import ProfileHeader from '../../../../utils/profileHeader';
 
 const Comment = () => {
     return (
         <div className="comments-section">
             <div className="comment-box">
-                <div className="profile">
+                <span className="profileInfoHeader"> <ProfileHeader /></span>
+                {/* <div className="profile">
                     <div className="photo">
                         <img src={pic} alt="PHOTO" width="28" height="28" />
                     </div>
@@ -20,7 +22,7 @@ const Comment = () => {
                         </p>
                     </div>
 
-                </div>
+                </div> */}
                 <div className="comment">
                     <p className="comment-text">
                         Can’t wait for this. njksdbhjxb nbhxbns hsnmxnmjkxhndxjksn.

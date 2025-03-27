@@ -5,12 +5,19 @@ import experienceLogo from '../../assets/MainLogo.svg'
 import eduLogo from '../../assets/TempImages/wallpaperflare.com_wallpaper (1).jpg'
 import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import ReferralCard from '../Referrals/referral_card';
+import PublicationsCard from '../PublicationsPage/PublicationsCard';
+import ActivityCard from './components/ActivityCard';
 
 const ProfilePage = () => {
     const navigate = useNavigate();
 
     const handlePostReferral = () => {
         navigate('/PostReferrals');
+    };
+
+    const handlePostPublication = () => {
+        navigate('/PostPublication');
     };
 
     return (
@@ -27,18 +34,28 @@ const ProfilePage = () => {
                         <h1>John Doe</h1>
                         <p className="title">Computer Science Student, IIT (ISM) Dhanbad</p>
                         <p className="location">Dhanbad, Jharkhand</p>
-{/* <div className="social-links">
+                        {/* <div className="social-links">
               <a href="#"><FaLinkedin /></a>
               <a href="#"><FaGithub /></a>
               <a href="mailto:example@email.com"><FaEnvelope /></a>
               <a href="tel:+1234567890"><FaPhone /></a>
             </div> */}
                     </div>
-                    <button 
-                        className="post-referral-btn"
+
+                    {/* activate post referral for alumni user only */}
+                    <button
+                        className="post-btn referral"
                         onClick={handlePostReferral}
                     >
                         Post Referral
+                    </button>
+
+                    {/* activate post publications for professor only */}
+                    <button
+                        className="post-btn"
+                        onClick={handlePostPublication}
+                    >
+                        Post Publication
                     </button>
                 </div>
             </div>
@@ -48,7 +65,7 @@ const ProfilePage = () => {
                     <h2>About</h2>
                     <p>Final year Computer Science student at IIT (ISM) Dhanbad with a passion for software development and problem-solving.</p>
                 </section>
-                
+
                 <section className="experience">
                     <h2>Experience</h2>
                     <div className="experience-item">
@@ -89,6 +106,8 @@ const ProfilePage = () => {
                         </div>
                     </div>
                 </section>
+
+                <ActivityCard />
             </div>
         </div>
     );

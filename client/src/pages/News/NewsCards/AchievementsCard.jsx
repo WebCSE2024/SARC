@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
 import './AchievementsCard.scss'
 import LikeShareArea from '../../../utils/LikeShareArea'
-import CommentSection from './Comments/commentSection'
+// import CommentSection from './Comments/commentSection'
+import CommentsArea from './Comments/CommentsArea'
 
 // import pics from '../../../assets/TempImages'
 
@@ -78,7 +79,8 @@ const AchievementsCard = () => {
             </div>
         
             <div className="commentsCardWrapper">
-                <CommentSection />
+                {/* <CommentSection /> */}
+                <CommentsArea />
             </div>
         </div>
     )

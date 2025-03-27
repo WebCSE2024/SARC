@@ -218,7 +218,8 @@
 
 .post-description {
     width: 737px;
-    height: 100px;
+    /* height: 100px; */
+    text-wrap:wrap;
     font-family: Inter;
     font-weight: 500px;
     font-size: 16px;

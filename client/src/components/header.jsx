@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { NavLink } from "react-router-dom"; // Import NavLink
 // import topBarLogo from "../assets/top_bar.png";
 import sarcLogo from "../assets/MainLogo.svg";
 import "./header.css";
@@ -12,29 +12,29 @@ const Header = () => {
       <header className="header-navbar">
         <nav>
 
-          <Link to="/" onClick={closeNewsMenu}>
+          <NavLink to="/" onClick={closeNewsMenu}>
             <div className="left-side">
               {/* <img src={topBarLogo} alt="Landing Page Logo" className="logo" /> */}
               <img src={sarcLogo} alt="Landing Page Logo" className="logo" />
               <div className="LogoTitle">SARC</div>
             </div>
-          </Link>
+          </NavLink>
 
 
           <ul className="nav-links">
-            <li><Link to="/publications" onClick={closeNewsMenu}>Publications</Link></li>
-            <li><Link to="/referrals" onClick={closeNewsMenu}>Referrals</Link></li>
-            <li><Link
+            <li><NavLink to="/publications" onClick={closeNewsMenu}>Publications</NavLink></li>
+            <li><NavLink to="/referrals" onClick={closeNewsMenu}>Referrals</NavLink></li>
+            <li><NavLink
               to="/news"
               className={showNewsMenu ? "active" : ""}
               onClick={() => setShowNewsMenu(!showNewsMenu)}
             >
               News
-            </Link>
+            </NavLink>
             </li>
           </ul>
           <div className="right-side">
-            <Link to="/signup" className="signup-btn" onClick={closeNewsMenu}>Sign in</Link>
+            <NavLink to="/signup" className="signup-btn" onClick={closeNewsMenu}>Sign in</NavLink>
           </div>
         </nav>
       </header>
@@ -42,9 +42,9 @@ const Header = () => {
       {showNewsMenu && (
         <div className="news-submenu">
           <div className="submenu-content">
-            <Link to="/achievements">Achievements</Link>
-            <Link to="/events">Events</Link>
-            <Link to="/seminars">Seminars</Link>
+            <NavLink to="/achievements">Achievements</NavLink>
+            <NavLink to="/events">Events</NavLink>
+            <NavLink to="/seminars">Seminars</NavLink>
           </div>
         </div>
       )}

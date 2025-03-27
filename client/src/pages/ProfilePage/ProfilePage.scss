@@ -13,7 +13,6 @@
         border-radius: 25px;
         border-width: 1px;
 
-
         background-color: white;
         border-radius: 12px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -112,12 +111,17 @@
                 }
             }
 
-            .post-referral-btn {
-                font-family: Inter,sans-sherif;
+            .post-btn {
+                font-family: Inter, sans-sherif;
 
                 position: absolute;
                 right: 24px;
                 top: 24px;
+
+                &.referral {
+                    top: 80px
+                }
+
                 padding: 10px 20px;
                 background-color: #0059ff;
                 color: white;
@@ -152,7 +156,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border: 1px solid #000000;
             font-family: Inter;
-            
+
             box-sizing: border-box;
 
             h2 {
@@ -218,9 +222,11 @@
         //     }
         // }
     }
+
 }
 
-.experience, .education {
+.experience,
+.education {
     background-color: white;
     border-radius: 12px;
     padding: 24px;
@@ -234,7 +240,8 @@
         font-weight: 600;
     }
 
-    .experience-item, .education-item {
+    .experience-item,
+    .education-item {
         border-bottom: 1px solid #e0e0e0;
         padding-bottom: 20px;
         margin-bottom: 20px;
@@ -246,12 +253,14 @@
         }
     }
 
-    .exp-header, .edu-header {
+    .exp-header,
+    .edu-header {
         display: flex;
         gap: 16px;
         margin-bottom: 16px;
 
-        .company-logo, .institute-logo {
+        .company-logo,
+        .institute-logo {
             width: 48px;
             height: 48px;
             flex-shrink: 0;
@@ -268,7 +277,8 @@
             }
         }
 
-        .exp-details, .edu-details {
+        .exp-details,
+        .edu-details {
             flex: 1;
 
             h3 {
@@ -278,13 +288,16 @@
                 margin-bottom: 4px;
             }
 
-            .company-name, .degree {
+            .company-name,
+            .degree {
                 font-size: 14px;
                 color: #1a1a1a;
                 margin-bottom: 4px;
             }
 
-            .duration, .location, .grades {
+            .duration,
+            .location,
+            .grades {
                 font-size: 14px;
                 color: #666666;
                 margin-bottom: 2px;
@@ -331,27 +344,31 @@
         }
     }
 
-    .experience, .education {
+    .experience,
+    .education {
         .exp-description {
             padding-left: 0;
         }
 
-        .exp-header, .edu-header {
+        .exp-header,
+        .edu-header {
             flex-direction: column;
             gap: 12px;
 
-            .company-logo, .institute-logo {
+            .company-logo,
+            .institute-logo {
                 width: 40px;
                 height: 40px;
             }
         }
     }
 
-    .profile-info {
-        .post-referral-btn {
-            position: static;
-            margin-top: 16px;
-            width: 100%;
-        }
-    }
+    // .profile-info {
+    //     .post-btn {
+
+    //         position: static;
+    //         margin-top: 16px;
+    //         width: 100%;
+    //     }
+    // }
 }

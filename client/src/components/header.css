@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Perandory-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Perandory-Regular'), url('../../public/Fonts/Perandory-Regular.otf');
+}
+
 .header-navbar {
     background-color: #ffffff;
     padding: 0;
@@ -61,7 +68,7 @@
 }
 
 .header-navbar .left-side .LogoTitle {
-    font-family: Perandory;
+    font-family: 'Perandory-Regular';
     font-weight: 400;
     font-size: 32px;
     line-height: 100%;
