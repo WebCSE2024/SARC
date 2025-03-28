@@ -6,8 +6,10 @@ import CommentsArea from './Comments/CommentsArea'
 
 // import pics from '../../../assets/TempImages'
 
-const AchievementsCard = () => {
+const AchievementsCard = ({data}) => {
     const imagesWrapperRef = useRef(null);
+
+    // console.log("achivements:",data);
 
     const modules = import.meta.glob('../../../assets/TempImages/*.{png,jpg,jpeg}');
     const gallery = [];
@@ -36,17 +38,18 @@ const AchievementsCard = () => {
             
             <div className='AchievementsCard'>
                 <h2 className="title">
-                    Some_achievement_title
+                    {data.title}
                 </h2>
                 <hr className='titleSeperator' />
                 <div className="desc">
-                    <p>
+                    <p>{data.description}</p>
+                    {/* <p>
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi at aspernatur atque sed commodi, obcaecati quod suscipit quibusdam et dolore doloremque. Dolorum voluptatibus nihil laudantium? Quisquam, eveniet illum? Eos, cupiditate.
                     </p>
 
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem facilis architecto molestiae. Corrupti, sit cupiditate recusandae accusamus odio ipsum dicta obcaecati eaque, quam aliquam ratione excepturi inventore eum velit omnis.
-                    </p>
+                    </p> */}
                 </div>
 
 
@@ -59,9 +62,9 @@ const AchievementsCard = () => {
                     {/* This ref is helpful in differentiating images-wrappers of 
                     different achievementsCard renderings */}
                     <div className="images-wrapper" ref={imagesWrapperRef}>
-                        {gallery.map((image, index) => (
+                        {data.gallery.map((image, index) => (
                             <div key={index} className={`SlideShowImage ${index}thImage`}>
-                                <img src={image} alt={`Image ${index}`} />
+                                <img src={(image.url).toString()} alt={`Image ${index}`} />
                             </div>
                         ))}
                     </div>

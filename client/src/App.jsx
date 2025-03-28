@@ -4,7 +4,7 @@ import './App.css'
 
 import EventsPage from './pages/News/EventsPage.jsx'
 import PublicationsPage from './pages/PublicationsPage/PublicationsPage'
-import ReferralCard from './pages/Referrals/referral_card.jsx'
+// import ReferralCard from './pages/Referrals/referral_card.jsx'
 import ReferralPage from './pages/Referrals/ReferralPage.jsx';
 // import AchievementsCard from './pages/News/NewsCards/AchievementsCard'
 import Achievements from './pages/News/AchievementsPage.jsx'
