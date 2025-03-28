@@ -7,8 +7,8 @@ import ProfileHeader from "../../utils/profileHeader";
 const ReferralCard = ({data}) => {
     // console.log('props', props);
 
-    console.log("received referral data:")
-    console.log(data);
+    // console.log("received referral data:")
+    // console.log(data);
     return (
                 <div className="card-container">
                     <div className="top-block">
@@ -48,7 +48,7 @@ const ReferralCard = ({data}) => {
                     {/* Job Description */}
                     <div className="company">
                         <div className="greet">
-                            <p>Greeting everyone! SDHVBSJ Tech has released a job opening.
+                            <p>Greeting everyone! {data.companyName} has released a job opening.
                             </p>
                         </div>
                         <div className="second-block">
@@ -56,12 +56,13 @@ const ReferralCard = ({data}) => {
                                 <div className="post-box">
                                     <div className="post-name">
                                         <p className="p">POST</p>
-                                        <span className="post-title">Software Engineer Intern (Summer 2025)</span>
+                                        <span className="post-title">{data.jobProfile} ({data.companyName})</span>
                                     </div>
 
                                     <div className="post-description">
                                         <p>
-                                            Join XYZ Tech for a 3-month summer internship. Work on cutting-edge AI-driven applications with our expert team. Gain hands-on experience in full-stack development, cloud computing, and DevOps.
+                                            {data.description}
+                                            {/* Join XYZ Tech for a 3-month summer internship. Work on cutting-edge AI-driven applications with our expert team. Gain hands-on experience in full-stack development, cloud computing, and DevOps. */}
                                         </p>
 
                                     </div>
@@ -70,11 +71,9 @@ const ReferralCard = ({data}) => {
                                 <div className="requirements">
                                     <h6 className="subtitle">Requirements:</h6>
                                     <p className="requirements-list">
-                                        B.Tech/B.E. (CSE), 3rd or 4th year students <br />
+                                        {data.eligibleYears?.join(', ')} Passouts <br />
                                         Proficiency in Python, JavaScript, React.js, and SQL <br />
                                         Strong problem-solving and analytical skills
-
-
                                     </p>
                                 </div>
 

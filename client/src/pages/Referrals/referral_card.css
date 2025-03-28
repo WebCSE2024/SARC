@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 834px;
-    height: 758px;
+    /* height: 758px; */
     top: 155px;
     left: 353px;
     border-radius: 16px;
@@ -24,7 +24,7 @@
 .top-block {
     display: flex;
     width: 802px;
-    height: 76px;
+    min-height: 76px;
     gap: 10px;
     padding: 10px;
 
@@ -123,14 +123,14 @@
     display: flex;
     flex-direction: column;
     width: 802px;
-    height: 589px;
+    /* height: 589px; */
     box-sizing: border-box;
 
 }
 
 .greet {
     width: 802px;
-    height: 37px;
+    /* height: 37px; */
     gap: 10px;
     padding: 10px;
     font-family: Inter;
@@ -149,7 +149,7 @@
     display: flex;
     flex-direction: column;
     width: 769px;
-    height: 542px;
+    /* height: 542px; */
     gap: 21px;
     box-sizing: border-box;
 
@@ -159,7 +159,7 @@
     display: flex;
     flex-direction: column;
     width: 769px;
-    height: 480px;
+    /* height: 480px; */
     border-radius: 12px;
     padding-top: 26px;
     padding-right: 16px;
@@ -174,10 +174,11 @@
 
 .post-box {
     width: 737px;
-    height: 162px;
+    /* height: 162px; */
     border-bottom-width: 1px;
     border-bottom: 1px solid #CBCCD8;
     box-sizing: border-box;
+    padding-bottom: 15px ;
 }
 
 .post-name {
@@ -232,7 +233,7 @@
 
 .requirements {
     width: 737px;
-    height: 137px;
+    /* height: 137px; */
     padding-bottom: 17px;
     border-bottom-width: 1px;
     border-bottom: 1px solid #CBCCD8;
@@ -254,7 +255,7 @@
 
 .requirements-list {
     width: 737px;
-    height: 92px;
+    /* height: 92px; */
     gap: 10px;
     padding: 10px;
 
@@ -272,9 +273,11 @@
     width: 252px;
     display: flex;
     flex-direction: column;
-    height: 118px;
+    /* height: 118px; */
     gap: 10px;
     padding: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 15px;
     font-family: Inter;
     font-weight: 500px;
     font-size: 12px;
@@ -374,7 +377,7 @@
 
 }
 
-.id {
+.emailid .id {
     width: 165px;
     height: 21px;
     font-family: Inter;
