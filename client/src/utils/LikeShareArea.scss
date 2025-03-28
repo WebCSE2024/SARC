@@ -1,0 +1,104 @@
+@keyframes likeAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.LikeShare {
+    display: flex;
+    width: 388.0010986328125px;
+    height: 41px;
+    gap: 199px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    // box-sizing: border-box;
+    // overflow:hidden;
+
+    .like {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 20px;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .like-icon {
+            fill: #fff;
+            transition: fill 0.2s ease;
+            stroke-width: 1px;
+            stroke: #8D91B0;
+
+
+            &.liked {
+                fill: #2196F3;
+                stroke-width: 0;
+                animation: likeAnimation 0.4s ease forwards;
+            }
+        }
+    }
+
+    .likeTxt,
+    .shareTxt {
+        // width: 52px;
+        height: 41px;
+        gap: 10px;
+        padding: 10px;
+        font-family: Inter;
+
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20.8px;
+        letter-spacing: 2%;
+        vertical-align: middle;
+
+        color: #8D91B0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        box-sizing: border-box;
+    }
+
+    .likeTxt {
+        width: 52px;
+    }
+
+    .shareTxt {
+        width: 65px;
+    }
+
+    .share {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 20px;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .share-icon {
+            fill: #8D91B0;
+            stroke-width: 2px;
+            stroke: #8D91B0;
+        }
+    }
+}
