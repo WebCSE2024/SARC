@@ -24,18 +24,18 @@ export const createReferral = asyncHandler(async(req,res)=>{
     const {
         companyName,
         deadline,
-        eligibleYears,
+        requirements,
         jobProfile,
-        experience,
         stipend,
-        duration,
         description,
-        worksite,
-        location
+        location,
+        email,
+        contact,
+        website
           
     }=req.body;
 
-    if(!companyName || !deadline || !eligibleYears || !jobProfile ||!location || !experience || !stipend || !duration || !description || !worksite  ){
+    if(!companyName || !deadline || !requirements || !jobProfile ||!location || !email  || !stipend  || !description || !website   ){
         throw new ApiError(400,"All fields are required ")
     }
     const referral_id=generateReferralId()
@@ -43,17 +43,17 @@ export const createReferral = asyncHandler(async(req,res)=>{
     const referral = await  Referral.create({
       companyName,
       deadline,
-      eligibleYears,
       jobProfile,
       addedBy:req.user._id,
-      experience,
       stipend,
-      duration,
       description,
-      worksite,
+      requirements,
       location,
       status:'pending',
-      referralId:referral_id
+      referralId:referral_id,
+      email,
+      contact,
+      website
     })
    
     if(!referral)
@@ -91,9 +91,9 @@ export const getAllReferrals = asyncHandler(async(req,res)=>{
         $project: {
     
     
-          _id:0,
+         
           __v:0,
-          'addedBy._id':0,
+          // 'addedBy':0,
           'addedBy.password':0,
           'addedBy.isVerified':0
           

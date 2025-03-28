@@ -14,10 +14,10 @@ const referralSchema = new mongoose.Schema({
             message:"Invalid date format"
         },
     },
-    eligibleYears:[{
-        type:String,
-        required:true
-    }],
+    // eligibleYears:[{
+    //     type:String,
+    //     required:true
+    // }],
     referralId:{
         type:String,
         required:true,
@@ -32,7 +32,7 @@ const referralSchema = new mongoose.Schema({
         ref:'Alumni',
         required:true
     },
-    experience:{
+    requirements:{
         type:String,
         required:true
     },
@@ -60,18 +60,11 @@ const referralSchema = new mongoose.Schema({
         },
         
     },
-    duration:{ // little bit dicey i think we can add it  to  description itself 
-       type:String,
-       required:true 
-    },
     description:{
        type:String,
        required:true
     },
-    worksite:{
-       type:String,
-       required:true
-    },
+    
     status:{
         type:String,
         enum:['pending','active','removed','expired'],
@@ -80,6 +73,17 @@ const referralSchema = new mongoose.Schema({
     
     message:{
        type:String    //any message on actions from admin-portal, only visible to alumni who posted
+    },
+    contact:{
+        type:String
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    website:{
+        type:String,
+        required:true
     }
 },{timestamps:true})
 
