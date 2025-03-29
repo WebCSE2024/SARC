@@ -26,8 +26,12 @@
 
         .cover-photo {
             height: 200px;
-            //   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-image: url('../../assets/ProfileBg.png');
+            background: linear-gradient(
+                135deg,
+                rgba(173, 216, 230, 0.7) 0%,   // Light blue
+                rgba(240, 248, 255, 0.9) 50%, // Very light pastel white
+                rgba(224, 255, 255, 0.7) 100% // Light cyan
+            );
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;

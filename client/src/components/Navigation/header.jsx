@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom"; // Import NavLink
-// import topBarLogo from "../assets/top_bar.png";
-import sarcLogo from "../assets/MainLogo.svg";
+import sarcLogo from "../../../public/MainLogo.svg";
 import "./header.css";
 
 const Header = () => {

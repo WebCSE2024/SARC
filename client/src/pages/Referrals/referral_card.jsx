@@ -1,8 +1,7 @@
 import React from "react";
 import "./referral_card.css";
 // import profilePic from "../../assets/NoProfileImg.png";
-import ProfileHeader from "../../utils/profileHeader";
-
+import ProfileHeader from "../../components/ProfileHeader/profileHeader";
 
 const ReferralCard = ({ data }) => {
     // console.log('props', props);
@@ -13,7 +12,7 @@ const ReferralCard = ({ data }) => {
         <div className="card-container">
             <div className="top-block">
                 {/* Header Section */}
-                <ProfileHeader personInfo={data.addedBy[0]} eventId={`referral-id:${10}`} />
+                <ProfileHeader personInfo={data && data.addedBy[0]} eventId={`referral-id:${10}`} />
                 {/* <div className="profile">
                             <div className="profile-box">
                             <div className="photo">

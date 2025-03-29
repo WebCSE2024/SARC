@@ -1,9 +1,8 @@
 import React, { useRef } from 'react'
 import './AchievementsCard.scss'
-import LikeShareArea from '../../../utils/LikeShareArea'
+import LikeShareArea from '../../components/LikeShareArea'
 // import CommentSection from './Comments/commentSection'
-import CommentsArea from './Comments/CommentsArea'
-
+import CommentsArea from '../../components/Comments/CommentsArea'
 // import pics from '../../../assets/TempImages'
 
 const AchievementsCard = ({data}) => {

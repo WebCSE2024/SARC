@@ -1,6 +1,6 @@
 import React from 'react'
-import EventsCard from './NewsCards/EventsCard'
-import SearchBox from '../../utils/Filtering/SearchBox'
+import EventsCard from '../../features/Events/EventsCard'
+import SearchBox from '../../components/Filtering/SearchBox'
 
 const SeminarsPage = () => {
     return (

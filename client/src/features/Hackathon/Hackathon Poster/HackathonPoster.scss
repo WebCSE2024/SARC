@@ -1,7 +1,6 @@
+// @import url('../../../../public/EventBg.png');
 
 .HackathonPoster {
-
-
     &.NoImg {
         .HackathonPoster {
             .detailsWrapper {
@@ -54,8 +53,8 @@
         gap: 20px;
 
         &.NoImg {
-            background-image: url('../assets/EventBg.png');
-            background-position: center;
+            background-image: url('./EventBg.png');
+            background-position: center;    
             background-repeat: no-repeat;
             background-size: cover;
 

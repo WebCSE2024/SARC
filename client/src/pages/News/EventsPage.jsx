@@ -1,10 +1,10 @@
 import { React, useEffect, useState } from 'react'
 import axiosInstance from '../../../axios.config'
-import EventsCard from './NewsCards/EventsCard'
-import HackathonCard from './NewsCards/HackathonCard'
+import EventsCard from '../../features/Events/EventsCard'
+import HackathonCard from '../../features/Hackathon/HackathonCard'
 import './EventsPage.scss'
 // import FloatingBookmark from '../../utils/Filtering/FloatingBookmark'
-import SearchBox from '../../utils/Filtering/SearchBox'
+import SearchBox from '../../components/Filtering/SearchBox'
 
 // import TempTestCard from './TempTestCard'
 

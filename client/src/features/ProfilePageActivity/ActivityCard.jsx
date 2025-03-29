@@ -1,8 +1,8 @@
 import React from 'react'
 import { useRef } from 'react'
 import './ActivityCard.scss'
-import PublicationsCard from '../../PublicationsPage/PublicationsCard'
-import ReferralCard from '../../Referrals/referral_card'
+import PublicationsCard from '../../pages/PublicationsPage/PublicationsCard'
+import ReferralCard from '../../pages/Referrals/referral_card'
 
 const ActivityCard = () => {
     const activitiesWrapperRef = useRef(null);

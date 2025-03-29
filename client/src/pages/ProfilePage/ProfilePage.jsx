@@ -1,13 +1,11 @@
 import React from 'react';
 import './ProfilePage.scss';
-import profileImg from '../../assets/NoProfileImg.png'
-import experienceLogo from '../../assets/MainLogo.svg'
-import eduLogo from '../../assets/TempImages/wallpaperflare.com_wallpaper (1).jpg'
+import profileImg from '../../../public/NoProfileImg.png'
+import experienceLogo from '../../../public/MainLogo.svg'
+import eduLogo from '../../../public/TempImages/wallpaperflare.com_wallpaper (1).jpg'
 import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import ReferralCard from '../Referrals/referral_card';
-import PublicationsCard from '../PublicationsPage/PublicationsCard';
-import ActivityCard from './components/ActivityCard';
+import ActivityCard from '../../features/ProfilePageActivity/ActivityCard';
 
 const ProfilePage = () => {
     const navigate = useNavigate();

@@ -85,7 +85,11 @@
 
 
                 scale: 0.6;
-                border: 2px solid black;
+
+                .card-container, .PublicationsCard {
+                    border: 1px solid black;
+                }
+
                 border-radius: 16px;
                 margin: -160px;
                 // margin-top: -160px;

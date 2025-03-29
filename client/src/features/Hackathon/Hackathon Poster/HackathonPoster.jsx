@@ -1,11 +1,13 @@
 import React from 'react'
 import './HackathonPoster.scss'
+import EventBg from '../../../../public/EventBg.png'
 
 const HackathonPoster = ({ imageUrl }) => {
 
     // console.log(imageUrl.posterImg);
     // if(imageUrl!= undefined && imageUrl.length==undefined)  imageUrl=undefined;
     imageUrl=imageUrl.posterImg;
+    if(imageUrl)console.log(imageUrl)
     
     return (
         <div className={`HackathonPoster ${imageUrl == undefined ? 'NoImg' : 'posterPresent'}`}>
@@ -21,7 +23,7 @@ const HackathonPoster = ({ imageUrl }) => {
                             <a href="">Register Now</a>
                         </div>
                     </div>
-                    <ul className={`Hack-Desc ${imageUrl == undefined ? `NoImg` : `posterPresent`}`}>
+                    <ul className={`Hack-Desc ${imageUrl == undefined ? `NoImg` : `posterPresent`}`} >
                         <li>Date: <b> 10th-12th August 2025</b></li>
                         <li>Venue:  <b>ABC University, Kolkata.  </b></li>
                         <li>Starts at <b>6:00 PM.</b></li>

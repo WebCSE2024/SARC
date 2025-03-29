@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
 import './profileHeader.scss'
-import defaultProfileImg from '../assets/NoProfileImg.png'
+import defaultProfileImg from '../../../public/NoProfileImg.png'
 
 const profileHeader = ({personInfo , eventId}) => {
 
-    // console.log("personInfo:");
-    // console.log(personInfo);
+    // const [isBookmarked, setIsBookmarked] = useState(false);
 
-    // console.log(eventId); 
-    const [isBookmarked, setIsBookmarked] = useState(false);
-
-    const handleBookmarkChange = (e) => {
-      setIsBookmarked(e.target.checked);
-      // Here we will add logic to save the bookmark state to backend/localStorage
-    };
+    // const handleBookmarkChange = (e) => {
+    //   setIsBookmarked(e.target.checked);
+    //   // Here we will add logic to save the bookmark state to backend/localStorage
+    // };
 
     return (
         <header className="accountDetails">

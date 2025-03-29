@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './CommentsArea.scss';
 import { FaReply } from 'react-icons/fa';
-import defaultUserImg from '../../../../assets/NoProfileImg.png';
+import defaultUserImg from '../../../public/noProfileImg.png';
 import CommentInput from './CommentInput';
 import CommentsList from './CommentsList';
 
 const CommentsArea = () => {
     const [comments, setComments] = useState([]);
 
+    
     const handleAddComment = (text) => {
         const newComment = {
             id: Date.now(),

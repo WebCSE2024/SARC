@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import './EventsCard.scss'
-import ProfileHeader from '../../../utils/profileHeader'
+import ProfileHeader from '../../components/profileHeader'
 // import bkmark from '../assets/Bookmark.svg'
 // import CommentSection from './Comments/commentSection'.
-import CommentsArea from './Comments/CommentsArea'
+// import CommentsArea from '../../pages/News/NewsCards/Comments/CommentsArea'
+import CommentsArea from '../../components/Comments/CommentsArea'
 
 
 const EventsCard = () => {

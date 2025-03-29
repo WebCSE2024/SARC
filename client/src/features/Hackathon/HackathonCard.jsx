@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import HackathonPoster from '../../../utils/HackathonPoster'
+import HackathonPoster from './Hackathon Poster/HackathonPoster'
 import './HackathonCard.scss'
-import ProfileHeader from '../../../utils/profileHeader'
+import ProfileHeader from '../../components/profileHeader'
 // import bkmark from '../assets/Bookmark.svg'
 // import PdfSvg from '../../assets/RuleBook.svg'
-import PdfSvg from '../../../assets/RuleBook.svg'
+import PdfSvg from '../../../public/Rulebook.svg'
 // import CommentSection from './Comments/commentSection'
-// import CommentsArea from './Comments/CommentsArea'
-import CommentsArea from './Comments/CommentsArea'
+import CommentsArea from '../../components/Comments/CommentsArea'
 
 const HackathonCard = (posterImg) => {
     const [isLiked, setIsLiked] = useState(false);

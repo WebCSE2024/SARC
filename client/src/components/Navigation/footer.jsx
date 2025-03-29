@@ -1,7 +1,7 @@
 import React from "react";
 import "./footer.css";
 import { FaYoutube, FaTwitter, FaLinkedin } from "react-icons/fa";
-import LogoSmall from "../assets/Logo-Small.png";
+import LogoSmall from "../../../public/Logo-Small.png";
 const Footer = () => {
   return (
     <footer className="footer">

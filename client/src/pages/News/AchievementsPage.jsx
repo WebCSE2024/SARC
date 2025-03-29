@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Achievements from './NewsCards/AchievementsCard'
-import SearchBox from '../../utils/Filtering/SearchBox'
+import Achievements from '../../features/Achievements/AchievementsCard'
+import SearchBox from '../../components/Filtering/SearchBox'
 import axiosInstance from '../../../axios.config'
 
 const AchievementsPage = () => {

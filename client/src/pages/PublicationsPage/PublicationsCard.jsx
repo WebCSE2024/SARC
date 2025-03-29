@@ -1,9 +1,9 @@
 import React from 'react'
 import './PublicationsCard.scss'
-import LikeShareArea from '../../utils/LikeShareArea';
+import LikeShareArea from '../../components/LikeShareArea/LikeShareArea';
 import { useState } from 'react';
-import defaultProfile from '../../assets/noProfileImg.png'
-import samplePdfPreview from '../../assets/samplePdfPreview.jpeg'
+import defaultProfile from '../../../public/noProfileImg.png'
+import samplePdfPreview from '../../../public/samplePdfPreview.jpeg'
 
 const PublicationsCard = () => {
     // const [isbooked, setIsbooked] = useState(false);

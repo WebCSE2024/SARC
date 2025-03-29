@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react'
 import axiosInstance from '../../../axios.config'
 import PublicationsCard from './PublicationsCard'
-import SearchBox from '../../utils/Filtering/SearchBox'
+import SearchBox from '../../components/Filtering/SearchBox'
 
 
 

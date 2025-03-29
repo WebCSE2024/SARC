@@ -268,11 +268,9 @@
 
 }
 
-.submenu-content a:hover {
+.submenu-content a:hover, .submenu-content .active {
     color: #075189;
     border: 0.4px solid #057CD5;
-    /* border-color: #2d00f5; */
-    /* Change border color on hover */
     text-decoration: none;
 
     font-family: Roboto;
@@ -284,10 +282,9 @@
 
 }
 
-.submenu-content .active {
+/* .submenu-content .active {
     color: #075189;
     border: 0.4px solid #057CD5;
-    /* Change border color on hover */
     text-decoration: none;
 
     font-family: Roboto;
@@ -297,7 +294,7 @@
     letter-spacing: 0%;
     vertical-align: middle;
 
-}
+} */
 
 .dropdown-menu li {
     padding: 0.5rem 1rem;
