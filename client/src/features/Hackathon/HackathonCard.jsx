@@ -8,8 +8,13 @@ import PdfSvg from '../../../public/Rulebook.svg'
 // import CommentSection from './Comments/commentSection'
 import CommentsArea from '../../components/Comments/CommentsArea'
 
-const HackathonCard = (posterImg) => {
+const HackathonCard = ({data}) => {
+    // const posterImg='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvGVNKFKB3h0ay5aBrx-YVN_FcDgH6uf_lpjiGNtTpg1DOaTmRxca2WVB07obEBgS-CRQ&usqp=CAU';
+    const posterImg=data.img_url;
     const [isLiked, setIsLiked] = useState(false);
+
+    // console.log(data);
+    // console.log(typeof(data));
 
     const handleLikeClick = () => {
         setIsLiked(!isLiked);
@@ -24,25 +29,26 @@ const HackathonCard = (posterImg) => {
             <div className='HackathonCard'>
 
                 {/* ADD HACKATHON ID HERE */}
-                <ProfileHeader eventId={`hackathonId-${1}`} />
+                <ProfileHeader createdAt={data && data.createdAt} eventId={`hackathonId-${data.id}`} />
 
                 <div className='HackathonDesc'>
                     <p>
-                        HackX 2025 is a 36-hour hackathon designed for innovators and problem solvers. Compete with the best minds, build impactful solutions, and win exciting prizes!
+                        {data && data.description}
+                        {/* HackX 2025 is a 36-hour hackathon designed for innovators and problem solvers. Compete with the best minds, build impactful solutions, and win exciting prizes! */}
                     </p>
                 </div>
 
                 {/* <HackathonPoster imageUrl={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvGVNKFKB3h0ay5aBrx-YVN_FcDgH6uf_lpjiGNtTpg1DOaTmRxca2WVB07obEBgS-CRQ&usqp=CAU`}/> */}
                 {/* <HackathonPoster /> */}
-                <HackathonPoster imageUrl={posterImg} />
+                <HackathonPoster imageUrl={posterImg}  data={data} />
 
-                {/*  add href for pdf link here! */}
-                <a href='/' className="rulebook" >
+                <a href={data.ruleBookLink} target='_blank' rel='noreferrer noopener' className="rulebook" >
                     <img src={PdfSvg} alt="" srcset="" /> Rulebook
                 </a>
 
                 <div className="HackathonEnd">
-                    <p className='Volunteer'>Want to volunteer? <a href="">CLICK HERE</a> | REGISTRATION DEADLINE: <b>11:59 PM, 05-03-2025 </b></p>
+                    {/*following can be added later for more functionality */}
+                    {/* <p className='Volunteer'>Want to volunteer? <a href="">CLICK HERE</a> | REGISTRATION DEADLINE: <b>11:59 PM, 05-03-2025 </b></p> */}
                     <hr />
 
                     <div className="LikeShare">

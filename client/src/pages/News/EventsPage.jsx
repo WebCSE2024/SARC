@@ -3,19 +3,19 @@ import axiosInstance from '../../../axios.config';
 import EventsCard from '../../features/Events/EventsCard';
 import HackathonCard from '../../features/Hackathon/HackathonCard';
 import hackathonData from '../../data/hackathonData.json';
+import eventsData from '../../data/eventsData.json';
 import './EventsPage.scss';
 import SearchBox from '../../components/Filtering/SearchBox';
 
 const EventsPage = () => {
-  const [eventData, setEventData] = useState([]);
+  const [apiEvents, setApiEvents] = useState([]);
   const [hackathons] = useState(hackathonData.hackathons);
+  const [mockEvents] = useState(eventsData.events);
 
   const getEventsData = async () => {
     try {
       const response = await axiosInstance.get('/event/event-list');
-      console.log(response);
-      console.log(response.data.data);
-      setEventData(response.data.data);
+      setApiEvents(response.data.data);
     } catch (error) {
       console.log("error:", error);
     }
@@ -35,24 +35,29 @@ const EventsPage = () => {
           <HackathonCard
             key={hackathon.id || `hack_${index}`}
             data={hackathon}
-            posterImg={hackathon.posterImage}
+            posterImg={hackathon.img_url}
           />
         ))}
       </section>
 
       <section className="events-section">
         {/* <h2 className="section-title">Events</h2> */}
-        <EventsCard />
-        <EventsCard />
+        {/* API Events */}
+        {/* {apiEvents.map((event, index) => (
+          <EventsCard
+            key={event.id || `api_${index}`}
+            data={event}
+          />
+        ))} */}
+        
+        {/* Mock Events */}
+        {mockEvents.map((event, index) => (
+          <EventsCard
+            key={event.id || `mock_${index}`}
+            data={event}
+          />
+        ))}
       </section>
-
-
-      <HackathonCard posterImg={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvGVNKFKB3h0ay5aBrx-YVN_FcDgH6uf_lpjiGNtTpg1DOaTmRxca2WVB07obEBgS-CRQ&usqp=CAU`} />
-      <HackathonCard />
-
-      <EventsCard />
-      <EventsCard />
-
     </div>
   );
 };

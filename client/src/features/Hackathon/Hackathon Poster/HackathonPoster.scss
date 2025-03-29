@@ -6,7 +6,7 @@
             .detailsWrapper {
                 box-shadow: 0px 4px 4px 0px #0000001A;
                 width: 768px;
-                height: 303px;
+                // height: 303px;
                 top: 1045px;
                 left: 3078px;
                 border-radius: 12px;
@@ -41,7 +41,7 @@
 
     .Hack-info {
         width: 768px;
-        height: 303px;
+        // height: 303px;
         // top: 200px;
         // left: 36px;
         border-radius: 12px;
@@ -174,18 +174,18 @@
             .HackathonTitle {
                 // color: aqua;
                 width: 336px;
-                height: 90px;
+                // height: 90px;
                 // top: 21px;
                 // left: 268px;
             }
         }
 
         .Hack-Desc {
-            li {
+            .detailPoint {
                 list-style-type: none;
 
                 // width: 194px;
-                height: 21px;
+                height: fit-content;
                 top: 104px;
                 left: 68px;
 

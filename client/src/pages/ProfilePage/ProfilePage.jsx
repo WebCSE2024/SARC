@@ -7,6 +7,9 @@ import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import ActivityCard from '../../features/ProfilePageActivity/ActivityCard';
 
+
+import userData from '../../data/userData.json'
+
 const ProfilePage = () => {
     const navigate = useNavigate();
 

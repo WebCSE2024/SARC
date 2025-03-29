@@ -18,7 +18,8 @@ const PublicationsCard = ({ data }) => {
     //     // Here we will add logic to save the bookmark state to backend/localStorage
     // };
     const handlePreviewClick = () => {
-        window.open('https://ncert.nic.in/textbook/pdf/jeff105.pdf', '_blank', 'noopener,noreferrer');
+        // window.open('https://ncert.nic.in/textbook/pdf/jeff105.pdf', '_blank', 'noopener,noreferrer');
+        window.open(data.publicationURL, '_blank', 'noopener,noreferrer');
     };
 
     return (
@@ -61,7 +62,7 @@ const PublicationsCard = ({ data }) => {
                     <img src={defaultProfile} alt="" className='publisher-pic' />
                     <div className="publisher-details">
                         <h3 className="name">
-                            Prof. {data.publisher[0].full_name}
+                            Prof. {data && data.publisher[0].full_name}
                             <br />
                             {/* <span className='designation'> (Dept. of Computer Science, ABC University)</span> */}
                         </h3>
@@ -74,7 +75,7 @@ const PublicationsCard = ({ data }) => {
                                         <path d="M0.973633 0.533325L9.49995 10.1333L18.0263 0.533325" stroke="#8D91B0" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
 
-                                </span> {data.publisher[0].email}
+                                </span> {data && data.publisher[0].email}
                             </p>
 
 

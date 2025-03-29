@@ -6,8 +6,9 @@ import ProfileHeader from '../../components/ProfileHeader/profileHeader'
 // import CommentsArea from '../../pages/News/NewsCards/Comments/CommentsArea'
 import CommentsArea from '../../components/Comments/CommentsArea'
 
+import { formatDate } from '../../utils/dateFormatter.jsx'
 
-const EventsCard = () => {
+const EventsCard = ({ data }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   const handleLikeClick = () => {
@@ -20,33 +21,37 @@ const EventsCard = () => {
 
   return (
     <div className="eventCardOuter">
-      
+
       <div className='eventCard'>
 
         {/* ADD UNIQUE EVENT ID here */}
-        <ProfileHeader eventId={`eventId-${1}`} />
+        <ProfileHeader createdAt={data && data.createdAt} />
 
         <div className='eventDesc'>
           <p>
-            Greeting everyone! We have an upcoming guest talk. Join us for an insightful talk by Dr. Ananya Roy, an AI expert from IIT Bombay, on how AI and robotics are shaping the future.
+            {data && data.description}
+            {/* Greeting everyone! We have an upcoming guest talk. Join us for an insightful talk by Dr. Ananya Roy, an AI expert from IIT Bombay, on how AI and robotics are shaping the future. */}
           </p>
         </div>
 
         <div className="Talk-info">
           <div className="heading">
-            <span className='eventTitle'><span className='eventType'> <span className="color">Guest talk</span> :</span> The Future of AI & Robotics</span>
+            <span className='eventTitle'><span className='eventType'> <span className="color">{data.title}</span> </span> </span>
 
-            <div className='seatBooking'>
+            {/* <div className='seatBooking'>
               <a href="">Book a Seat</a>
-            </div>
+            </div> */}
+
+
           </div>
           <ul className="talk-Desc">
-            <li>Date: <b> 20th July 2025</b></li>
-            <li>Venue:  <b>GJLT.  </b></li>
-            <li>Time: <b>2:00 PM- 4:00 PM.</b></li>
+            <li className='descPoints'>Date: <b> {formatDate(data.eventDate)}</b></li>
+            <li className='descPoints'>Venue:  <b>{data.venue}  </b></li>
+            {/* <li className='descPoints'>Time: <b>2:00 PM- 4:00 PM.</b></li> */}
             <br />
             <br />
-            <p>Speaker: <b>Dr. Ananya Roy</b>, AI Expert at IIT Bombay</p>
+            {data && data.speaker && (<p cla>Speaker: <b>{data.speaker.name}</b>, {data.speaker.designation && data.speaker.designation}, {data.speaker.organization}</p>)}
+
           </ul>
         </div>
 

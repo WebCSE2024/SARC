@@ -12,8 +12,8 @@ const PublicationsPage = () => {
     const getPublications = async () => {
         try {
             const response = await axiosInstance.get(`/publication/publication-list`);
-            console.log(response)
-            console.log(response.data.data)
+            // console.log(response)
+            // console.log(response.data.data)
             setPublicationsData(response.data.data);
         } catch (error) {
             console.error('Error:', error);

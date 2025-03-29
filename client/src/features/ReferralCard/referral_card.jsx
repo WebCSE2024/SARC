@@ -83,12 +83,12 @@ const ReferralCard = ({ data }) => {
                                 <span className="job-text">  {data && `${data.location.city}, ${data.location.country}`}
                                 </span></div>
                             <div className="detail"><p className="job-heading">Stipend:</p>
-                                <span className="job-text">{data && formatAmount(data.stipend.amount)} {data.stipend.currency}
+                                <span className="job-text">{data && formatAmount(data.stipend.amount)} {data && data.stipend.currency}
                                 </span></div>
                             <div className="detail"><p className="job-heading">Deadline:</p>
                                 <span className="job-text">{data && formatDate(data.deadline)}
                                 </span></div>
-                            <div className="detail"><p className="job-heading"><a href={data.website}>Website Link</a></p>
+                            <div className="detail"><p className="job-heading"><a href={data && data.website}>Website Link</a></p>
 
                             </div>
 
@@ -104,7 +104,7 @@ const ReferralCard = ({ data }) => {
                                 </svg></div>
 
                             <div className="number">
-                                <p className="number-text">{data.contact}</p>
+                                <p className="number-text">{data && data.contact && data.contact}</p>
                             </div>
                         </div>
                         <div className="email">
@@ -115,7 +115,7 @@ const ReferralCard = ({ data }) => {
 
                             </div>
                             <div className="emailid">
-                                <p className="id">{data.email}</p>
+                                <p className="id">{data && data.email}</p>
                             </div>
                         </div>
                     </div>

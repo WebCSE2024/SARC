@@ -1,15 +1,23 @@
 import React from 'react'
 import EventsCard from '../../features/Events/EventsCard'
 import SearchBox from '../../components/Filtering/SearchBox'
+import seminarsDataObj from '../../data/seminarData.json'
 
 const SeminarsPage = () => {
+    console.log(seminarsDataObj);
+    console.log(typeof(seminarsDataObj.seminars));
+    const seminarsData=seminarsDataObj.seminars
     return (
         <div className='SeminarsPage'>
 
             <SearchBox />
 
-            <EventsCard />
-            <EventsCard />
+            {seminarsData.map((Sem_data, index) => (
+                <EventsCard data={Sem_data}/>
+            ))}
+
+            {/* <EventsCard />
+            <EventsCard /> */}
 
         </div>
     )
