@@ -18,11 +18,11 @@ const referralSchema = new mongoose.Schema({
     //     type:String,
     //     required:true
     // }],
-    referralId:{
-        type:String,
-        required:true,
-        unique:true
-    },
+    // referralId:{
+    //     type:String,
+    //     required:true,
+    //     unique:true
+    // },
     jobProfile:{
         type:String,
         required:true,
@@ -34,6 +34,8 @@ const referralSchema = new mongoose.Schema({
     },
     requirements:{
         type:String,
+        maxlength:[700,"Requirements should be less than 700 characters"],
+        minlength:[15,"Requirements should be more than 10 characters"],        
         required:true
     },
     stipend:{
@@ -59,6 +61,11 @@ const referralSchema = new mongoose.Schema({
           required: true 
         },
         
+    },
+    mode:{
+        type:String,
+        enum:['remote','hybrid','onsite'],
+        default:'remote'
     },
     description:{
        type:String,
