@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import HackathonPoster from './Hackathon Poster/HackathonPoster'
 import './HackathonCard.scss'
-import ProfileHeader from '../../components/profileHeader'
+import ProfileHeader from '../../components/ProfileHeader/profileHeader'
 // import bkmark from '../assets/Bookmark.svg'
 // import PdfSvg from '../../assets/RuleBook.svg'
 import PdfSvg from '../../../public/Rulebook.svg'

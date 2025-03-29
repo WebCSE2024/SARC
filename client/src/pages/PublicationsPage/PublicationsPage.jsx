@@ -11,7 +11,7 @@ const PublicationsPage = () => {
 
     const getPublications = async () => {
         try {
-            const response = await axiosInstance.get(`/publication/publications-list`);
+            const response = await axiosInstance.get(`/publication/publication-list`);
             console.log(response)
             console.log(response.data.data)
             setPublicationsData(response.data.data);
@@ -29,9 +29,15 @@ const PublicationsPage = () => {
     return (
         <div className='PublicationsPage'>
             <SearchBox />
+
+            {PublicationsData.map((publ_data,index)=>{
+                // console.log(publ_data);
+                return <PublicationsCard key={index} data={publ_data}/>;
+            })}
+
+            {/* <PublicationsCard />
             <PublicationsCard />
-            <PublicationsCard />
-            <PublicationsCard />
+            <PublicationsCard /> */}
         </div>
     )
 }

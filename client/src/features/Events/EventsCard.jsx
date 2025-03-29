@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './EventsCard.scss'
-import ProfileHeader from '../../components/profileHeader'
+import ProfileHeader from '../../components/ProfileHeader/profileHeader'
 // import bkmark from '../assets/Bookmark.svg'
 // import CommentSection from './Comments/commentSection'.
 // import CommentsArea from '../../pages/News/NewsCards/Comments/CommentsArea'

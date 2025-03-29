@@ -1,5 +1,7 @@
 import React from "react";
 import "./referral_card.css";
+import { formatDate } from '../../utils/dateFormatter';
+import { formatAmount } from '../../utils/numberFormatter';
 // import profilePic from "../../assets/NoProfileImg.png";
 import ProfileHeader from "../../components/ProfileHeader/profileHeader";
 
@@ -12,7 +14,7 @@ const ReferralCard = ({ data }) => {
         <div className="card-container">
             <div className="top-block">
                 {/* Header Section */}
-                <ProfileHeader personInfo={data && data.addedBy[0]} eventId={`referral-id:${10}`} />
+                <ProfileHeader personInfo={data && data.addedBy[0]} createdAt={data && data.createdAt} eventId={data && data.referralId} />
                 {/* <div className="profile">
                             <div className="profile-box">
                             <div className="photo">
@@ -80,17 +82,15 @@ const ReferralCard = ({ data }) => {
                             <div className="detail"><p className="job-heading">Location:</p>
                                 <span className="job-text">  {data && `${data.location.city}, ${data.location.country}`}
                                 </span></div>
-                            <div className="detail"><p className="job-heading">Stipend (in ₹):</p>
-                                <span className="job-text">{data && data.stipend.amount}
+                            <div className="detail"><p className="job-heading">Stipend:</p>
+                                <span className="job-text">{data && formatAmount(data.stipend.amount)} {data.stipend.currency}
                                 </span></div>
                             <div className="detail"><p className="job-heading">Deadline:</p>
-                                <span className="job-text">{data && data.duration}  
-                                    {/* convert the above to date of last apply */}
+                                <span className="job-text">{data && formatDate(data.deadline)}
                                 </span></div>
-                            <div className="detail"><p className="job-heading">Website Link:</p>
-                                {/* add website link here */}
-                                <span className="job-text">xyztech.com  
-                                </span></div>
+                            <div className="detail"><p className="job-heading"><a href={data.website}>Website Link</a></p>
+
+                            </div>
 
 
                         </div>
@@ -104,7 +104,7 @@ const ReferralCard = ({ data }) => {
                                 </svg></div>
 
                             <div className="number">
-                                <p className="number-text">+91 9876543210</p>
+                                <p className="number-text">{data.contact}</p>
                             </div>
                         </div>
                         <div className="email">
@@ -115,7 +115,7 @@ const ReferralCard = ({ data }) => {
 
                             </div>
                             <div className="emailid">
-                                <p className="id">john.doe@xyztech.com</p>
+                                <p className="id">{data.email}</p>
                             </div>
                         </div>
                     </div>

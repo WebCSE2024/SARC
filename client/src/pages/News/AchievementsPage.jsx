@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import Achievements from '../../features/Achievements/AchievementsCard'
 import SearchBox from '../../components/Filtering/SearchBox'
 import axiosInstance from '../../../axios.config'
+import mockAchievements from '../../data/achievementsData.json'
 
 const AchievementsPage = () => {
-  const [achievementsData, setAchievementsData] = useState([]);
+  const [apiAchievements, setApiAchievements] = useState([]);
+  const [mockData] = useState(mockAchievements.achievements);
 
   const getAchievements = async () => {
     try {
       const response = await axiosInstance.get(`/achievements/achievement-list`);
-      // console.log(response.data.data);
-      // console.log(typeof(response.data.data));
-      setAchievementsData(response.data.data);
+      setApiAchievements(response.data.data);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -24,9 +24,19 @@ const AchievementsPage = () => {
   return (
     <div className='AchievementsPage'>
       <SearchBox />
-      {achievementsData && achievementsData.map((achievement, index) => (
+      
+      {/* Display API Achievements */}
+      {apiAchievements && apiAchievements.map((achievement, index) => (
         <Achievements 
-          key={achievement.id || index}
+          key={achievement.id || `api_${index}`}
+          data={achievement}
+        />
+      ))}
+
+      {/* Display Mock Achievements */}
+      {mockData && mockData.map((achievement, index) => (
+        <Achievements 
+          key={achievement.id || `mock_${index}`}
           data={achievement}
         />
       ))}

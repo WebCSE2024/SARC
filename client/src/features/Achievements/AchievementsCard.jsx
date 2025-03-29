@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import './AchievementsCard.scss'
-import LikeShareArea from '../../components/LikeShareArea'
+import LikeShareArea from '../../components/LikeShareArea/LikeShareArea'
 // import CommentSection from './Comments/commentSection'
 import CommentsArea from '../../components/Comments/CommentsArea'
 // import pics from '../../../assets/TempImages'
@@ -60,10 +60,11 @@ const AchievementsCard = ({data}) => {
 
                     {/* This ref is helpful in differentiating images-wrappers of 
                     different achievementsCard renderings */}
+                    {console.log(data.gallery)}
                     <div className="images-wrapper" ref={imagesWrapperRef}>
                         {data.gallery.map((image, index) => (
                             <div key={index} className={`SlideShowImage ${index}thImage`}>
-                                <img src={(image.url).toString()} alt={`Image ${index}`} />
+                                <img src={(image.url)} alt={`Image ${index}`} />
                             </div>
                         ))}
                     </div>
