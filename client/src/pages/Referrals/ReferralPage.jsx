@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ReferralCard from './Referral_card.jsx'
+import ReferralCard from './referral_card.jsx'
 import SearchBox from '../../utils/Filtering/SearchBox'
 import axiosInstance from '../../../axios.config'
 

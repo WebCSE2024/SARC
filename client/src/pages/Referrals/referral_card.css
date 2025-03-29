@@ -289,9 +289,7 @@
 
 }
 
-.detail1,
-.detail2,
-.detail3 {
+.detail {
     display: flex;
     gap: 10px;
 }

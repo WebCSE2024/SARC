@@ -1,4 +1,5 @@
-import React from 'react'
+import { React, useEffect, useState } from 'react'
+import axiosInstance from '../../../axios.config'
 import EventsCard from './NewsCards/EventsCard'
 import HackathonCard from './NewsCards/HackathonCard'
 import './EventsPage.scss'
@@ -8,9 +9,28 @@ import SearchBox from '../../utils/Filtering/SearchBox'
 // import TempTestCard from './TempTestCard'
 
 const EventsPage = () => {
+
+  const [eventData, setEventData] = useState([]);
+
+  const getEventsData = async () => {
+    try {
+      const response = await axiosInstance.get('/event/event-list');
+      console.log(response);
+      console.log(response.data.data);
+      setEventData(response.data.data);
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+
+  useEffect(()=>{
+    getEventsData();
+  },[]);
+
+
   return (
     <div className='eventsPage'>
-      
+
       <SearchBox />
 
       {/* <FloatingBookmark elementId={`event-${123}`} /> */}

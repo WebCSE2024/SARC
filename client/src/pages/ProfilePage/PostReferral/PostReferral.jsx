@@ -84,7 +84,7 @@ const PostReferral = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="stipend">Stipend/Salary</label>
+                    <label htmlFor="stipend">Stipend/Salary (in ₹)</label>
                     <input
                         type="text"
                         id="stipend"

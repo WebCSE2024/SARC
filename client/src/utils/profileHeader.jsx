@@ -2,7 +2,10 @@ import React, { useState } from 'react'
 import './profileHeader.scss'
 import defaultProfileImg from '../assets/NoProfileImg.png'
 
-const profileHeader = ({eventId}) => {
+const profileHeader = ({personInfo , eventId}) => {
+
+    // console.log("personInfo:");
+    // console.log(personInfo);
 
     // console.log(eventId); 
     const [isBookmarked, setIsBookmarked] = useState(false);
@@ -18,9 +21,9 @@ const profileHeader = ({eventId}) => {
                 <img src={defaultProfileImg} alt="not presenet" className="profileImg" />
                 <div className="accountTextDetails">
                     {/* Handle overflow in title by not displaying the extras. or putting ... */}
-                    <div className='AccountTitle'>Department of Computer Science and Engineering, IIT (ISM) Dhanbad</div>
+                    <div className='AccountTitle'>{(personInfo && personInfo.full_name) || (`IIT (ISM) Dhanbad`)}</div>
 
-                    <div className='follower-count'>29K followers</div>
+                    {/* <div className='follower-count'>29K followers</div> */}
                     {/* Follower count will be addded once we add the feature to follow people */}
                     <div className='TimeOfPost'>2 hours ago</div>
                 </div>

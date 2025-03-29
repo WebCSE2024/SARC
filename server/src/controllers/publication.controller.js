@@ -4,7 +4,7 @@ import {ApiError} from '../utils/ApiError.js'
 import { deleteFromCloudinary, uploadOnCloudinary, uploadOnCloudinaryPublication } from "../connections/coludinaryConnection.js";
 import { v4 as uuidv4 } from "uuid";
 import { ApiResponse } from "../utils/ApiResponse.js";
-// import { client } from "../connections/redisConnection.js";
+import { client } from "../connections/redisConnection.js";
 import { REDIS_CACHE_EXPIRY_PUBLICATIONS } from "../constants/constants.js";
 import mongoose from "mongoose";
 const generateUniqueId = () => {

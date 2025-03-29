@@ -6,13 +6,13 @@ import defaultProfile from '../../assets/noProfileImg.png'
 import samplePdfPreview from '../../assets/samplePdfPreview.jpeg'
 
 const PublicationsCard = () => {
-    const [isbooked, setIsbooked] = useState(false);
+    // const [isbooked, setIsbooked] = useState(false);
 
-    const handleBookmarkChange = (e) => {
-        setIsbooked(e.target.checked);
+    // const handleBookmarkChange = (e) => {
+    //     setIsbooked(e.target.checked);
 
-        // Here we will add logic to save the bookmark state to backend/localStorage
-    };
+    //     // Here we will add logic to save the bookmark state to backend/localStorage
+    // };
 
     return (
         <div className='PublicationsCard'>

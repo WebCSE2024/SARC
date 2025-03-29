@@ -23,11 +23,16 @@ import PostReferral from './pages/ProfilePage/PostReferral/PostReferral';
 const App = () => {
   return (
     <div className='app'>
-      <BrowserRouter>
-        <Header /> 
+      <BrowserRouter
+        future={{
+          v7_relativeSplatPath: true,
+          v7_startTransition: true,
+        }}
+      >
+        <Header />
         {/* Stays on all pages */}
         {/* <PostReferral /> */}
-        
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/achievements" element={<Achievements />} />
@@ -35,12 +40,12 @@ const App = () => {
           <Route path="/referrals" element={<ReferralPage />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/news" element={<Navigate to="/events" />} />
-          <Route path="/signup" element={<LoginPage/>} />
-          <Route path="/profile" element={<ProfilePage/>} />
-          <Route path="/seminars" element={<SeminarsPage/>} />
-          <Route path="/PostReferrals" element={<PostReferral/>} />
-          <Route path="/PostPublication" element={<PostPublications/>} />
-          
+          <Route path="/signup" element={<LoginPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/seminars" element={<SeminarsPage />} />
+          <Route path="/PostReferrals" element={<PostReferral />} />
+          <Route path="/PostPublication" element={<PostPublications />} />
+
           {/* Temporary Redirects */}
           {/* <Route path="/seminars" element={<Navigate to="/" />} /> */}
 
