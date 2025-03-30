@@ -7,17 +7,22 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { client } from "../connections/redisConnection.js";
 import { REDIS_CACHE_EXPIRY_PUBLICATIONS } from "../constants/constants.js";
 import mongoose from "mongoose";
-const generateUniqueId = () => {
-    return uuidv4().replace(/-/g, "").substring(0, 7);
-}
+// import { title } from "process";
+
 
 export const createPublication = asyncHandler(async(req,res)=>{
     
+    console.log('pub',req.body)
     if(!req.user)
         throw new ApiError(400,'Unauthenticated')
     const user=req.user
-    if(req.user.role !== 'PROFESSOR')
+    if(req.user.userType !== 'professor')
         throw new ApiError(400,'Unauthorized')
+
+    const {title}=req.body
+
+    if(!title)
+        throw new ApiError(400,'title is required')
 
     const pdf_path=req.file?.path
     if(!pdf_path)
@@ -25,13 +30,13 @@ export const createPublication = asyncHandler(async(req,res)=>{
 
     const uploadedPdf = await uploadOnCloudinaryPublication(pdf_path)
 
+
     if(pdf_path && !uploadedPdf && !uploadedPdf.url)
         throw new ApiError(400,'cloudinary upload error')
 
-    const publicationId=generateUniqueId()
 
     const newPublication = await Publication.create({
-        publicationId,
+        title,
         publicationURL:uploadedPdf.url,
         publisher:req.user._id
     })
@@ -50,22 +55,14 @@ export const createPublication = asyncHandler(async(req,res)=>{
             },
             {
                 $lookup:{
-                    from:'profs',
+                    from:'users',
                     localField:'publisher',
                     foreignField:'_id',
                     as:'publisher'
                 }
             },
            
-            {
-                $project:{
-                    publicationId:1,
-                    publicationURL:1,
-                    'publisher.full_name':1,
-                    'publisher.email':1,
-                    "publisher.linkedIn":1
-                }
-            }
+            
         ])
         
         await client.del('publication-list')
@@ -86,21 +83,10 @@ export const getAllPublications=asyncHandler(async(req,res)=>{
             
             {
                 $lookup:{
-                    from:'profs',
+                    from:'users',
                     localField:'publisher',
                     foreignField:'_id',
                     as:'publisher'
-                }
-            },
-           
-            {
-                $project:{
-                    publicationId:1,
-                    publicationURL:1,
-                    'publisher.full_name':1,
-                    'publisher.email':1,
-                    "publisher.linkedIn":1,
-                    _id:0
                 }
             }
     
@@ -132,12 +118,12 @@ export const getPublicationDetails=asyncHandler(async(req,res)=>{
         const publication_data = await Publication.aggregate([
             {
                 $match:{
-                    publicationId:publicationid
+                    _id:new mongoose.Types.ObjectId(publicationid)
                 }
             },
             {
                 $lookup:{
-                    from:'profs',
+                    from:'users',
                     localField:'publisher',
                     foreignField:'_id',
                     as:'publisher'
@@ -150,7 +136,7 @@ export const getPublicationDetails=asyncHandler(async(req,res)=>{
                     publicationURL:1,
                     'publisher.full_name':1,
                     'publisher.email':1,
-                    "publisher.linkedIn":1,
+                    "publisher.professorDetails":1,
                     _id:0
                 }
             }
@@ -167,7 +153,7 @@ export const deletePublication = asyncHandler(async(req,res)=>{
     if(!req.user)
         throw new ApiError(400,'Unauthenticated')
 
-    if(!(req.user.role === 'PROFESSOR'))
+    if(!(req.user.role === 'professor' || req.user.role === 'admin'))
         throw new ApiError(400,'Unauthorized')
 
 
@@ -175,7 +161,7 @@ export const deletePublication = asyncHandler(async(req,res)=>{
         throw new ApiError(400,'Publication-ID not available')
 
     const fetchPublication = await Publication.findOne({
-        publicationId:publicationid
+        _id:new mongoose.Types.ObjectId(publicationid)
     })
 
     if(!fetchPublication)
@@ -189,7 +175,7 @@ export const deletePublication = asyncHandler(async(req,res)=>{
     await client.del(`publication:${publicationid}`)
 
     const response=await Publication.deleteOne({
-        publicationId:publicationid
+        _id:new mongoose.Types.ObjectId(publicationid)
 
     })
      
@@ -224,8 +210,9 @@ export const getMyPublications = asyncHandler(async(req,res)=>{
           },
           {
             $project: {
-              publicationId:1,
-              publicationURL:1
+            //   publicationId:1,
+              publicationURL:1,
+              title:1,
             },
           },
         ]);

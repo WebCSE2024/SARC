@@ -5,55 +5,54 @@ import {ApiResponse} from '../utils/ApiResponse.js'
 import { client } from "../connections/redisConnection.js";
 import { v4 as uuidv4 } from "uuid";
 import {REDIS_CACHE_EXPIRY_REFERRAL} from '../constants/constants.js'
-import { ApplyReferral } from "../models/applyReferral.models.js";
 import mongoose from "mongoose";
 
 
-const generateReferralId = () => {
-    return uuidv4().replace(/-/g, "").substring(0, 7);
-};
+
 
 export const createReferral = asyncHandler(async(req,res)=>{
      
     const user = req.user
     console.log("REFROUTE",user)
 
-    if(user.role !== "ALUMNI")
+    if(user.userType !== "alumni")
         throw new ApiError(400,"Not authorized to publish a referral")
 
     const {
         companyName,
         deadline,
-        eligibleYears,
+        requirements,
         jobProfile,
-        experience,
         stipend,
-        duration,
         description,
-        worksite,
-        location
+        location,
+        email,
+        contact,
+        website,
+        mode
           
     }=req.body;
 
-    if(!companyName || !deadline || !eligibleYears || !jobProfile ||!location || !experience || !stipend || !duration || !description || !worksite  ){
+    if(!companyName || !deadline || !requirements || !jobProfile ||!location || !email  || !stipend  || !description || !website   ){
         throw new ApiError(400,"All fields are required ")
     }
-    const referral_id=generateReferralId()
+    // const referral_id=generateReferralId()
     
     const referral = await  Referral.create({
       companyName,
       deadline,
-      eligibleYears,
       jobProfile,
       addedBy:req.user._id,
-      experience,
       stipend,
-      duration,
       description,
-      worksite,
+      requirements,
       location,
       status:'pending',
-      referralId:referral_id
+      // referralId:referral_id,
+      email,
+      contact,
+      website,
+      mode
     })
    
     if(!referral)
@@ -81,7 +80,7 @@ export const getAllReferrals = asyncHandler(async(req,res)=>{
     const allReferrals = await Referral.aggregate([
       {
         $lookup: {
-          from: 'alumnis',
+          from: 'users',
           localField: 'addedBy',
           foreignField: '_id',
           as: 'addedBy'
@@ -91,11 +90,11 @@ export const getAllReferrals = asyncHandler(async(req,res)=>{
         $project: {
     
     
-          _id:0,
+         
           __v:0,
-          'addedBy._id':0,
+          // 'addedBy':0,
           'addedBy.password':0,
-          'addedBy.isVerified':0
+          // 'addedBy.isVerified':0
           
         }
       }
@@ -122,16 +121,16 @@ export const toggleReferralState = asyncHandler(async(req,res)=>{
     throw new ApiError(400,'Data incomplete')
 
   const referral = await Referral.findOne({
-    referralId:referralId
+    _id:new mongoose.Types.ObjectId(referralId)
   })
   if(!referral)
     throw new ApiError(400,'Referral not found')
 
   referral.status = status
-  await referral.save()
-  const updatedReferral = await Referral.findById(referralId,status)
+  const response = await referral.save()
+  // const updatedReferral = await Referral.findById(referralId,status)
 
-  if(!updatedReferral)
+  if(!response)
     throw new ApiError(400,'Referral not updated')
 
   return res.status(200).json(
@@ -148,24 +147,13 @@ export  const  getActiveReferrals = asyncHandler(async(req,res)=>{
       },
       {
         $lookup: {
-          from: 'alumnis',
+          from: 'users',
           localField: 'addedBy',
           foreignField: '_id',
           as: 'addedBy'
         }
       },
-      {
-        $project: {
-    
-    
-          _id:0,
-          __v:0,
-          'addedBy._id':0,
-          'addedBy.password':0,
-          'addedBy.isVerified':0
-          
-        }
-      }
+      
     ])
     if(!activeReferrals)
         throw new ApiError(400,'No active referrals found')
@@ -173,63 +161,6 @@ export  const  getActiveReferrals = asyncHandler(async(req,res)=>{
     return res.status(200).json(
         new ApiResponse(200,activeReferrals,'List of active referrals')
     )
-})
-
-export const applyReferral= asyncHandler(async(req,res)=>{
-        
-    const referralId=req.params.referralId
-    if(!referralId)
-        throw new ApiError(400,'Referral-ID not available')
-    console.log('ALLGOOD1')
-    console.log(referralId)
-    const referral=await Referral.findOne({
-        referralId:referralId
-    })
-    console.log('ALLGOOD2')
-    if(!referral)
-        throw new ApiError(400,'Referral does not exist')
-
-    if(referral.status !== 'active'){
-      throw new ApiError(400,'Referral is not active yet')
-    }
-
-    if(!req.user)
-        throw new ApiError(400,'Unauthenticated')
-
-    if(req.user.role !=='STUDENT')
-        throw new ApiError(400,'Unauthorized')
-    
-    // console.log(referral._id)
-
-    if(referral.eligibleYears.indexOf(req.user.grad_yr) === -1)
-        throw new ApiError(400,'Not eligible for this referral')
-
-    const existsApplication = await ApplyReferral.findOne({
-        applied_by: new mongoose.Types.ObjectId(req.user._id),
-        referral_id: new mongoose.Types.ObjectId(referral._id)
-    })
-    
-   if(existsApplication)
-      throw new ApiError(400,'Already applied for referral')
-    
-   if(Date.now() > Date.parse(referral.deadline))
-      throw new ApiError(400,'Deadline for application has passed')
-
-    const apply_ref = await ApplyReferral.create({
-         
-        applied_by:req.user._id,
-        referral_id:referral._id,
-        applied_on:new Date().toISOString()
-    })
-    console.log("ALLGOOD3")
-
-    if(!apply_ref)
-        throw new ApiError(400,'Can not apply ')
-    
-    return res.status(200).json(
-        new ApiResponse(200,null,'Applied successfully')
-    )
-
 })
 
 export const getReferralDetails=asyncHandler(async(req,res)=>{
@@ -245,7 +176,7 @@ export const getReferralDetails=asyncHandler(async(req,res)=>{
         )
 
     const referral=await Referral.findOne({
-        referralId:referralId
+        _id:new mongoose.Types.ObjectId(referralId)
     })
 
     if(!referral)
@@ -263,58 +194,7 @@ export const getReferralDetails=asyncHandler(async(req,res)=>{
                 referralId: referralId 
               }
         },
-        {
-          $lookup: {
-            from: "applyreferrals",
-            localField: "_id",
-            foreignField: "referral_id",
-            as: "application_list"
-          }
-        },
-        {
-          $unwind: "$application_list"
-        },
-        {
-          $lookup: {
-            from: "students",
-            localField: "application_list.applied_by",
-            foreignField: "_id",
-            as: "student_details"
-          }
-        },
-        {
-          $unwind: "$student_details"
-        },
-        {
-          $group: {
-            _id: "$_id",
-            referralId: { $first: "$referralId" },
-            companyName: { $first: "$companyName" },
-            jobProfile: { $first: "$jobProfile" },
-            deadline: { $first: "$deadline" },
-            experience: { $first: "$experience" },
-            stipend: { $first: "$stipend" },
-            location: { $first: "$location" },
-            duration: { $first: "$duration" },
-            description: { $first: "$description" },
-            worksite: { $first: "$worksite" },
-            status: { $first: "$status" },
-            message: { $first: "$message" },
-            applicants: {
-              $push: {
-                full_name: "$student_details.full_name",
-                linkedIn: "$student_details.linkedIn",
-                email: "$student_details.email",
-                grad_yr: "$student_details.grad_yr"
-              }
-            }
-          }
-        },
-        {
-          $project: {
-            _id: 0
-          }
-        }
+        
       ]);
       
 
@@ -340,52 +220,25 @@ export const getMyReferrals = asyncHandler(async (req, res) => {
     if(!user)
         throw new ApiError(400,'Unauthenticated')
 
-    if(user.role !== 'ALUMNI')  
+    if(user.role !== 'alumni')  
         throw new ApiError(400,'Unauthorized')
 
     const myReferrals = await Referral.aggregate([
 
         {
             $match: {
-               addedBy: new mongoose.Types.ObjectId('67c8a5b1364003db93f7e147')
+               addedBy: new mongoose.Types.ObjectId(req.user._id)
             }
         },
         {
             $lookup: {
-              from: 'alumnis',
+              from: 'users',
               localField: 'addedBy',
               foreignField: '_id',
               as: 'addedBy'
             }
           },
-          {
-             $unwind: "$addedBy"
-          },
-          {
-            $lookup: {
-              from: 'applyreferrals',
-              localField: '_id',
-              foreignField: 'referral_id',
-              as: 'applications'
-          }
-        },
-        {
-            $project: {
-                _id:1,
-                companyName:1,
-                jobProfile:1,
-                deadline:1,
-                experience:1,
-                stipend:1,
-                location:1,
-                duration:1,
-                description:1,
-                worksite:1,
-                status:1,
-                message:1,
-                applicants: { $size: "$applications" },
-                _id:0
-        }}
+          
     ])
     if(!myReferrals)
         throw new ApiError(400,'No referrals found')
@@ -406,8 +259,8 @@ export const deleteReferral = asyncHandler(async(req,res)=>{
     await client.del(`referral/:${refid}`)
 
     const response=await Referral.deleteOne({
-        referral_id:refid
-
+        _id:new mongoose.Types.ObjectId(refid),
+        addedBy:req.user._id        
     })
 
     if(!response)
@@ -418,34 +271,3 @@ export const deleteReferral = asyncHandler(async(req,res)=>{
     )
 })
 
-export const removeApplication = asyncHandler(async(req,res)=>{
-    const refid=req.params.refid
-    const applied_by=req.params.applied_by
-
-    if(!refid || !appid)
-        throw new ApiError(400,'Referral-ID or Application-ID not available')
-
-    await client.del(`referral/:${refid}`)
-    await client.del(`application/:${appid}`)
-   
-    const existsApplication = await ApplyReferral.findOne({
-        referral_id:refid,
-        applied_by:applied_by
-    })
-
-    if(!existsApplication)
-        throw new ApiError(400,'No such application exist')
-
-    const response=await ApplyReferral.deleteOne({
-        referral_id:refid,
-        applied_by:applied_by
-    })
-
-    if(!response)
-        throw new ApiError(400,'can not delete the application')
-
-    return res.status(200).json(
-        new ApiResponse(200,null,'application deleted successfully')
-    )
-}   
-)
