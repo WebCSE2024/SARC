@@ -1,0 +1,117 @@
+{
+    "seminars": [
+        {
+            "id": "sem_1",
+            "title": "Emerging Trends in Quantum Computing",
+            "description": "A comprehensive overview of recent developments in quantum computing, including quantum supremacy, error correction, and practical applications in cryptography and optimization.",
+            "FIC": "507f1f77bcf86cd799439016",
+            "type": "Others",
+            "ruleBookLink": null,
+            "reg_url": "https://forms.example.com/quantum-seminar",
+            "eventDate": "2024-04-25T14:00:00Z",
+            "status": "Ongoing",
+            "organizedBy": "Department of Physics & Computer Science, IIT (ISM) Dhanbad",
+            "img_url": "https://example.com/images/seminars/quantum.jpg",
+            "reports": null,
+            "prizePool": null,
+            "contacts": {
+                "name": "Dr. Richard Feynman",
+                "email": "r.feynman@iitism.ac.in",
+                "phone": "+91 9876543216",
+                "role": "Seminar Coordinator"
+            },
+            "venue": "Physics Auditorium, IIT (ISM) Dhanbad",
+            "sponsors": [
+                {
+                    "name": "QuantumTech Solutions",
+                    "logo": "https://example.com/images/sponsors/quantumtech.png",
+                    "website": "https://quantumtech.com"
+                }
+            ],
+            "speaker": {
+                "name": "Dr. Richard Feynman",
+                "designation": "Principal Quantum Researcher",
+                "organization": "Quantum Labs, MIT"
+            },
+            "createdAt": "2024-03-10T08:30:00Z",
+            "updatedAt": "2024-03-10T08:30:00Z"
+        },
+        {
+            "id": "sem_2",
+            "title": "AI and Ethics in Modern Computing",
+            "description": "Exploring the ethical implications of artificial intelligence deployment in society, focusing on bias, privacy, and responsible AI development practices.",
+            "FIC": "507f1f77bcf86cd799439017",
+            "type": "Others",
+            "ruleBookLink": "https://example.com/industry40/schedule.pdf",
+            "reg_url": "https://forms.example.com/industry40-register",
+            "eventDate": "2024-05-15T10:00:00Z",
+            "status": "Draft",
+            "organizedBy": "Department of Mechanical Engineering, IIT (ISM) Dhanbad",
+            "img_url": "https://example.com/images/seminars/industry40.jpg",
+            "reports": null,
+            "prizePool": null,
+            "contacts": {
+                "name": "Prof. Michael Zhang",
+                "email": "m.zhang@iitism.ac.in",
+                "phone": "+91 9876543217",
+                "role": "Faculty Coordinator"
+            },
+            "venue": "Virtual Seminar",
+            "sponsors": [
+                {
+                    "name": "AutoTech Industries",
+                    "logo": "https://example.com/images/sponsors/autotech.png",
+                    "website": "https://autotech.com"
+                },
+                {
+                    "name": "SmartFactory Solutions",
+                    "logo": "https://example.com/images/sponsors/smartfactory.png",
+                    "website": "https://smartfactory.com"
+                }
+            ],
+            "speaker": {
+                "name": "Prof. Sarah Johnson",
+                "designation": "Head of AI Ethics Division",
+                "organization": "Stanford University"
+            },
+            "createdAt": "2024-03-15T09:30:00Z",
+            "updatedAt": "2024-03-15T09:30:00Z"
+        },
+        {
+            "id": "sem_3",
+            "title": "Future of Sustainable Energy Systems",
+            "description": "Discussion on next-generation renewable energy technologies and their integration into smart grids for sustainable urban development.",
+            "FIC": "507f1f77bcf86cd799439018",
+            "type": "Others",
+            "ruleBookLink": "https://example.com/mining/guidelines.pdf",
+            "reg_url": "https://forms.example.com/mining-seminar",
+            "eventDate": "2024-05-20T15:30:00Z",
+            "status": "Draft",
+            "organizedBy": "Department of Mining Engineering, IIT (ISM) Dhanbad",
+            "img_url": "https://example.com/images/seminars/mining.jpg",
+            "reports": null,
+            "prizePool": null,
+            "contacts": {
+                "name": "Dr. Sarah Miller",
+                "email": "sarah.m@iitism.ac.in",
+                "phone": "+91 9876543219",
+                "role": "Seminar Chair"
+            },
+            "venue": "Main Conference Hall, IIT (ISM) Dhanbad",
+            "sponsors": [
+                {
+                    "name": "EcoMining Corp",
+                    "logo": "https://example.com/images/sponsors/ecomining.png",
+                    "website": "https://ecomining.com"
+                }
+            ],
+            "speaker": {
+                "name": "Dr. Elena Martinez",
+                "designation": "Senior Research Scientist",
+                "organization": "Renewable Energy Institute"
+            },
+            "createdAt": "2024-03-20T11:45:00Z",
+            "updatedAt": "2024-03-20T11:45:00Z"
+        }
+    ]
+}

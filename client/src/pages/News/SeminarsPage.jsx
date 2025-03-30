@@ -1,7 +1,7 @@
 import React from 'react'
 import EventsCard from '../../features/Events/EventsCard'
 import SearchBox from '../../components/Filtering/SearchBox'
-import seminarsDataObj from '../../data/seminarData.json'
+import seminarsDataObj from '../../SampleData/seminarData.json'
 
 const SeminarsPage = () => {
     console.log(seminarsDataObj);

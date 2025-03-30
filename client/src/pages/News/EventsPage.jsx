@@ -2,8 +2,8 @@ import { React, useEffect, useState } from 'react';
 import axiosInstance from '../../../axios.config';
 import EventsCard from '../../features/Events/EventsCard';
 import HackathonCard from '../../features/Hackathon/HackathonCard';
-import hackathonData from '../../data/hackathonData.json';
-import eventsData from '../../data/eventsData.json';
+import hackathonData from '../../SampleData/hackathonData.json';
+import eventsData from '../../SampleData/eventsData.json';
 import './EventsPage.scss';
 import SearchBox from '../../components/Filtering/SearchBox';
 

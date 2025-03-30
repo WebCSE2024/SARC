@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import ActivityCard from '../../features/ProfilePageActivity/ActivityCard';
 
 
-import userData from '../../data/userData.json'
+import userData from '../../SampleData/userData.json'
+
 
 const ProfilePage = () => {
     const navigate = useNavigate();

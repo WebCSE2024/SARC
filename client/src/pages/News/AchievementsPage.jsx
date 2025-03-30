@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Achievements from '../../features/Achievements/AchievementsCard'
 import SearchBox from '../../components/Filtering/SearchBox'
 import axiosInstance from '../../../axios.config'
-import mockAchievements from '../../data/achievementsData.json'
+import mockAchievements from '../../SampleData/achievementsData.json'
 
 const AchievementsPage = () => {
   const [apiAchievements, setApiAchievements] = useState([]);

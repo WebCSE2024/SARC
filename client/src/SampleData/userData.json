@@ -1,0 +1,191 @@
+{
+  "users": [
+    {
+      "id": "usr_1",
+      "full_name": "Dr. Priya Sharma",
+      "designation": "Senior AI Researcher",
+      "location": {
+        "city": "Bangalore",
+        "country": "India"
+      },
+      "profile_pic": "/images/profiles/priya-sharma.jpg",
+      "user_type": "alumni",
+      "about": "AI/ML expert with 8+ years of experience. Previously led research teams at Google and Microsoft. PhD from Stanford University in Computer Science with focus on Deep Learning.",
+      "experience": [
+        {
+          "companyName": "Google Research",
+          "position": "Senior Research Scientist",
+          "timeline": {
+            "start": "2020-06",
+            "end": "present"
+          },
+          "location": "Bangalore, India",
+          "highlights": [
+            "Leading a team of 15 researchers in NLP projects",
+            "Published 6 papers in top-tier conferences",
+            "Developed ML models improving search accuracy by 23%",
+            "Mentor for Google Summer of Code students"
+          ]
+        },
+        {
+          "companyName": "Microsoft",
+          "position": "Research Engineer",
+          "timeline": {
+            "start": "2016-07",
+            "end": "2020-05"
+          },
+          "location": "Hyderabad, India",
+          "highlights": [
+            "Worked on Azure ML platform development",
+            "Implemented distributed training pipelines",
+            "Reduced model inference time by 40%",
+            "Filed 3 patents in ML optimization"
+          ]
+        }
+      ],
+      "education": [
+        {
+          "university": "Stanford University",
+          "degree": "PhD",
+          "course": "Computer Science",
+          "year": 2016,
+          "grade": "3.95/4.0 GPA"
+        },
+        {
+          "university": "IIT (ISM) Dhanbad",
+          "degree": "B.Tech",
+          "course": "Computer Science and Engineering",
+          "year": 2012,
+          "grade": "9.8/10 CGPA"
+        }
+      ],
+      "activity": {
+        "referrals": [
+          {
+            "id": "ref_1",
+            "companyName": "Google",
+            "position": "ML Engineer",
+            "postedDate": "2024-03-15T10:30:00Z"
+          },
+          {
+            "id": "ref_2",
+            "companyName": "Microsoft",
+            "position": "Research Scientist",
+            "postedDate": "2024-02-20T14:15:00Z"
+          }
+        ],
+        "publications": [
+          {
+            "id": "pub_1",
+            "title": "Advances in Neural Network Optimization",
+            "conference": "NeurIPS 2023",
+            "publishDate": "2023-12-10"
+          },
+          {
+            "id": "pub_2",
+            "title": "Efficient Training of Large Language Models",
+            "conference": "ICML 2023",
+            "publishDate": "2023-07-15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "usr_2",
+      "full_name": "Prof. Rajesh Kumar",
+      "designation": "Associate Professor",
+      "location": {
+        "city": "Dhanbad",
+        "country": "India"
+      },
+      "profile_pic": "/images/profiles/rajesh-kumar.jpg",
+      "user_type": "professor",
+      "about": "Associate Professor at IIT (ISM) Dhanbad with research interests in Distributed Systems and Cloud Computing. 15+ years of teaching experience.",
+      "experience": [
+        {
+          "companyName": "IIT (ISM) Dhanbad",
+          "position": "Associate Professor",
+          "timeline": {
+            "start": "2015-01",
+            "end": "present"
+          },
+          "location": "Dhanbad, India",
+          "highlights": [
+            "Teaching undergraduate and graduate courses",
+            "Published 25+ research papers",
+            "Supervised 12 PhD students",
+            "Principal Investigator for 3 government-funded projects"
+          ]
+        }
+      ],
+      "education": [
+        {
+          "university": "IIT Delhi",
+          "degree": "PhD",
+          "course": "Computer Science",
+          "year": 2010,
+          "grade": "Outstanding"
+        }
+      ],
+      "activity": {
+        "referrals": [],
+        "publications": [
+          {
+            "id": "pub_3",
+            "title": "Cloud Resource Optimization Techniques",
+            "journal": "IEEE Transactions on Cloud Computing",
+            "publishDate": "2024-01-15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "usr_3",
+      "full_name": "Arun Verma",
+      "designation": "Final Year Student",
+      "location": {
+        "city": "Dhanbad",
+        "country": "India"
+      },
+      "profile_pic": "/images/profiles/arun-verma.jpg",
+      "user_type": "student",
+      "about": "Final year Computer Science student passionate about web development and competitive programming. ICPC regional finalist.",
+      "experience": [
+        {
+          "companyName": "Amazon",
+          "position": "SDE Intern",
+          "timeline": {
+            "start": "2023-05",
+            "end": "2023-07"
+          },
+          "location": "Bangalore, India",
+          "highlights": [
+            "Developed microservices using Spring Boot",
+            "Improved API response time by 35%",
+            "Implemented automated testing pipeline"
+          ]
+        }
+      ],
+      "education": [
+        {
+          "university": "IIT (ISM) Dhanbad",
+          "degree": "B.Tech",
+          "course": "Computer Science and Engineering",
+          "year": 2024,
+          "grade": "9.2/10 CGPA"
+        }
+      ],
+      "activity": {
+        "referrals": [
+          {
+            "id": "ref_3",
+            "companyName": "Amazon",
+            "position": "SDE",
+            "postedDate": "2024-03-01T09:00:00Z"
+          }
+        ],
+        "publications": []
+      }
+    }
+  ]
+}

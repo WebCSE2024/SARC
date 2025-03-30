@@ -1,0 +1,23 @@
+{
+  
+  "achievements": [
+    {
+      "id": "mock_1",
+      "title": "ACM IICPC World Finals Qualification",
+      "description": "Team CodeCrafters from IIT (ISM) Dhanbad qualified for the ACM ICPC World Finals 2024.",
+      "gallery": [
+        "/images/achievements/acm-team.jpg",
+        "/images/achievements/competition.jpg"
+      ]
+    },
+    {
+      "id": "mock_2",
+      "title": "Google Summer of Code Success",
+      "description": "15 students from IIT (ISM) Dhanbad were selected for Google Summer of Code 2024.",
+      "gallery": [
+        "/images/achievements/gsoc-students.jpg",
+        "/images/achievements/project-demo.jpg"
+      ]
+    }
+  ]
+}
