@@ -147,7 +147,7 @@ c-30 33 -34 35 -96 35 -67 0 -199 -21 -289 -46 -28 -8 -59 -14 -70 -14 -10 0
 
       <div className="commentsCardWrapper">
         {/* <CommentSection /> */}
-        <CommentsArea />
+        <CommentsArea postId={data._id}/>
       </div>
     </div>
   )

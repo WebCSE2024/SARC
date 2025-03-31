@@ -13,6 +13,7 @@ const admin ={
     fullname:'admin',
     password:'admin'
 }
+// const currArray=alumni
 const currArray=profs
 export const setUser=async(req,res,next)=>{
    
@@ -20,8 +21,8 @@ export const setUser=async(req,res,next)=>{
     const currUser=currArray[idx]
     console.log('setuser',currUser)
     try {
-        // const user=await User.findOne({email:currUser.email})
-        req.user=admin
+        const user=await User.findOne({email:currUser.email})
+        req.user=user
         console.log(req.user)
         next()
     } catch (error) {

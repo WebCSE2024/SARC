@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CommentsArea.scss';
 import { FaReply } from 'react-icons/fa';
 import defaultUserImg from '../../../public/noProfileImg.png';
 import CommentInput from './CommentInput';
 import CommentsList from './CommentsList';
 
-const CommentsArea = () => {
+const CommentsArea = ({ postId }) => {
     const [comments, setComments] = useState([]);
 
-    
+    // console.log("postId:", postId);
+
+    const getComments = async (postId) => {
+        try {
+            const response = await axiosInstance.get(`/comments/get-comments/:${postId}`);
+            setComments(response.data.data);
+        } catch (error) {
+            console.error('Error:', error);
+            setComments([]);
+        }
+    }
+
+    useEffect(() => {
+        getComments();
+    }, []);
+
+
     const handleAddComment = (text) => {
         const newComment = {
             id: Date.now(),
@@ -42,8 +58,8 @@ const CommentsArea = () => {
     return (
         <div className="comments-area">
             <CommentInput onSubmit={handleAddComment} />
-            <CommentsList 
-                comments={comments} 
+            <CommentsList
+                comments={comments}
                 onAddReply={handleAddReply}
             />
         </div>

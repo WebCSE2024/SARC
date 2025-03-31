@@ -17,7 +17,7 @@ const SingleComment = ({ comment, onAddReply }) => {
                 <div className="comment-content">
                     <div className="user-info">
                         <h4>{comment.userName}</h4>
-                        <span className="timestamp">{comment.timestamp}</span>
+                        {/* <span className="timestamp">{comment.timestamp}</span> */}
                     </div>
                     <p className="comment-text">{comment.text}</p>
                     <button 

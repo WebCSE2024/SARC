@@ -15,6 +15,7 @@ export const createReferral = asyncHandler(async(req,res)=>{
     const user = req.user
     console.log("REFROUTE",user)
 
+    console.log('reqbody',req.body)
     if(user.userType !== "alumni")
         throw new ApiError(400,"Not authorized to publish a referral")
 
@@ -30,7 +31,6 @@ export const createReferral = asyncHandler(async(req,res)=>{
         contact,
         website,
         mode
-          
     }=req.body;
 
     if(!companyName || !deadline || !requirements || !jobProfile ||!location || !email  || !stipend  || !description || !website   ){

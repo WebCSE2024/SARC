@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../../axios.config.js';
 import './PostPublications.scss';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 
 const PostPublications = () => {
     const [formData, setFormData] = useState({
         title: '',
-        pages: '',
-        pagesDisplay: '',
-        pdfFile: null
+        publication_pdf: null
     });
 
     const [fileName, setFileName] = useState('');
@@ -25,14 +23,18 @@ const PostPublications = () => {
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        if (file && file.type === 'application/pdf') {
-            setFormData(prevState => ({
-                ...prevState,
-                pdfFile: file
-            }));
-            setFileName(file.name);
-        } else {
-            alert('Please upload a PDF file');
+        if (file) {
+            if (file.type === 'application/pdf') {
+                setFormData(prevState => ({
+                    ...prevState,
+                    publication_pdf: file
+                }));
+                setFileName(file.name);
+                setError(null);
+            } else {
+                setError('Please upload a PDF file');
+                e.target.value = ''; // Reset file input
+            }
         }
     };
 
@@ -41,42 +43,54 @@ const PostPublications = () => {
         setIsSubmitting(true);
         setError(null);
 
-        try {
-            const formDataToSend = new FormData();
-            
-            // Append all form fields
-            formDataToSend.append('title', formData.title);
-            formDataToSend.append('pages', formData.pages);
-            formDataToSend.append('pagesDisplay', formData.pagesDisplay);
-            formDataToSend.append('pdfFile', formData.pdfFile);
-            
-            // Add user ID if available from auth context
-            // formDataToSend.append('addedBy', user._id);
+        if (!formData.publication_pdf) {
+            setError('Please select a PDF file');
+            setIsSubmitting(false);
+            return;
+        }
 
-            const response = await axios.post('/create-publication', 
+        try {
+            const formDataToSend = formData;
+            // const formDataToSend = new FormData();
+            // formDataToSend.append('title', formData.title);
+            // formDataToSend.append('file', formData.publication_pdf);
+
+            // Log the data properly
+            console.log("Form Data Contents:");
+            console.log(formDataToSend);
+            // for (let pair of formDataToSend.entries()) {
+            //     console.log(pair[0] + ': ' + pair[1]);
+            // }
+
+            const response = await axiosInstance.post('/publication/create-publication',
                 formDataToSend,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
+                    },
                 }
             );
 
-            if (response.status === 201) {
-                // Reset form
+            // Check response status and data
+            if (response.status === 201 || response.status === 200) { // Handle both success codes
                 setFormData({
                     title: '',
-                    pages: '',
-                    pagesDisplay: '',
-                    pdfFile: null
+                    publication_pdf: null
                 });
                 setFileName('');
                 alert('Publication posted successfully!');
+                setIsSubmitting(false);
+                return;
             }
+
+            throw new Error('Failed to create publication');
+
         } catch (err) {
-            setError(err.response?.data?.message || 'Failed to post publication');
-            console.error('Error posting publication:', err);
+            console.error('Upload error:', err);
+            setError(
+                err.response?.data?.message ||
+                'Failed to post publication. Make sure you are logged in as a professor.'
+            );
         } finally {
             setIsSubmitting(false);
         }
@@ -106,7 +120,8 @@ const PostPublications = () => {
                         <input
                             type="file"
                             id="pdfFile"
-                            accept=".pdf"
+                            name="publication_pdf"
+                            accept=".pdf,application/pdf"
                             onChange={handleFileChange}
                             required
                         />
@@ -117,33 +132,8 @@ const PostPublications = () => {
                     </div>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="pages">Total Number of Pages*</label>
-                    <input
-                        type="number"
-                        id="pages"
-                        name="pages"
-                        value={formData.pages}
-                        onChange={handleChange}
-                        required
-                        min="1"
-                        placeholder="Enter number of pages"
-                    />
-                    <label htmlFor="pagesDisplay">Number of Pages to be displayed*</label>
-                    <input
-                        type="number"
-                        id="pagesDisplay"
-                        name="pagesDisplay"
-                        value={formData.pagesDisplay}
-                        onChange={handleChange}
-                        required
-                        min="1"
-                        placeholder="Enter number of pages to be displayed"
-                    />
-                </div>
-
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     className="submit-btn"
                     disabled={isSubmitting}
                 >

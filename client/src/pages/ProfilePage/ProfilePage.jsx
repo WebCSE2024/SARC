@@ -30,7 +30,7 @@ const ProfilePage = () => {
         navigate('/login');
     };
 
-    const user = userData.users[1];
+    const user = userData.users[0];
 
     return (
         <div className="profile-container">

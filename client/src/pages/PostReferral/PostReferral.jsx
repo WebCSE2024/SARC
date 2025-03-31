@@ -3,11 +3,20 @@ import React, { useState } from 'react';
 import axiosInstance from '../../../axios.config';
 import './PostReferral.scss';
 
+import ReferralPosterInfo from '../../SampleData/ReferralPosterInfo'
+
 const PostReferral = () => {
-// Get logged in user
+
+    function convertToUTC(dateStr) {
+        const [day, month, year] = dateStr.split('-');
+        const date = new Date(Date.UTC(year, month - 1, day));
+        return date.toUTCString();
+    }
+
+    // Get logged in user
 
     const [formData, setFormData] = useState({
-        role: '',
+        jobProfile: '',
         companyName: '',
         description: '',
         requirements: '',
@@ -20,19 +29,45 @@ const PostReferral = () => {
             amount: '',
             currency: 'INR'
         },
-        deadline: '',
+        deadline: new Date().toISOString().split('T')[0], // Initialize with current date
         website: '',
         email: '',
         contact: '',
-        addedBy: '', // Will be filled from logged-in user
+        addedBy: [], // Will be filled from logged-in user
         status: 'pending',
-        message: '' // Will be filled by admin
+        // message: '', // Will be filled by admin
+        // createdAt: "",
+        // updatedAt: ""
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        // Handle nested objects
-        if (name.includes('.')) {
+
+        if (name === 'deadline') {
+            try {
+                // Only convert to UTC if we have a valid date
+                if (value) {
+                    const utcDate = new Date(value);
+                    if (!isNaN(utcDate.getTime())) {
+                        utcDate.setUTCHours(23, 59, 59, 999);
+                        setFormData(prevState => ({
+                            ...prevState,
+                            [name]: utcDate.toISOString()
+                        }));
+                    }
+                } else {
+                    // If input is cleared, set to empty string or current date
+                    setFormData(prevState => ({
+                        ...prevState,
+                        [name]: new Date().toISOString()
+                    }));
+                }
+            } catch (error) {
+                console.error('Invalid date:', error);
+                // Keep the previous valid date on error
+            }
+        } else if (name.includes('.')) {
+            // Handle nested objects
             const [parent, child] = name.split('.');
             setFormData(prevState => ({
                 ...prevState,
@@ -49,19 +84,23 @@ const PostReferral = () => {
         }
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            // const currentDateTime = new Date().toISOString();
             const referralData = {
                 ...formData,
-                addedBy: "randomID", // Add logged in user's ID
+                addedBy: ReferralPosterInfo.addedBy, // Add logged in user's ID
                 status: 'pending', // Default status for new referrals posts
+                // createdAt: currentDateTime,
+                // updatedAt: currentDateTime
             };
 
-            const response = await axiosInstance.post('/create-referral', referralData, {
+            const response = await axiosInstance.post('/referral/create-referral', referralData, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}` // If using JWT
+                    // 'Authorization': `Bearer ${localStorage.getItem('token')}` // If using JWT
                 }
             });
 
@@ -95,12 +134,12 @@ const PostReferral = () => {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="role">Role*</label>
+                    <label htmlFor="jobProfile">jobProfile*</label>
                     <input
                         type="text"
-                        id="role"
-                        name="role"
-                        value={formData.role}
+                        id="jobProfile"
+                        name="jobProfile"
+                        value={formData.jobProfile}
                         onChange={handleChange}
                         required
                         placeholder="e.g. Software Engineer"
@@ -212,17 +251,16 @@ const PostReferral = () => {
                 </div>
 
                 {/* Deadline */}
-                <div className="form-group">
-                    <label htmlFor="deadline">Application Deadline*</label>
-                    <input
-                        type="date"
-                        id="deadline"
-                        name="deadline"
-                        value={formData.deadline}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                <input
+                    type="date"
+                    id="deadline"
+                    name="deadline"
+                    value={formData.deadline.split('T')[0]} // Display only the date part
+                    onChange={handleChange} // Restore onChange
+                    required
+                    min={new Date().toISOString().split('T')[0]} // Prevent past dates
+                />
+
 
                 {/* Contact Information */}
                 <div className="form-group">
