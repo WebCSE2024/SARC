@@ -3,10 +3,6 @@ import './EducationItem.scss'
 
 const EducationItem = ({ data }) => {
     const eduData=data;
-    console.log("eduData");
-    console.log(eduData);
-
-
     return (
 
         <div className="education-item">

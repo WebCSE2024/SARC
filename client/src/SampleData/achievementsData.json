@@ -1,23 +1,100 @@
 {
-  
   "achievements": [
     {
-      "id": "mock_1",
-      "title": "ACM IICPC World Finals Qualification",
-      "description": "Team CodeCrafters from IIT (ISM) Dhanbad qualified for the ACM ICPC World Finals 2024.",
+      "achievementId": "ACH_ICPC_2024_01",
+      "title": "ACM ICPC World Finals Qualification",
+      "description": "Team CodeCrafters from IIT (ISM) Dhanbad qualified for the ACM ICPC World Finals 2024. The team demonstrated exceptional problem-solving skills, solving 8 out of 10 problems in the regional finals.",
+      "date": "2024-01-15T10:00:00Z",
+      "awardedTo": "Team CodeCrafters",
+      "initiative": "507f1f77bcf86cd799439011",
+      "tags": ["Competitive Programming", "ICPC", "World Finals", "Competition"],
       "gallery": [
-        "/images/achievements/acm-team.jpg",
-        "/images/achievements/competition.jpg"
-      ]
+        {
+          "url": "https://images.unsplash.com/photo-1516321165247-4aa89a48be28",
+          "publicId": "achievements/celebration_mn7h3r"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1523240795612-9a054b0db644",
+          "publicId": "achievements/award_mn7h3r"
+        }
+      ],
+      "socialMediaLinks": [
+        {
+          "platform": "LinkedIn",
+          "url": "https://linkedin.com/posts/iitism-icpc-qualification"
+        },
+        {
+          "platform": "Twitter",
+          "url": "https://twitter.com/IITISMDhanbad/status/icpc2024"
+        }
+      ],
+      "status": "published",
+      "createdAt": "2024-01-16T08:30:00Z",
+      "updatedAt": "2024-01-16T08:30:00Z"
     },
     {
-      "id": "mock_2",
-      "title": "Google Summer of Code Success",
-      "description": "15 students from IIT (ISM) Dhanbad were selected for Google Summer of Code 2024.",
+      "achievementId": "ACH_GSOC_2024_01",
+      "title": "Record GSoC Selections",
+      "description": "15 students from IIT (ISM) Dhanbad selected for Google Summer of Code 2024, marking our highest participation yet.",
+      "date": "2024-03-20T15:00:00Z",
+      "awardedTo": "WebCSE Community",
+      "initiative": "507f1f77bcf86cd799439012",
+      "tags": ["GSoC", "Open Source", "Programming"],
       "gallery": [
-        "/images/achievements/gsoc-students.jpg",
-        "/images/achievements/project-demo.jpg"
-      ]
+        {
+          "url": "https://images.unsplash.com/photo-1531482615713-2afd69097998",
+          "publicId": "achievements/gsoc-selections_kj7h2p"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0",
+          "publicId": "achievements/coding_vn4j2l"
+        }
+      ],
+      "socialMediaLinks": [
+        {
+          "platform": "LinkedIn",
+          "url": "https://linkedin.com/posts/iitism-gsoc-2024"
+        }
+      ],
+      "status": "published",
+      "createdAt": "2024-03-21T09:00:00Z",
+      "updatedAt": "2024-03-21T09:00:00Z"
+    },
+    {
+      "achievementId": "ACH_HACKATHON_2024_01",
+      "title": "Smart India Hackathon Winners",
+      "description": "Team InnovateIIT wins first prize at Smart India Hackathon 2024 in Healthcare category with their AI-based disease detection project.",
+      "date": "2024-02-28T18:30:00Z",
+      "awardedTo": "Team InnovateIIT",
+      "initiative": "507f1f77bcf86cd799439013",
+      "tags": ["Hackathon", "Healthcare", "AI", "Winner"],
+      "gallery": [
+        {
+          "url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+          "publicId": "achievements/sih-winners_rt5k9m"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c",
+          "publicId": "achievements/team-work_vn4j2l"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1517245386807-9b4d0d6f9717",
+          "publicId": "achievements/presentation_lk9m2p"
+        }
+      ],
+      "socialMediaLinks": [
+        {
+          "platform": "LinkedIn",
+          "url": "https://linkedin.com/posts/iitism-sih-2024"
+        },
+        {
+          "platform": "Instagram",
+          "url": "https://instagram.com/p/sih-winners-2024"
+        }
+      ],
+      "status": "published",
+      "createdAt": "2024-03-01T10:15:00Z",
+      "updatedAt": "2024-03-01T10:15:00Z"
     }
   ]
 }

@@ -75,9 +75,9 @@ const AchievementsCard = ({data}) => {
 
                 </div>
 
-                <div className="LikeShare-wrappper">
+                {/* <div className="LikeShare-wrappper">
                     <LikeShareArea />
-                </div>
+                </div> */}
 
             </div>
         

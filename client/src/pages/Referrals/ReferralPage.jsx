@@ -24,7 +24,7 @@ const ReferralPage = () => {
 
   return (
     <div className='ReferralPage'>
-      <SearchBox />
+      <SearchBox key="referralsPage" />
       {/* {console.log(referralData)} */}
 
       {referralData && referralData.map((referral, index) => (

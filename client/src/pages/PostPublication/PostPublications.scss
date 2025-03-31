@@ -114,7 +114,25 @@
             &:active {
                 transform: translateY(1px);
             }
+
+            &:disabled {
+                background-color: #cccccc;
+                cursor: not-allowed;
+                
+                &:hover {
+                    background-color: #cccccc;
+                }
+            }
         }
+    }
+
+    .error-message {
+        background-color: #fff3f3;
+        color: #dc3545;
+        padding: 1rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        border: 1px solid #ffcdd2;
     }
 }
 

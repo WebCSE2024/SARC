@@ -1,9 +1,11 @@
 import React from 'react'
 import './PublicationsCard.scss'
 import LikeShareArea from '../../components/LikeShareArea/LikeShareArea';
-import { useState } from 'react';
+// import { useState } from 'react';
 import defaultProfile from '../../../public/noProfileImg.png'
 import samplePdfPreview from '../../../public/samplePdfPreview.jpeg'
+
+import PublicationEntry from '../../SampleData/PublicationEntry.json'
 
 const PublicationsCard = ({ data }) => {
     // console.log("data:");
@@ -18,17 +20,17 @@ const PublicationsCard = ({ data }) => {
     //     // Here we will add logic to save the bookmark state to backend/localStorage
     // };
     // if(data==undefined) console.log("data not FOUND!")
-    if (data.publicationURL == undefined) data.publicationURL = 'www.google.com';
+    if (data == undefined) data=PublicationEntry;
     const handlePreviewClick = () => {
         // window.open('https://ncert.nic.in/textbook/pdf/jeff105.pdf', '_blank', 'noopener,noreferrer');
-        window.open(data.publicationURL, '_blank', 'noopener,noreferrer');
+        window.open(data && data.publicationURL, '_blank', 'noopener,noreferrer');
     };
 
     return (
         <div className='PublicationsCard'>
 
             <div className="title-save">
-                <h3 className="title">AI-Driven Cybersecurity in Cloud Computing</h3>
+                <h3 className="title">{data && data.title}</h3>
                 {/* <span className='BookmarkSpan'>
                     <input
                         type="checkbox"
@@ -61,10 +63,10 @@ const PublicationsCard = ({ data }) => {
                 </div>
 
                 <div className="about-publisher">
-                    <img src={defaultProfile} alt="" className='publisher-pic' />
+                    <img src={data.profilePicture || defaultProfile} alt="" className='publisher-pic' />
                     <div className="publisher-details">
                         <h3 className="name">
-                            Prof. {data && data.publisher[0] && data.publisher[0].full_name}
+                            {data && data.publisher[0] && data.publisher[0].name}
                             <br />
                             {/* <span className='designation'> (Dept. of Computer Science, ABC University)</span> */}
                         </h3>

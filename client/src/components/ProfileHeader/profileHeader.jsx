@@ -4,6 +4,7 @@ import './profileHeader.scss';
 import defaultProfileImg from '../../../public/NoProfileImg.png';
 
 const profileHeader = ({personInfo, createdAt, eventId}) => {
+
     const getTimeAgo = (dateString) => {
         try {
             const date = parseISO(dateString);
@@ -16,10 +17,10 @@ const profileHeader = ({personInfo, createdAt, eventId}) => {
     return (
         <header className="accountDetails">
             <span className="accountInfo">
-                <img src={defaultProfileImg} alt="not presenet" className="profileImg" />
+                <img src={(personInfo && personInfo.profilePicture) || defaultProfileImg} alt="Profile Pic" className="profileImg" />
                 <div className="accountTextDetails">
                     <div className='AccountTitle'>
-                        {(personInfo && personInfo.full_name) || (`IIT (ISM) Dhanbad`)}
+                        {(personInfo && personInfo.name) || (`CSES IIT (ISM) Dhanbad`)}
                     </div>
                     <div className='TimeOfPost'>{getTimeAgo(createdAt)}</div>
                 </div>

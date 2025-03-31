@@ -3,10 +3,13 @@ import Achievements from '../../features/Achievements/AchievementsCard'
 import SearchBox from '../../components/Filtering/SearchBox'
 import axiosInstance from '../../../axios.config'
 import mockAchievements from '../../SampleData/achievementsData.json'
+import { searchInObject } from '../../utils/searchUtils'
 
 const AchievementsPage = () => {
-  const [apiAchievements, setApiAchievements] = useState([]);
   const [mockData] = useState(mockAchievements.achievements);
+  const [apiAchievements, setApiAchievements] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredAchievements, setFilteredAchievements] = useState([]);
 
   const getAchievements = async () => {
     try {
@@ -14,8 +17,29 @@ const AchievementsPage = () => {
       setApiAchievements(response.data.data);
     } catch (error) {
       console.error('Error:', error);
+      setApiAchievements(mockAchievements.achievements);
     }
   };
+
+  // Filter achievements based on search query
+  useEffect(() => {
+    const filterAchievements = () => {
+      if (!searchQuery.trim()) {
+        setFilteredAchievements(apiAchievements);
+        return;
+      }
+
+      const query = searchQuery.toLowerCase();
+      const filtered = apiAchievements.filter(achievement => 
+        searchInObject(achievement,query)
+        // achievement.title.toLowerCase().includes(query) ||
+        // achievement.description.toLowerCase().includes(query)
+      );
+      setFilteredAchievements(filtered);
+    };
+
+    filterAchievements();
+  }, [searchQuery, apiAchievements]);
 
   useEffect(() => {
     getAchievements();
@@ -23,23 +47,28 @@ const AchievementsPage = () => {
 
   return (
     <div className='AchievementsPage'>
-      <SearchBox />
+      <SearchBox 
+        key="achievements"
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        // resultsCount={filteredAchievements.length}
+      />
       
-      {/* Display API Achievements */}
-      {apiAchievements && apiAchievements.map((achievement, index) => (
+      {/* Display Filtered Achievements */}
+      {filteredAchievements.map((achievement, index) => (
         <Achievements 
-          key={achievement.id || `api_${index}`}
+          key={achievement.id || `achievement_${index}`}
           data={achievement}
         />
       ))}
 
       {/* Display Mock Achievements */}
-      {mockData && mockData.map((achievement, index) => (
+      {/* {mockData && mockData.map((achievement, index) => (
         <Achievements 
           key={achievement.id || `mock_${index}`}
           data={achievement}
         />
-      ))}
+      ))} */}
     </div>
   )
 }

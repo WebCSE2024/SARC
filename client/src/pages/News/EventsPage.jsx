@@ -6,11 +6,48 @@ import hackathonData from '../../SampleData/hackathonData.json';
 import eventsData from '../../SampleData/eventsData.json';
 import './EventsPage.scss';
 import SearchBox from '../../components/Filtering/SearchBox';
+import { searchInObject } from '../../utils/searchUtils';
+// import { set } from 'mongoose';
 
 const EventsPage = () => {
-  const [apiEvents, setApiEvents] = useState([]);
-  const [hackathons] = useState(hackathonData.hackathons);
-  const [mockEvents] = useState(eventsData.events);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [apiEvents, setApiEvents] = useState(eventsData.events);
+  const [filteredEvents, setFilteredEvents] = useState(eventsData.events);
+  const [apiHackathons, setApiHackathons] = useState(hackathonData.hackathons);
+  const [filteredHackathons, setFilteredHackathons] = useState(hackathonData.hackathons);
+  // const [mockHackathons] = useState(hackathonData.hackathons);
+  // const [mockEvents] = useState(eventsData.events);
+
+  const getHackathonsData = async () => {
+    try {
+      const response = await axiosInstance.get('/hackathon/hackathon-list');
+      setApiEvents(response.data.data);
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+
+  useEffect(() => {
+    const filterHackathons = () => {
+      if (!searchQuery.trim()) {
+        setFilteredHackathons(apiHackathons);
+        return;
+      }
+
+      const query = searchQuery.toLowerCase();
+      const filtered = apiHackathons.filter(Hacakathon =>
+        searchInObject(Hacakathon, query)
+      );
+      setFilteredHackathons(filtered);
+    };
+
+    filterHackathons();
+  }, [searchQuery, apiHackathons]);
+
+  useEffect(() => {
+    getHackathonsData();
+  }, []);
+
 
   const getEventsData = async () => {
     try {
@@ -22,16 +59,38 @@ const EventsPage = () => {
   }
 
   useEffect(() => {
+    const filterEvents = () => {
+      if (!searchQuery.trim()) {
+        setFilteredEvents(apiEvents);
+        return;
+      }
+
+      const query = searchQuery.toLowerCase();
+      const filtered = apiEvents.filter(Events =>
+        searchInObject(Events, query)
+      );
+      setFilteredEvents(filtered);
+    };
+
+    filterEvents();
+  }, [searchQuery, apiEvents]);
+
+  useEffect(() => {
     getEventsData();
   }, []);
 
   return (
     <div className='eventsPage'>
-      <SearchBox />
+      <SearchBox
+        key="events"
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        resultsCount={filteredHackathons.length + filteredEvents.length}
+      />
 
       <section className="hackathons-section">
         {/* <h2 className="section-title">Hackathons</h2> */}
-        {hackathons.map((hackathon, index) => (
+        {filteredHackathons.map((hackathon, index) => (
           <HackathonCard
             key={hackathon.id || `hack_${index}`}
             data={hackathon}
@@ -49,9 +108,9 @@ const EventsPage = () => {
             data={event}
           />
         ))} */}
-        
+
         {/* Mock Events */}
-        {mockEvents.map((event, index) => (
+        {filteredEvents.map((event, index) => (
           <EventsCard
             key={event.id || `mock_${index}`}
             data={event}

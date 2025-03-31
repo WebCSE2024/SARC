@@ -1,0 +1,38 @@
+{
+    "_id": "67e813d2771689896ebc8031",
+    "companyName": "SpaceTech",
+    "deadline": "2025-11-15T13:30:00.000Z",
+    "jobProfile": "Aerospace Engineer",
+    "addedBy": [
+      {
+        "_id": "67e804d4592dedf3ec592209",
+        "name": "Name",
+        "username": "userName",
+        "email": "User@example.com",
+        "userType": "alumni",
+        "active": true,
+        "alumniDetails": {
+          "gradYear": 2019,
+          "linkedInProfile": "https://www.linkedin.com/in/megharao"
+        },
+        "profilePicture": "https://res.cloudinary.com/dyyi2bb0d/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1741600517/gn0nbo2hr9wgqxeawez6.jpg"
+      }
+    ],
+    "requirements": "Experience in aerodynamics, CFD simulations, and spacecraft design.",
+    "stipend": {
+      "amount": 85000,
+      "currency": "INR"
+    },
+    "location": {
+      "city": "Bangalore",
+      "country": "India"
+    },
+    "mode": "onsite",
+    "description": "Work on next-gen space technologies and aircraft design.",
+    "status": "pending",
+    "contact": "+91 9212345678",
+    "email": "careers@spacetech.com",
+    "website": "https://spacetech.com",
+    "createdAt": "2025-03-29T15:37:54.953Z",
+    "updatedAt": "2025-03-29T15:37:54.953Z"
+  }

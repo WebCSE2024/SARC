@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import ActivityCard from '../../features/ProfilePageActivity/ActivityCard';
 import ExperienceItem from '../../components/ExperienceBox/ExperienceItem';
 import EducationItem from '../../components/EducationBox/EducationItem';
+import defaultProfileImg from '../../../public/NoProfileImg.png';
 
 import userData from '../../SampleData/userData.json'
 
@@ -22,9 +23,14 @@ const ProfilePage = () => {
         navigate('/PostPublication');
     };
 
-    const user = userData.users[0];
-    // console.log("user.education:");
-    console.log(user);
+    const handleLogout = () => {
+        // Clear local storage
+        localStorage.removeItem('token');
+        // Redirect to login page
+        navigate('/login');
+    };
+
+    const user = userData.users[1];
 
     return (
         <div className="profile-container">
@@ -32,8 +38,8 @@ const ProfilePage = () => {
                 <div className="cover-photo"></div>
                 <div className="profile-info">
                     <img
-                        src={user.profile_pic}
-                        alt="Profile"
+                        src={user.profile_pic || defaultProfileImg }
+                        alt="Profile Picture"
                         className="profile-picture"
                     />
                     <div className="basic-info">
@@ -90,7 +96,16 @@ const ProfilePage = () => {
                     {/* <EducationItem /> */}
                 </section>)}
 
-                <ActivityCard />
+                {/* <ActivityCard /> */}
+
+                <div className="logout-section">
+                    <button 
+                        className="logout-btn"
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </button>
+                </div>
             </div>
         </div>
     );

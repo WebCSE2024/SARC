@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './PostPublications.scss';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 
@@ -6,12 +7,13 @@ const PostPublications = () => {
     const [formData, setFormData] = useState({
         title: '',
         pages: '',
-        email: '',
-        phone: '',
+        pagesDisplay: '',
         pdfFile: null
     });
 
     const [fileName, setFileName] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,15 +36,56 @@ const PostPublications = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
-        // Add submission logic here
+        setIsSubmitting(true);
+        setError(null);
+
+        try {
+            const formDataToSend = new FormData();
+            
+            // Append all form fields
+            formDataToSend.append('title', formData.title);
+            formDataToSend.append('pages', formData.pages);
+            formDataToSend.append('pagesDisplay', formData.pagesDisplay);
+            formDataToSend.append('pdfFile', formData.pdfFile);
+            
+            // Add user ID if available from auth context
+            // formDataToSend.append('addedBy', user._id);
+
+            const response = await axios.post('/create-publication', 
+                formDataToSend,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+            );
+
+            if (response.status === 201) {
+                // Reset form
+                setFormData({
+                    title: '',
+                    pages: '',
+                    pagesDisplay: '',
+                    pdfFile: null
+                });
+                setFileName('');
+                alert('Publication posted successfully!');
+            }
+        } catch (err) {
+            setError(err.response?.data?.message || 'Failed to post publication');
+            console.error('Error posting publication:', err);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
         <div className="post-publication-container">
             <h2>Post Research Publication</h2>
+            {error && <div className="error-message">{error}</div>}
             <form onSubmit={handleSubmit} className="publication-form">
                 <div className="form-group">
                     <label htmlFor="title">Paper Title*</label>
@@ -86,37 +129,25 @@ const PostPublications = () => {
                         min="1"
                         placeholder="Enter number of pages"
                     />
+                    <label htmlFor="pagesDisplay">Number of Pages to be displayed*</label>
+                    <input
+                        type="number"
+                        id="pagesDisplay"
+                        name="pagesDisplay"
+                        value={formData.pagesDisplay}
+                        onChange={handleChange}
+                        required
+                        min="1"
+                        placeholder="Enter number of pages to be displayed"
+                    />
                 </div>
 
-                <div className="contact-group">
-                    <div className="form-group">
-                        <label htmlFor="email">Email*</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                            placeholder="Enter your email"
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone Number</label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            placeholder="Enter your phone number"
-                        />
-                    </div>
-                </div>
-
-                <button type="submit" className="submit-btn">
-                    Post Publication
+                <button 
+                    type="submit" 
+                    className="submit-btn"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Posting...' : 'Post Publication'}
                 </button>
             </form>
         </div>

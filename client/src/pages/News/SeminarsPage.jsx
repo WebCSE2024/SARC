@@ -1,26 +1,62 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import EventsCard from '../../features/Events/EventsCard'
 import SearchBox from '../../components/Filtering/SearchBox'
-import seminarsDataObj from '../../SampleData/seminarData.json'
+import axiosInstance from '../../../axios.config'
+import { searchInObject } from '../../utils/searchUtils'
 
 const SeminarsPage = () => {
-    console.log(seminarsDataObj);
-    console.log(typeof(seminarsDataObj.seminars));
-    const seminarsData=seminarsDataObj.seminars
+    const [apiSeminars, setApiSeminars] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredSeminars, setFilteredSeminars] = useState([]);
+
+    const getSeminars = async () => {
+        try {
+            const response = await axiosInstance.get(`/seminar/seminar-list`);
+            setApiSeminars(response.data.data);
+        } catch (error) {
+            console.error('Error:', error);
+            setApiSeminars([]); // Set empty array on error
+        }
+    };
+
+    useEffect(() => {
+        const filterSeminars = () => {
+            if (!searchQuery.trim()) {
+                setFilteredSeminars(apiSeminars);
+                return;
+            }
+
+            const query = searchQuery.toLowerCase();
+            const filtered = apiSeminars.filter(seminar => 
+                searchInObject(seminar, query)
+            );
+            setFilteredSeminars(filtered);
+        };
+
+        filterSeminars();
+    }, [searchQuery, apiSeminars]);
+
+    useEffect(() => {
+        getSeminars();
+    }, []);
+
     return (
-        <div className='SeminarsPage'>
+        <div className="seminars-page">
+            <SearchBox
+                key="seminars"
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                resultsCount={filteredSeminars.length}
+            />
 
-            <SearchBox />
-
-            {seminarsData.map((Sem_data, index) => (
-                <EventsCard data={Sem_data}/>
+            {filteredSeminars.map((seminar, index) => (
+                <EventsCard 
+                    data={seminar} 
+                    key={seminar.id || `seminar-${index}`} 
+                />
             ))}
-
-            {/* <EventsCard />
-            <EventsCard /> */}
-
         </div>
-    )
-}
+    );
+};
 
-export default SeminarsPage
+export default SeminarsPage;

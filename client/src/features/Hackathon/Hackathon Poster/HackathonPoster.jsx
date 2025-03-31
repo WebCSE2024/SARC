@@ -27,7 +27,7 @@ const HackathonPoster = ({ data, imageUrl }) => {
                         </div>
                     </div>
                     <ul className={`Hack-Desc ${imageUrl == undefined ? `NoImg` : `posterPresent`}`} >
-                        <li className='detailPoint'>Date: <b> {data && formatDate(data.eventDate)}</b></li>
+                        <li className='detailPoint'>Date: <b> {data && formatDate(data.date)}</b></li>
                         <li className='detailPoint'>Venue:  <b>{data && data.venue}  </b></li>
                         {/* <li className='detailPoint'>Starts at <b>6:00 PM.</b></li> */}
                         {/* <br /> */}

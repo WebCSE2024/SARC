@@ -8,7 +8,7 @@ import LoginPage from '../pages/LoginPage/LoginPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import SeminarsPage from '../pages/News/SeminarsPage';
 import PostReferral from '../pages/PostReferral/PostReferral';
-import PostPublications from '../pages/PostPublications/PostPublications';
+import PostPublication from '../pages/PostPublication/PostPublications';
 
 export const appRoutes = [
   {
@@ -53,7 +53,7 @@ export const appRoutes = [
   },
   {
     path: "/PostPublication",
-    element: <PostPublications />,
+    element: <PostPublication />,
   },
   {
     path: "*",

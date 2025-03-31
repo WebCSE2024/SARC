@@ -46,11 +46,11 @@ const HackathonCard = ({data}) => {
                     <img src={PdfSvg} alt="" srcset="" /> Rulebook
                 </a>
 
-                <div className="HackathonEnd">
                     {/*following can be added later for more functionality */}
-                    {/* <p className='Volunteer'>Want to volunteer? <a href="">CLICK HERE</a> | REGISTRATION DEADLINE: <b>11:59 PM, 05-03-2025 </b></p> */}
+                {/* <div className="HackathonEnd">
+                    <p className='Volunteer'>Want to volunteer? <a href="">CLICK HERE</a> | REGISTRATION DEADLINE: <b>11:59 PM, 05-03-2025 </b></p>
+                    
                     <hr />
-
                     <div className="LikeShare">
                         <div className="like" onClick={handleLikeClick}>
                             <svg
@@ -68,7 +68,6 @@ const HackathonCard = ({data}) => {
                         </div>
 
 
-                        {/* share action for onClick on share! */}
                         <div className="share" onClick={handleShareHackathon}>
 
                             <svg className='share-icon' version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +134,7 @@ c-30 33 -34 35 -96 35 -67 0 -199 -21 -289 -46 -28 -8 -59 -14 -70 -14 -10 0
                             </span>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
             </div>
 

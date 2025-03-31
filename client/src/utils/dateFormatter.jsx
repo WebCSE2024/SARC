@@ -6,6 +6,6 @@ export const formatDate = (dateString) => {
         return format(date, 'MMMM dd, yyyy');
     } catch (error) {
         console.error('Error formatting date:', error);
-        return 'Invalid date';
+        return '(To Be Informed)';
     }
 };

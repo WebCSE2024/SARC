@@ -1,14 +1,63 @@
 {
   "users": [
     {
+      "id": "usr_2",
+      "full_name": "Prof. Rajesh Kumar",
+      "designation": "Associate Professor",
+      "location": {
+        "city": "Dhanbad",
+        "country": "India"
+      },
+      "profile_pic": "/images/profiles/rajesh-kumar.jpg",
+      "user_type": "professor",
+      "about": "Associate Professor at IIT (ISM) Dhanbad with research interests in Distributed Systems and Cloud Computing. 15+ years of teaching experience.",
+      "experience": [
+        {
+          "companyName": "IIT (ISM) Dhanbad",
+          "position": "Associate Professor",
+          "timeline": {
+            "start": "January, 2015",
+            "end": "Present"
+          },
+          "location": "Dhanbad, India",
+          "highlights": [
+            "Teaching undergraduate and graduate courses",
+            "Published 25+ research papers",
+            "Supervised 12 PhD students",
+            "Principal Investigator for 3 government-funded projects"
+          ]
+        }
+      ],
+      "education": [
+        {
+          "university": "IIT Delhi",
+          "degree": "PhD",
+          "course": "Computer Science",
+          "year": 2010,
+          "grade": "Outstanding"
+        }
+      ],
+      "activity": {
+        "referrals": [],
+        "publications": [
+          {
+            "id": "pub_3",
+            "title": "Cloud Resource Optimization Techniques",
+            "journal": "IEEE Transactions on Cloud Computing",
+            "publishDate": "2024-01-15"
+          }
+        ]
+      }
+    },
+    {
       "id": "usr_1",
-      "full_name": "Dr. Priya Sharma",
+      "full_name": "Dr. Abhishek Sharma",
       "designation": "Senior AI Researcher",
       "location": {
         "city": "Bangalore",
         "country": "India"
       },
-      "profile_pic": "/images/profiles/priya-sharma.jpg",
+      "profile_pic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROA0JmO84Tw8zB3Nj5Up744TonyT7CR01T0w&s",
       "user_type": "alumni",
       "about": "AI/ML expert with 8+ years of experience. Previously led research teams at Google and Microsoft. PhD from Stanford University in Computer Science with focus on Deep Learning.",
       "experience": [
@@ -86,55 +135,6 @@
             "title": "Efficient Training of Large Language Models",
             "conference": "ICML 2023",
             "publishDate": "2023-07-15"
-          }
-        ]
-      }
-    },
-    {
-      "id": "usr_2",
-      "full_name": "Prof. Rajesh Kumar",
-      "designation": "Associate Professor",
-      "location": {
-        "city": "Dhanbad",
-        "country": "India"
-      },
-      "profile_pic": "/images/profiles/rajesh-kumar.jpg",
-      "user_type": "professor",
-      "about": "Associate Professor at IIT (ISM) Dhanbad with research interests in Distributed Systems and Cloud Computing. 15+ years of teaching experience.",
-      "experience": [
-        {
-          "companyName": "IIT (ISM) Dhanbad",
-          "position": "Associate Professor",
-          "timeline": {
-            "start": "January, 2015",
-            "end": "Present"
-          },
-          "location": "Dhanbad, India",
-          "highlights": [
-            "Teaching undergraduate and graduate courses",
-            "Published 25+ research papers",
-            "Supervised 12 PhD students",
-            "Principal Investigator for 3 government-funded projects"
-          ]
-        }
-      ],
-      "education": [
-        {
-          "university": "IIT Delhi",
-          "degree": "PhD",
-          "course": "Computer Science",
-          "year": 2010,
-          "grade": "Outstanding"
-        }
-      ],
-      "activity": {
-        "referrals": [],
-        "publications": [
-          {
-            "id": "pub_3",
-            "title": "Cloud Resource Optimization Techniques",
-            "journal": "IEEE Transactions on Cloud Computing",
-            "publishDate": "2024-01-15"
           }
         ]
       }

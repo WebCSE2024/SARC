@@ -33,7 +33,12 @@ const Header = () => {
             </li>
           </ul>
           <div className="right-side">
+            {/* show this button to logout */}
             <NavLink to="/signup" className="signup-btn" onClick={closeNewsMenu}>Sign in</NavLink>
+
+            {/* add this button only if the user is loggen in */}
+            <NavLink to="/profile" className="signup-btn" onClick={closeNewsMenu}> Hi {/*username here*/}</NavLink>
+
           </div>
         </nav>
       </header>

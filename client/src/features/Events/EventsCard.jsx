@@ -10,6 +10,7 @@ import { formatDate } from '../../utils/dateFormatter.jsx'
 
 const EventsCard = ({ data }) => {
   const [isLiked, setIsLiked] = useState(false);
+  // console.log(data);
 
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
@@ -24,7 +25,6 @@ const EventsCard = ({ data }) => {
 
       <div className='eventCard'>
 
-        {/* ADD UNIQUE EVENT ID here */}
         <ProfileHeader createdAt={data && data.createdAt} />
 
         <div className='eventDesc'>
@@ -45,7 +45,7 @@ const EventsCard = ({ data }) => {
 
           </div>
           <ul className="talk-Desc">
-            <li className='descPoints'>Date: <b> {formatDate(data.eventDate)}</b></li>
+            <li className='descPoints'>Date: <b> {formatDate(data.date)}</b></li>
             <li className='descPoints'>Venue:  <b>{data.venue}  </b></li>
             {/* <li className='descPoints'>Time: <b>2:00 PM- 4:00 PM.</b></li> */}
             <br />
@@ -55,7 +55,7 @@ const EventsCard = ({ data }) => {
           </ul>
         </div>
 
-        <div className="eventEnd">
+        {/* <div className="eventEnd">
           <p className='Volunteer'>Want to volunteer? <a href="">CLICK HERE</a></p>
           <hr />
 
@@ -75,8 +75,6 @@ const EventsCard = ({ data }) => {
               </span>
             </div>
 
-
-            {/* share action for onClick on share! */}
             <div className="share" onClick={handleShareEvent}>
 
               <svg className='share-icon' version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +141,7 @@ c-30 33 -34 35 -96 35 -67 0 -199 -21 -289 -46 -28 -8 -59 -14 -70 -14 -10 0
               </span>
             </div>
           </div>
-        </div>
+        </div> */}
 
       </div>
 

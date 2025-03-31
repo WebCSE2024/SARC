@@ -5,11 +5,16 @@ import { formatAmount } from '../../utils/numberFormatter';
 // import profilePic from "../../assets/NoProfileImg.png";
 import ProfileHeader from "../../components/ProfileHeader/profileHeader";
 
+import ReferralEntry from '../../SampleData/ReferralEntry.json'
+
 const ReferralCard = ({ data }) => {
     // console.log('props', props);
 
     // console.log("received referral data:")
     // console.log(data);
+
+    if(data== undefined)    data=ReferralEntry;
+
     return (
         <div className="card-container">
             <div className="top-block">
@@ -72,15 +77,16 @@ const ReferralCard = ({ data }) => {
                         <div className="requirements">
                             <h6 className="subtitle">Requirements:</h6>
                             <p className="requirements-list">
-                                {data && data.eligibleYears?.join(', ')} Passouts <br />
+                                {data.requirements}
+                                {/* {data && data.eligibleYears?.join(', ')} Passouts <br />
                                 Proficiency in Python, JavaScript, React.js, and SQL <br />
-                                Strong problem-solving and analytical skills
+                                Strong problem-solving and analytical skills */}
                             </p>
                         </div>
 
                         <div className="job-details">
                             <div className="detail"><p className="job-heading">Location:</p>
-                                <span className="job-text">  {data && `${data.location.city}, ${data.location.country}`}
+                                <span className="job-text">  {data && `${data.location.city}, ${data.location.country} (${data.mode})`}
                                 </span></div>
                             <div className="detail"><p className="job-heading">Stipend:</p>
                                 <span className="job-text">{data && formatAmount(data.stipend.amount)} {data && data.stipend.currency}
