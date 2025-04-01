@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import { dbConnection } from './src/connections/dbConnection.js'
+
 import { app } from './app.js'
 import {redis} from './src/connections/redisConnection.js'
 dotenv.config({
