@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import defaultUserImg from '../../../public/noProfileImg.png'
+import defaultUserImg from '../../../public/NoProfileImg.png'
 
 const CommentInput = ({ onSubmit, placeholder = "Write a comment..." }) => {
     const [text, setText] = useState('');
