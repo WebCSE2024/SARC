@@ -1,0 +1,108 @@
+.activities {
+
+    h2 {
+        font-family: Inter;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        vertical-align: middle;
+    }
+
+    .activitySlideShow-wrapper {
+        // width: 803px;
+        // border: #ff0000 solid 5px;
+        width: calc(375px + 375px + 16px);
+        // max-height: 440px;
+        position: relative;
+        margin: 0 auto;
+
+        .activity-scroll-btn {
+
+            z-index: 2;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+
+            &.scrollRight {
+                right: 10px;
+            }
+
+            &.scrollLeft {
+                left: 10px;
+            }
+
+            width: 26px;
+            height: 30px;
+            border-radius: 8px;
+            // padding: 10px;
+            box-sizing: border-box;
+            // gap: 10px;
+            background-color: #fff;
+            box-shadow: 0px 4px 4px 0px #00000040;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            .scrollSvg {
+                // background: #5B729E;
+                width: 12px;
+                height: 20px;
+            }
+        }
+
+        .allActivityCards {
+            width: calc(375px + 375px + 16px);
+            overflow-x: scroll;
+            overflow-y: hidden;
+
+            // max-height: 440px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            // justify-content: space-evenly;
+            align-items: center;
+
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            /* Snaps to each image */
+            white-space: nowrap;
+            /* Prevents line breaks */
+            scrollbar-width: none;
+            /* Hides scrollbar in Firefox */
+            -ms-overflow-style: none;
+            /* Hides scrollbar in IE/Edge */
+
+            &::-webkit-scrollbar {
+                display: none;
+                /* Hides scrollbar in Chrome/Safari */
+            }
+
+            .ActivityCard {
+                flex-shrink: 0;
+
+
+                scale: 0.6;
+
+                .card-container, .PublicationsCard {
+                    border: 1px solid black;
+                }
+
+                border-radius: 16px;
+                margin: -160px;
+                // margin-top: -160px;
+                // border-width: 1px;
+                // padding-top: 32px;
+                // padding-right: 16px;
+                // padding-bottom: 32px;
+                // padding-left: 16px;
+                // gap: 17px;
+                box-sizing: border-box;
+
+                scroll-snap-align: center;
+            }
+        }
+    }
+}

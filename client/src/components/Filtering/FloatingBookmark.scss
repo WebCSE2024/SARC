@@ -1,0 +1,71 @@
+@keyframes checkedAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.FloatingBookmark {
+
+    position: fixed;
+    right: 0px;
+
+    width: 41px;
+    height: 60px;
+    // width: 58px;
+    // height: 85px;
+    // top: 170px;
+    // left: 1382px;
+    border-radius: 16px 0 0 16px;
+    box-shadow: 2px 2px 12px 0px #0000001A;
+    background-color: #FFFFFF;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .bookmark-chkbox {
+        display: none;
+    }
+
+    .label-bookmark-chkbox {
+        // width: 58px;
+        // height: 85px;
+        // top: 170px;
+        // left: 1382px;
+        // border-radius: 16px;
+        // // border: 2px solid #8D91B0;
+        // box-shadow: 2px 2px 12px 0px #0000001A;
+
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        :hover {
+            cursor: pointer;
+        }
+    }
+
+    .Bookmark-svg {
+        transition: fill 0.2s ease-in-out;
+        stroke-width: 3px;
+        stroke: #8D91B0;
+        // see animation wokring!!
+        animation: checkedAnimation 0.4s ease forwards;
+
+        height: 24px;
+        width: 18px;
+        scale: 1.5;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}

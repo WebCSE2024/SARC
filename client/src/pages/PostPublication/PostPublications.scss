@@ -1,0 +1,150 @@
+.post-publication-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    font-family: Inter;
+
+    h2 {
+        color: #1a1a1a;
+        margin-bottom: 1.5rem;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .publication-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            label {
+                font-size: 14px;
+                font-weight: 500;
+                color: #4a4a4a;
+
+                &::after {
+                    content: "*";
+                    color: #e41e3f;
+                    margin-left: 4px;
+                }
+            }
+
+            input {
+                padding: 12px;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                font-size: 14px;
+                transition: border-color 0.3s ease;
+
+                &:focus {
+                    outline: none;
+                    border-color: #2196F3;
+                }
+            }
+        }
+
+        .file-upload-group {
+            .upload-area {
+                position: relative;
+                border: 2px dashed #e0e0e0;
+                border-radius: 8px;
+                padding: 2rem;
+                text-align: center;
+                transition: border-color 0.3s ease;
+
+                &:hover {
+                    border-color: #2196F3;
+                }
+
+                input[type="file"] {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+
+                .upload-placeholder {
+                    .upload-icon {
+                        font-size: 2rem;
+                        color: #2196F3;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    p {
+                        color: #666;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+
+        .contact-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            margin-top: 1rem;
+            padding: 12px 24px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #1976D2;
+            }
+
+            &:active {
+                transform: translateY(1px);
+            }
+
+            &:disabled {
+                background-color: #cccccc;
+                cursor: not-allowed;
+                
+                &:hover {
+                    background-color: #cccccc;
+                }
+            }
+        }
+    }
+
+    .error-message {
+        background-color: #fff3f3;
+        color: #dc3545;
+        padding: 1rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        border: 1px solid #ffcdd2;
+    }
+}
+
+@media (max-width: 768px) {
+    .post-publication-container {
+        margin: 1rem;
+        padding: 1rem;
+
+        .publication-form {
+            .contact-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}

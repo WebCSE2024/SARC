@@ -1,0 +1,365 @@
+@keyframes likeAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.HackathonCardOuter {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-wrap: wrap;
+
+    margin: 40px auto;
+
+    .commentsCardWrapper{
+        width: 400px;
+    }
+}
+
+.HackathonCard {
+    box-sizing: border-box;
+    width: 843px;
+    // height: 734px;
+    border-radius: 16px;
+    padding: 35px;
+    box-sizing: border-box;
+
+    background-color: #fff;
+
+    box-shadow: 4px 4px 12px 0px #0000001A;
+
+
+    .HackathonDesc {
+        width: 783px;
+        // height: 92px;
+        top: 112px;
+        left: 31px;
+        padding: 10px;
+        gap: 10px;
+        box-sizing: border-box;
+
+        padding-top: 30px;
+
+        p {
+            width: 763px;
+            height: 72px;
+            font-family: "Inter", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0%;
+            vertical-align: middle;
+            color: #7A7983;
+
+        }
+    }
+
+    .Hack-info {
+        width: 768px;
+        height: 278px;
+        // top: 200px;
+        // left: 36px;
+        border-radius: 12px;
+        margin-top: 20px;
+
+        background-image: url('../assets/EventBg.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 30px;
+        box-sizing: border-box;
+        color: #fff;
+
+        .heading {
+            display: flex;
+            justify-content: space-between;
+
+            .HackathonTitle {
+                font-family: Calibri;
+                font-weight: 400;
+                font-size: 28px;
+                line-height: 24px;
+                letter-spacing: 0%;
+                vertical-align: middle;
+
+                .HackathonType {
+                    font-family: Calibri;
+                    font-weight: 700;
+                    font-size: 28px;
+                    line-height: 24px;
+                    letter-spacing: 0%;
+                    vertical-align: middle;
+                    // .color{
+                    //     color: ;
+                    // }
+                }
+            }
+
+            .Registeration {
+                width: 134px;
+                height: 45px;
+                top: 19px;
+                left: 617px;
+                border-radius: 24px;
+                padding-top: 12px;
+                padding-right: 16px;
+                padding-bottom: 12px;
+                padding-left: 16px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+                background-color: #fff;
+                gap: 10px;
+
+
+                a {
+                    font-family: Inter, sans-serif;
+                    font-weight: 400;
+                    font-size: 15px;
+                    line-height: 20.8px;
+                    letter-spacing: 0%;
+                    vertical-align: middle;
+                    text-align: center;
+                    width: 102px;
+                    height: 21px;
+                    box-sizing: border-box;
+
+
+                    text-decoration: none;
+                    color: #000;
+                }
+
+            }
+        }
+
+        .Hack-Desc {
+            li {
+                list-style-type: none;
+
+                // width: 194px;
+                height: 21px;
+                top: 104px;
+                left: 68px;
+
+
+                font-family: "Inter", sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 20.8px;
+                letter-spacing: 2%;
+                vertical-align: middle;
+
+
+                b {
+                    margin-left: 5px;
+                    font-family: "Inter", sans-serif;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 20.8px;
+                    // letter-spacing: 2%;
+                    vertical-align: middle;
+
+                }
+
+            }
+
+            .PIC-details {
+                .pic-name {
+                    font-family: Inter, sans-serif;
+                    font-weight: 300;
+                    font-size: 14px;
+                    line-height: 20.8px;
+                    letter-spacing: 2%;
+                    vertical-align: middle;
+
+                    // width: 285px;
+                    height: 21px;
+
+                    margin-top: 15px;
+                    margin-bottom: 0px;
+
+                }
+
+                .pic-otherDetails {
+                    font-family: Inter, sans-serif;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 20.8px;
+                    letter-spacing: 2%;
+                    vertical-align: middle;
+
+
+                    .prize-pool {
+                        margin-top: 20px;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+
+    .rulebook {
+        text-decoration: none;
+        cursor: pointer;
+
+        width: 124px;
+        height: 44px;
+        border-radius: 16px;
+        gap: 7px;
+        padding-top: 4px;
+        padding-right: 8px;
+        padding-bottom: 4px;
+        padding-left: 4px;
+        border-width: 0.8px;
+        border: 0.8px solid #5B729E;
+        background: #F6F9FF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 23px;
+        // margin-bottom: 50px;
+
+
+        color: #5B729E;
+
+        img {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    .HackathonEnd {
+        width: 768px;
+        // height: 108px;
+        top: 550px;
+        left: 30px;
+        gap: 12px;
+        margin-top: 50px;
+
+        .Volunteer {
+            font-family: Inter;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20.8px;
+            letter-spacing: 2%;
+            vertical-align: middle;
+            text-transform: capitalize;
+            color: #7A7983;
+
+            margin-bottom: 22px;
+
+            a {
+                color: #2F295F;
+            }
+        }
+
+        .LikeShare {
+            display: flex;
+        }
+
+
+
+    }
+}
+
+
+
+.LikeShare {
+    width: 388.0010986328125px;
+    height: 41px;
+    gap: 199px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    // box-sizing: border-box;
+    // overflow:hidden;
+
+    .like {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 20px;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .like-icon {
+            fill: #fff;
+            transition: fill 0.2s ease;
+            stroke-width: 1px;
+            stroke: #8D91B0;
+
+
+            &.liked {
+                fill: #2196F3;
+                stroke-width: 0;
+                animation: likeAnimation 0.4s ease forwards;
+            }
+        }
+    }
+
+    .likeTxt,
+    .shareTxt {
+        // width: 52px;
+        height: 41px;
+        gap: 10px;
+        padding: 10px;
+        font-family: Inter;
+
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20.8px;
+        letter-spacing: 2%;
+        vertical-align: middle;
+
+        color: #8D91B0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        box-sizing: border-box;
+    }
+
+    .likeTxt {
+        width: 52px;
+    }
+
+    .shareTxt {
+        width: 65px;
+    }
+
+    .share {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 20px;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .share-icon {
+            fill: #8D91B0;
+            stroke-width: 2px;
+            stroke: #8D91B0;
+        }
+    }
+}
