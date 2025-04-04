@@ -2,8 +2,8 @@ import React from 'react'
 import './PublicationsCard.scss'
 import LikeShareArea from '../../components/LikeShareArea/LikeShareArea';
 // import { useState } from 'react';
-import defaultProfile from '../../../public/NoProfileImg.png'
-import samplePdfPreview from '../../../public/SamplePdfPreview.jpeg'
+import defaultProfile from '../../../public/noProfileImg.png'
+import samplePdfPreview from '../../../public/samplePdfPreview.jpeg'
 
 import PublicationEntry from '../../SampleData/PublicationEntry.json'
 

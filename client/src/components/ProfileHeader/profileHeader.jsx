@@ -3,7 +3,7 @@ import { formatDistanceToNow, parseISO } from 'date-fns';
 import './profileHeader.scss';
 import defaultProfileImg from '../../../public/NoProfileImg.png';
 
-const profileHeader = ({personInfo, createdAt, eventId}) => {
+const profileHeader = ({personInfo, createdAt, eventId, eventData}) => {
 
     const getTimeAgo = (dateString) => {
         try {
@@ -25,6 +25,11 @@ const profileHeader = ({personInfo, createdAt, eventId}) => {
                     <div className='TimeOfPost'>{getTimeAgo(createdAt)}</div>
                 </div>
             </span>
+            {eventData && eventData.type && (
+                <div className="event-type">
+                    {eventData.type}
+                </div>
+            )}
         </header>
     );
 };

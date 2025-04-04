@@ -29,7 +29,7 @@ const HackathonCard = ({data}) => {
             <div className='HackathonCard'>
 
                 {/* ADD HACKATHON ID HERE */}
-                <ProfileHeader createdAt={data && data.createdAt} eventId={`hackathonId-${data.id}`} />
+                <ProfileHeader createdAt={data && data.createdAt} eventId={`hackathonId-${data.id}`} eventData={data} />
 
                 <div className='HackathonDesc'>
                     <p>

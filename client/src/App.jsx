@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from './components/Navigation/header';
-import Footer from './components/Navigation/footer';
+import Header from './components/navigation/header';
+import Footer from './components/navigation/footer';
 import { appRoutes } from './Routes/routes';
 import './App.css';
 

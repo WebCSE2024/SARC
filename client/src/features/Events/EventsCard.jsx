@@ -25,7 +25,7 @@ const EventsCard = ({ data }) => {
 
       <div className='eventCard'>
 
-        <ProfileHeader createdAt={data && data.createdAt} />
+        <ProfileHeader createdAt={data && data.createdAt} eventData={data}/>
 
         <div className='eventDesc'>
           <p>

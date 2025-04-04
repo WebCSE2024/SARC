@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './CommentsArea.scss';
 import { FaReply } from 'react-icons/fa';
-import defaultUserImg from '../../../public/NoProfileImg.png';
+import defaultUserImg from '../../../public/noProfileImg.png';
 import CommentInput from './CommentInput';
 import CommentsList from './CommentsList';
 

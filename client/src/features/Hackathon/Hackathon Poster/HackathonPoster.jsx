@@ -1,6 +1,6 @@
 import React from 'react'
 import './HackathonPoster.scss'
-import EventBg from '../../../../public/EventBg.png'
+// import EventBg from '../../../../public/EventBg.png'
 import { formatDate } from '../../../utils/dateFormatter'
 
 const HackathonPoster = ({ data, imageUrl }) => {
@@ -28,7 +28,7 @@ const HackathonPoster = ({ data, imageUrl }) => {
                     </div>
                     <ul className={`Hack-Desc ${imageUrl == undefined ? `NoImg` : `posterPresent`}`} >
                         <li className='detailPoint'>Date: <b> {data && formatDate(data.date)}</b></li>
-                        <li className='detailPoint'>Venue:  <b>{data && data.venue}  </b></li>
+                        {/* <li className='detailPoint'>Venue:  <b>{data && data.venue}  </b></li> */}
                         {/* <li className='detailPoint'>Starts at <b>6:00 PM.</b></li> */}
                         {/* <br /> */}
                         <div className='PIC-details'>
