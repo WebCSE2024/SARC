@@ -7,13 +7,26 @@ import {FaLinkedin} from 'react-icons/fa'
 const LoginPage = () => {
 //   const navigate = useNavigate();
 
-  const handleLinkedInClick = () => {
-    // This will be replaced with actual LinkedIn auth later
-    navigate('/dashboard');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Form validation
+    if (!username.trim() || !password.trim()) {
+      setError('Username and password are required');
+      return;
+    }
+    setError('');
+    // Here you will implement the first layer authentication check
+    console.log('Checking credentials for:', username);
   };
 
-  const handleRegisterClick = () => {
-    window.open('https://cses.fi/problemset/', '_blank');
+  const handleLinkedInClick = () => {
+    // This will be replaced with actual LinkedIn auth later
+    // navigate('/dashboard');
+    console.log('Initiating LinkedIn authentication');
   };
 
   return (
@@ -22,30 +35,46 @@ const LoginPage = () => {
         <h1>Welcome to SARC</h1>
         <p className="subtitle">Student Alumni Relations Cell, IIT(ISM) Dhanbad</p>
         
-        <div className="auth-section">
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="form-input"
+            />
+          </div>
+          
+          <div className="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-input"
+            />
+          </div>
+          
+          {error && <p className="error-message">{error}</p>}
+          
+          <button type="submit" className="submit-button">
+            Verify Credentials
+          </button>
+          
+          <div className="divider">
+            <span>Then</span>
+          </div>
+          
           <button 
+            type="button"
             onClick={handleLinkedInClick} 
             className="linkedin-button"
           >
-            {/* <img 
-              src=''
-              alt="LinkedIn Logo" 
-              className="linkedin-icon"
-            /> */}
             <FaLinkedin style={{scale:1.5, marginRight:5,}}/>
             Sign in with LinkedIn
           </button>
-
-          <div className="register-prompt">
-            <p>Haven't registered yet?</p>
-            <button 
-              onClick={handleRegisterClick}
-              className="register-button"
-            >
-              Register Now
-            </button>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   );

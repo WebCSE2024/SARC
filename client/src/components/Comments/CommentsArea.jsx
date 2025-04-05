@@ -1,69 +1,178 @@
-import React, { useEffect, useState } from 'react';
-import './CommentsArea.scss';
-import { FaReply } from 'react-icons/fa';
-import defaultUserImg from '../../../public/noProfileImg.png';
-import CommentInput from './CommentInput';
-import CommentsList from './CommentsList';
+import React, { useEffect, useState } from "react";
+import "./CommentsArea.scss";
+import { FaReply } from "react-icons/fa";
+import defaultUserImg from "../../../public/NoProfileImg.png";
+import CommentInput from "./CommentInput";
+import CommentsList from "./CommentsList";
+import axiosInstance from "../../../axios.config";
 
-const CommentsArea = ({ postId }) => {
-    const [comments, setComments] = useState([]);
+const CommentsArea = ({ postId, referenceModel = "Achievement" }) => {
+  const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    // console.log("postId:", postId);
+  const getComments = async () => {
+    if (!postId) return;
 
-    const getComments = async (postId) => {
-        try {
-            const response = await axiosInstance.get(`/comments/get-comments/:${postId}`);
-            setComments(response.data.data);
-        } catch (error) {
-            console.error('Error:', error);
-            setComments([]);
-        }
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axiosInstance.get(
+        `/comments/get-comments/${postId}?referenceModel=${referenceModel}`
+      );
+
+      // Check if response.data.data exists and is an array before mapping
+      const responseData = response.data.data || [];
+      const dataArray = Array.isArray(responseData) ? responseData : [];
+
+      // Transform server data format to client format
+      const transformedComments = dataArray.map((comment) => ({
+        id: comment._id,
+        text: comment.content,
+        userName: comment.commentedBy.username,
+        userImage: defaultUserImg, // Use default image or get from user profile
+        timestamp: new Date(comment.createdAt).toLocaleString(),
+        replies:
+          comment.result && Array.isArray(comment.result)
+            ? comment.result.map((reply) => ({
+                id: reply._id,
+                text: reply.content,
+                userName: reply.repliedBy.username,
+                userImage: defaultUserImg,
+                timestamp: new Date(reply.createdAt).toLocaleString(),
+              }))
+            : [],
+      }));
+
+      setComments(transformedComments);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+      setError("Failed to load comments");
+      setComments([]);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    useEffect(() => {
-        getComments();
-    }, []);
+  useEffect(() => {
+    getComments();
+  }, [postId]);
 
+  const handleAddComment = async (text) => {
+    try {
+      const response = await axiosInstance.post(
+        `/comments/add-comment?referenceModel=${referenceModel}&postId=${postId}`,
+        { content: text }
+      );
 
-    const handleAddComment = (text) => {
+      if (response.data.success) {
+        // Check if commentedBy exists and provide fallbacks for username
+        const commentData = response.data.data || {};
+        const commentedBy = commentData.commentedBy || {};
+
         const newComment = {
-            id: Date.now(),
-            text,
-            userName: "Current User", // Replace with actual user data
-            userImage: defaultUserImg,
-            timestamp: "Just now",
-            replies: []
+          id: commentData._id || "",
+          text: commentData.content || text,
+          userName: commentedBy.username || "Anonymous User",
+          userImage: defaultUserImg,
+          timestamp: "Just now",
+          replies: [],
         };
         setComments([newComment, ...comments]);
-    };
+      }
+    } catch (error) {
+      console.error("Error adding comment:", error);
+      alert("Failed to add comment");
+    }
+  };
 
-    const handleAddReply = (commentId, replyText) => {
-        setComments(comments.map(comment => {
+  const handleAddReply = async (commentId, replyText) => {
+    if (!commentId) {
+      console.error("Comment ID is required");
+      alert("Cannot add reply: Invalid comment");
+      return;
+    }
+
+    try {
+      console.log(`Adding reply to comment: ${commentId}`);
+      const response = await axiosInstance.post(
+        `/comments/add-reply/${commentId}`,
+        { content: replyText }
+      );
+
+      if (response.data.success) {
+        // Check if repliedBy exists and provide fallbacks for username
+        const replyData = response.data.data || {};
+        const repliedBy = replyData.repliedBy || {};
+
+        const newReply = {
+          id: replyData._id || "",
+          text: replyData.content || replyText,
+          userName: repliedBy.username || "Anonymous User",
+          userImage: defaultUserImg,
+          timestamp: "Just now",
+        };
+
+        setComments(
+          comments.map((comment) => {
             if (comment.id === commentId) {
-                return {
-                    ...comment,
-                    replies: [...comment.replies, {
-                        id: Date.now(),
-                        text: replyText,
-                        userName: "Current User", // Replace with actual user data
-                        userImage: defaultUserImg,
-                        timestamp: "Just now"
-                    }]
-                };
+              return {
+                ...comment,
+                replies: [...comment.replies, newReply],
+              };
             }
             return comment;
-        }));
-    };
+          })
+        );
+      }
+    } catch (error) {
+      console.error("Error adding reply:", error);
+      alert(
+        `Failed to add reply: ${
+          error.response?.status === 404
+            ? "API endpoint not found"
+            : "Server error"
+        }`
+      );
+    }
+  };
 
-    return (
-        <div className="comments-area">
-            <CommentInput onSubmit={handleAddComment} />
-            <CommentsList
-                comments={comments}
-                onAddReply={handleAddReply}
-            />
-        </div>
-    );
+  const handleDeleteComment = async (commentId, replyId = null) => {
+    if (replyId) {
+      // Delete a reply
+      setComments(
+        comments.map((comment) => {
+          if (comment.id === commentId) {
+            return {
+              ...comment,
+              replies: comment.replies.filter((reply) => reply.id !== replyId),
+            };
+          }
+          return comment;
+        })
+      );
+    } else {
+      // Delete a comment
+      setComments(comments.filter((comment) => comment.id !== commentId));
+    }
+  };
+
+  return (
+    <div className="comments-area">
+      <CommentInput onSubmit={handleAddComment} />
+      {loading ? (
+        <p className="loading-comments">Loading comments...</p>
+      ) : error ? (
+        <p className="error-message">{error}</p>
+      ) : (
+        <CommentsList
+          comments={comments}
+          onAddReply={handleAddReply}
+          onDeleteComment={handleDeleteComment}
+        />
+      )}
+    </div>
+  );
 };
 
 export default CommentsArea;

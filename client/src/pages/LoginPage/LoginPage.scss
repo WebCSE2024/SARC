@@ -25,10 +25,63 @@
       width: 100%;
     }
 
-    .auth-section {
+    .login-form {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+
+      .form-group {
+        text-align: left;
+        
+        .form-input {
+          width: 100%;
+          padding: 0.8rem;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          font-size: 1rem;
+          
+          &:focus {
+            outline: none;
+            border-color: #0077b5;
+            box-shadow: 0 0 0 2px rgba(0, 119, 181, 0.2);
+          }
+        }
+      }
+
+      .submit-button {
+        background: #3498db;
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background: #2980b9;
+        }
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 0.5rem 0;
+        
+        &::before,
+        &::after {
+          content: '';
+          flex: 1;
+          border-bottom: 1px solid #ecf0f1;
+        }
+        
+        span {
+          padding: 0 10px;
+          color: #7f8c8d;
+          font-size: 0.9rem;
+        }
+      }
 
       .linkedin-button {
         display: flex;
@@ -57,33 +110,8 @@
       .error-message {
         color: #e74c3c;
         font-size: 0.9rem;
-      }
-
-      .register-prompt {
-        border-top: 1px solid #ecf0f1;
-        padding-top: 1.5rem;
-        margin-top: 1rem;
-
-        p {
-          color: #7f8c8d;
-          margin-bottom: 1rem;
-        }
-
-        .register-button {
-          background: transparent;
-          border: 2px solid #0077b5;
-          color: #0077b5;
-          padding: 0.8rem 2rem;
-          border-radius: 6px;
-          cursor: pointer;
-          font-size: 1rem;
-          transition: all 0.2s;
-
-          &:hover {
-            background: #0077b5;
-            color: white;
-          }
-        }
+        margin: -0.5rem 0 0;
+        text-align: left;
       }
     }
   }
