@@ -1,6 +1,7 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { authAPI } from "../../../../shared/axios/axiosInstance";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+import PropTypes from "prop-types";
 
 // Create authentication context
 const AuthContext = createContext();
@@ -14,6 +15,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [credentialsVerified, setCredentialsVerified] = useState(false);
   const [verifiedCredentials, setVerifiedCredentials] = useState(null);
+  const [linkedinError, setLinkedinError] = useState(false);
+  const [linkedinProfile, setLinkedinProfile] = useState(null);
 
   // Check if user is already logged in (token in localStorage)
   useEffect(() => {
@@ -23,7 +26,7 @@ export const AuthProvider = ({ children }) => {
         if (storedToken) {
           // Verify token is not expired
           try {
-            const decoded = jwt_decode(storedToken);
+            const decoded = jwtDecode(storedToken);
             const currentTime = Date.now() / 1000;
 
             if (decoded.exp < currentTime) {
@@ -51,6 +54,20 @@ export const AuthProvider = ({ children }) => {
             console.error("Invalid or expired token:", error);
             localStorage.removeItem("token");
             setToken(null);
+          }
+        } else {
+          // Check if we have saved credentials in session
+          const savedCredentials = sessionStorage.getItem(
+            "verifiedCredentials"
+          );
+          if (savedCredentials) {
+            try {
+              setVerifiedCredentials(JSON.parse(savedCredentials));
+              setCredentialsVerified(true);
+            } catch (e) {
+              console.error("Error parsing saved credentials:", e);
+              sessionStorage.removeItem("verifiedCredentials");
+            }
           }
         }
       } catch (error) {
@@ -95,8 +112,16 @@ export const AuthProvider = ({ children }) => {
 
       if (response.data && response.data.success) {
         // Store credentials temporarily for the second layer
-        setVerifiedCredentials({ username, password });
+        const credentials = { username, password };
+        setVerifiedCredentials(credentials);
         setCredentialsVerified(true);
+
+        // Store credentials in session for later use
+        sessionStorage.setItem(
+          "verifiedCredentials",
+          JSON.stringify(credentials)
+        );
+
         return { success: true };
       } else {
         setCredentialsVerified(false);
@@ -126,53 +151,32 @@ export const AuthProvider = ({ children }) => {
 
       // Handle LinkedIn OAuth flow
       if (provider === "linkedin") {
-        // Get the current origin for constructing the redirect URI
-        const origin = window.location.origin;
+        try {
+          // Get the current origin for constructing the redirect URI
+          const origin = window.location.origin;
 
-        // Store credentials in sessionStorage for retrieval after OAuth redirect
-        sessionStorage.setItem(
-          "verifiedCredentials",
-          JSON.stringify(verifiedCredentials)
-        );
+          // Redirect to LinkedIn OAuth endpoint
+          const baseUrl = authAPI.defaults.baseURL.endsWith("/")
+            ? authAPI.defaults.baseURL
+            : authAPI.defaults.baseURL + "/";
 
-        // Redirect to LinkedIn OAuth endpoint
-        window.location.href = `${
-          authAPI.defaults.baseURL
-        }/auth-system/v0/auth/linkedin?storage=local&redirect=${encodeURIComponent(
-          `${origin}/login`
-        )}`;
+          window.location.href = `${baseUrl}auth-system/v0/auth/linkedin?storage=local&redirect=${encodeURIComponent(
+            `${origin}/login`
+          )}`;
 
-        // Indicate we're redirecting
-        return {
-          redirecting: true,
-        };
+          return {
+            redirecting: true,
+          };
+        } catch (linkedinError) {
+          console.error("LinkedIn service error:", linkedinError);
+          setLinkedinError(true);
+
+          // Fall back to regular login with saved credentials
+          return await performRegularLogin();
+        }
       }
 
-      // Use the saved credentials from the first layer
-      const { username, password } = verifiedCredentials;
-
-      // Complete the authentication process using the login endpoint
-      const response = await authAPI.post("/auth-system/v0/auth/login", {
-        username,
-        password,
-      });
-
-      if (response.data && response.data.success) {
-        // Save token and user data
-        localStorage.setItem("token", response.data.token);
-        setToken(response.data.token);
-        setUser(response.data.user);
-
-        // Clear temporary credentials
-        setVerifiedCredentials(null);
-
-        return { success: true };
-      } else {
-        return {
-          success: false,
-          message: response.data?.message || "Authentication failed",
-        };
-      }
+      return await performRegularLogin();
     } catch (error) {
       console.error("Error during login:", error);
       return {
@@ -182,14 +186,77 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Helper function for regular login (without LinkedIn)
+  const performRegularLogin = async () => {
+    // Use the saved credentials
+    const { username, password } = verifiedCredentials;
+
+    // Complete the authentication process using the login endpoint
+    const response = await authAPI.post("/auth-system/v0/auth/login", {
+      username,
+      password,
+    });
+
+    if (response.data && response.data.success) {
+      // Save token and user data
+      localStorage.setItem("token", response.data.token);
+      setToken(response.data.token);
+      setUser(response.data.user);
+
+      // Clear temporary credentials from session storage
+      // but keep them in state for potential LinkedIn retry
+      sessionStorage.removeItem("verifiedCredentials");
+
+      return { success: true };
+    } else {
+      return {
+        success: false,
+        message: response.data?.message || "Authentication failed",
+      };
+    }
+  };
+
+  // Function to get LinkedIn profile data
+  const getLinkedInProfile = async () => {
+    if (!token) return null;
+
+    try {
+      const response = await authAPI.get(
+        "/auth-system/v0/auth/linkedin/profile",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data && response.data.success) {
+        setLinkedinProfile(response.data.profile);
+        return response.data.profile;
+      }
+      return null;
+    } catch (error) {
+      console.error("Error fetching LinkedIn profile:", error);
+      return null;
+    }
+  };
+
   // Check for OAuth callback results on component mount
   useEffect(() => {
     const handleOAuthCallback = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get("token");
+      const error = urlParams.get("error");
 
-      // If we have a token in the URL, it means we've been redirected back from the OAuth provider
-      if (token) {
+      if (error) {
+        // LinkedIn auth failed, set the error state
+        setLinkedinError(true);
+        // Fall back to regular login with saved credentials
+        if (credentialsVerified && verifiedCredentials) {
+          await performRegularLogin();
+        }
+      } else if (token) {
+        // If we have a token in the URL, it means we've been redirected back from the OAuth provider
         try {
           // Set token
           localStorage.setItem("token", token);
@@ -204,7 +271,13 @@ export const AuthProvider = ({ children }) => {
 
           if (response.data && response.data.success) {
             setUser(response.data.user);
+
+            // Try to get LinkedIn profile data
+            await getLinkedInProfile();
           }
+
+          // Remove credentials from session storage since login is complete
+          sessionStorage.removeItem("verifiedCredentials");
 
           // Remove token from URL to prevent it from being saved in browser history
           window.history.replaceState(
@@ -216,12 +289,18 @@ export const AuthProvider = ({ children }) => {
           console.error("Error processing OAuth callback:", error);
           localStorage.removeItem("token");
           setToken(null);
+          setLinkedinError(true);
+
+          // Fall back to regular login
+          if (credentialsVerified && verifiedCredentials) {
+            await performRegularLogin();
+          }
         }
       }
     };
 
     handleOAuthCallback();
-  }, []);
+  }, [credentialsVerified, verifiedCredentials]);
 
   // Logout function
   const logout = async () => {
@@ -244,6 +323,8 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
       setCredentialsVerified(false);
       setVerifiedCredentials(null);
+      setLinkedinError(false);
+      setLinkedinProfile(null);
 
       // Force page to reload to ensure all auth state is cleared
       window.location.href = "/login";
@@ -256,7 +337,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       // Verify token is not expired
-      const decoded = jwt_decode(token);
+      const decoded = jwtDecode(token);
       const currentTime = Date.now() / 1000;
 
       if (decoded.exp < currentTime) {
@@ -279,13 +360,22 @@ export const AuthProvider = ({ children }) => {
     token,
     loading,
     credentialsVerified,
+    verifiedCredentials,
+    linkedinError,
+    linkedinProfile,
     verifyCredentials,
     completeLogin,
+    getLinkedInProfile,
+    performRegularLogin,
     logout,
     isAuthenticated,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default AuthContext;

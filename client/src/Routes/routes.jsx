@@ -1,27 +1,25 @@
 import { Navigate } from "react-router-dom";
 import HomePage from "../pages/HomePage/HomePage";
-import Achievements from "../pages/News/AchievementsPage";
-import EventsPage from "../pages/News/EventsPage";
+import News from "../pages/News/News";
 import ReferralPage from "../pages/Referrals/ReferralPage";
 import PublicationsPage from "../pages/PublicationsPage/PublicationsPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
-import SeminarsPage from "../pages/News/SeminarsPage";
 import PostReferral from "../pages/PostReferral/PostReferral";
 import PostPublication from "../pages/PostPublication/PostPublications";
 
-// Public routes that don't require authentication
+// These routes are now also protected but categorized as "main content"
 export const appRoutes = [
   {
     path: "/",
     element: <HomePage />,
   },
   {
-    path: "/achievements",
-    element: <Achievements />,
+    path: "/news",
+    element: <Navigate to="/news/events" replace />,
   },
   {
-    path: "/events",
-    element: <EventsPage />,
+    path: "/news/:tab",
+    element: <News />,
   },
   {
     path: "/referrals",
@@ -31,32 +29,50 @@ export const appRoutes = [
     path: "/publications",
     element: <PublicationsPage />,
   },
+  // Legacy URL support - redirect old URLs to the new News component
   {
-    path: "/news",
-    element: <Navigate to="/events" />,
+    path: "/events",
+    element: <Navigate to="/news/events" replace />,
+  },
+  {
+    path: "/achievements",
+    element: <Navigate to="/news/achievements" replace />,
   },
   {
     path: "/seminars",
-    element: <SeminarsPage />,
-  },
-  {
-    path: "*",
-    element: <Navigate to="/" />,
+    element: <Navigate to="/news/seminars" replace />,
   },
 ];
 
-// Protected routes that require authentication
+// User-specific and content creation routes
 export const protectedRoutes = [
+  // User profile
   {
     path: "/profile",
     element: <ProfilePage />,
   },
   {
-    path: "/PostReferrals",
+    path: "/profile/:id",
+    element: <ProfilePage />,
+  },
+
+  // Content creation
+  {
+    path: "/post-referral",
     element: <PostReferral />,
   },
   {
-    path: "/PostPublication",
+    path: "/post-publication",
     element: <PostPublication />,
+  },
+
+  // Legacy URL support
+  {
+    path: "/PostReferrals",
+    element: <Navigate to="/post-referral" replace />,
+  },
+  {
+    path: "/PostPublication",
+    element: <Navigate to="/post-publication" replace />,
   },
 ];

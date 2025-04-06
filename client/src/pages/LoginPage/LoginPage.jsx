@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./LoginPage.scss";
-import { FaLinkedin, FaSpinner } from "react-icons/fa";
+import { FaLinkedin, FaSpinner, FaSignInAlt } from "react-icons/fa";
 import { useAuth } from "../../contexts/AuthContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { verifyCredentials, completeLogin, isAuthenticated } = useAuth();
+  const {
+    verifyCredentials,
+    completeLogin,
+    isAuthenticated,
+    linkedinError,
+    performRegularLogin,
+  } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [linkedinAttempted, setLinkedinAttempted] = useState(false);
 
   // Check for error or success parameters in URL (from OAuth callbacks)
   useEffect(() => {
@@ -24,6 +31,7 @@ const LoginPage = () => {
 
     if (errorMsg) {
       setError(decodeURIComponent(errorMsg));
+      setLinkedinAttempted(true);
     } else if (successMsg) {
       // Clear any previous errors
       setError("");
@@ -34,7 +42,7 @@ const LoginPage = () => {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-    // If already authenticated, redirect to home page
+    // If already authenticated, redirect to home page or the page they tried to access
     if (isAuthenticated()) {
       const from = location.state?.from?.pathname || "/";
       navigate(from, { replace: true });
@@ -78,6 +86,7 @@ const LoginPage = () => {
     }
 
     setIsLoading(true);
+    setLinkedinAttempted(true);
 
     try {
       // Second layer authentication - LinkedIn OAuth
@@ -90,14 +99,44 @@ const LoginPage = () => {
       }
 
       if (result.success) {
-        // Success - navigate to home page
-        navigate("/");
+        // Success - navigate to home page or previous page
+        const from = location.state?.from?.pathname || "/";
+        navigate(from, { replace: true });
       } else {
         setError(result.message || "Authentication failed");
-        setIsVerified(false); // Reset verification on failure
+        // Don't reset verification since we want to allow direct login
       }
     } catch (error) {
       console.error("LinkedIn login error:", error);
+      setError(
+        "LinkedIn authentication failed. You can continue with regular login."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRegularLogin = async () => {
+    if (!isVerified) {
+      setError("Please verify your credentials first");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const result = await performRegularLogin();
+
+      if (result.success) {
+        // Success - navigate to home page or previous page
+        const from = location.state?.from?.pathname || "/";
+        navigate(from, { replace: true });
+      } else {
+        setError(result.message || "Login failed");
+        setIsVerified(false); // Reset verification on failure
+      }
+    } catch (error) {
+      console.error("Login error:", error);
       setError("Authentication failed. Please try again.");
       setIsVerified(false);
     } finally {
@@ -137,6 +176,12 @@ const LoginPage = () => {
           </div>
 
           {error && <p className="error-message">{error}</p>}
+          {linkedinError && !error && (
+            <p className="error-message">
+              LinkedIn authentication is currently unavailable. Please use
+              regular login.
+            </p>
+          )}
 
           <button
             type="submit"
@@ -152,25 +197,53 @@ const LoginPage = () => {
             )}
           </button>
 
-          <div className="divider">
-            <span>{isVerified ? "Now" : "Then"}</span>
-          </div>
+          {isVerified && (
+            <>
+              <div className="divider">
+                <span>Login Options</span>
+              </div>
 
-          <button
-            type="button"
-            onClick={handleLinkedInClick}
-            className={`linkedin-button ${!isVerified ? "disabled" : ""}`}
-            disabled={!isVerified || isLoading}
-          >
-            {isLoading && isVerified ? (
-              <FaSpinner className="spinner" />
-            ) : (
-              <>
-                <FaLinkedin style={{ scale: 1.5, marginRight: 5 }} />
-                Sign in with LinkedIn
-              </>
-            )}
-          </button>
+              <div className="login-options">
+                {/* LinkedIn button - show unless there was a previous LinkedIn error */}
+                {!linkedinError && (
+                  <button
+                    type="button"
+                    onClick={handleLinkedInClick}
+                    className="linkedin-button"
+                    disabled={isLoading}
+                  >
+                    {isLoading && linkedinAttempted ? (
+                      <FaSpinner className="spinner" />
+                    ) : (
+                      <>
+                        <FaLinkedin style={{ scale: 1.5, marginRight: 5 }} />
+                        Sign in with LinkedIn
+                      </>
+                    )}
+                  </button>
+                )}
+
+                {/* Regular login button - always show when credentials are verified */}
+                <button
+                  type="button"
+                  onClick={handleRegularLogin}
+                  className="regular-login-button"
+                  disabled={isLoading}
+                >
+                  {isLoading && !linkedinAttempted ? (
+                    <FaSpinner className="spinner" />
+                  ) : (
+                    <>
+                      <FaSignInAlt style={{ marginRight: 5 }} />
+                      {linkedinError
+                        ? "Continue with Login"
+                        : "Skip LinkedIn & Sign In"}
+                    </>
+                  )}
+                </button>
+              </div>
+            </>
+          )}
         </form>
       </div>
     </div>

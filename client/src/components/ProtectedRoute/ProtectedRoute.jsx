@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { authAPI } from "../../../../../shared/axios/axiosInstance";
@@ -46,7 +46,7 @@ const ProtectedRoute = () => {
     };
 
     validateToken();
-  }, [token, location.pathname]);
+  }, [token, location.pathname, logout]);
 
   // If authentication is still loading or validating token, show a loading spinner
   if (loading || validatingToken) {
@@ -59,10 +59,11 @@ const ProtectedRoute = () => {
   }
 
   // Redirect to login if user is not authenticated or token is invalid
+  // Save the location they were trying to access for redirection after login
   return isAuthenticated() && tokenValid ? (
     <Outlet />
   ) : (
-    <Navigate to="/login" state={{ from: location }} />
+    <Navigate to="/login" state={{ from: location }} replace />
   );
 };
 

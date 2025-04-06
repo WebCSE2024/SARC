@@ -1,0 +1,61 @@
+.news-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+  .news-tabs {
+    display: flex;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+
+    .tab {
+      padding: 12px 24px;
+      margin: 0 8px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #f5f5f5;
+        color: #057cd5;
+      }
+
+      &.active {
+        background-color: #057cd5;
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  .news-content {
+    background-color: transparent;
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .news-container {
+    padding: 10px;
+
+    .news-tabs {
+      flex-wrap: wrap;
+
+      .tab {
+        margin: 5px;
+        flex: 1 1 auto;
+        text-align: center;
+        padding: 10px;
+      }
+    }
+  }
+}
