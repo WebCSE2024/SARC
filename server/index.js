@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import { dbConnection } from './src/connections/dbConnection.js'
 import { app } from './app.js'
 import {redis} from './src/connections/redisConnection.js'
+import { initializeServices } from './src/connections/rabbitmq.connnection.js'
 dotenv.config({
 
     path:'./.env'
@@ -22,6 +23,9 @@ dbConnection()
                 }
             });
         });
+    })
+    .then(() => {
+        return initializeServices()
     })
     .then(() => {
         app.listen(PORT, () => {

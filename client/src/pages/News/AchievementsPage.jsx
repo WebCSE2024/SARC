@@ -4,6 +4,7 @@ import SearchBox from '../../components/Filtering/SearchBox'
 import axiosInstance from '../../../axios.config'
 import mockAchievements from '../../SampleData/achievementsData.json'
 import { searchInObject } from '../../utils/searchUtils'
+import {sarcAPI} from "../../../../../shared/axios/axiosInstance.js"
 
 const AchievementsPage = () => {
   const [mockData] = useState(mockAchievements.achievements);
@@ -13,7 +14,7 @@ const AchievementsPage = () => {
 
   const getAchievements = async () => {
     try {
-      const response = await axiosInstance.get(`/achievements/achievement-list`);
+      const response = await sarcAPI.get(`sarc/v0/achievement/achievement-list`);
       setApiAchievements(response.data.data);
     } catch (error) {
       console.error('Error:', error);

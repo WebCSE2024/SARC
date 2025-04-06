@@ -22,12 +22,12 @@ app.get("/sarc/v0/api", (req, res) => {
   res.send("hello from server api");
 });
 
-app.use("/sarc/v0/api/referral", referralRouter);
-app.use("/sarc/v0/api/publication", publicationRouter);
-app.use("/sarc/v0/api/seminar", seminarRouter);
-app.use("/sarc/v0/api/achievement", achievementRoutes);
-app.use("/sarc/v0/api/likes", likeRouter);
-app.use("/sarc/v0/api/comments", commentRouter);
+app.use("/sarc/v0/referral", referralRouter);
+app.use("/sarc/v0/publication", publicationRouter);
+app.use("/sarc/v0/seminar", seminarRouter);
+app.use("/sarc/v0/achievement", achievementRoutes);
+app.use("/sarc/v0/likes", likeRouter);
+app.use("/sarc/v0/comments", commentRouter);
 
 app.use(errorHandler);
 export { app };

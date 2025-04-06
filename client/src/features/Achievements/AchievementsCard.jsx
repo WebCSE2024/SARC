@@ -42,13 +42,6 @@ const AchievementsCard = ({data}) => {
                 <hr className='titleSeperator' />
                 <div className="desc">
                     <p>{data.description}</p>
-                    {/* <p>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi at aspernatur atque sed commodi, obcaecati quod suscipit quibusdam et dolore doloremque. Dolorum voluptatibus nihil laudantium? Quisquam, eveniet illum? Eos, cupiditate.
-                    </p>
-
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem facilis architecto molestiae. Corrupti, sit cupiditate recusandae accusamus odio ipsum dicta obcaecati eaque, quam aliquam ratione excepturi inventore eum velit omnis.
-                    </p> */}
                 </div>
 
 

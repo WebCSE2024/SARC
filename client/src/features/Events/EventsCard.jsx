@@ -16,7 +16,7 @@ import { formatDate } from "../../utils/dateFormatter.jsx";
 
 const EventsCard = ({ data }) => {
   const [isLiked, setIsLiked] = useState(false);
-  console.log(data);
+  console.log(data.speaker);
 
   // Check event type to determine display
   const isHackathon = data.type?.toLowerCase() === "hackathon";

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import EventsCard from '../../features/Events/EventsCard'
 import SearchBox from '../../components/Filtering/SearchBox'
-import axiosInstance from '../../../axios.config'
+// import axiosInstance from '../../../axios.config'
 import { searchInObject } from '../../utils/searchUtils'
+import {sarcAPI} from "../../../../../shared/axios/axiosInstance.js"
 
 const SeminarsPage = () => {
     const [apiSeminars, setApiSeminars] = useState([]);
@@ -11,7 +12,8 @@ const SeminarsPage = () => {
 
     const getSeminars = async () => {
         try {
-            const response = await axiosInstance.get(`/seminar/seminar-list`);
+            const response = await sarcAPI.get(`sarc/v0/seminar/seminar-list`);
+        
             setApiSeminars(response.data.data);
         } catch (error) {
             console.error('Error:', error);
