@@ -1,15 +1,15 @@
 import { Navigate } from "react-router-dom";
-import HomePage from '../pages/HomePage/HomePage';
-import Achievements from '../pages/News/AchievementsPage';
-import EventsPage from '../pages/News/EventsPage';
-import ReferralPage from '../pages/Referrals/ReferralPage';
-import PublicationsPage from '../pages/PublicationsPage/PublicationsPage';
-import LoginPage from '../pages/LoginPage/LoginPage';
-import ProfilePage from '../pages/ProfilePage/ProfilePage';
-import SeminarsPage from '../pages/News/SeminarsPage';
-import PostReferral from '../pages/PostReferral/PostReferral';
-import PostPublication from '../pages/PostPublication/PostPublications';
+import HomePage from "../pages/HomePage/HomePage";
+import Achievements from "../pages/News/AchievementsPage";
+import EventsPage from "../pages/News/EventsPage";
+import ReferralPage from "../pages/Referrals/ReferralPage";
+import PublicationsPage from "../pages/PublicationsPage/PublicationsPage";
+import ProfilePage from "../pages/ProfilePage/ProfilePage";
+import SeminarsPage from "../pages/News/SeminarsPage";
+import PostReferral from "../pages/PostReferral/PostReferral";
+import PostPublication from "../pages/PostPublication/PostPublications";
 
+// Public routes that don't require authentication
 export const appRoutes = [
   {
     path: "/",
@@ -36,16 +36,20 @@ export const appRoutes = [
     element: <Navigate to="/events" />,
   },
   {
-    path: "/signup",
-    element: <LoginPage />,
+    path: "/seminars",
+    element: <SeminarsPage />,
   },
+  {
+    path: "*",
+    element: <Navigate to="/" />,
+  },
+];
+
+// Protected routes that require authentication
+export const protectedRoutes = [
   {
     path: "/profile",
     element: <ProfilePage />,
-  },
-  {
-    path: "/seminars",
-    element: <SeminarsPage />,
   },
   {
     path: "/PostReferrals",
@@ -55,8 +59,4 @@ export const appRoutes = [
     path: "/PostPublication",
     element: <PostPublication />,
   },
-  {
-    path: "*",
-    element: <Navigate to="/" />,
-  }
 ];
