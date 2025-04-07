@@ -10,12 +10,11 @@ const seminarSchema = new mongoose.Schema(
       organization: { type: String },
     },
     date: {
-      // type: Date,
-      // validate: {
-      //   validator: (value) => !isNaN(new Date(value).getTime()),
-      //   message: "Invalid date format",
-      // },
-      type: String,
+      type: Date,
+      validate: {
+        validator: (value) => !isNaN(new Date(value).getTime()),
+        message: "Invalid date format",
+      },
       required: true,
     },
 
@@ -31,7 +30,7 @@ const seminarSchema = new mongoose.Schema(
       url: { type: String },
       publicId: { type: String },
     },
-  },
+  },     
   { timestamps: true }
 );
 

@@ -3,6 +3,8 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/AsyncHandler.js";
 import { client } from "../connections/redisConnection.js";
+
+
 export const createSeminar = asyncHandler(async (req, res) => {
   // if (!req.user) throw new ApiError(400, 'Unauthenticated');
 
@@ -45,23 +47,11 @@ export const getAllSeminars = asyncHandler(async (req, res) => {
 });
 
 export const getSeminarDetails = asyncHandler(async (req, res) => {
-  if (!req.user) throw new ApiError(400, "Unauthenticated");
 
   const { seminarId } = req.params;
   if (!seminarId) throw new ApiError(400, "Seminar ID is required");
 
-  const cacheSeminars = await client.get(`seminar:${seminarId}`);
-  if (cacheSeminars) {
-    return res
-      .status(200)
-      .json(
-        new ApiResponse(
-          200,
-          JSON.parse(cacheSeminars),
-          "Seminars fetched successfully"
-        )
-      );
-  }
+  
   const seminar = await Seminar.findById(seminarId);
   if (!seminar) throw new ApiError(404, "Seminar not found");
 

@@ -4,10 +4,10 @@ import { setUser } from '../middlewares/setUser.js';
 
 const router = express.Router();
 
-router.post('/create',setUser, createSeminar);
-router.get('/seminar-list',setUser, getAllSeminars);
-router.get('/:seminarId',setUser, getSeminarDetails);
-router.put('/:seminarId',setUser, updateSeminar);
-router.delete('/:seminarId',setUser, deleteSeminar);
+router.post('/create',createSeminar);
+router.get('/seminar-list', getAllSeminars);
+router.get('/:seminarId', getSeminarDetails);
+router.put('/:seminarId',updateSeminar);
+router.delete('/:seminarId', deleteSeminar);
 
 export default router;

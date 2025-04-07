@@ -96,37 +96,7 @@ export const getAllAchievements = asyncHandler(async (req, res) => {
 export const getAchievementDetails = asyncHandler(async (req, res) => {
   const { achievementId } = req.params;
   if (!achievementId) throw new ApiError(400, "Achievement ID is required");
-  const achievement = await Achievement.aggregate([
-    {
-      $match: {
-        achievementId: achievementId,
-      },
-    },
-    {
-      $lookup: {
-        from: "users",
-        localField: "awardedTo",
-        foreignField: "_id",
-        as: "awardedTo",
-      },
-    },
-
-    {
-      $project: {
-        title: 1,
-        description: 1,
-        date: 1,
-        _id: 0,
-        tags: 1,
-        gallery: 1,
-        achievementId: 1,
-        socialMediaLinks: 1,
-        status: 1,
-        "awardedTo.full_name": 1,
-        "awardedTo.email": 1,
-      },
-    },
-  ]);
+  const achievement = await Achievement.findOne({ _id : achievementId });
   if (!achievement) throw new ApiError(404, "Achievement not found");
   return res
     .status(200)
