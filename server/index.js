@@ -10,6 +10,9 @@ dotenv.config({
 
 const PORT=process.env.PORT || 8001
 
+
+//MCP: For production the relative path to server the static file is : ../client/dist/index.html
+
 dbConnection()
     .then(() => {
         return new Promise((resolve, reject) => {
