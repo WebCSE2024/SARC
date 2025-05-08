@@ -9,8 +9,15 @@ import {
 const router = express.Router();
 import { setUser } from "../middlewares/setUser.js";
 import { upload } from "../middlewares/multer.js";
+import { compressionMiddleware } from "../../../../shared/middlewares/compressor.middleware.js";
 
-router.post("/create", setUser, upload.array("gallery"), createAchievement);
+router.post(
+  "/create",
+  setUser,
+  upload.array("gallery"),
+  compressionMiddleware,
+  createAchievement
+);
 router.get("/achievement-list", getAllAchievements);
 router.get("/:achievementId", getAchievementDetails);
 router.patch("/:achievementId", setUser, updateAchievement);
