@@ -1,115 +1,180 @@
 .post-referral-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
-    font-family: Inter,sans-serif;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #000000;
 
-    h2 {
-        text-align: center;
-        margin-bottom: 2rem;
-        color: #333;
-        font-size: 24px;
-        font-weight: 600;
-    }
+  font-family: Inter, sans-serif;
 
-    .referral-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
+  h2 {
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 2rem;
+    color: #000;
+  }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+  .referral-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 
-            label {
-                font-size: 14px;
-                font-weight: 500;
-                color: #444;
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
 
-                &::after {
-                    content: "*";
-                    color: red;
-                    margin-left: 4px;
-                }
+      label {
+        font-family: Inter;
+        font-weight: 500;
+        font-size: 16px;
+        color: #000;
 
-                &[for="stipend"]::after,
-                &[for="companyWebsite"]::after,
-                &[for="phone"]::after,
-                &[for="contact"]::after {
-                    content: "";
-                }
-            }
-
-            input, select, textarea {
-                padding: 0.75rem;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-                font-size: 1rem;
-                transition: border-color 0.3s ease;
-
-                &:focus {
-                    outline: none;
-                    border-color: #007bff;
-                }
-
-                &::placeholder {
-                    color: #999;
-                }
-            }
-
-            select {
-                background-color: white;
-            }
-
-            textarea {
-                resize: vertical;
-                min-height: 100px;
-            }
+        &::after {
+          content: "*";
+          color: red;
+          margin-left: 4px;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+        &[for="stipend"]::after,
+        &[for="companyWebsite"]::after,
+        &[for="phone"]::after,
+        &[for="contact"]::after {
+          content: "";
+        }
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="url"],
+      input[type="tel"],
+      input[type="number"],
+      input[type="date"],
+      select {
+        padding: 0.75rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: Inter;
+
+        &:focus {
+          outline: none;
+          border-color: #0059ff;
+          box-shadow: 0 0 0 2px rgba(0, 89, 255, 0.1);
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      // Rich text editor styles
+      .quill {
+        .ql-toolbar {
+          border: 1px solid #e2e8f0;
+          border-radius: 6px 6px 0 0;
+          background-color: #f8fafc;
         }
 
-        .submit-btn {
-            margin-top: 1rem;
+        .ql-container {
+          border: 1px solid #e2e8f0;
+          border-radius: 0 0 6px 6px;
+          min-height: 150px;
+          font-family: Inter;
+          font-size: 14px;
+
+          .ql-editor {
+            min-height: 150px;
             padding: 1rem;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s;
 
-            &:hover {
-                background: #0056b3;
+            &:focus {
+              outline: none;
             }
 
-            &:active {
-                transform: translateY(1px);
+            p {
+              margin-bottom: 0.5rem;
             }
+
+            ul,
+            ol {
+              padding-left: 1.5rem;
+              margin-bottom: 0.5rem;
+            }
+          }
         }
+      }
     }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      button {
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-family: Inter;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+      }
+
+      .cancel-btn {
+        background-color: #f7fafc;
+        border: 1px solid #e2e8f0;
+        color: #4a5568;
+
+        &:hover:not(:disabled) {
+          background-color: #edf2f7;
+        }
+      }
+
+      .submit-btn {
+        background-color: #0059ff;
+        border: none;
+        color: white;
+
+        &:hover:not(:disabled) {
+          background-color: #0048ce;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) {
-    .post-referral-container {
-        padding: 1rem;
-        margin: 1rem;
+  .post-referral-container {
+    margin: 1rem;
+    padding: 1rem;
 
-        .referral-form {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+    .referral-form {
+      .form-actions {
+        flex-direction: column;
+
+        button {
+          width: 100%;
         }
+      }
     }
+  }
 }

@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-// import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { toast } from "react-toastify";
 import axiosInstance from "../../../axios.config";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import "./PostReferral.scss";
 
-import ReferralPosterInfo from "../../SampleData/ReferralPosterInfo";
-
 const PostReferral = () => {
-  function convertToUTC(dateStr) {
-    const [day, month, year] = dateStr.split("-");
-    const date = new Date(Date.UTC(year, month - 1, day));
-    return date.toUTCString();
-  }
-
-  // Get logged in user
-
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     jobProfile: "",
     companyName: "",
@@ -28,92 +25,94 @@ const PostReferral = () => {
       amount: "",
       currency: "INR",
     },
-    deadline: new Date().toISOString().split("T")[0], // Initialize with current date
+    deadline: new Date().toISOString().split("T")[0],
     website: "",
     email: "",
     contact: "",
-    addedBy: [], // Will be filled from logged-in user
-    status: "pending",
-    // message: '', // Will be filled by admin
-    // createdAt: "",
-    // updatedAt: ""
+    status: "active",
   });
+
+  // Quill editor modules configuration
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
+      ["clean"],
+    ],
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === "deadline") {
-      try {
-        // Only convert to UTC if we have a valid date
-        if (value) {
-          const utcDate = new Date(value);
-          if (!isNaN(utcDate.getTime())) {
-            utcDate.setUTCHours(23, 59, 59, 999);
-            setFormData((prevState) => ({
-              ...prevState,
-              [name]: utcDate.toISOString(),
-            }));
-          }
-        } else {
-          // If input is cleared, set to empty string or current date
-          setFormData((prevState) => ({
-            ...prevState,
-            [name]: new Date().toISOString(),
-          }));
-        }
-      } catch (error) {
-        console.error("Invalid date:", error);
-        // Keep the previous valid date on error
-      }
-    } else if (name.includes(".")) {
-      // Handle nested objects
+    if (name.includes(".")) {
       const [parent, child] = name.split(".");
-      setFormData((prevState) => ({
-        ...prevState,
+      setFormData((prev) => ({
+        ...prev,
         [parent]: {
-          ...prevState[parent],
+          ...prev[parent],
           [child]: value,
         },
       }));
     } else {
-      setFormData((prevState) => ({
-        ...prevState,
+      setFormData((prev) => ({
+        ...prev,
         [name]: value,
       }));
     }
   };
 
+  const handleDescriptionChange = (content) => {
+    setFormData((prev) => ({
+      ...prev,
+      description: content,
+    }));
+  };
+
+  const handleRequirementsChange = (content) => {
+    setFormData((prev) => ({
+      ...prev,
+      requirements: content,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      // const currentDateTime = new Date().toISOString();
-      const referralData = {
+      // Validate required fields
+      if (
+        !formData.jobProfile ||
+        !formData.companyName ||
+        !formData.description
+      ) {
+        toast.error("Please fill in all required fields");
+        return;
+      }
+
+      // Add user ID to form data
+      const submissionData = {
         ...formData,
-        addedBy: ReferralPosterInfo.addedBy, // Add logged in user's ID
-        status: "pending", // Default status for new referrals posts
-        // createdAt: currentDateTime,
-        // updatedAt: currentDateTime
+        addedBy: user.id,
       };
 
       const response = await axiosInstance.post(
-        "/referral/create-referral",
-        referralData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            // 'Authorization': `Bearer ${localStorage.getItem('token')}` // If using JWT
-          },
-        }
+        "/referral/create",
+        submissionData
       );
 
-      if (response.status === 201) {
-        // Show success message
-        alert("Referral posted successfully!");
-        // Reset form or redirect
+      if (response.data.success) {
+        toast.success("Referral posted successfully");
+        navigate("/referrals");
+      } else {
+        throw new Error(response.data.message || "Failed to post referral");
       }
     } catch (error) {
       console.error("Error posting referral:", error);
-      alert("Failed to post referral. Please try again.");
+      toast.error(error.message || "Failed to post referral");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -136,7 +135,7 @@ const PostReferral = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="jobProfile">jobProfile*</label>
+          <label htmlFor="jobProfile">Job Profile*</label>
           <input
             type="text"
             id="jobProfile"
@@ -151,54 +150,46 @@ const PostReferral = () => {
         {/* Description and Requirements */}
         <div className="form-group">
           <label htmlFor="description">Description*</label>
-          <textarea
-            id="description"
-            name="description"
+          <ReactQuill
             value={formData.description}
-            onChange={handleChange}
-            required
+            onChange={handleDescriptionChange}
+            modules={modules}
             placeholder="Job description and responsibilities"
-            rows="4"
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="requirements">Requirements*</label>
-          <textarea
-            id="requirements"
-            name="requirements"
+          <label htmlFor="requirements">Requirements</label>
+          <ReactQuill
             value={formData.requirements}
-            onChange={handleChange}
-            required
+            onChange={handleRequirementsChange}
+            modules={modules}
             placeholder="Required skills and qualifications"
-            rows="3"
           />
         </div>
 
         {/* Location and Mode */}
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="location.city">City*</label>
+            <label htmlFor="location.city">City</label>
             <input
               type="text"
               id="location.city"
               name="location.city"
               value={formData.location.city}
               onChange={handleChange}
-              required
               placeholder="e.g. Bangalore"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="location.country">Country*</label>
+            <label htmlFor="location.country">Country</label>
             <input
               type="text"
               id="location.country"
               name="location.country"
               value={formData.location.country}
               onChange={handleChange}
-              required
               placeholder="e.g. India"
             />
           </div>
@@ -214,99 +205,106 @@ const PostReferral = () => {
             required
           >
             <option value="">Select work mode</option>
-            <option value="on-site">On-site</option>
+            <option value="onsite">On-site</option>
             <option value="remote">Remote</option>
             <option value="hybrid">Hybrid</option>
           </select>
         </div>
 
-        {/* Stipend Details */}
+        {/* Stipend */}
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="stipend.amount">Stipend Amount*</label>
+            <label htmlFor="stipend.amount">Stipend Amount</label>
             <input
               type="number"
               id="stipend.amount"
               name="stipend.amount"
               value={formData.stipend.amount}
               onChange={handleChange}
-              required
               placeholder="e.g. 50000"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="stipend.currency">Currency*</label>
+            <label htmlFor="stipend.currency">Currency</label>
             <select
               id="stipend.currency"
               name="stipend.currency"
               value={formData.stipend.currency}
               onChange={handleChange}
-              required
             >
               <option value="INR">INR</option>
               <option value="USD">USD</option>
               <option value="EUR">EUR</option>
-              <option value="GBP">GBP</option>
             </select>
           </div>
         </div>
 
         {/* Deadline */}
-        <input
-          type="date"
-          id="deadline"
-          name="deadline"
-          value={formData.deadline.split("T")[0]} // Display only the date part
-          onChange={handleChange} // Restore onChange
-          required
-          min={new Date().toISOString().split("T")[0]} // Prevent past dates
-        />
+        <div className="form-group">
+          <label htmlFor="deadline">Application Deadline*</label>
+          <input
+            type="date"
+            id="deadline"
+            name="deadline"
+            value={formData.deadline}
+            onChange={handleChange}
+            required
+            min={new Date().toISOString().split("T")[0]}
+          />
+        </div>
 
         {/* Contact Information */}
         <div className="form-group">
-          <label htmlFor="website">Company Website*</label>
+          <label htmlFor="website">Company Website</label>
           <input
             type="url"
             id="website"
             name="website"
             value={formData.website}
             onChange={handleChange}
-            required
             placeholder="https://company.com"
           />
         </div>
 
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="email">Email*</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder="contact@company.com"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="contact">Phone Number</label>
-            <input
-              type="tel"
-              id="contact"
-              name="contact"
-              value={formData.contact}
-              onChange={handleChange}
-              placeholder="+91 9876543210"
-            />
-          </div>
+        <div className="form-group">
+          <label htmlFor="email">Contact Email*</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            placeholder="contact@company.com"
+          />
         </div>
 
-        <button type="submit" className="submit-btn">
-          Post Referral
-        </button>
+        <div className="form-group">
+          <label htmlFor="contact">Contact Number</label>
+          <input
+            type="tel"
+            id="contact"
+            name="contact"
+            value={formData.contact}
+            onChange={handleChange}
+            placeholder="+91 1234567890"
+          />
+        </div>
+
+        <div className="form-actions">
+          <button
+            type="button"
+            className="cancel-btn"
+            onClick={() => navigate("/profile")}
+            disabled={loading}
+          >
+            Cancel
+          </button>
+          <button type="submit" className="submit-btn" disabled={loading}>
+            {loading ? "Posting..." : "Post Referral"}
+          </button>
+        </div>
       </form>
     </div>
   );
