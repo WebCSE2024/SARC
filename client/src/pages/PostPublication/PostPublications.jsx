@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axiosInstance from "../../../axios.config.js";
 import "./PostPublications.scss";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { sarcAPI } from "../../../../../shared/axios/axiosInstance";
 
 const PostPublications = () => {
   const [formData, setFormData] = useState({
@@ -62,7 +62,7 @@ const PostPublications = () => {
       //     console.log(pair[0] + ': ' + pair[1]);
       // }
 
-      const response = await axiosInstance.post(
+      const response = await sarcAPI.post(
         "/publication/create-publication",
         formDataToSend,
         {

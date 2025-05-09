@@ -2,8 +2,8 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
-import axiosInstance from "../../../axios.config";
 import "./PostPublication.scss";
+import { sarcAPI } from "../../../../../shared/axios/axiosInstance";
 
 const PostPublication = () => {
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ const PostPublication = () => {
       uploadData.append("uploaderId", user.id);
 
       // Upload to backend
-      const response = await axiosInstance.post(
+      const response = await sarcAPI.post(
         "/publication/upload",
         uploadData,
         {

@@ -1,8 +1,8 @@
 import { React, useEffect, useState } from 'react'
-import axiosInstance from '../../../axios.config'
 import PublicationsCard from './PublicationsCard'
 import SearchBox from '../../components/Filtering/SearchBox'
 import { searchInObject } from '../../utils/searchUtils'
+import { sarcAPI } from '../../../../../shared/axios/axiosInstance'
 
 
 const PublicationsPage = () => {
@@ -14,7 +14,7 @@ const PublicationsPage = () => {
 
     const getPublications = async () => {
         try {
-            const response = await axiosInstance.get(`/publication/publication-list`);
+            const response = await sarcAPI.get(`/publication/publication-list`);
             setPublicationsData(response.data.data);
         } catch (error) {
             console.error('Error:', error);

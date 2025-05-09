@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import ReferralCard from '../../features/ReferralCard/referral_card.jsx'
 import SearchBox from '../../components/Filtering/SearchBox.jsx'
-import axiosInstance from '../../../axios.config'
 import { searchInObject } from '../../utils/searchUtils.js'
+import { sarcAPI } from '../../../../../shared/axios/axiosInstance.js'
 
 const ReferralPage = () => {
   const [referralData, setReferralData] = useState([]);
@@ -11,7 +11,7 @@ const ReferralPage = () => {
 
   const getReferrals = async () => {
     try {
-      const response = await axiosInstance.get(`/referral/referral-list`);
+      const response = await sarcAPI.get(`/referral/referral-list`);
       // console.log(response)
       // console.log(response.data.data)
       setReferralData(response.data.data);

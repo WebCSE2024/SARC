@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
-import axiosInstance from "../../../axios.config";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./PostReferral.scss";
+import { sarcAPI } from "../../../../../shared/axios/axiosInstance";
+
 
 const PostReferral = () => {
   const navigate = useNavigate();
@@ -97,7 +98,7 @@ const PostReferral = () => {
         addedBy: user.id,
       };
 
-      const response = await axiosInstance.post(
+      const response = await sarcAPI.post(
         "/referral/create",
         submissionData
       );

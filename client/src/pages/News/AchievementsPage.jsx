@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Achievements from '../../features/Achievements/AchievementsCard'
 import SearchBox from '../../components/Filtering/SearchBox'
-import axiosInstance from '../../../axios.config'
 import mockAchievements from '../../SampleData/achievementsData.json'
 import { searchInObject } from '../../utils/searchUtils'
 import {sarcAPI} from "../../../../../shared/axios/axiosInstance.js"

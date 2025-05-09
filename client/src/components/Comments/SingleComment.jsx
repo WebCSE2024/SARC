@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { FaReply, FaTrash } from "react-icons/fa";
 import CommentInput from "./CommentInput";
-import axiosInstance from "../../../axios.config";
+import { sarcAPI } from "../../../../../shared/axios/axiosInstance";
+
 
 const SingleComment = ({ comment, onAddReply, onDeleteComment }) => {
   const [showReplyInput, setShowReplyInput] = useState(false);
@@ -16,7 +17,7 @@ const SingleComment = ({ comment, onAddReply, onDeleteComment }) => {
     if (window.confirm("Are you sure you want to delete this comment?")) {
       setIsDeleting(true);
       try {
-        await axiosInstance.delete(`/comments/delete-comment/${comment.id}`);
+        await sarcAPI.delete(`/comments/delete-comment/${comment.id}`);
         if (onDeleteComment) onDeleteComment(comment.id);
       } catch (error) {
         console.error("Error deleting comment:", error);
@@ -30,7 +31,7 @@ const SingleComment = ({ comment, onAddReply, onDeleteComment }) => {
   const handleDeleteReply = async (replyId) => {
     if (window.confirm("Are you sure you want to delete this reply?")) {
       try {
-        await axiosInstance.delete(`/comments/delete-reply/${replyId}`);
+        await sarcAPI.delete(`/comments/delete-reply/${replyId}`);
         if (onDeleteComment) onDeleteComment(comment.id, replyId);
       } catch (error) {
         console.error("Error deleting reply:", error);

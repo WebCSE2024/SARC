@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import EventsCard from '../../features/Events/EventsCard'
 import SearchBox from '../../components/Filtering/SearchBox'
-// import axiosInstance from '../../../axios.config'
 import { searchInObject } from '../../utils/searchUtils'
 import {sarcAPI} from "../../../../../shared/axios/axiosInstance.js"
 

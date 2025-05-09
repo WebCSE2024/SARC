@@ -4,7 +4,7 @@ import { FaReply } from "react-icons/fa";
 import defaultUserImg from "../../../public/NoProfileImg.png";
 import CommentInput from "./CommentInput";
 import CommentsList from "./CommentsList";
-import axiosInstance from "../../../axios.config";
+import { sarcAPI } from "../../../../../shared/axios/axiosInstance";
 
 const CommentsArea = ({ postId, referenceModel = "Achievement" }) => {
   const [comments, setComments] = useState([]);
@@ -17,7 +17,7 @@ const CommentsArea = ({ postId, referenceModel = "Achievement" }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axiosInstance.get(
+      const response = await sarcAPI.get(
         `/comments/get-comments/${postId}?referenceModel=${referenceModel}`
       );
 
@@ -60,7 +60,7 @@ const CommentsArea = ({ postId, referenceModel = "Achievement" }) => {
 
   const handleAddComment = async (text) => {
     try {
-      const response = await axiosInstance.post(
+      const response = await sarcAPI.post(
         `/comments/add-comment?referenceModel=${referenceModel}&postId=${postId}`,
         { content: text }
       );
@@ -95,7 +95,7 @@ const CommentsArea = ({ postId, referenceModel = "Achievement" }) => {
 
     try {
       console.log(`Adding reply to comment: ${commentId}`);
-      const response = await axiosInstance.post(
+      const response = await sarcAPI.post(
         `/comments/add-reply/${commentId}`,
         { content: replyText }
       );
