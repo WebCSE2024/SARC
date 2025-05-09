@@ -11,9 +11,7 @@ const ReferralPage = () => {
 
   const getReferrals = async () => {
     try {
-      const response = await sarcAPI.get(`/referral/referral-list`);
-      // console.log(response)
-      // console.log(response.data.data)
+      const response = await sarcAPI.get(`sarc/v0/referral/referral-list`);
       setReferralData(response.data.data);
     } catch (error) {
       console.error('Error:', error);

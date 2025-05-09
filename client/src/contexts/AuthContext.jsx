@@ -38,9 +38,9 @@ export const AuthProvider = ({ children }) => {
 
             // Get user data using the token
             const response = await authAPI.get("/auth-system/v0/auth/me", {
-              headers: {
-                Authorization: `Bearer ${storedToken}`,
-              },
+              // headers: {
+              //   Authorization: `Bearer ${storedToken}`,
+              // },
             });
 
             if (response.data && response.data.success) {

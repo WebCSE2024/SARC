@@ -4,12 +4,19 @@ import LikeShareArea from "../../components/LikeShareArea/LikeShareArea";
 import defaultProfile from "../../../public/NoProfileImg.png";
 import { FaEnvelope } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useAuth } from "../../contexts/AuthContext";
 
 const PublicationsCard = ({ data }) => {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const { user } = useAuth();
+
+
+  //Publication URL consists of the acual URL of the PDF File in Cloudinary
+  //So we need to extract the PDF from the Cloudinary URL and show it in the preview
+  //Remove the View Preview Button and show the PDF Preview Beatifully directly in theCard ITseself
 
   const handlePreviewClick = () => {
-    if (data.previewUrl) {
+    if (data?.publicationURL) {
       setIsPreviewOpen(true);
     } else {
       toast.error("Preview not available");
@@ -17,8 +24,8 @@ const PublicationsCard = ({ data }) => {
   };
 
   const handleContactClick = () => {
-    if (data.uploader?.email) {
-      window.location.href = `mailto:${data.uploader.email}`;
+    if (user?.email) {
+      window.location.href = `mailto:${user.email}`;
     } else {
       toast.error("Contact information not available");
     }
@@ -36,15 +43,17 @@ const PublicationsCard = ({ data }) => {
 
       <div className="preview-publisher-details">
         <div className="paper-preview">
-          {data.previewUrl ? (
+          {/* Remove this Button and Show the PDF in the Card Itself */}
+          {data?.publicationURL ? (
             <img
-              src={data.previewUrl}
+              src={data?.publicationURL}
               alt="Publication Preview"
               className="previewImg"
             />
           ) : (
             <div className="no-preview">Preview not available</div>
           )}
+          {/* Remove this Button and Show the PDF in the Card Itself */}
           <button className="openPreviewBtn" onClick={handlePreviewClick}>
             View Preview
           </button>
@@ -52,15 +61,15 @@ const PublicationsCard = ({ data }) => {
 
         <div className="about-publisher">
           <img
-            src={data.uploader?.profilePicture || defaultProfile}
+            src={user?.profilePicture?.url || defaultProfile}
             alt="Publisher"
             className="publisher-pic"
           />
           <div className="publisher-details">
             <div className="name">
-              {data.uploader?.fullName || "Unknown Author"}
+              {user?.name || "Unknown Author"}
               <p className="designation">
-                {data.uploader?.designation || "Author"}
+                {user?.userType || "Author"}
               </p>
             </div>
             <button className="contact-btn" onClick={handleContactClick}>
@@ -73,9 +82,9 @@ const PublicationsCard = ({ data }) => {
       <p className="Note">
         Kindly contact the author for access to full publication.
       </p>
-      <LikeShareArea />
+      {/* <LikeShareArea /> */}
 
-      {/* Preview Modal */}
+      {/* Want to Remove this Preview Modal and Directly Show the PDF in the Card Itself */}
       {isPreviewOpen && (
         <div className="preview-modal" onClick={handleClosePreview}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

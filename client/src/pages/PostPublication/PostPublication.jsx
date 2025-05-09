@@ -1,9 +1,10 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import "./PostPublication.scss";
 import { sarcAPI } from "../../../../../shared/axios/axiosInstance";
+import { PDFDocument } from "pdf-lib";
 
 const PostPublication = () => {
   const navigate = useNavigate();
@@ -16,25 +17,36 @@ const PostPublication = () => {
     file: null,
   });
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [titleError, setTitleError] = useState("");
+  const [fileError, setFileError] = useState("");
 
-  // Check if user is authorized
-  if (!user || user.userType !== "PROFESSOR") {
-    navigate("/profile");
-    return null;
-  }
+  // Check if user is authorized - route protection
+  useEffect(() => {
+    if (!user || user.userType !== "PROFESSOR") {
+      toast.error("Only professors can post publications");
+      navigate("/profile");
+    }
+  }, [user, navigate]);
+
+  if (!user) return null;
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
+    // Clear previous error
+    setFileError("");
+
     // Validate file type
     if (file.type !== "application/pdf") {
+      setFileError("Please upload a PDF file");
       toast.error("Please upload a PDF file");
       return;
     }
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
+      setFileError("File size should be less than 10MB");
       toast.error("File size should be less than 10MB");
       return;
     }
@@ -48,40 +60,102 @@ const PostPublication = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "title") {
+      setTitleError("");
+    }
+
     setFormData((prev) => ({
       ...prev,
       [name]: name === "previewPages" ? parseInt(value) || 0 : value,
     }));
   };
 
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!formData.title.trim()) {
+      setTitleError("Publication title is required");
+      isValid = false;
+    }
+
+    if (!formData.file) {
+      setFileError("PDF file is required");
+      isValid = false;
+    }
+
+    if (formData.previewPages < 1 || formData.previewPages > 10) {
+      toast.error("Preview pages should be between 1 and 10");
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  const extractPreviewPages = async (pdfFile, pageCount) => {
+    try {
+      // Read the file
+      const arrayBuffer = await pdfFile.arrayBuffer();
+      const pdfDoc = await PDFDocument.load(arrayBuffer);
+
+      // Limit preview pages to the actual number of pages in the document
+      const totalPages = pdfDoc.getPageCount();
+      const pagesToExtract = Math.min(pageCount, totalPages);
+
+      // Create a new document for the preview
+      const previewDoc = await PDFDocument.create();
+
+      // Copy the first n pages to the preview document
+      for (let i = 0; i < pagesToExtract; i++) {
+        const [copiedPage] = await previewDoc.copyPages(pdfDoc, [i]);
+        previewDoc.addPage(copiedPage);
+      }
+
+      // Serialize the preview document to a Uint8Array
+      const previewPdfBytes = await previewDoc.save();
+
+      // Convert to blob for upload
+      return new Blob([previewPdfBytes], { type: "application/pdf" });
+    } catch (error) {
+      console.error("Error extracting preview pages:", error);
+      throw new Error("Failed to extract preview pages");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.file || !formData.title) {
-      toast.error("Please fill in all required fields");
+
+    if (!validateForm()) {
       return;
     }
 
     setLoading(true);
     try {
+      // Extract preview pages
+      const previewPdfBlob = await extractPreviewPages(
+        formData.file,
+        formData.previewPages
+      );
+
       // Create FormData for file upload
       const uploadData = new FormData();
-      uploadData.append("file", formData.file);
+      uploadData.append("publication_pdf", previewPdfBlob);
       uploadData.append("title", formData.title);
       uploadData.append("previewPages", formData.previewPages);
-      uploadData.append("uploaderId", user.id);
 
       // Upload to backend
       const response = await sarcAPI.post(
-        "/publication/upload",
+        "sarc/v0/publication/create-publication",
         uploadData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          validateStatus: () => true, // Accept all status codes to handle errors locally
         }
       );
 
-      if (response.data.success) {
+      if (response.data.status === 200) {
         toast.success("Publication uploaded successfully");
         navigate("/publications");
       } else {
@@ -89,7 +163,15 @@ const PostPublication = () => {
       }
     } catch (error) {
       console.error("Upload error:", error);
-      toast.error(error.message || "Failed to upload publication");
+
+      // Don't let API errors affect authentication
+      if (error.response?.status === 401) {
+        toast.error(
+          "Authentication error. Please try again without logging out."
+        );
+      } else {
+        toast.error(error.message || "Failed to upload publication");
+      }
     } finally {
       setLoading(false);
     }
@@ -109,7 +191,9 @@ const PostPublication = () => {
             onChange={handleInputChange}
             required
             placeholder="Enter publication title"
+            className={titleError ? "error" : ""}
           />
+          {titleError && <span className="error-message">{titleError}</span>}
         </div>
 
         <div className="form-group">
@@ -139,7 +223,9 @@ const PostPublication = () => {
             onChange={handleFileChange}
             accept=".pdf"
             required
+            className={fileError ? "error" : ""}
           />
+          {fileError && <span className="error-message">{fileError}</span>}
           <small>Upload a PDF file (max 10MB)</small>
         </div>
 

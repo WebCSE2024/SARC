@@ -5,7 +5,7 @@ import ReferralPage from "../pages/Referrals/ReferralPage";
 import PublicationsPage from "../pages/PublicationsPage/PublicationsPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import PostReferral from "../pages/PostReferral/PostReferral";
-import PostPublication from "../pages/PostPublication/PostPublications";
+import PostPublication from "../pages/PostPublication/PostPublication";
 
 // These routes are now also protected but categorized as "main content"
 export const appRoutes = [

@@ -14,7 +14,7 @@ const PublicationsPage = () => {
 
     const getPublications = async () => {
         try {
-            const response = await sarcAPI.get(`/publication/publication-list`);
+            const response = await sarcAPI.get(`sarc/v0/publication/publication-list`);
             setPublicationsData(response.data.data);
         } catch (error) {
             console.error('Error:', error);

@@ -5,6 +5,8 @@ import { ApiError } from "../utils/ApiError.js";
 
 export const setUser = async (req, res, next) => {
   try {
+    console.log("req.user", req.user);
+    
     if (!req.user) {
       return next(new ApiError(401, "Unauthorized"));
     }
