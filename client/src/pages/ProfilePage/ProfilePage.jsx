@@ -1,10 +1,10 @@
-import React from "react";
+// import React from "react";
 import "./ProfilePage.scss";
 // import profileImg from '../../../public/NoProfileImg.png'
-import eduLogo from "../../../public/TempImages/wallpaperflare.com_wallpaper (1).jpg";
-import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from "react-icons/fa";
+// import eduLogo from "../../../public/TempImages/wallpaperflare.com_wallpaper (1).jpg";
+// import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import ActivityCard from "../../features/ProfilePageActivity/ActivityCard";
+// import ActivityCard from "../../features/ProfilePageActivity/ActivityCard";
 import ExperienceItem from "../../components/ExperienceBox/ExperienceItem";
 import EducationItem from "../../components/EducationBox/EducationItem";
 import defaultProfileImg from "../../../public/NoProfileImg.png";
@@ -64,7 +64,7 @@ const ProfilePage = () => {
           </div>
 
           {/* Role-based action buttons */}
-          <div className="role-based-actions">
+          <div className="action-buttons">
             {user.userType === "PROFESSOR" && (
               <>
                 <button className="post-btn" onClick={handlePostPublication}>

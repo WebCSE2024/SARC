@@ -4,7 +4,6 @@ import { NewsType } from "../../../../shared/types/news.type.js";
 import Achievement from "../models/achievement.models.js";
 import { UserType } from "../../../../shared/types/user.type.js";
 import Seminar from "../models/seminar.models.js";
-import mongoose from "mongoose";
 import {
   deleteFromCloudinary,
   uploadOnCloudinary,
