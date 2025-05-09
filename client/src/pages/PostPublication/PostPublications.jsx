@@ -56,8 +56,7 @@ const PostPublications = () => {
       // formDataToSend.append('file', formData.publication_pdf);
 
       // Log the data properly
-      console.log("Form Data Contents:");
-      console.log(formDataToSend);
+
       // for (let pair of formDataToSend.entries()) {
       //     console.log(pair[0] + ': ' + pair[1]);
       // }

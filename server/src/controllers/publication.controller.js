@@ -12,7 +12,6 @@ import mongoose from "mongoose";
 
 export const createPublication = asyncHandler(async(req,res)=>{
     
-    console.log('pub',req.body)
     if(!req.user)
         throw new ApiError(400,'Unauthenticated')
     const user=req.user

@@ -84,7 +84,6 @@ class NewsService {
 
         const achievement = new Achievement(achievementData);
         await achievement.save();
-        console.log("Achievement news created:", achievement._id);
         return { success: true, data: achievement };
       } else if (news.type === NewsType.SEMINAR) {
         // Format and save seminar data
@@ -107,11 +106,9 @@ class NewsService {
             : undefined,
         };
 
-        console.log(seminarData);
 
         const seminar = new Seminar(seminarData);
         await seminar.save();
-        console.log("Seminar news created:", seminar._id);
         return { success: true, data: seminar };
       } else {
         console.warn(`Unhandled news type: ${news.type}`);
@@ -190,7 +187,6 @@ class NewsService {
           { new: true }
         );
 
-        console.log("Achievement updated:", updatedAchievement._id);
         return { success: true, data: updatedAchievement };
       } else if (newsData.type === NewsType.SEMINAR) {
         // Find existing seminar to get old image
@@ -209,7 +205,6 @@ class NewsService {
         ) {
           try {
             await deleteFromCloudinary(existingSeminar.image.publicId);
-            console.log(`Deleted old image for seminar ${newsId}`);
           } catch (error) {
             console.error("Error deleting old seminar image:", error);
             // Continue with update even if image deletion fails
@@ -248,7 +243,6 @@ class NewsService {
           { new: true }
         );
 
-        console.log("Seminar updated:", updatedSeminar._id);
         return { success: true, data: updatedSeminar };
       } else {
         console.warn(`Unhandled news type: ${newsData.type}`);

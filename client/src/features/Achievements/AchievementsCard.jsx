@@ -53,7 +53,6 @@ const AchievementsCard = ({data}) => {
 
                     {/* This ref is helpful in differentiating images-wrappers of 
                     different achievementsCard renderings */}
-                    {console.log(data.gallery)}
                     <div className="images-wrapper" ref={imagesWrapperRef}>
                         {data.gallery.map((image, index) => (
                             <div key={index} className={`SlideShowImage ${index}thImage`}>

@@ -32,12 +32,10 @@ export const createAchievement = asyncHandler(async (req, res) => {
   }
   // Check if required fields are missing
 
-  console.log("FILES", req.files);
   const gallery = [];
   if (req.files?.length > 0) {
     for (const file of req.files) {
       const uploadedImage = await uploadOnCloudinary(file.path);
-      console.log("UPLOADED IMAGE", uploadedImage);
       if (!uploadedImage?.url)
         throw new ApiError(400, "Cloudinary upload failed");
       gallery.push({
@@ -114,11 +112,9 @@ export const deleteAchievement = asyncHandler(async (req, res) => {
   const achievement = await Achievement.findOne({ achievementId });
   if (!achievement) throw new ApiError(404, "Achievement not found");
 
-  console.log("ACHIEVEMENT", achievement);
 
   if (achievement.gallery?.length > 0) {
     for (const img of achievement.gallery) {
-      console.log("IMG", img.publicId);
       await deleteFromCloudinary(img.publicId);
     }
   }
