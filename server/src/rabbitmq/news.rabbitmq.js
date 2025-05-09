@@ -69,7 +69,6 @@ class NewsService {
       if (news.type === NewsType.ACHIEVEMENT) {
         // Format and save achievement data
         const achievementData = {
-
           title: news.title,
           description: news.description,
           date: news.date,
@@ -98,7 +97,7 @@ class NewsService {
             designation: news.speaker.designation || "",
             organization: news.speaker.organization || "",
           },
-          date: news.time,
+          date: news.date,
           venue: news.venue,
           // Add image if available
           image: news.imageUrl
@@ -110,7 +109,6 @@ class NewsService {
         };
 
         console.log(seminarData);
-        
 
         const seminar = new Seminar(seminarData);
         await seminar.save();
@@ -228,7 +226,7 @@ class NewsService {
             designation: newsData.speaker.designation || "",
             organization: newsData.speaker.organization || "",
           },
-          date: newsData.time,
+          date: newsData.date,
           venue: newsData.venue,
         };
 

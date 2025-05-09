@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
@@ -11,6 +11,7 @@ const PostReferral = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     jobProfile: "",
     companyName: "",
@@ -20,17 +21,26 @@ const PostReferral = () => {
       city: "",
       country: "",
     },
-    mode: "",
+    mode: "remote",
     stipend: {
       amount: "",
       currency: "INR",
     },
-    deadline: new Date().toISOString().split("T")[0],
+    deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split("T")[0], // Default to 7 days from now
     website: "",
     email: "",
     contact: "",
-    status: "active",
   });
+
+  // Check if user is authorized to access this page
+  useEffect(() => {
+    if (user && user.userType !== "PROFESSOR" && user.userType !== "ALUMNI") {
+      toast.error("Only professors and alumni can post referrals");
+      navigate("/profile");
+    }
+  }, [user, navigate]);
 
   // Quill editor modules configuration
   const modules = {
@@ -76,49 +86,110 @@ const PostReferral = () => {
     }));
   };
 
+  const validateForm = () => {
+    if (!formData.companyName.trim()) {
+      setError("Company name is required");
+      return false;
+    }
+    if (!formData.jobProfile.trim()) {
+      setError("Job profile is required");
+      return false;
+    }
+    if (
+      !formData.description.trim() ||
+      formData.description === "<p><br></p>"
+    ) {
+      setError("Description is required");
+      return false;
+    }
+    if (
+      !formData.requirements.trim() ||
+      formData.requirements === "<p><br></p>"
+    ) {
+      setError("Requirements are required");
+      return false;
+    }
+    if (!formData.location.city.trim() || !formData.location.country.trim()) {
+      setError("Complete location information is required");
+      return false;
+    }
+    if (!formData.email.trim()) {
+      setError("Contact email is required");
+      return false;
+    }
+    if (!formData.website.trim()) {
+      setError("Company website is required");
+      return false;
+    }
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError("Please enter a valid email address");
+      return false;
+    }
+    // Validate website URL format
+    try {
+      new URL(formData.website);
+    } catch (err) {
+      setError(
+        "Please enter a valid website URL (include http:// or https://)"
+      );
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    if (!validateForm()) {
+      toast.error(error || "Please fill in all required fields");
+      return;
+    }
+
     setLoading(true);
-
     try {
-      // Validate required fields
-      if (
-        !formData.jobProfile ||
-        !formData.companyName ||
-        !formData.description
-      ) {
-        toast.error("Please fill in all required fields");
-        return;
-      }
-
-      // Add user ID to form data
-      const submissionData = {
-        ...formData,
-        addedBy: user.id,
-      };
-
       const response = await axiosInstance.post(
-        "/referral/create",
-        submissionData
+        "/referral/create-referral",
+        formData
       );
 
-      if (response.data.success) {
-        toast.success("Referral posted successfully");
+      if (
+        response.data &&
+        response.data.status >= 200 &&
+        response.data.status < 300
+      ) {
+        toast.success("Referral posted successfully!");
         navigate("/referrals");
       } else {
         throw new Error(response.data.message || "Failed to post referral");
       }
     } catch (error) {
       console.error("Error posting referral:", error);
-      toast.error(error.message || "Failed to post referral");
+      toast.error(
+        error.response?.data?.message ||
+          error.message ||
+          "Failed to post referral. Please try again."
+      );
+      setError(
+        error.response?.data?.message ||
+          error.message ||
+          "Failed to post referral"
+      );
     } finally {
       setLoading(false);
     }
   };
 
+  if (user && user.userType !== "PROFESSOR" && user.userType !== "ALUMNI") {
+    return null; // Prevents flash of content before redirect
+  }
+
   return (
     <div className="post-referral-container">
       <h2>Post a Referral</h2>
+      {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit} className="referral-form">
         {/* Company Details */}
         <div className="form-group">
@@ -151,45 +222,55 @@ const PostReferral = () => {
         <div className="form-group">
           <label htmlFor="description">Description*</label>
           <ReactQuill
+            id="description"
             value={formData.description}
             onChange={handleDescriptionChange}
             modules={modules}
             placeholder="Job description and responsibilities"
           />
+          <small className="form-text">
+            Provide detailed information about the job role and responsibilities
+          </small>
         </div>
 
         <div className="form-group">
-          <label htmlFor="requirements">Requirements</label>
+          <label htmlFor="requirements">Requirements*</label>
           <ReactQuill
+            id="requirements"
             value={formData.requirements}
             onChange={handleRequirementsChange}
             modules={modules}
             placeholder="Required skills and qualifications"
           />
+          <small className="form-text">
+            List the required skills, qualifications, and experience
+          </small>
         </div>
 
         {/* Location and Mode */}
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="location.city">City</label>
+            <label htmlFor="location.city">City*</label>
             <input
               type="text"
               id="location.city"
               name="location.city"
               value={formData.location.city}
               onChange={handleChange}
+              required
               placeholder="e.g. Bangalore"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="location.country">Country</label>
+            <label htmlFor="location.country">Country*</label>
             <input
               type="text"
               id="location.country"
               name="location.country"
               value={formData.location.country}
               onChange={handleChange}
+              required
               placeholder="e.g. India"
             />
           </div>
@@ -221,6 +302,7 @@ const PostReferral = () => {
               name="stipend.amount"
               value={formData.stipend.amount}
               onChange={handleChange}
+              min="0"
               placeholder="e.g. 50000"
             />
           </div>
@@ -236,6 +318,10 @@ const PostReferral = () => {
               <option value="INR">INR</option>
               <option value="USD">USD</option>
               <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="SGD">SGD</option>
+              <option value="AUD">AUD</option>
+              <option value="CAD">CAD</option>
             </select>
           </div>
         </div>
@@ -256,13 +342,14 @@ const PostReferral = () => {
 
         {/* Contact Information */}
         <div className="form-group">
-          <label htmlFor="website">Company Website</label>
+          <label htmlFor="website">Company Website*</label>
           <input
             type="url"
             id="website"
             name="website"
             value={formData.website}
             onChange={handleChange}
+            required
             placeholder="https://company.com"
           />
         </div>

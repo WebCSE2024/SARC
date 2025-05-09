@@ -16,7 +16,7 @@ import { formatDate } from "../../utils/dateFormatter.jsx";
 
 const EventsCard = ({ data }) => {
   const [isLiked, setIsLiked] = useState(false);
-  console.log(data.speaker);
+  
 
   // Check event type to determine display
   const isHackathon = data.type?.toLowerCase() === "hackathon";
@@ -27,7 +27,7 @@ const EventsCard = ({ data }) => {
 
   return (
     <div className="eventCardOuter">
-      <div className="eventCard">
+      <div className="eventCard" >
         <ProfileHeader createdAt={data && data.createdAt} eventData={data} />
 
         <div className="eventDesc">

@@ -64,25 +64,30 @@ const ProfilePage = () => {
           </div>
 
           {/* Role-based action buttons */}
-          {user.userType === "PROFESSOR" && (
-            <>
-              <button className="post-btn" onClick={handlePostPublication}>
-                Post Publication
-              </button>
+          <div className="role-based-actions">
+            {user.userType === "PROFESSOR" && (
+              <>
+                <button className="post-btn" onClick={handlePostPublication}>
+                  Post Publication
+                </button>
+                <button
+                  className="post-btn referral"
+                  onClick={handlePostReferral}
+                >
+                  Post Referral
+                </button>
+              </>
+            )}
+
+            {user.userType === "ALUMNI" && (
               <button
                 className="post-btn referral"
                 onClick={handlePostReferral}
               >
                 Post Referral
               </button>
-            </>
-          )}
-
-          {user.userType === "ALUMNI" && (
-            <button className="post-btn referral" onClick={handlePostReferral}>
-              Post Referral
-            </button>
-          )}
+            )}
+          </div>
         </div>
       </div>
 

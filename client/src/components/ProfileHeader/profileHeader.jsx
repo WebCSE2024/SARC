@@ -17,7 +17,7 @@ const profileHeader = ({personInfo, createdAt, eventId, eventData}) => {
     return (
         <header className="accountDetails">
             <span className="accountInfo">
-                <img src={(personInfo && personInfo.profilePicture) || defaultProfileImg} alt="Profile Pic" className="profileImg" />
+                <img src={(personInfo && personInfo.profilePicture) || eventData?.image?.url ||defaultProfileImg } alt="Profile Pic" className="profileImg" />
                 <div className="accountTextDetails">
                     <div className='AccountTitle'>
                         {(personInfo && personInfo.name) || (`CSES IIT (ISM) Dhanbad`)}
