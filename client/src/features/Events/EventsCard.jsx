@@ -27,7 +27,7 @@ const EventsCard = ({ data }) => {
 
   return (
     <div className="eventCardOuter">
-      <div className="eventCard" >
+      <div className="eventCard">
         <ProfileHeader createdAt={data && data.createdAt} eventData={data} />
 
         <div className="eventDesc">
@@ -133,8 +133,7 @@ const EventsCard = ({ data }) => {
       </div>
 
       <div className="commentsCardWrapper">
-        {/* <CommentSection /> */}
-        <CommentsArea postId={data._id} />
+        <CommentsArea postId={data._id} referenceModel="Event" />
       </div>
     </div>
   );

@@ -3,25 +3,34 @@ import { FaReply, FaTrash } from "react-icons/fa";
 import CommentInput from "./CommentInput";
 import { sarcAPI } from "../../../../../shared/axios/axiosInstance";
 
-
 const SingleComment = ({ comment, onAddReply, onDeleteComment }) => {
   const [showReplyInput, setShowReplyInput] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [replyText, setReplyText] = useState("");
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const handleReply = (text) => {
-    onAddReply(comment.id, text);
-    setShowReplyInput(false);
+    if (text.trim()) {
+      onAddReply(comment.id, text);
+      setReplyText("");
+      setShowReplyInput(false);
+    }
   };
 
   const handleDeleteComment = async () => {
     if (window.confirm("Are you sure you want to delete this comment?")) {
       setIsDeleting(true);
       try {
-        await sarcAPI.delete(`/comments/delete-comment/${comment.id}`);
+        await sarcAPI.delete(`sarc/v0/comments/delete-comment/${comment.id}`);
         if (onDeleteComment) onDeleteComment(comment.id);
       } catch (error) {
         console.error("Error deleting comment:", error);
-        alert("Failed to delete comment");
+        if (error.response && error.response.status === 404) {
+          console.log("Comment was already deleted from database");
+          if (onDeleteComment) onDeleteComment(comment.id);
+        } else {
+          alert("Failed to delete comment");
+        }
       } finally {
         setIsDeleting(false);
       }
@@ -31,17 +40,22 @@ const SingleComment = ({ comment, onAddReply, onDeleteComment }) => {
   const handleDeleteReply = async (replyId) => {
     if (window.confirm("Are you sure you want to delete this reply?")) {
       try {
-        await sarcAPI.delete(`/comments/delete-reply/${replyId}`);
+        await sarcAPI.delete(`sarc/v0/comments/delete-reply/${replyId}`);
         if (onDeleteComment) onDeleteComment(comment.id, replyId);
       } catch (error) {
         console.error("Error deleting reply:", error);
-        alert("Failed to delete reply");
+        if (error.response && error.response.status === 404) {
+          console.log("Reply was already deleted from database");
+          if (onDeleteComment) onDeleteComment(comment.id, replyId);
+        } else {
+          alert("Failed to delete reply");
+        }
       }
     }
   };
 
   const formatTimestamp = (timestamp) => {
-    if (timestamp === "Just now") return timestamp;
+    if (!timestamp) return "Just now";
 
     const date = new Date(timestamp);
     const now = new Date();
@@ -57,6 +71,12 @@ const SingleComment = ({ comment, onAddReply, onDeleteComment }) => {
 
     return date.toLocaleDateString();
   };
+
+  const toggleReplies = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const hasReplies = comment.replies && comment.replies.length > 0;
 
   return (
     <div className="single-comment" style={isDeleting ? { opacity: 0.5 } : {}}>
@@ -74,12 +94,30 @@ const SingleComment = ({ comment, onAddReply, onDeleteComment }) => {
             <button
               className="reply-btn"
               onClick={() => setShowReplyInput(!showReplyInput)}
+              aria-label="Reply to comment"
             >
               <FaReply /> Reply
             </button>
-            <button className="delete-btn" onClick={handleDeleteComment}>
+            <button
+              className="delete-btn"
+              onClick={handleDeleteComment}
+              aria-label="Delete comment"
+            >
               <FaTrash /> Delete
             </button>
+            {hasReplies && (
+              <button
+                className="toggle-replies-btn"
+                onClick={toggleReplies}
+                aria-label={isExpanded ? "Hide replies" : "Show replies"}
+              >
+                {isExpanded
+                  ? "Hide replies"
+                  : `Show ${comment.replies.length} ${
+                      comment.replies.length === 1 ? "reply" : "replies"
+                    }`}
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -88,12 +126,14 @@ const SingleComment = ({ comment, onAddReply, onDeleteComment }) => {
         <div className="reply-input-wrapper">
           <CommentInput
             onSubmit={handleReply}
-            placeholder="Press Enter to reply..."
+            placeholder="Write a reply..."
+            initialValue={replyText}
+            onChange={setReplyText}
           />
         </div>
       )}
 
-      {comment.replies && comment.replies.length > 0 && (
+      {hasReplies && isExpanded && (
         <div className="replies-section">
           {comment.replies.map((reply) => (
             <div key={reply.id} className="reply">
@@ -106,12 +146,25 @@ const SingleComment = ({ comment, onAddReply, onDeleteComment }) => {
                   </span>
                 </div>
                 <p className="reply-text">{reply.text}</p>
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDeleteReply(reply.id)}
-                >
-                  <FaTrash /> Delete
-                </button>
+                <div className="reply-actions">
+                  <button
+                    className="reply-btn"
+                    onClick={() => {
+                      setShowReplyInput(true);
+                      setReplyText(`@${reply.userName} `);
+                    }}
+                    aria-label="Reply to this comment"
+                  >
+                    <FaReply /> Reply
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDeleteReply(reply.id)}
+                    aria-label="Delete reply"
+                  >
+                    <FaTrash /> Delete
+                  </button>
+                </div>
               </div>
             </div>
           ))}

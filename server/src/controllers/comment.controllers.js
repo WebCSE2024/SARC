@@ -24,7 +24,7 @@ export const addComment = asyncHandler(async (req, res) => {
   const newComment = await Comment.create({
     content,
     commentedBy: {
-      userid: req.user._id,
+      userid: req.user.id,
       username: req.user.username || req.user.first_name || "Anonymous User", // Fallback to ensure username is always provided
     },
     referenceModel,
@@ -35,7 +35,7 @@ export const addComment = asyncHandler(async (req, res) => {
 
   res
     .status(201)
-    .json(new ApiResponse(201, "Comment added successfully", newComment));
+    .json(new ApiResponse(201, newComment, "Comment added successfully"));
 });
 
 export const addReply = asyncHandler(async (req, res) => {
@@ -55,7 +55,7 @@ export const addReply = asyncHandler(async (req, res) => {
   const newReply = await Reply.create({
     content,
     repliedBy: {
-      userid: req.user._id,
+      userid: req.user.id,
       username: req.user.username || req.user.first_name || "Anonymous User", // Fallback to ensure username is always provided
     },
     reference: req.params.commentId,
@@ -65,7 +65,7 @@ export const addReply = asyncHandler(async (req, res) => {
 
   res
     .status(201)
-    .json(new ApiResponse(201, "Reply added successfully", newReply));
+    .json(new ApiResponse(201, newReply,"Reply added successfully"));
 });
 
 export const getComments = asyncHandler(async (req, res) => {
@@ -100,8 +100,8 @@ export const getComments = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         200,
-        "Comments retrieved successfully",
-        commentsWithReplies
+        commentsWithReplies,
+        "Comments retrieved successfully"
       )
     );
 });
@@ -113,33 +113,36 @@ export const deleteComment = asyncHandler(async (req, res) => {
     throw new ApiError(400, "CommentId is required");
   }
 
-  const comment = await Comment.findOneAndDelete({
+  await Comment.findOneAndDelete({
     _id: req.params.commentId,
-    "commentedBy.userid": req.user._id,
+    "commentedBy.userid": req.user.id,
   });
-
-  if (!comment) throw new ApiError(404, "Comment not found");
 
   // Also delete all replies to this comment
   await Reply.deleteMany({ reference: req.params.commentId });
 
   res
     .status(200)
-    .json(new ApiResponse(200, "Comment deleted successfully", comment));
+    .json(
+      new ApiResponse(200, req.params.commentId, "Comment deleted successfully")
+    );
 });
 
 export const deleteReply = asyncHandler(async (req, res) => {
   if (!req.user) {
     throw new ApiError(400, "Not authenticated");
   }
-
+  console.log(req.params);
+  console.log(req.user);
+  
+  
   if (!req.params.replyId) {
     throw new ApiError(400, "ReplyId is required");
   }
 
   const reply = await Reply.findOne({
     _id: req.params.replyId,
-    "repliedBy.userid": req.user._id,
+    "repliedBy.userid": req.user.id,
   });
 
   if (!reply) {

@@ -22,7 +22,7 @@ const commentSchema = new mongoose.Schema(
     referenceModel: {
       type: String,
       required: true,
-      enum: ["Achievement", "Seminar"],
+      enum: ["Achievement", "Seminar", "Event"],
     },
     content: {
       type: String,

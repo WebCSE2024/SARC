@@ -9,7 +9,6 @@ export const createSeminar = asyncHandler(async (req, res) => {
   // if (!req.user) throw new ApiError(400, 'Unauthenticated');
 
   if (!req.user) throw new ApiError(400, "Unauthenticated");
-  if (req.user.userType !== "admin") throw new ApiError(400, "Unauthorized");
 
   const { title, speaker, date, venue, description } = req.body;
   if ([title, speaker, date, venue, description].some((field) => !field)) {
@@ -37,6 +36,8 @@ export const createSeminar = asyncHandler(async (req, res) => {
 export const getAllSeminars = asyncHandler(async (req, res) => {
   try {
     const seminars = await Seminar.find();
+    console.log(seminars);
+    
     if (!seminars.length) throw new ApiError(400, "No seminars found");
     return res
       .status(200)

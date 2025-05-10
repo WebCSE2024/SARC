@@ -1,13 +1,25 @@
-import express from 'express';
-import { addComment,addReply,getComments,deleteComment,deleteReply } from '../controllers/comment.controllers.js';
-import {setUser} from '../middlewares/setUser.js'
+import express from "express";
+import {
+  addComment,
+  addReply,
+  getComments,
+  deleteComment,
+  deleteReply,
+} from "../controllers/comment.controllers.js";
+import { setUser } from "../middlewares/setUser.js";
+import { authenticate } from "../../../../shared/middlewares/auth.middleware.js";
 
-const router=express.Router()
+const router = express.Router();
 
-router.post('/add-comment',setUser,addComment)
-router.post('/add-reply/:commentId',setUser,addReply)
-router.get('/get-comments/:postId',setUser,getComments)
-router.delete('/delete-comment/:commentId',setUser,deleteComment)
-router.delete('/delete-reply/:replyId',setUser,deleteReply)
+router.post("/add-comment", authenticate, setUser, addComment);
+router.post("/add-reply/:commentId", authenticate, setUser, addReply);
+router.get("/get-comments/:postId", authenticate, setUser, getComments);
+router.delete(
+  "/delete-comment/:commentId",
+  authenticate,
+  setUser,
+  deleteComment
+);
+router.delete("/delete-reply/:replyId", authenticate, setUser, deleteReply);
 
-export default router
+export default router;

@@ -15,7 +15,6 @@ const generateReferralId = () => {
 export const createAchievement = asyncHandler(async (req, res) => {
   if (!req.user) throw new ApiError(400, "Unauthenticated");
 
-  if (req.user.role !== "admin") throw new ApiError(400, "Unauthorized");
 
   const {
     title,

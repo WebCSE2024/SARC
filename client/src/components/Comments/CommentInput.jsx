@@ -1,8 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import defaultUserImg from "../../../public/NoProfileImg.png";
 
-const CommentInput = ({ onSubmit, placeholder = "Write a comment..." }) => {
-  const [text, setText] = useState("");
+const CommentInput = ({
+  onSubmit,
+  placeholder = "Write a comment...",
+  initialValue = "",
+  onChange = null,
+}) => {
+  const [text, setText] = useState(initialValue);
+
+  // Update text if initialValue changes (for reply prefill)
+  useEffect(() => {
+    setText(initialValue);
+  }, [initialValue]);
+
+  const handleChange = (e) => {
+    const newText = e.target.value;
+    setText(newText);
+    // Call onChange prop if provided
+    if (onChange) {
+      onChange(newText);
+    }
+  };
 
   const handleSubmit = () => {
     if (text.trim()) {
@@ -25,15 +44,17 @@ const CommentInput = ({ onSubmit, placeholder = "Write a comment..." }) => {
         <input
           type="text"
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={handleChange}
           onKeyPress={handleKeyPress}
           placeholder={placeholder}
           className="comment-input"
+          aria-label={placeholder}
         />
         <button
           className={`send-button ${text.trim() ? "active" : ""}`}
           onClick={handleSubmit}
           disabled={!text.trim()}
+          aria-label="Send comment"
         >
           <svg
             width="20"
