@@ -27,6 +27,20 @@
       flex-direction: column;
       gap: 0.5rem;
 
+      &.has-error {
+        input,
+        select,
+        .quill .ql-container {
+          border-color: #e53e3e !important;
+        }
+      }
+
+      .error-message {
+        color: #e53e3e;
+        font-size: 14px;
+        margin-top: 4px;
+      }
+
       label {
         font-family: Inter;
         font-weight: 500;
@@ -34,16 +48,18 @@
         color: #000;
 
         &::after {
-          content: "*";
-          color: red;
+          content: "";
           margin-left: 4px;
         }
 
-        &[for="stipend"]::after,
-        &[for="companyWebsite"]::after,
-        &[for="phone"]::after,
-        &[for="contact"]::after {
-          content: "";
+        &[for="companyName"]::after,
+        &[for="jobProfile"]::after,
+        &[for="description"]::after,
+        &[for="mode"]::after,
+        &[for="deadline"]::after,
+        &[for="email"]::after {
+          content: "*";
+          color: red;
         }
       }
 
@@ -78,6 +94,32 @@
           border: 1px solid #e2e8f0;
           border-radius: 6px 6px 0 0;
           background-color: #f8fafc;
+          padding: 8px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+
+          @media (max-width: 576px) {
+            padding: 6px;
+
+            .ql-formats {
+              margin-right: 10px;
+            }
+          }
+
+          .ql-formats {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+
+            button {
+              width: 28px;
+              height: 28px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
         }
 
         .ql-container {
@@ -86,6 +128,7 @@
           min-height: 150px;
           font-family: Inter;
           font-size: 14px;
+          transition: border-color 0.2s;
 
           .ql-editor {
             min-height: 150px;
@@ -104,7 +147,36 @@
               padding-left: 1.5rem;
               margin-bottom: 0.5rem;
             }
+
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+
+            blockquote {
+              border-left: 4px solid #e2e8f0;
+              padding-left: 1rem;
+              margin: 1rem 0;
+            }
+
+            .ql-syntax {
+              background: #f8fafc;
+              border-radius: 3px;
+              padding: 10px;
+              font-family: monospace;
+              overflow-x: auto;
+            }
           }
+        }
+      }
+
+      // Specific styles for rich text editor class
+      .rich-text-editor {
+        margin-bottom: 0.5rem;
+
+        .ql-editor {
+          // Enhanced editor height for better viewing experience
+          min-height: 180px;
         }
       }
     }
@@ -173,6 +245,35 @@
 
         button {
           width: 100%;
+        }
+      }
+    }
+  }
+}
+
+/* Additional responsive styles for the rich text editor */
+@media (max-width: 576px) {
+  .post-referral-container {
+    .referral-form {
+      .form-group {
+        .quill {
+          .ql-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+
+            .ql-formats {
+              margin-right: 8px;
+              margin-bottom: 4px;
+            }
+          }
+
+          .ql-container {
+            .ql-editor {
+              min-height: 120px;
+              padding: 0.75rem;
+            }
+          }
         }
       }
     }
