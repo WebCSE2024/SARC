@@ -10,7 +10,6 @@ import { User } from "../models/user.models.js";
 import { UserType } from "../../../../shared/types/user.type.js";
 
 export const createReferral = async (req, res) => {
-  console.log("Aaya");
     
   const user = req.user;
   console.log("yaha tak aaya");
