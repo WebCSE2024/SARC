@@ -12,9 +12,9 @@ import { UserType } from "../../../../shared/types/user.type.js";
 export const createReferral = async (req, res) => {
     
   const user = req.user;
-  console.log("yaha tak aaya");
+  
 
-  if (user.userType !== UserType.PROFESSOR || user.userType !== UserType.ALUMNI)
+  if (user.userType !== UserType.PROFESSOR && user.userType !== UserType.ALUMNI)
     throw new ApiError(400, "Not authorized to publish a referral");
 
   const {
@@ -50,7 +50,7 @@ export const createReferral = async (req, res) => {
     companyName,
     deadline,
     jobProfile,
-    addedBy: req.user._id,
+    addedBy: user.id,
     stipend,
     description,
     requirements,
@@ -68,9 +68,21 @@ export const createReferral = async (req, res) => {
   // await client.del('referral-list');
   // await client.del(`myreferral:${user._id}`)
 
-  const createdReferral = await Referral.findById(referral._id).select(
-    "-_id -addedBy"
-  );
+  const createdReferral = {
+    companyName: referral.companyName,
+    deadline: referral.deadline,
+    jobProfile: referral.jobProfile,
+    addedBy: user.id,
+    stipend: referral.stipend,
+    description: referral.description,
+    requirements: referral.requirements,
+    location: referral.location,
+    status: referral.status,
+    email: referral.email,
+    contact: referral.contact,
+    website: referral.website,
+    mode: referral.mode,
+  };
   return res
     .status(201)
     .json(
@@ -79,11 +91,11 @@ export const createReferral = async (req, res) => {
 };
 
 export const getAllReferrals = asyncHandler(async (req, res) => {
-  const cacheReferral = await client.get("referral-list");
-  if (cacheReferral)
-    return res
-      .status(200)
-      .send(new ApiResponse(200, JSON.parse(cacheReferral), "referral list "));
+  // const cacheReferral = await client.get("referral-list");
+  // if (cacheReferral)
+  //   return res
+  //     .status(200)
+  //     .send(new ApiResponse(200, JSON.parse(cacheReferral), "referral list "));
 
   const allReferrals = await Referral.aggregate([
     {
@@ -106,12 +118,12 @@ export const getAllReferrals = asyncHandler(async (req, res) => {
 
   if (!allReferrals) throw new ApiError(400, "Refrrals list not found");
 
-  await client.set(
-    "referral-list",
-    JSON.stringify(allReferrals),
-    "EX",
-    REDIS_CACHE_EXPIRY_REFERRAL
-  );
+  // await client.set(
+  //   "referral-list",
+  //   JSON.stringify(allReferrals),
+  //   "EX",
+  //   REDIS_CACHE_EXPIRY_REFERRAL
+  // );
 
   return res
     .status(200)

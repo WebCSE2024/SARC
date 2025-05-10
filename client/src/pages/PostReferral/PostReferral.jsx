@@ -195,7 +195,7 @@ const PostReferral = () => {
       }
 
       const response = await sarcAPI.post(
-        "sarc/v0/referral/create",
+        "sarc/v0/referral/create-referral",
         submissionData
       );
 
