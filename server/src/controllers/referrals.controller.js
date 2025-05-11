@@ -8,6 +8,7 @@ import { REDIS_CACHE_EXPIRY_REFERRAL } from "../constants/constants.js";
 import mongoose from "mongoose";
 import { User } from "../models/user.models.js";
 import { UserType } from "../../../../shared/types/user.type.js";
+import { ReferralStatus } from "../../../../shared/types/referral.type.js";
 
 export const createReferral = async (req, res) => {
   const user = req.user;
@@ -53,7 +54,7 @@ export const createReferral = async (req, res) => {
     description,
     requirements,
     location,
-    status: "pending",
+    status: "Pending",
     // referralId:referral_id,
     email,
     contact,
@@ -141,7 +142,7 @@ export const toggleReferralState = asyncHandler(async (req, res) => {
 
 export const getActiveReferrals = asyncHandler(async (req, res) => {
   const activeReferrals = await Referral.find({
-    status: "active",
+    status: ReferralStatus.ACTIVE,
   });
   if (!activeReferrals) throw new ApiError(400, "No active referrals found");
 

@@ -111,16 +111,7 @@ export const getAllPublications = asyncHandler(async (req, res) => {
 //         )
 //       );
 
-  const response = await Publication.aggregate([
-    {
-      $lookup: {
-        from: "users",
-        localField: "publisher",
-        foreignField: "userId",
-        as: "publisher",
-      },
-    },
-  ]);
+  const response = await Publication.find();
 
   if (!response) throw new ApiError(400, "no publications found");
 

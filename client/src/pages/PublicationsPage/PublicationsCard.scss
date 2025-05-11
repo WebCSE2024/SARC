@@ -1,69 +1,118 @@
 .PublicationsCard {
-  width: 803px;
-  margin: 0 auto;
-  margin-bottom: 24px;
+  width: 100%;
+  height: 100%;
   padding: 24px;
   background-color: white;
   border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid #000000;
-  font-family: Inter;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  font-family: Inter, sans-serif;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
 
   .title-save {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+    align-items: flex-start;
+    margin-bottom: 16px;
 
     .title {
-      font-family: Inter;
       font-weight: 600;
-      font-size: 20px;
-      line-height: 100%;
-      letter-spacing: 0%;
-      vertical-align: middle;
-      color: #000;
+      font-size: 18px;
+      line-height: 1.4;
+      color: #1a202c;
       margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
-  .preview-publisher-details {
+  .preview-section {
+    flex: 1;
     display: flex;
-    gap: 24px;
-    margin-bottom: 24px;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
 
-    .paper-preview {
-      flex: 1;
+    .no-preview,
+    .loading-preview,
+    .error-preview,
+    .loading-pdf,
+    .error-pdf {
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #718096;
+      text-align: center;
+      padding: 16px;
+    }
+
+    .pdf-container {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      align-items: center;
+      padding: 16px;
+      background-color: #f7fafc;
 
-      .previewImg {
-        width: 100%;
-        height: 245px;
-        object-fit: cover;
-        border-radius: 8px;
+      canvas {
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 8px;
       }
 
-      .no-preview {
+      .preview-info {
+        font-size: 12px;
+        color: #718096;
+        margin-top: 8px;
+      }
+    }
+
+    .iframe-container {
+      aspect-ratio: 3/4;
+      width: 100%;
+      position: relative;
+
+      .pdf-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 245px;
+        height: 100%;
+        border: none;
+        border-radius: 4px;
+      }
+    }
+
+    .preview-actions {
+      display: flex;
+      justify-content: center;
+      padding: 12px;
+      border-top: 1px solid #e2e8f0;
+      background-color: #fff;
+
+      .view-full-btn {
         display: flex;
         align-items: center;
-        justify-content: center;
-        background-color: #f7fafc;
-        border: 2px dashed #e2e8f0;
-        border-radius: 8px;
-        color: #718096;
-        font-size: 14px;
-      }
-
-      .openPreviewBtn {
+        gap: 8px;
         padding: 8px 16px;
         background-color: #0059ff;
-        color: white;
         border: none;
         border-radius: 6px;
+        color: white;
         font-size: 14px;
         font-weight: 500;
         cursor: pointer;
@@ -72,157 +121,106 @@
         &:hover {
           background-color: #0048ce;
         }
-      }
-    }
 
-    .about-publisher {
-      width: 320px;
-      height: 245px;
-      padding: 20px;
-      gap: 12px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-
-      .publisher-pic {
-        width: 64px;
-        height: 64px;
-        border-radius: 999px;
-        object-fit: cover;
-      }
-
-      .publisher-details {
-        width: 280px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-
-        .name {
-          width: 280px;
-          text-align: center;
-          font-family: Inter;
-          font-weight: 500;
+        svg {
           font-size: 16px;
-          line-height: 20px;
-          color: #000;
-
-          .designation {
-            font-family: Inter;
-            font-weight: 500;
-            font-size: 12px;
-            line-height: 20px;
-            color: #7a7983;
-            margin-top: 4px;
-          }
-        }
-
-        .contact-btn {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 8px 16px;
-          background-color: #f7fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 6px;
-          color: #4a5568;
-          font-size: 14px;
-          font-weight: 500;
-          cursor: pointer;
-          transition: all 0.2s ease;
-
-          &:hover {
-            background-color: #edf2f7;
-            border-color: #cbd5e0;
-          }
-
-          svg {
-            font-size: 16px;
-          }
         }
       }
     }
   }
 
-  .Note {
-    font-family: Inter;
-    font-size: 14px;
-    color: #718096;
-    margin: 16px 0;
-  }
-
-  // Preview Modal
-  .preview-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75);
+  .author-section {
     display: flex;
     align-items: center;
-    justify-content: center;
-    z-index: 1000;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #f8fafc;
 
-    .modal-content {
-      position: relative;
-      width: 90%;
-      height: 90%;
-      background-color: white;
-      border-radius: 12px;
-      overflow: hidden;
+    .author-pic {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-      .close-btn {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        width: 32px;
-        height: 32px;
-        background-color: white;
-        border: none;
-        border-radius: 50%;
-        font-size: 24px;
-        line-height: 1;
-        cursor: pointer;
-        z-index: 1;
+    .author-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .name {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1.2;
+        color: #1a202c;
+
+        .designation {
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 1.2;
+          color: #718096;
+          margin-top: 4px;
+        }
+      }
+
+      .contact-btn {
         display: flex;
         align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        gap: 8px;
+        padding: 8px 12px;
+        background-color: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        color: #4a5568;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: fit-content;
 
         &:hover {
           background-color: #f7fafc;
+          border-color: #cbd5e0;
         }
-      }
 
-      iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
+        svg {
+          font-size: 14px;
+        }
       }
     }
   }
+
+  .publication-note {
+    font-size: 12px;
+    color: #718096;
+    margin: 0;
+    text-align: center;
+    font-style: italic;
+  }
 }
 
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .PublicationsCard {
-    width: 100%;
-    margin: 1rem;
-    padding: 1rem;
+    padding: 16px;
 
-    .preview-publisher-details {
-      flex-direction: column;
-
-      .paper-preview {
-        width: 100%;
+    .preview-section {
+      .iframe-container {
+        aspect-ratio: 2/3;
       }
+    }
 
-      .about-publisher {
-        width: 100%;
-        height: auto;
-        padding: 1rem 0;
+    .author-section {
+      flex-direction: column;
+      text-align: center;
+
+      .author-details {
+        align-items: center;
       }
     }
   }
