@@ -332,9 +332,9 @@ const PostReferral = () => {
             required
           >
             <option value="">Select work mode</option>
-            <option value="onsite">On-site</option>
-            <option value="remote">Remote</option>
-            <option value="hybrid">Hybrid</option>
+            <option value="Onsite">On-site</option>
+            <option value="Remote">Remote</option>
+            <option value="Hybrid">Hybrid</option>
           </select>
           {errors.mode && <span className="error-message">{errors.mode}</span>}
         </div>

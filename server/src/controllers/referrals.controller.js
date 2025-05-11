@@ -10,9 +10,7 @@ import { User } from "../models/user.models.js";
 import { UserType } from "../../../../shared/types/user.type.js";
 
 export const createReferral = async (req, res) => {
-    
   const user = req.user;
-  
 
   if (user.userType !== UserType.PROFESSOR && user.userType !== UserType.ALUMNI)
     throw new ApiError(400, "Not authorized to publish a referral");
@@ -97,24 +95,7 @@ export const getAllReferrals = asyncHandler(async (req, res) => {
   //     .status(200)
   //     .send(new ApiResponse(200, JSON.parse(cacheReferral), "referral list "));
 
-  const allReferrals = await Referral.aggregate([
-    {
-      $lookup: {
-        from: "users",
-        localField: "addedBy",
-        foreignField: "_id",
-        as: "addedBy",
-      },
-    },
-    {
-      $project: {
-        __v: 0,
-        // 'addedBy':0,
-        "addedBy.password": 0,
-        // 'addedBy.isVerified':0
-      },
-    },
-  ]);
+  const allReferrals = await Referral.find({});
 
   if (!allReferrals) throw new ApiError(400, "Refrrals list not found");
 
@@ -131,14 +112,20 @@ export const getAllReferrals = asyncHandler(async (req, res) => {
 });
 
 export const toggleReferralState = asyncHandler(async (req, res) => {
-  if (req.user.role !== "PROFESSOR") throw new ApiError(400, "Unauthorized");
+  const referralId = req.params.id;
+  const { status } = req.body;
 
-  const { referralId, status } = req.query;
+
+  
+  
   if (!referralId || !status) throw new ApiError(400, "Data incomplete");
 
   const referral = await Referral.findOne({
     _id: new mongoose.Types.ObjectId(referralId),
   });
+
+  console.log(referral);
+
   if (!referral) throw new ApiError(400, "Referral not found");
 
   referral.status = status;
@@ -153,21 +140,9 @@ export const toggleReferralState = asyncHandler(async (req, res) => {
 });
 
 export const getActiveReferrals = asyncHandler(async (req, res) => {
-  const activeReferrals = await Referral.aggregate([
-    {
-      $match: {
-        status: "active",
-      },
-    },
-    {
-      $lookup: {
-        from: "users",
-        localField: "addedBy",
-        foreignField: "_id",
-        as: "addedBy",
-      },
-    },
-  ]);
+  const activeReferrals = await Referral.find({
+    status: "active",
+  });
   if (!activeReferrals) throw new ApiError(400, "No active referrals found");
 
   return res

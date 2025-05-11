@@ -3,44 +3,45 @@
   justify-content: center;
   align-items: start;
 
-  margin: 40px auto;
+  margin: 2.5rem auto;
 
   .commentsCardWrapper {
     // background-color: #2196F3;
-    width: 400px;
+    width: 25rem;
   }
 
   .eventCard {
     box-sizing: border-box;
-    width: 843px;
+    width: 90%;
+    max-width: 52.5rem;
     // height: 690px;
-    border-radius: 16px;
+    border-radius: 1rem;
     // margin: 40px auto;
-    padding: 35px;
+    padding: 2.2rem;
     box-sizing: border-box;
 
     background-color: #fff;
 
-    box-shadow: 4px 4px 12px 0px #0000001a;
+    box-shadow: 0.25rem 0.25rem 0.75rem 0px #0000001a;
 
     .eventDesc {
-      width: 783px;
+      width: 100%;
       // height: 92px;
-      top: 112px;
-      left: 31px;
-      padding: 10px;
-      gap: 10px;
+      top: 7rem;
+      left: 2rem;
+      padding: 0.625rem;
+      gap: 0.625rem;
       box-sizing: border-box;
 
-      padding-top: 30px;
+      padding-top: 1.875rem;
 
       p {
-        width: 763px;
+        width: 100%;
         // height: 72px;
         font-family: "Inter", sans-serif;
         font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 1rem;
+        line-height: 1.5;
         letter-spacing: 0%;
         vertical-align: middle;
         color: #7a7983;
@@ -48,18 +49,19 @@
     }
 
     .Talk-info {
-      width: 768px;
-      height: 278px;
+      width: 100%;
+      height: auto;
+      min-height: 17.375rem;
       // top: 200px;
       // left: 36px;
-      border-radius: 12px;
-      margin-top: 20px;
+      border-radius: 0.75rem;
+      margin-top: 1.25rem;
 
       background-image: url("./EventBg.png");
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      padding: 30px;
+      padding: 1.875rem;
       box-sizing: border-box;
       color: #fff;
 
@@ -70,17 +72,17 @@
         .eventTitle {
           font-family: Calibri;
           font-weight: 400;
-          font-size: 28px;
-          line-height: 24px;
+          font-size: 1.75rem;
+          line-height: 1.5;
           letter-spacing: 0%;
           vertical-align: middle;
-          margin-bottom: 20px;
+          margin-bottom: 1.25rem;
 
           .eventType {
             font-family: Calibri;
             font-weight: 700;
-            font-size: 28px;
-            line-height: 24px;
+            font-size: 1.75rem;
+            line-height: 1.5;
             letter-spacing: 0%;
             vertical-align: middle;
             // .color{
@@ -90,32 +92,29 @@
         }
 
         .seatBooking {
-          width: 121px;
-          height: 45px;
-          top: 19px;
-          left: 617px;
-          border-radius: 24px;
-          padding-top: 12px;
-          padding-right: 16px;
-          padding-bottom: 12px;
-          padding-left: 16px;
+          width: 7.5rem;
+          height: 2.8rem;
+          top: 1.2rem;
+          left: 38.5rem;
+          border-radius: 1.5rem;
+          padding: 0.75rem 1rem;
           display: flex;
           justify-content: center;
           align-items: center;
           box-sizing: border-box;
           background-color: #fff;
-          gap: 10px;
+          gap: 0.625rem;
 
           a {
             font-family: Inter, sans-serif;
             font-weight: 400;
-            font-size: 15px;
-            line-height: 20.8px;
+            font-size: 0.9375rem;
+            line-height: 1.3;
             letter-spacing: 0%;
             vertical-align: middle;
             text-align: center;
-            width: 89px;
-            height: 21px;
+            width: 100%;
+            height: auto;
             box-sizing: border-box;
 
             text-decoration: none;
@@ -130,89 +129,89 @@
 
           // width: 194px;
           // height: 21px;
-          top: 104px;
-          left: 68px;
-          margin: 7px 0;
+          top: 6.5rem;
+          left: 4.25rem;
+          margin: 0.4375rem 0;
 
           font-family: "Inter", sans-serif;
           font-weight: 400;
-          font-size: 14px;
-          line-height: 20.8px;
+          font-size: 0.875rem;
+          line-height: 1.3;
           letter-spacing: 2%;
           vertical-align: middle;
 
           b {
-            margin-left: 5px;
+            margin-left: 0.3125rem;
             font-family: "Inter", sans-serif;
             font-weight: 600;
-            font-size: 16px;
-            line-height: 20.8px;
+            font-size: 1rem;
+            line-height: 1.3;
             // letter-spacing: 2%;
             vertical-align: middle;
           }
         }
 
         p {
-          padding-top: 5px;
+          padding-top: 0.3125rem;
           // width: calc(184px + 161px);
           // height: 21px;
           font-family: "Inter", sans-serif;
           font-weight: 300;
-          font-size: 15px;
-          line-height: 20.8px;
+          font-size: 0.9375rem;
+          line-height: 1.3;
           letter-spacing: 2%;
           vertical-align: middle;
         }
 
         .contact-info {
-          margin-top: 15px;
-          padding: 10px;
+          margin-top: 0.9375rem;
+          padding: 0.625rem;
           background-color: rgba(255, 255, 255, 0.15);
-          border-radius: 8px;
+          border-radius: 0.5rem;
 
           p {
-            margin: 5px 0;
+            margin: 0.3125rem 0;
           }
         }
       }
     }
 
     .eventEnd {
-      width: 768px;
-      height: 108px;
-      top: 550px;
-      left: 30px;
-      gap: 12px;
+      width: 100%;
+      height: auto;
+      top: 34.375rem;
+      left: 1.875rem;
+      gap: 0.75rem;
 
       .Volunteer {
         font-family: Inter;
         font-weight: 400;
-        font-size: 16px;
-        line-height: 20.8px;
+        font-size: 1rem;
+        line-height: 1.3;
         letter-spacing: 2%;
         vertical-align: middle;
         text-transform: capitalize;
         color: #7a7983;
 
-        margin-bottom: 22px;
+        margin-bottom: 1.375rem;
 
         a {
           color: #2f295f;
         }
       }
 
-      margin-top: 72px;
+      margin-top: 4.5rem;
     }
 
     // Styles for rulebook link
     .rulebook {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 20px;
-      padding: 10px 16px;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      padding: 0.625rem 1rem;
       background-color: #f5f5f5;
-      border-radius: 8px;
+      border-radius: 0.5rem;
       text-decoration: none;
       color: #333;
       font-family: "Inter", sans-serif;
@@ -224,32 +223,32 @@
       }
 
       img {
-        height: 24px;
+        height: 1.5rem;
         width: auto;
       }
     }
 
     // Styles for register button
     .register-link {
-      margin-top: 20px;
+      margin-top: 1.25rem;
       text-align: center;
 
       .register-button {
         display: inline-block;
-        padding: 12px 24px;
+        padding: 0.75rem 1.5rem;
         background-color: #2f295f;
         color: white;
-        border-radius: 24px;
+        border-radius: 1.5rem;
         text-decoration: none;
         font-family: "Inter", sans-serif;
         font-weight: 500;
-        font-size: 16px;
+        font-size: 1rem;
         transition: all 0.2s ease;
 
         &:hover {
           background-color: #201c42;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          transform: translateY(-0.125rem);
+          box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
         }
       }
     }
@@ -258,10 +257,11 @@
 
 .LikeShare {
   display: flex;
-  width: 388.0010986328125px;
-  height: 41px;
-  gap: 199px;
-  margin-top: 24px;
+  width: 100%;
+  max-width: 24.25rem;
+  height: 2.5625rem;
+  gap: 12.5rem;
+  margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
   // box-sizing: border-box;
@@ -270,10 +270,10 @@
   .like {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 0.25rem;
     cursor: pointer;
-    padding: 8px;
-    border-radius: 20px;
+    padding: 0.5rem;
+    border-radius: 1.25rem;
     transition: background-color 0.2s ease;
 
     &:hover {
@@ -297,14 +297,14 @@
   .likeTxt,
   .shareTxt {
     // width: 52px;
-    height: 41px;
-    gap: 10px;
-    padding: 10px;
+    height: 2.5625rem;
+    gap: 0.625rem;
+    padding: 0.625rem;
     font-family: Inter;
 
     font-weight: 400;
-    font-size: 16px;
-    line-height: 20.8px;
+    font-size: 1rem;
+    line-height: 1.3;
     letter-spacing: 2%;
     vertical-align: middle;
 
@@ -318,20 +318,20 @@
   }
 
   .likeTxt {
-    width: 52px;
+    width: 3.25rem;
   }
 
   .shareTxt {
-    width: 65px;
+    width: 4.0625rem;
   }
 
   .share {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 0.25rem;
     cursor: pointer;
-    padding: 8px;
-    border-radius: 20px;
+    padding: 0.5rem;
+    border-radius: 1.25rem;
     transition: background-color 0.2s ease;
 
     &:hover {
