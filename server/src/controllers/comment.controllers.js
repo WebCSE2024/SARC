@@ -132,8 +132,7 @@ export const deleteReply = asyncHandler(async (req, res) => {
   if (!req.user) {
     throw new ApiError(400, "Not authenticated");
   }
-  console.log(req.params);
-  console.log(req.user);
+
   
   
   if (!req.params.replyId) {

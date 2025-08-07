@@ -36,7 +36,6 @@ export const createSeminar = asyncHandler(async (req, res) => {
 export const getAllSeminars = asyncHandler(async (req, res) => {
   try {
     const seminars = await Seminar.find();
-    console.log(seminars);
     
     if (!seminars.length) throw new ApiError(400, "No seminars found");
     return res
