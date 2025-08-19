@@ -15,8 +15,10 @@ const ReferralCard = ({ data }) => {
 
   if (data == undefined) data = ReferralEntry;
 
+  const titleId = `ref-title-${data?.referralId || "item"}`;
+
   return (
-    <div className="card-container">
+    <div className="card-container" role="article" aria-labelledby={titleId}>
       <div className="top-block">
         {/* Header Section */}
         <ProfileHeader
@@ -39,7 +41,7 @@ const ReferralCard = ({ data }) => {
             <div className="post-box">
               <div className="post-name">
                 <p className="p">POST</p>
-                <span className="post-title">
+                <span className="post-title" id={titleId}>
                   {data && data.jobProfile} ({data && data.companyName})
                 </span>
               </div>{" "}
@@ -82,7 +84,13 @@ const ReferralCard = ({ data }) => {
               </div>
               <div className="detail">
                 <p className="job-heading">
-                  <a href={data && data.website}>Website Link</a>
+                  <a
+                    href={data && data.website}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    Website Link
+                  </a>
                 </p>
               </div>
             </div>

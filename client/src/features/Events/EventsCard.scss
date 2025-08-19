@@ -2,27 +2,21 @@
   display: flex;
   justify-content: center;
   align-items: start;
-
+  gap: 16px;
   margin: 2.5rem auto;
+  padding: 0 12px;
 
   .commentsCardWrapper {
-    // background-color: #2196F3;
     width: 25rem;
   }
 
   .eventCard {
-    box-sizing: border-box;
-    width: 90%;
-    max-width: 52.5rem;
-    // height: 690px;
-    border-radius: 1rem;
-    // margin: 40px auto;
-    padding: 2.2rem;
-    box-sizing: border-box;
-
-    background-color: #fff;
-
-    box-shadow: 0.25rem 0.25rem 0.75rem 0px #0000001a;
+    width: min(100%, 840px);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
 
     .eventDesc {
       width: 100%;
@@ -219,7 +213,8 @@
       transition: all 0.2s ease;
 
       &:hover {
-        background-color: #e5e5e5;
+        background-color: var(--brand-50);
+        color: var(--brand-700);
       }
 
       img {
@@ -236,7 +231,7 @@
       .register-button {
         display: inline-block;
         padding: 0.75rem 1.5rem;
-        background-color: #2f295f;
+        background-color: var(--brand-500);
         color: white;
         border-radius: 1.5rem;
         text-decoration: none;
@@ -246,9 +241,9 @@
         transition: all 0.2s ease;
 
         &:hover {
-          background-color: #201c42;
+          background-color: var(--brand-600);
           transform: translateY(-0.125rem);
-          box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+          box-shadow: var(--shadow-sm);
         }
       }
     }

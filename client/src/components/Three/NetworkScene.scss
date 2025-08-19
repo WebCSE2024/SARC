@@ -1,0 +1,380 @@
+.network-scene {
+  position: relative;
+  width: 100%;
+  max-width: 1400px; // Maximum width for very large screens
+  height: 600px; // Increased height for better 3D viewing
+  margin: 0 auto; // Center the container horizontally
+  padding: 0 24px; // Add horizontal padding for breathing room
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(47, 41, 95, 0.03) 0%,
+    rgba(66, 133, 244, 0.03) 30%,
+    rgba(52, 168, 83, 0.03) 60%,
+    rgba(234, 67, 53, 0.02) 100%
+  );
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  box-sizing: border-box; // Include padding in width calculation
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at 20% 80%,
+        rgba(47, 41, 95, 0.12) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse at 80% 20%,
+        rgba(66, 133, 244, 0.08) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse at 60% 60%,
+        rgba(52, 168, 83, 0.06) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 50% 50%,
+        rgba(234, 67, 53, 0.04) 0%,
+        transparent 70%
+      );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  canvas {
+    width: calc(100% - 48px) !important; // Account for horizontal padding
+    height: 100% !important;
+    margin: 0 24px; // Center canvas within padded container
+  }
+}
+
+.network-legend {
+  position: absolute;
+  top: 16px;
+  right: 40px; // Adjusted for container padding
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+  backdrop-filter: blur(12px);
+  min-width: 160px;
+
+  .legend-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+
+    h4 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .pause-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 12px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: var(--brand-50);
+        border-color: var(--brand-300);
+        color: var(--brand-600);
+      }
+
+      &.paused {
+        background: var(--brand-500);
+        color: white;
+        border-color: var(--brand-500);
+      }
+    }
+  }
+
+  .legend-items {
+    margin-bottom: 12px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+
+      &.alumni {
+        background: #2f295f;
+      }
+
+      &.professor {
+        background: #34a853;
+      }
+
+      &.student {
+        background: #4285f4;
+      }
+
+      &.sarc {
+        background: linear-gradient(45deg, #ea4335, #2f295f);
+        border: none;
+      }
+    }
+  }
+
+  .interaction-help {
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+
+    small {
+      color: var(--text-muted);
+      font-size: 10px;
+      line-height: 1.4;
+
+      &::after {
+        content: " • Use mouse wheel for depth navigation";
+        display: block;
+        font-style: italic;
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+.selected-node-info {
+  position: absolute;
+  top: 16px;
+  left: 40px; // Adjusted for container padding
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-lg);
+  z-index: 15;
+  backdrop-filter: blur(12px);
+  min-width: 220px;
+  max-width: 280px;
+
+  .info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+
+    h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      line-height: 1;
+
+      &:hover {
+        background: var(--brand-50);
+        color: var(--brand-600);
+      }
+    }
+  }
+
+  .info-content {
+    p {
+      margin: 0 0 8px 0;
+      font-size: 13px;
+      color: var(--text-muted);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+/* Node tooltips and labels */
+.node-tooltip {
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+
+  .tooltip-type {
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .tooltip-name {
+    font-size: 11px;
+    opacity: 0.9;
+  }
+
+  .tooltip-dept {
+    font-size: 10px;
+    opacity: 0.7;
+  }
+}
+
+.node-label {
+  &.sarc-label {
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(47, 41, 95, 0.95),
+      rgba(234, 67, 53, 0.95)
+    );
+    color: white;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+
+    .label-text {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .label-subtitle {
+      font-size: 10px;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .network-scene {
+    height: 480px; // Increased mobile height for better 3D view
+    padding: 0 16px; // Reduced padding for mobile
+
+    canvas {
+      width: calc(100% - 32px) !important; // Adjust for mobile padding
+      margin: 0 16px;
+    }
+  }
+
+  .network-legend {
+    top: 8px;
+    right: 24px; // Account for container padding
+    padding: 8px;
+
+    .legend-item {
+      font-size: 11px;
+      margin-bottom: 6px;
+
+      .legend-color {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .network-scene {
+    height: 380px; // Better mobile 3D experience
+    padding: 0 12px; // Minimal padding for small screens
+
+    canvas {
+      width: calc(100% - 24px) !important; // Adjust for small screen padding
+      margin: 0 12px;
+    }
+  }
+
+  .network-legend {
+    position: static;
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    .legend-item {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* Loading animation */
+.network-scene.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: "";
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top: 3px solid var(--brand-500);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Accessibility - Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  .network-scene canvas {
+    animation-play-state: paused;
+  }
+}

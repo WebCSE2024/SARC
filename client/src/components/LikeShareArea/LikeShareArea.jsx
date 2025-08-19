@@ -1,46 +1,75 @@
-import React from 'react'
-import { useState } from 'react';
-import './LikeShareArea.scss'
+import React from "react";
+import { useState } from "react";
+import "./LikeShareArea.scss";
 
 const LikeShareArea = () => {
-    const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
-    const handleLikeClick = () => {
-        setIsLiked(!isLiked);
-    };
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked);
+  };
 
-    const handleShareEvent = () => {
-        // console.log(`share clicked!`);
+  const handleKeyActivate = (e, handler) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handler();
     }
-    return (
-        <div className='LikeShareArea'>
-            <hr />
+  };
 
-            <div className="LikeShare">
-                <div className="like" onClick={handleLikeClick}>
-                    <svg
-                        className={`like-icon ${isLiked ? 'liked' : ''}`}
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                    >
-                        <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z" />
-                    </svg>
-                    <span className="likeTxt">
-                        Like
-                    </span>
-                </div>
+  const handleShareEvent = () => {
+    // console.log(`share clicked!`);
+  };
+  return (
+    <div className="LikeShareArea">
+      <hr />
 
+      <div
+        className="LikeShare"
+        role="group"
+        aria-label="Like and share controls"
+      >
+        <div
+          className="like"
+          role="button"
+          tabIndex={0}
+          aria-pressed={isLiked}
+          aria-label={isLiked ? "Unlike" : "Like"}
+          onClick={handleLikeClick}
+          onKeyDown={(e) => handleKeyActivate(e, handleLikeClick)}
+        >
+          <svg
+            className={`like-icon ${isLiked ? "liked" : ""}`}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z" />
+          </svg>
+          <span className="likeTxt">Like</span>
+        </div>
 
-                {/* share action for onClick on share! */}
-                <div className="share" onClick={handleShareEvent}>
-
-                    <svg className='share-icon' version="1.0" xmlns="http://www.w3.org/2000/svg"
-                        width="36px" height="36px" viewBox="0 0 675.000000 675.000000"
-                        preserveAspectRatio="xMidYMid meet">
-                        <g transform="translate(0.000000,675.000000) scale(0.100000,-0.100000)">
-                            <path d="M3949 5667 c-59 -50 -59 -46 -59 -525 l0 -439 -87 -17 c-49 -9 -122
+        {/* share action for onClick on share! */}
+        <div
+          className="share"
+          role="button"
+          tabIndex={0}
+          aria-label="Share"
+          onClick={handleShareEvent}
+          onKeyDown={(e) => handleKeyActivate(e, handleShareEvent)}
+        >
+          <svg
+            className="share-icon"
+            version="1.0"
+            xmlns="http://www.w3.org/2000/svg"
+            width="36px"
+            height="36px"
+            viewBox="0 0 675.000000 675.000000"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <g transform="translate(0.000000,675.000000) scale(0.100000,-0.100000)">
+              <path
+                d="M3949 5667 c-59 -50 -59 -46 -59 -525 l0 -439 -87 -17 c-49 -9 -122
 -24 -163 -32 -120 -24 -283 -67 -338 -90 -18 -8 -39 -14 -47 -14 -8 0 -29 -6
 -47 -14 -18 -8 -53 -22 -78 -32 -41 -16 -88 -36 -195 -84 -22 -10 -47 -20 -55
 -24 -8 -3 -28 -15 -45 -26 -16 -11 -40 -24 -53 -30 -12 -5 -50 -28 -83 -50
@@ -76,8 +105,10 @@ c-30 33 -34 35 -96 35 -67 0 -199 -21 -289 -46 -28 -8 -59 -14 -70 -14 -10 0
 0 11 4 11 9 0 9 187 124 260 160 25 12 52 26 60 30 30 17 125 58 198 85 102
 39 120 45 177 61 33 9 74 21 90 27 29 10 53 15 165 39 30 6 83 17 117 25 34 8
 77 14 95 14 18 1 69 7 113 15 70 12 84 18 108 47 l27 32 0 366 c0 202 3 370 7
-373 10 11 13 9 53 -25z"/>
-                            <path d="M1700 5244 c-93 -14 -159 -30 -205 -50 -147 -63 -232 -116 -323 -199
+373 10 11 13 9 53 -25z"
+              />
+              <path
+                d="M1700 5244 c-93 -14 -159 -30 -205 -50 -147 -63 -232 -116 -323 -199
 -35 -31 -148 -165 -169 -200 -36 -59 -86 -172 -115 -260 l-33 -100 0 -1280 c0
 -1216 1 -1283 19 -1345 18 -65 37 -120 62 -175 7 -16 15 -37 19 -45 18 -45 99
 -162 156 -224 47 -51 162 -145 224 -183 42 -26 166 -83 180 -83 8 0 29 -6 47
@@ -91,17 +122,16 @@ c-30 33 -34 35 -96 35 -67 0 -199 -21 -289 -46 -28 -8 -59 -14 -70 -14 -10 0
 -243 231 -270 302 -3 8 -10 23 -15 32 -22 42 -48 140 -58 217 -15 116 -15
 2286 0 2402 13 102 39 185 81 259 4 8 11 22 15 30 14 32 100 137 145 179 54
 48 96 78 164 116 79 44 121 57 269 84 40 7 345 11 923 11 l863 0 29 31 c37 41
-43 84 18 132 -35 70 11 67 -950 66 -645 -1 -884 -5 -948 -15z"/>
-                        </g>
-                    </svg>
+43 84 18 132 -35 70 11 67 -950 66 -645 -1 -884 -5 -948 -15z"
+              />
+            </g>
+          </svg>
 
-                    <span className="shareTxt">
-                        Share
-                    </span>
-                </div>
-            </div>
+          <span className="shareTxt">Share</span>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default LikeShareArea
+export default LikeShareArea;

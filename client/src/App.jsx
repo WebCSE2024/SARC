@@ -27,7 +27,7 @@ const AppRoutes = () => {
   return (
     <>
       <Header />
-      <main className="main-content">
+      <main id="main" className="main-content" role="main" aria-live="polite">
         <Routes>
           {/* Login route - always accessible */}
           <Route path="/login" element={<LoginPage />} />

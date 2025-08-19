@@ -42,8 +42,21 @@ const AchievementsCard = ({ data }) => {
           <p>{data.description}</p>
         </div>
 
-        <div className="slideShow">
-          <div className="scroll-btn scrollLeft" onClick={handleLeftScroll}>
+        <div
+          className="slideShow"
+          role="region"
+          aria-label="Achievement gallery"
+        >
+          <div
+            className="scroll-btn scrollLeft"
+            onClick={handleLeftScroll}
+            role="button"
+            tabIndex={0}
+            aria-label="Scroll gallery left"
+            onKeyDown={(e) =>
+              (e.key === "Enter" || e.key === " ") && handleLeftScroll()
+            }
+          >
             <svg
               className="scrollSvg left"
               xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +69,11 @@ const AchievementsCard = ({ data }) => {
 
           {/* This ref is helpful in differentiating images-wrappers of 
                     different achievementsCard renderings */}
-          <div className="images-wrapper" ref={imagesWrapperRef}>
+          <div
+            className="images-wrapper"
+            ref={imagesWrapperRef}
+            aria-live="polite"
+          >
             {data.gallery.map((image, index) => (
               <div key={index} className={`SlideShowImage ${index}thImage`}>
                 <img src={image.url} alt={`Image ${index}`} />
@@ -64,7 +81,16 @@ const AchievementsCard = ({ data }) => {
             ))}
           </div>
 
-          <div className="scroll-btn scrollRight" onClick={handleRightScroll}>
+          <div
+            className="scroll-btn scrollRight"
+            onClick={handleRightScroll}
+            role="button"
+            tabIndex={0}
+            aria-label="Scroll gallery right"
+            onKeyDown={(e) =>
+              (e.key === "Enter" || e.key === " ") && handleRightScroll()
+            }
+          >
             <svg
               className="scrollSvg right"
               xmlns="http://www.w3.org/2000/svg"

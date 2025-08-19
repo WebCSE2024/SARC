@@ -1,157 +1,163 @@
 @keyframes checkedAnimation {
-    0% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(1);
+  }
 
-    50% {
-        transform: scale(1.2);
-    }
+  50% {
+    transform: scale(1.2);
+  }
 
-    100% {
-        transform: scale(1);
-    }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .accountDetails {
-    width: 757px;
-    height: 56px;
-    // top: 38px;
-    // left: 35px;
-    // gap: 69px;
-    // margin: auto;
+  width: 100%;
+  max-width: 757px;
+  min-height: 56px;
+  // top: 38px;
+  // left: 35px;
+  // gap: 69px;
+  // margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .accountInfo {
+    width: 100%;
+    min-height: 56px;
+    border-radius: 999px;
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-evenly;
+
+    .profileImg {
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      margin-right: 20px;
+    }
+
+    .AccountTitle {
+      width: 100%;
+      min-height: 21px;
+      left: 72px;
+
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      vertical-align: middle;
+      color: var(--text);
+    }
+
+    .follower-count,
+    .TimeOfPost {
+      width: 100%;
+      min-height: 21px;
+
+      display: flex;
+      // justify-content: center;
+      align-items: center;
+
+      font-family: Inter;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      vertical-align: middle;
+      color: #5c5757;
+    }
+
+    p {
+      font-family: "Inter", sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      vertical-align: middle;
+      color: #5c5757;
+    }
+  }
+
+  // .bookmark input {
+  //     width: 38;
+  //     height: 44;
+  //     border-radius: 6px;
+  //     gap: 10px;
+  //     padding: 10px;
+
+  //     box-shadow: 0px 6px 12px 0px #00000026;
+  // }
+
+  // .BookmarkSpan {
+  //     width: 38px;
+  //     height: 44px;
+  //     border-radius: 6px;
+  //     gap: 10px;
+  //     padding: 10px;
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+
+  //     .bookmark-chkbox {
+  //         display: none;
+  //     }
+
+  //     .label-bookmark-chkbox {
+  //         width: 38px;
+  //         height: 44px;
+  //         border-radius: 6px;
+  //         gap: 10px;
+  //         padding: 10px;
+  //         box-sizing: border-box;
+  //         box-shadow: 0px 6px 12px 0px #00000026;
+
+  //         :hover {
+  //             cursor: pointer;
+  //         }
+  //     }
+
+  //     svg {
+  //         transition: fill 0.2s ease-in-out;
+  //         stroke-width: 5px;
+  //         stroke: #8D91B0;
+  //         animation: checkedAnimation 0.4s ease forwards;
+
+  //         height: 24px;
+  //         width: 18px;
+  //         scale: 1.2;
+  //         margin-top: auto;
+  //         margin-bottom: auto;
+  //     }
+  // }
+
+  .event-type {
+    min-height: 30px;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    padding: 4px 12px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: var(--brand-50);
+    box-shadow: var(--shadow-sm);
+    color: var(--brand-700);
+    font-family: "Inter", sans-serif;
+    // font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+}
 
-    .accountInfo {
-        width: 650px;
-        height: 56px;
-        border-radius: 999px;
-        display: flex;
-        // justify-content: space-evenly;
-
-        .profileImg {
-            width: 56px;
-            height: 56px;
-            border-radius: 999px;
-            margin-right: 20px;
-        }
-
-        .AccountTitle {
-            width: 578px;
-            height: 21px;
-            left: 72px;
-
-
-            font-family: "Inter", sans-serif;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 100%;
-            letter-spacing: 0%;
-            vertical-align: middle;
-            color: #000;
-
-        }
-
-        .follower-count,
-        .TimeOfPost {
-            width: 366px;
-            height: 21px;
-
-            display: flex;
-            // justify-content: center;
-            align-items: center;
-
-            font-family: Inter;
-            font-weight: 300;
-            font-size: 14px;
-            line-height: 100%;
-            letter-spacing: 0%;
-            vertical-align: middle;
-            color: #5C5757;
-
-        }
-
-        p {
-            font-family: "Inter", sans-serif;
-            font-weight: 300;
-            font-size: 14px;
-            line-height: 100%;
-            letter-spacing: 0%;
-            vertical-align: middle;
-            color: #5C5757;
-        }
-
-
-    }
-
-    // .bookmark input {
-    //     width: 38;
-    //     height: 44;
-    //     border-radius: 6px;
-    //     gap: 10px;
-    //     padding: 10px;
-
-    //     box-shadow: 0px 6px 12px 0px #00000026;
-    // }
-
-    // .BookmarkSpan {
-    //     width: 38px;
-    //     height: 44px;
-    //     border-radius: 6px;
-    //     gap: 10px;
-    //     padding: 10px;
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-
-    //     .bookmark-chkbox {
-    //         display: none;
-    //     }
-
-    //     .label-bookmark-chkbox {
-    //         width: 38px;
-    //         height: 44px;
-    //         border-radius: 6px;
-    //         gap: 10px;
-    //         padding: 10px;
-    //         box-sizing: border-box;
-    //         box-shadow: 0px 6px 12px 0px #00000026;
-            
-
-    //         :hover {
-    //             cursor: pointer;
-    //         }
-    //     }
-
-    //     svg {
-    //         transition: fill 0.2s ease-in-out;
-    //         stroke-width: 5px;
-    //         stroke: #8D91B0;
-    //         animation: checkedAnimation 0.4s ease forwards;
-            
-    //         height: 24px;
-    //         width: 18px;
-    //         scale: 1.2;
-    //         margin-top: auto;
-    //         margin-bottom: auto;
-    //     }
-    // }
-
+@media (max-width: 600px) {
+  .accountDetails {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
     .event-type {
-        min-height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 4px 12px;
-        box-sizing: border-box;
-        border-radius: 20px;
-        background-color: #e3f2fd;
-        box-shadow: 0px 4px 10px 0px #70707026;
-        color: #1976d2;
-        font-family: "Inter", sans-serif;
-        // font-size: 0.875rem;
-        font-weight: 500;
-        text-transform: capitalize;
+      align-self: flex-end;
     }
+  }
 }

@@ -3,9 +3,10 @@
   overflow-y: scroll;
   padding: 24px;
   padding-top: 0px;
-  background: white;
+  background: var(--bg-surface);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
   margin-left: 10px;
   margin-right: 0;
   position: relative; // For fixed comment input
@@ -26,7 +27,7 @@
   .no-comments {
     text-align: center;
     padding: 20px 0;
-    color: #6b7280;
+    color: var(--text-muted);
     font-size: 14px;
   }
 
@@ -41,10 +42,10 @@
     margin-bottom: 20px;
     position: sticky;
     top: 0;
-    background: white;
+    background: var(--bg-surface);
     padding: 16px 0;
     z-index: 10;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--border);
 
     .input-wrapper {
       flex: 1;
@@ -56,17 +57,17 @@
         flex: 1;
         padding: 12px 20px;
         padding-right: 44px; // Make room for send button
-        border: 1px solid #e5e7eb;
+        border: 1px solid var(--border);
         border-radius: 24px;
         font-size: 14px;
-        background-color: #f9fafb;
+        background-color: var(--bg-elevated, #f9fafb);
         transition: all 0.2s ease;
 
         &:focus {
           outline: none;
-          border-color: #2196f3;
-          background-color: white;
-          box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+          border-color: var(--brand-500);
+          background-color: var(--bg-surface);
+          box-shadow: var(--shadow-xs);
         }
       }
 
@@ -90,10 +91,10 @@
         }
 
         &.active {
-          color: #2196f3;
+          color: var(--brand-500);
 
           &:hover {
-            background-color: rgba(33, 150, 243, 0.1);
+            background-color: var(--brand-50);
             transform: scale(1.1);
           }
         }
@@ -119,17 +120,17 @@
   .comment-input {
     flex: 1;
     padding: 12px 20px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
     border-radius: 24px;
     font-size: 14px;
-    background-color: #f9fafb;
+    background-color: var(--bg-elevated, #f9fafb);
     transition: all 0.2s ease;
 
     &:focus {
       outline: none;
-      border-color: #2196f3;
-      background-color: white;
-      box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+      border-color: var(--brand-500);
+      background-color: var(--bg-surface);
+      box-shadow: var(--shadow-xs);
     }
   }
 
@@ -162,13 +163,13 @@
         h4 {
           font-size: 14px;
           font-weight: 600;
-          color: #111827;
+          color: var(--text);
           margin: 0;
         }
 
         .timestamp {
           font-size: 12px;
-          color: #6b7280;
+          color: var(--text-muted);
         }
       }
 
@@ -176,7 +177,7 @@
       .reply-text {
         margin: 0 0 10px 0;
         font-size: 14px;
-        color: #374151;
+        color: var(--text);
         line-height: 1.5;
         word-break: break-word;
       }
@@ -205,7 +206,7 @@
       transition: all 0.2s ease;
 
       &:hover {
-        color: #2196f3;
+        color: var(--brand-500);
         background-color: #f3f4f6;
       }
     }
@@ -223,7 +224,7 @@
       font-weight: 500;
 
       &:hover {
-        color: #2196f3;
+        color: var(--brand-500);
       }
     }
 
@@ -236,7 +237,7 @@
       margin-left: 52px;
       margin-top: 8px;
       padding-left: 16px;
-      border-left: 2px solid #e5e7eb;
+      border-left: 2px solid var(--border);
       animation: fadeIn 0.3s ease;
 
       .reply {

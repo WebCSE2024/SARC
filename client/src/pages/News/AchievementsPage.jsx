@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import Achievements from '../../features/Achievements/AchievementsCard'
-import SearchBox from '../../components/Filtering/SearchBox'
-import mockAchievements from '../../SampleData/achievementsData.json'
-import { searchInObject } from '../../utils/searchUtils'
-import {sarcAPI} from "../../../../../shared/axios/axiosInstance.js"
+import React, { useState, useEffect } from "react";
+import Achievements from "../../features/Achievements/AchievementsCard";
+import SearchBox from "../../components/Filtering/SearchBox";
+import mockAchievements from "../../SampleData/achievementsData.json";
+import { searchInObject } from "../../utils/searchUtils";
+import { sarcAPI } from "../../../../../shared/axios/axiosInstance.js";
 
 const AchievementsPage = () => {
   const [mockData] = useState(mockAchievements.achievements);
   const [apiAchievements, setApiAchievements] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [filteredAchievements, setFilteredAchievements] = useState([]);
 
   const getAchievements = async () => {
     try {
-      const response = await sarcAPI.get(`sarc/v0/achievement/achievement-list`);
+      const response = await sarcAPI.get(
+        `sarc/v0/achievement/achievement-list`
+      );
       setApiAchievements(response.data.data);
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       setApiAchievements(mockAchievements.achievements);
     }
   };
@@ -30,8 +32,8 @@ const AchievementsPage = () => {
       }
 
       const query = searchQuery.toLowerCase();
-      const filtered = apiAchievements.filter(achievement => 
-        searchInObject(achievement,query)
+      const filtered = apiAchievements.filter(
+        (achievement) => searchInObject(achievement, query)
         // achievement.title.toLowerCase().includes(query) ||
         // achievement.description.toLowerCase().includes(query)
       );
@@ -46,17 +48,17 @@ const AchievementsPage = () => {
   }, []);
 
   return (
-    <div className='AchievementsPage'>
-      <SearchBox 
+    <div className="AchievementsPage">
+      <SearchBox
         key="achievements"
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
-        // resultsCount={filteredAchievements.length}
+        resultsCount={filteredAchievements.length}
       />
-      
+
       {/* Display Filtered Achievements */}
       {filteredAchievements.map((achievement, index) => (
-        <Achievements 
+        <Achievements
           key={achievement.id || `achievement_${index}`}
           data={achievement}
         />
@@ -70,7 +72,7 @@ const AchievementsPage = () => {
         />
       ))} */}
     </div>
-  )
-}
+  );
+};
 
-export default AchievementsPage
+export default AchievementsPage;

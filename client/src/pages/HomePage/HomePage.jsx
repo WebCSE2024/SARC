@@ -1,18 +1,85 @@
-import React from 'react'
-import './HomePage.scss'
+import React, { useEffect, useRef, Suspense } from "react";
+import "./HomePage.scss";
+import { animate, createScope, createSpring, stagger } from "animejs";
+import { NavLink } from "react-router-dom";
+import NetworkScene from "../../components/Three/NetworkScene";
 
 const HomePage = () => {
+  const root = useRef(null);
+  const scope = useRef(null);
+
+  useEffect(() => {
+    // Respect reduced motion
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    scope.current = createScope({ root }).add(() => {
+      if (prefersReduced) return;
+
+      // Intro fade-up for hero content
+      animate(".hero h1, .hero p, .hero .cta", {
+        y: [20, 0],
+        opacity: [0, 1],
+        ease: "out(3)",
+        duration: 700,
+        delay: stagger(90),
+      });
+
+      // Subtle floating parallax for cards in 3D container
+      animate(".threeD .card", {
+        translateZ: [0, 20],
+        rotateX: [-2, 2],
+        rotateY: [-2, 2],
+        ease: createSpring({ stiffness: 70, damping: 12 }),
+        loop: true,
+        alternate: true,
+        duration: 3000,
+        delay: stagger(200),
+      });
+
+      // Note: pseudo-elements can't be targeted; the glow is done via CSS only
+    });
+
+    return () => scope.current?.revert();
+  }, []);
+
   return (
-    <div className='HomePage'>
-        <h1 className="tagline">Where Legacy Meets Opportunity
-        Connect with the IIT ISM Alumni Network.</h1>
-
-        {/* <img className='DisplayImg' src="https://www.figma.com/file/DiPVcgFmvura6BmeIqaj0T/image/02f21037c032bedb8dd83d384b105487aae9b7e1" alt="HomePageImg" /> */}.
-        <div className="DisplayImg">
-            This space will Be replaced by 3D models
+    <div className="HomePage" ref={root}>
+      <section className="hero container" aria-label="SARC mission">
+        <h1 className="tagline">
+          Where Legacy Meets Opportunity
+          <br />
+          Connect with the IIT ISM Alumni Network.
+        </h1>
+        <p className="subtitle">
+          Collaborate with alumni, professors, and peers. Access research,
+          referrals, and opportunities to grow.
+        </p>
+        <div className="cta" role="group" aria-label="Primary actions">
+          <NavLink to="/news" className="btn primary">
+            Explore News
+          </NavLink>
+          <NavLink to="/publications" className="btn ghost">
+            Read Publications
+          </NavLink>
         </div>
+      </section>
+      <Suspense
+        fallback={
+          <div
+            className="DisplayImg threeD loading"
+            role="region"
+            aria-label="Loading network visualization"
+          >
+            <div className="loading-text">Loading SARC Network...</div>
+          </div>
+        }
+      >
+        <NetworkScene />
+      </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

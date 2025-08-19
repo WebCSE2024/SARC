@@ -43,27 +43,44 @@ const News = () => {
 
   return (
     <div className="news-container">
-      <div className="news-tabs">
-        <div
+      <div className="news-tabs" role="tablist" aria-label="News categories">
+        <button
           className={`tab ${activeTab === "events" ? "active" : ""}`}
+          role="tab"
+          aria-selected={activeTab === "events"}
+          aria-controls="panel-events"
           onClick={() => handleTabChange("events")}
         >
           Events
-        </div>
-        <div
+        </button>
+        <button
           className={`tab ${activeTab === "achievements" ? "active" : ""}`}
+          role="tab"
+          aria-selected={activeTab === "achievements"}
+          aria-controls="panel-achievements"
           onClick={() => handleTabChange("achievements")}
         >
           Achievements
-        </div>
-        <div
+        </button>
+        <button
           className={`tab ${activeTab === "seminars" ? "active" : ""}`}
+          role="tab"
+          aria-selected={activeTab === "seminars"}
+          aria-controls="panel-seminars"
           onClick={() => handleTabChange("seminars")}
         >
           Seminars
-        </div>
+        </button>
       </div>
-      <div className="news-content">{renderContent()}</div>
+      <div
+        id={`panel-${activeTab}`}
+        className="news-content"
+        role="tabpanel"
+        tabIndex={0}
+        aria-label={`${activeTab} content`}
+      >
+        {renderContent()}
+      </div>
     </div>
   );
 };

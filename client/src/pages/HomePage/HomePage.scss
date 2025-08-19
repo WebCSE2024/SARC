@@ -1,38 +1,135 @@
 .HomePage {
-    .tagline {
-        margin: 200px auto;
-        margin-bottom: 99px;
+  .tagline {
+    margin: 160px auto 24px;
+    max-width: 980px;
+    font-family: Inter, serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #0f172a;
+  }
 
-        max-width: 1187px;
-        // height: 152px;
-        top: 355px;
-        left: 127px;
+  .subtitle {
+    margin: 0 auto 28px;
+    max-width: 820px;
+    text-align: center;
+    color: #334155;
+    font-size: clamp(14px, 2.2vw, 18px);
+  }
 
-        font-family: "New York Extra Large";
-        font-weight: 400;
-        font-style: italic;
-        font-size: 64px;
-        line-height: 100%;
-        letter-spacing: 0%;
-        text-align: center;
-        vertical-align: middle;
+  .cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 12px auto 40px;
+  }
 
-    }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.08);
+    will-change: transform;
+    border: 1px solid transparent;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn.primary {
+    background: var(--brand-500);
+    color: #fff;
+  }
+  .btn.primary:hover {
+    background: var(--brand-600);
+    box-shadow: 0 10px 24px rgba(10, 102, 194, 0.25);
+  }
+  .btn.ghost {
+    background: #fff;
+    color: var(--brand-700);
+    border-color: var(--brand-200);
+  }
+  .btn.ghost:hover {
+    background: var(--brand-50);
+  }
 
-    .DisplayImg {
-        width: 980px;
-        height: 536px;
-        top: 606px;
-        left: 230px;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
+  .DisplayImg {
+    width: min(980px, 92%);
+    height: clamp(400px, 50vw, 600px);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+        135deg,
+        rgba(47, 41, 95, 0.08),
+        rgba(66, 133, 244, 0.08)
+      ),
+      #fafbfc;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-2xl);
 
-        margin-left: auto;
-        margin-right: auto;
-        
+    /* Loading state */
+    &.loading {
+      background: linear-gradient(
+        135deg,
+        rgba(47, 41, 95, 0.05),
+        rgba(66, 133, 244, 0.05)
+      );
+
+      .loading-text {
+        color: var(--text-muted);
+        font-weight: 500;
+        font-size: 16px;
         display: flex;
-        justify-content: center;
+        align-items: center;
+        gap: 12px;
 
-        background-color:cadetblue;
+        &::after {
+          content: "";
+          width: 20px;
+          height: 20px;
+          border: 2px solid var(--border);
+          border-top: 2px solid var(--brand-500);
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+      }
     }
+  }
+
+  /* Remove old 3D card styles and glow effects */
+  .DisplayImg::after {
+    display: none;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tagline {
+      margin-top: 120px;
+    }
+    .DisplayImg {
+      height: clamp(320px, 45vw, 450px);
+    }
+  }
 }

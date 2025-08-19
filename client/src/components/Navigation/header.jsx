@@ -14,24 +14,32 @@ const Header = () => {
   };
 
   return (
-    <header className="header-navbar">
-      <nav>
-        <NavLink to="/">
+    <header className="header-navbar" role="banner">
+      <nav aria-label="Primary" role="navigation">
+        <NavLink to="/" aria-label="Home">
           <div className="left-side">
-            <img src={sarcLogo} alt="Landing Page Logo" className="logo" />
-            <div className="LogoTitle">SARC</div>
+            <img src={sarcLogo} alt="SARC logo" className="logo" />
+            <div className="LogoTitle" aria-hidden>
+              SARC
+            </div>
           </div>
         </NavLink>
         {user ? (
-          <ul className="nav-links">
-            <li>
-              <NavLink to="/publications">Publications</NavLink>
+          <ul className="nav-links" role="menubar" aria-label="Main sections">
+            <li role="none">
+              <NavLink role="menuitem" to="/publications">
+                Publications
+              </NavLink>
             </li>
-            <li>
-              <NavLink to="/referrals">Referrals</NavLink>
+            <li role="none">
+              <NavLink role="menuitem" to="/referrals">
+                Referrals
+              </NavLink>
             </li>
-            <li>
-              <NavLink to="/news">News</NavLink>
+            <li role="none">
+              <NavLink role="menuitem" to="/news">
+                News
+              </NavLink>
             </li>
           </ul>
         ) : null}
@@ -39,15 +47,23 @@ const Header = () => {
         <div className="right-side">
           {isAuthenticated() ? (
             <>
-              <NavLink to="/profile" className="profile-btn">
+              <NavLink
+                to="/profile"
+                className="profile-btn"
+                aria-label="Profile"
+              >
                 Hi {user?.name || user?.username || "User"}
               </NavLink>
-              <button className="logout-btn" onClick={handleLogout}>
+              <button
+                className="logout-btn"
+                onClick={handleLogout}
+                aria-label="Logout"
+              >
                 Logout
               </button>
             </>
           ) : (
-            <NavLink to="/login" className="signup-btn">
+            <NavLink to="/login" className="signup-btn" aria-label="Sign in">
               Sign in
             </NavLink>
           )}

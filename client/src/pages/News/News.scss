@@ -8,32 +8,38 @@
     display: flex;
     background-color: #fff;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 999px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
     justify-content: center;
 
     .tab {
-      padding: 12px 24px;
-      margin: 0 8px;
+      padding: 10px 18px;
+      margin: 0 6px;
       cursor: pointer;
-      border-radius: 6px;
-      font-family: "Inter", sans-serif;
-      font-weight: 500;
-      font-size: 16px;
-      transition: all 0.3s ease;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-family: Inter, sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-strong);
+      transition: all 0.2s ease;
+    }
 
-      &:hover {
-        background-color: #f5f5f5;
-        color: #057cd5;
-      }
-
-      &.active {
-        background-color: #057cd5;
-        color: white;
-        font-weight: 600;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      }
+    .tab:hover {
+      background-color: var(--brand-50);
+      color: var(--brand-700);
+    }
+    .tab.active {
+      background-color: var(--brand-500);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: var(--shadow-md);
+    }
+    .tab:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
     }
   }
 
