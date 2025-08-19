@@ -372,7 +372,7 @@ const NetworkScene = () => {
         // Request up to 5000 users, projection handled on server
         const { data } = await authAPI.post("auth-system/v0/user/all", {
           page: 1,
-          limit: 5000,
+          limit: 100,
           fields: [
             "name",
             "username",
