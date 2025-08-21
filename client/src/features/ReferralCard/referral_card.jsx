@@ -5,15 +5,11 @@ import { formatAmount } from "../../utils/numberFormatter";
 // import profilePic from "../../assets/NoProfileImg.png";
 import ProfileHeader from "../../components/ProfileHeader/profileHeader";
 
-import ReferralEntry from "../../SampleData/ReferralEntry.json";
-
 const ReferralCard = ({ data }) => {
   // console.log('props', props);
 
   // console.log("received referral data:")
   // console.log(data);
-
-  if (data == undefined) data = ReferralEntry;
 
   const titleId = `ref-title-${data?.referralId || "item"}`;
 

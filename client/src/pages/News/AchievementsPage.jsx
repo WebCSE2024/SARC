@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Achievements from "../../features/Achievements/AchievementsCard";
 import SearchBox from "../../components/Filtering/SearchBox";
-import mockAchievements from "../../SampleData/achievementsData.json";
 import { searchInObject } from "../../utils/searchUtils";
 import { sarcAPI } from "../../../../../shared/axios/axiosInstance.js";
 
 const AchievementsPage = () => {
-  const [mockData] = useState(mockAchievements.achievements);
   const [apiAchievements, setApiAchievements] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredAchievements, setFilteredAchievements] = useState([]);
@@ -19,7 +17,7 @@ const AchievementsPage = () => {
       setApiAchievements(response.data.data);
     } catch (error) {
       console.error("Error:", error);
-      setApiAchievements(mockAchievements.achievements);
+      setApiAchievements([]);
     }
   };
 

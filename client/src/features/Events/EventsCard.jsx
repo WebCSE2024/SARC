@@ -16,14 +16,16 @@ import { formatDate } from "../../utils/dateFormatter.jsx";
 
 const EventsCard = ({ data }) => {
   const [isLiked, setIsLiked] = useState(false);
-  
 
   // Check event type to determine display
-  const isHackathon = data.type?.toLowerCase() === "hackathon";
-  const isCultural = data.type?.toLowerCase() === "cultural";
+  const isHackathon =
+    data.type?.toLowerCase() === EventTypes.HACKATHON.toLowerCase();
+  const isCultural =
+    data.type?.toLowerCase() === EventTypes.CULTURAL.toLowerCase();
   const isConference =
-    data.type?.toLowerCase() === "conferrence" ||
-    data.type?.toLowerCase() === "conference";
+    data.type?.toLowerCase() === EventTypes.CONFERENCE.toLowerCase();
+  const isContests =
+    data.type?.toLowerCase() === EventTypes.CONTESTS.toLowerCase();
 
   return (
     <div className="eventCardOuter">
@@ -49,14 +51,14 @@ const EventsCard = ({ data }) => {
             </li>
 
             {/* Show venue only for CULTURAL or CONFERENCE events */}
-            {!isHackathon && (
+            {!isHackathon && !isContests && (
               <li className="descPoints">
                 Venue: <b>{data.venue} </b>
               </li>
             )}
 
-            {/* Show prize pool for HACKATHON events */}
-            {isHackathon && data.prizePool && (
+            {/* Show prize pool for HACKATHON and CONTESTS events */}
+            {(isHackathon || isContests) && data.prizePool && (
               <li className="descPoints">
                 Prize Pool: <b>₹{data.prizePool} </b>
               </li>
@@ -105,8 +107,8 @@ const EventsCard = ({ data }) => {
           </ul>
         </div>
 
-        {/* Show rulebook link only for HACKATHON events */}
-        {isHackathon && data.ruleBookLink && (
+        {/* Show rulebook link only for HACKATHON and CONTESTS events */}
+        {(isHackathon || isContests) && data.ruleBookLink && (
           <a
             href={data.ruleBookLink}
             target="_blank"

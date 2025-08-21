@@ -20,8 +20,6 @@ export const setUser = async (req, res, next) => {
     const user = await User.findOne({ userId: req.user.id });
 
     if (user) {
-      console.log("User already exists");
-
       return next();
     }
 

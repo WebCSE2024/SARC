@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from 'react';
 import EventsCard from '../../features/Events/EventsCard';
-import eventsData from '../../SampleData/eventsData.json';
 import './EventsPage.scss';
 import SearchBox from '../../components/Filtering/SearchBox';
 import { searchInObject } from '../../utils/searchUtils';
@@ -8,8 +7,8 @@ import {csesAPI} from "../../../../../shared/axios/axiosInstance"
 
 const EventsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [apiEvents, setApiEvents] = useState(eventsData.events);
-  const [filteredEvents, setFilteredEvents] = useState(eventsData.events);
+  const [apiEvents, setApiEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
 
   const getEventsData = async () => {
