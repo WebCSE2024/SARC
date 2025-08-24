@@ -22,7 +22,7 @@
 
   font-family: Inter;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 1rem;
   line-height: 20.8px;
   letter-spacing: 0%;
   vertical-align: middle;
@@ -70,7 +70,7 @@
 .header-navbar .left-side .LogoTitle {
   font-family: "Perandory-Regular";
   font-weight: 400;
-  font-size: 32px;
+  font-size: 2rem;
   line-height: 100%;
   letter-spacing: 0%;
   vertical-align: middle;
@@ -135,7 +135,7 @@
 .header-navbar .left-side .WebsiteName {
   font-family: Perandory;
   font-weight: 400;
-  font-size: 32px;
+  font-size: 2rem;
   line-height: 100%;
   /* letter-spacing: 0%; */
   vertical-align: middle;
@@ -211,7 +211,7 @@
   font-family: Inter;
   font-weight: 700;
   /* font-size: 20px; */
-  font-size: 18px;
+  font-size: 1rem;
   line-height: 20.8px;
   letter-spacing: 0%;
   vertical-align: middle;
@@ -259,7 +259,7 @@
 
   font-family: Inter;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 1rem;
   line-height: 20.8px;
   letter-spacing: 0%;
   vertical-align: middle;
@@ -291,11 +291,10 @@
   border-radius: 10px;
   border: 2px solid transparent;
   /* Added transparent border */
-  font-size: 0.9rem;
 
   font-family: Roboto;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 1rem ;
   line-height: 24px;
   letter-spacing: 0%;
   vertical-align: middle;
