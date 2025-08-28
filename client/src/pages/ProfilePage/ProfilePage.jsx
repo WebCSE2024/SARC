@@ -44,7 +44,7 @@ const ProfilePage = () => {
         <div className="cover-photo"></div>
         <div className="profile-info">
           <img
-            src={user.profile_pic || defaultProfileImg}
+            src={user.profilePicture?.url || defaultProfileImg}
             alt="Profile Picture"
             className="profile-picture"
           />
@@ -91,40 +91,42 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      <div className="profile-content">
-        <section className="about">
-          <h2>About</h2>
-          <p>{user.about}</p>
-        </section>
-
-        {user.experience && (
-          <section className="experience">
-            <h2>Experience</h2>
-            {user.experience.map((exp, index) => (
-              <ExperienceItem data={exp} key={index} />
-            ))}
-            {/* {user.experience && (<ExperienceItem data={user.experience} />)} */}
+      {user?.about ? (
+        <div className="profile-content">
+          <section className="about">
+            <h2>About</h2>
+            <p>{user.about}</p>
           </section>
-        )}
 
-        {user.education && (
-          <section className="education">
-            <h2>Education</h2>
-            {user.education.map((edu, index) => (
-              <EducationItem data={edu} key={index} />
-            ))}
-            {/* <EducationItem /> */}
-          </section>
-        )}
+          {user.experience && (
+            <section className="experience">
+              <h2>Experience</h2>
+              {user.experience.map((exp, index) => (
+                <ExperienceItem data={exp} key={index} />
+              ))}
+              {/* {user.experience && (<ExperienceItem data={user.experience} />)} */}
+            </section>
+          )}
 
-        {/* <ActivityCard /> */}
+          {user.education && (
+            <section className="education">
+              <h2>Education</h2>
+              {user.education.map((edu, index) => (
+                <EducationItem data={edu} key={index} />
+              ))}
+              {/* <EducationItem /> */}
+            </section>
+          )}
 
-        <div className="logout-section">
-          <button className="logout-btn" onClick={handleLogout}>
-            Logout
-          </button>
+          {/* <ActivityCard /> */}
+
+          <div className="logout-section">
+            <button className="logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 };
