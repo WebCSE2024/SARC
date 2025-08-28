@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { NewsType } from "../../../../shared/types/news.type.js";
+
 
 const achievementSchema = new mongoose.Schema(
   {
@@ -18,7 +20,12 @@ const achievementSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
+    type: {
+      type: String,
+      enum: Object.values(NewsType),
+      default: NewsType.ACHIEVEMENT,
+      required: true,
+    },
     gallery: [
       {
         url: {

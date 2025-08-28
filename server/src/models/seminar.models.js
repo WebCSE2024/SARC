@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { NewsType } from "../../../../shared/types/news.type.js";
 
 const seminarSchema = new mongoose.Schema(
   {
@@ -24,13 +25,18 @@ const seminarSchema = new mongoose.Schema(
         return this.mode !== "Online";
       },
     },
-
+    type: {
+      type: String,
+      enum: Object.values(NewsType),
+      default: NewsType.SEMINAR,
+      required: true,
+    },
     // Add image field to store seminar poster/image
     image: {
       url: { type: String },
       publicId: { type: String },
     },
-  },     
+  },
   { timestamps: true }
 );
 
