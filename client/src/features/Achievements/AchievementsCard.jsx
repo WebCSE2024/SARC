@@ -8,7 +8,6 @@ import CommentsArea from "../../components/Comments/CommentsArea";
 const AchievementsCard = ({ data }) => {
   const imagesWrapperRef = useRef(null);
 
-  // console.log("achivements:",data);
 
   const modules = import.meta.glob(
     "../../../assets/TempImages/*.{png,jpg,jpeg}"
@@ -19,7 +18,6 @@ const AchievementsCard = ({ data }) => {
     const imagePath = new URL(path, import.meta.url).href;
     gallery.push(imagePath);
   }
-  // console.log("gallery:", gallery);
 
   const handleLeftScroll = () => {
     if (imagesWrapperRef.current) {

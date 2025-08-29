@@ -71,7 +71,7 @@ class NewsService {
           title: news.title,
           description: news.description,
           date: news.date,
-          awardedTo: news.awardedTo,
+          awardedTo: news.awardedTo || "",
           initiative: news.initiative,
           tags: news.tags || [],
           gallery: (news.images || []).map((img) => ({
@@ -105,7 +105,6 @@ class NewsService {
               }
             : undefined,
         };
-
 
         const seminar = new Seminar(seminarData);
         await seminar.save();
@@ -141,40 +140,71 @@ class NewsService {
           return { success: false, error: "Achievement not found" };
         }
 
-        // Delete old images if new images are provided
-        if (
-          newsData.images &&
-          newsData.images.length > 0 &&
-          existingAchievement.gallery
-        ) {
+
+        let imagesToDelete = [];
+        if (newsData.imagesToDelete) {
+
+
           try {
-            const deletePromises = existingAchievement.gallery.map((img) =>
+            imagesToDelete =
+              typeof newsData.imagesToDelete === "string"
+                ? JSON.parse(newsData.imagesToDelete)
+                : newsData.imagesToDelete;
+
+            // Ensure it's an array
+            if (!Array.isArray(imagesToDelete)) {
+              console.warn(
+                "⚠️ imagesToDelete is not an array, converting:",
+                typeof imagesToDelete
+              );
+              imagesToDelete = [];
+            }
+          } catch (parseError) {
+            console.error("❌ Error parsing imagesToDelete:", parseError);
+            imagesToDelete = [];
+          }
+        }
+
+        // Delete only the images that were removed by the user
+        if (imagesToDelete.length > 0) {
+
+          try {
+            const deletePromises = imagesToDelete.map((img) =>
               deleteFromCloudinary(img.publicId)
             );
             await Promise.all(deletePromises);
-            console.log(
-              `Deleted ${existingAchievement.gallery.length} old images for achievement ${newsId}`
-            );
+
           } catch (error) {
-            console.error("Error deleting old achievement images:", error);
+            console.error(
+              "❌ Error deleting removed achievement images:",
+              error
+            );
             // Continue with update even if image deletion fails
           }
-        }
+        } 
 
         // Format and update achievement data
         const updateData = {
           title: newsData.title,
           description: newsData.description,
           date: newsData.date,
-          awardedTo: newsData.awardedTo,
+          awardedTo: newsData.awardedTo || "",
           initiative: newsData.initiative,
           tags: newsData.tags || [],
-          gallery: (newsData.images || []).map((img) => ({
-            url: img.url,
-            publicId: img.publicId,
-          })),
           socialMediaLinks: newsData.socialMediaLinks || [],
         };
+
+        // Handle gallery update based on final image state
+        if (newsData.images && newsData.images.length > 0) {
+          // Update gallery with final image set (kept existing + new)
+          updateData.gallery = newsData.images.map((img) => ({
+            url: img.url,
+            publicId: img.publicId,
+          }));
+        } else {
+          // No images left - set empty gallery
+          updateData.gallery = [];
+        }
 
         // Filter out undefined values
         Object.keys(updateData).forEach(
@@ -197,17 +227,51 @@ class NewsService {
           return { success: false, error: "Seminar not found" };
         }
 
-        // Delete old image if new image is provided
+        // Parse and validate existingImage to ensure it's an object
+        let existingImageData = null;
+        if (newsData.existingImage) {
+          try {
+            existingImageData =
+              typeof newsData.existingImage === "string"
+                ? JSON.parse(newsData.existingImage)
+                : newsData.existingImage;
+
+            // Ensure it's an object with publicId
+            if (
+              !existingImageData ||
+              typeof existingImageData !== "object" ||
+              !existingImageData.publicId
+            ) {
+              console.warn(
+                "⚠️ existingImage is not a valid image object:",
+                existingImageData
+              );
+              existingImageData = null;
+            }
+          } catch (parseError) {
+            console.error("❌ Error parsing existingImage:", parseError);
+            existingImageData = null;
+          }
+        }
+
+        // Delete old image if new image is provided AND it's different from existing one
         if (
           newsData.imageUrl &&
           existingSeminar.image &&
           existingSeminar.image.publicId
         ) {
-          try {
-            await deleteFromCloudinary(existingSeminar.image.publicId);
-          } catch (error) {
-            console.error("Error deleting old seminar image:", error);
-            // Continue with update even if image deletion fails
+          // Check if the new image is actually different from existing one
+          if (newsData.imageUrl.publicId !== existingSeminar.image.publicId) {
+            try {
+              await deleteFromCloudinary(existingSeminar.image.publicId);
+            } catch (error) {
+              console.error("❌ Error deleting old seminar image:", error);
+              // Continue with update even if image deletion fails
+            }
+          } else {
+            console.log(
+              `ℹ️ No new image detected for seminar ${newsId}, preserving existing image`
+            );
           }
         }
 
@@ -224,7 +288,7 @@ class NewsService {
           venue: newsData.venue,
         };
 
-        // Update image if available
+        // Update image only if new image is provided
         if (newsData.imageUrl) {
           updateData.image = {
             url: newsData.imageUrl.url,

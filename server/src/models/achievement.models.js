@@ -18,7 +18,6 @@ const achievementSchema = new mongoose.Schema(
     },
     awardedTo: {
       type: String,
-      required: true,
     },
     type: {
       type: String,

@@ -6,10 +6,7 @@ import { formatAmount } from "../../utils/numberFormatter";
 import ProfileHeader from "../../components/ProfileHeader/profileHeader";
 
 const ReferralCard = ({ data }) => {
-  // console.log('props', props);
 
-  // console.log("received referral data:")
-  // console.log(data);
 
   const titleId = `ref-title-${data?.referralId || "item"}`;
 

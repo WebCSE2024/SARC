@@ -26,7 +26,7 @@ export const createAchievement = asyncHandler(async (req, res) => {
     socialMediaLinks,
   } = JSON.parse(req.body.data);
 
-  if ([title, description, date, awardedTo].some((field) => !field?.trim())) {
+  if ([title, description, date].some((field) => !field?.trim())) {
     throw new ApiError(400, "Required fields are missing");
   }
   // Check if required fields are missing

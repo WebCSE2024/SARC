@@ -241,7 +241,6 @@ export const deletePublication = asyncHandler(async (req, res) => {
 });
 
 export const getMyPublications = asyncHandler(async (req, res) => {
-  // console.log('hii')
   const userId = req.user.id;
 
   if (!userId) throw new ApiError(400, "No user exists");
@@ -260,7 +259,6 @@ export const getMyPublications = asyncHandler(async (req, res) => {
       );
   }
 
-  //    console.log("MYPUB",req.user)
   const result = await Publication.aggregate([
     {
       $match: {

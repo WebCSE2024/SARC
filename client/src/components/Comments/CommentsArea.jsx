@@ -140,12 +140,10 @@ const CommentsArea = ({ postId, referenceModel = "Achievement" }) => {
 
   const handleDeleteComment = async (commentId, replyId = null) => {
     try {
-      console.log(replyId);
       
       if (replyId) {
         // Delete a reply
         const res = await sarcAPI.delete(`sarc/v0/comments/delete-reply/${replyId}`);
-        console.log(res.success);
         
         // Update state by filtering out the deleted reply
         setComments((prevComments) =>
