@@ -6,28 +6,48 @@ import { formatAmount } from "../../utils/numberFormatter";
 import ProfileHeader from "../../components/ProfileHeader/profileHeader";
 
 const ReferralCard = ({ data }) => {
-
-
   const titleId = `ref-title-${data?.referralId || "item"}`;
+
+  // Safe derived fields and fallbacks
+  const personInfo = data?.addedBy?.[0];
+  const createdAt = data?.createdAt;
+  const eventId = data?.referralId;
+  const jobProfile = data?.jobProfile || "";
+  const companyName = data?.companyName || "";
+  const description = data?.description || "";
+  const requirements = data?.requirements || "";
+  const locationCity = data?.location?.city;
+  const locationCountry = data?.location?.country;
+  const mode = data?.mode;
+  const stipendAmount = data?.stipend?.amount;
+  const stipendCurrency = data?.stipend?.currency;
+  const deadline = data?.deadline;
+  const website = data?.website || "#";
+  const contact = data?.contact || "";
+  const email = data?.email || "";
+
+  const locationText =
+    locationCity || locationCountry || mode
+      ? `${locationCity || ""}${locationCity && locationCountry ? ", " : ""}${
+          locationCountry || ""
+        }${mode ? ` (${mode})` : ""}`
+      : "";
 
   return (
     <div className="card-container" role="article" aria-labelledby={titleId}>
       <div className="top-block">
         {/* Header Section */}
         <ProfileHeader
-          personInfo={data && data.addedBy[0]}
-          createdAt={data && data.createdAt}
-          eventId={data && data.referralId}
+          personInfo={personInfo}
+          createdAt={createdAt}
+          eventId={eventId}
         />
       </div>
 
       {/* Job Description */}
       <div className="company">
         <div className="greet">
-          <p>
-            Greeting everyone! {data && data.companyName} has released a job
-            opening.
-          </p>
+          <p>Greeting everyone! {companyName} has released a job opening.</p>
         </div>
         <div className="second-block">
           <div className="post">
@@ -35,13 +55,11 @@ const ReferralCard = ({ data }) => {
               <div className="post-name">
                 <p className="p">POST</p>
                 <span className="post-title" id={titleId}>
-                  {data && data.jobProfile} ({data && data.companyName})
+                  {jobProfile} ({companyName})
                 </span>
               </div>{" "}
               <div className="post-description">
-                <div
-                  dangerouslySetInnerHTML={{ __html: data && data.description }}
-                />
+                <div dangerouslySetInnerHTML={{ __html: description }} />
               </div>
             </div>
 
@@ -49,39 +67,32 @@ const ReferralCard = ({ data }) => {
               <h6 className="subtitle">Requirements:</h6>
               <div
                 className="requirements-list"
-                dangerouslySetInnerHTML={{ __html: data && data.requirements }}
+                dangerouslySetInnerHTML={{ __html: requirements }}
               />
             </div>
 
             <div className="job-details">
               <div className="detail">
                 <p className="job-heading">Location:</p>
-                <span className="job-text">
-                  {" "}
-                  {data &&
-                    `${data.location.city}, ${data.location.country} (${data.mode})`}
-                </span>
+                <span className="job-text"> {locationText}</span>
               </div>
               <div className="detail">
                 <p className="job-heading">Stipend:</p>
                 <span className="job-text">
-                  {data && formatAmount(data.stipend.amount)}{" "}
-                  {data && data.stipend.currency}
+                  {stipendAmount != null
+                    ? `${formatAmount(stipendAmount)} ${stipendCurrency || ""}`
+                    : "—"}
                 </span>
               </div>
               <div className="detail">
                 <p className="job-heading">Deadline:</p>
                 <span className="job-text">
-                  {data && formatDate(data.deadline)}
+                  {deadline ? formatDate(deadline) : "(To Be Informed)"}
                 </span>
               </div>
               <div className="detail">
                 <p className="job-heading">
-                  <a
-                    href={data && data.website}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
+                  <a href={website} target="_blank" rel="noreferrer noopener">
                     Website Link
                   </a>
                 </p>
@@ -107,9 +118,7 @@ const ReferralCard = ({ data }) => {
               </div>
 
               <div className="number">
-                <p className="number-text">
-                  {data && data.contact && data.contact}
-                </p>
+                <p className="number-text">{contact}</p>
               </div>
             </div>
             <div className="email">
@@ -130,7 +139,7 @@ const ReferralCard = ({ data }) => {
                 </svg>
               </div>
               <div className="emailid">
-                <p className="id">{data && data.email}</p>
+                <p className="id">{email}</p>
               </div>
             </div>
           </div>
