@@ -45,7 +45,6 @@ const PublicationsPage = () => {
   return (
     <div className="PublicationsPage">
       <div className="publications-header">
-        <h1>Publications</h1>
         <SearchBox
           key="publications"
           searchQuery={searchQuery}
