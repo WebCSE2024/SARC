@@ -1,0 +1,66 @@
+.sig-pub {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  height: 100%;
+  min-height: 420px;
+}
+.sig-pub:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: rgba(16,24,40,0.14); }
+.sig-pub:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.sig-pub__preview { overflow: hidden; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; position: relative; }
+.sig-pub__preview::after { content: ""; position: absolute; inset: auto 0 0 0; height: 24px; background: linear-gradient(to bottom, rgba(248,250,252,0), rgba(248,250,252,1)); }
+.sig-pub__preview img, .sig-pub__preview video { width: 100%; height: 180px; object-fit: contain; display: block; background: #e5e7eb; }
+.sig-pub__iframe-wrap { position: relative; width: 100%; padding-bottom: 62%; }
+.sig-pub__iframe-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
+
+.sig-pub__badge {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 24, 40, 0.08);
+  background: #eef2ff;
+  color: #312e81;
+  margin-bottom: 6px;
+}
+.sig-pub__badge--journal { background: #e0f2fe; color: #0c4a6e; }
+.sig-pub__badge--conference { background: #ede9fe; color: #5b21b6; }
+.sig-pub__badge--preprint { background: #fef3c7; color: #92400e; }
+
+.sig-pub__title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sig-pub__authors {
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.sig-pub__desc {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.sig-pub__footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+
+.sig-pub__date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.sig-pub__link {
+  color: var(--brand-700);
+}
+.sig-pub__link:hover { color: var(--brand-600); }

@@ -1,0 +1,6 @@
+.sig-subnav { position: sticky; top: 72px; z-index: 10; background: rgba(255,255,255,0.85); backdrop-filter: saturate(1.1) blur(8px); border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(2,6,23,0.04); }
+.sig-subnav__container { width: min(1100px, 92%); margin-inline: auto; display: flex; justify-content: center; gap: 12px; padding: 12px 0; overflow-x: auto; scrollbar-width: none; }
+.sig-subnav__container::-webkit-scrollbar { display: none; }
+.sig-subnav__item { appearance: none; border: 1px solid var(--border); background: var(--bg-surface); border-radius: 999px; padding: 10px 16px; font-size: 15px; line-height: 1; color: var(--text-strong); transition: all 160ms ease; white-space: nowrap; }
+.sig-subnav__item:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.sig-subnav__item.is-active { background: var(--brand-50); border-color: var(--brand-300); color: var(--brand-700); box-shadow: 0 1px 0 rgba(2,6,23,0.02), inset 0 0 0 1px var(--brand-100); }

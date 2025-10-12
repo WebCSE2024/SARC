@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import App from "./App.jsx";
+// import App from "./App.jsx";
 import "./index.css";
+import SIGMain from "./pages/SIGs/SIG-main.jsx";
 
 // import EventsPage from "./pages/News/NewsPage";
 // import PublicationsCard from "./pages/PublicationsPage/PublicationsCard";
@@ -14,6 +15,7 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <App />
+      {/* <App /> */}
+  <SIGMain />
   </React.StrictMode>
 );

@@ -1,0 +1,104 @@
+:root {
+  --sig-grid-gap: 20px;
+}
+
+.sig {
+  padding: 48px 0 72px;
+}
+
+.sig__container {
+  width: min(1100px, 92%);
+  margin-inline: auto;
+}
+
+.sig__header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.sig__eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.sig__title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-top: 6px;
+}
+
+.sig__subtitle {
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+.sig__grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--sig-grid-gap);
+}
+
+.sig-tile {
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-md);
+  text-align: left;
+  padding: 18px 18px;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.sig-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(16, 24, 40, 0.16);
+}
+
+.sig-tile__content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.sig-tile__icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: #0a0a0a;
+}
+
+.sig-tile__title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sig-tile__subtitle {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Accents */
+.sig-tile--ml .sig-tile__icon {
+  background: linear-gradient(135deg, #c7d2fe 0%, #f5d0fe 100%);
+  color: #111827;
+}
+.sig-tile--bc .sig-tile__icon {
+  background: linear-gradient(135deg, #a5f3fc 0%, #bfdbfe 100%);
+  color: #0b1b3a;
+}
+.sig-tile--sec .sig-tile__icon {
+  background: linear-gradient(135deg, #bbf7d0 0%, #ddd6fe 100%);
+  color: #0b1f1a;
+}
+.sig-tile--gen .sig-tile__icon {
+  background: linear-gradient(135deg, #fef3c7 0%, #e5e7eb 100%);
+  color: #1f2937;
+}
