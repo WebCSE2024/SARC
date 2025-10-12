@@ -1,0 +1,122 @@
+[
+    {
+        "domain":"machine learning and ai",
+        "id":1,
+        "research_publications":[
+            {
+                "title":"A Comprehensive Survey on Graph Neural Networks",
+                "authors":"Zonghan Wu",
+                "description":"IEEE Transactions on Neural Networks and Learning Systems",
+                "dateofPublication":"15.08.2020",
+                "link":"https://ieeexplore.ieee.org/document/9096288",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"Attention Is All You Need",
+                "authors":"Ashish Vaswani",
+                "description":"Advances in Neural Information Processing Systems (NeurIPS)",
+                "dateofPublication":"01.05.2017",
+                "link":"https://arxiv.org/abs/1706.03762",
+                "typeofPublication":"conference"
+            },
+            {
+                "title":"Deep Residual Learning for Image Recognition",
+                "authors":"Kaiming He",
+                "description":"Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+                "dateofPublication":"26.05.2016",
+                "link":"https://arxiv.org/abs/1512.03385",
+                "typeofPublication":"conference"
+            }
+        ]
+    },
+    {
+        "domain":"cybersecurity",
+        "id":2,
+        "research_publications":[
+            {
+                "title":"A Survey of Machine Learning for Big Code and Naturalness",
+                "authors":"Miltiadis Allamanis",
+                "description":"ACM Computing Surveys",
+                "dateofPublication":"28.06.2018",
+                "link":"https://arxiv.org/abs/1709.06182",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"The Security Implications of Deep Learning in Cybersecurity",
+                "authors":"Battista Biggio",
+                "description":"IEEE Security & Privacy",
+                "dateofPublication":"01.03.2018",
+                "link":"https://ieeexplore.ieee.org/document/8355461",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"Adversarial Examples in the Physical World",
+                "authors":"Alexey Kurakin",
+                "description":"arXiv preprint arXiv:1607.02533",
+                "dateofPublication":"08.07.2016",
+                "link":"https://arxiv.org/abs/1607.02533",
+                "typeofPublication":"preprint"
+            }
+        ]
+    },
+    {
+        "domain":"blockchain",
+        "id":3,
+        "research_publications":[
+            {
+                "title":"A Survey on the Security of Blockchain Systems",
+                "authors":"Mingxiao Li",
+                "description":"Future Generation Computer Systems",
+                "dateofPublication":"01.01.2020",
+                "link":"https://www.sciencedirect.com/science/article/pii/S0167739X19322409",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"Blockchain Technology: Principles and Applications",
+                "authors":"Marc Pilkington",
+                "description":"Research Handbook on Digital Transformations",
+                "dateofPublication":"15.11.2016",
+                "link":"https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2874598",
+                "typeofPublication":"book chapter"
+            },
+            {
+                "title":"Decentralized Trust Management",
+                "authors":"Matt Blaze",
+                "description":"IEEE Symposium on Security and Privacy",
+                "dateofPublication":"01.05.1996",
+                "link":"https://ieeexplore.ieee.org/document/502675",
+                "typeofPublication":"conference"
+            }
+        ]
+    },
+    {
+        "domain":"others",
+        "id":4,
+        "research_publications":[
+            {
+                "title":"The Anatomy of a Large-Scale Hypertextual Web Search Engine",
+                "authors":"Sergey Brin",
+                "description":"Computer Networks and ISDN Systems",
+                "dateofPublication":"01.04.1998",
+                "link":"https://infolab.stanford.edu/~backrub/google.html",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"MapReduce: Simplified Data Processing on Large Clusters",
+                "authors":"Jeffrey Dean",
+                "description":"Communications of the ACM",
+                "dateofPublication":"01.01.2008",
+                "link":"https://dl.acm.org/doi/10.1145/1327452.1327492",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"The Google File System",
+                "authors":"Sanjay Ghemawat",
+                "description":"ACM SIGOPS Operating Systems Review",
+                "dateofPublication":"01.12.2003",
+                "link":"https://research.google/pubs/pub51/",
+                "typeofPublication":"journal"
+            }
+        ]
+    }
+]
