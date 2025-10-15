@@ -19,6 +19,7 @@ export default function OthersPage({ onBack, showBack = false }) {
         )}
 
         {/* here Put TheoryCanvas to show theory specific animation */}
+  <TheoryCanvas className="gen__canvas" />
   <OthersCanvas className="gen__canvas" />
         <div className="gen__orbs" aria-hidden="true" />
         <div className="gen__fade" aria-hidden="true" />
