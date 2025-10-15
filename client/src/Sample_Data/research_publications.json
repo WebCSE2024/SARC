@@ -1,0 +1,267 @@
+[
+    {
+        "domain":"Theoretical Computer Science (Quantum Computing, Discrete Mathematics & Graph Theory)",
+        
+        "id":1,
+        "research_publications":[
+            {
+                "title":"Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer",
+                "authors":"Peter W. Shor",
+                "description":"SIAM Journal on Computing",
+                "dateofPublication":"01.10.1997",
+                "link":"https://epubs.siam.org/doi/10.1137/S0097539795293172",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"Expander Graphs and Their Applications",
+                "authors":"Shlomo Hoory",
+                "description":"Bulletin of the American Mathematical Society",
+                "dateofPublication":"01.10.2006",
+                "link":"https://www.ams.org/journals/bull/2006-43-04/S0273-0979-06-01126-8/",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"The Complexity of Theorem-Proving Procedures",
+                "authors":"Stephen A. Cook",
+                "description":"ACM Symposium on Theory of Computing (STOC)",
+                "dateofPublication":"01.05.1971",
+                "link":"https://dl.acm.org/doi/10.1145/800157.805047",
+                "typeofPublication":"conference"
+            }
+        ],
+    "professors": [
+            {
+                "name": "Dr. Ada Lovelace",
+                "designation": "Professor",
+                "image": "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Quantum Algorithms", "Computational Complexity", "Graph Theory"]
+            },
+            {
+                "name": "Dr. Alan Turing",
+                "designation": "Associate Professor",
+                "image": "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Automata Theory", "Combinatorics", "Discrete Mathematics"]
+            },
+            {
+                "name": "Dr. Grace Hopper",
+                "designation": "Assistant Professor",
+                "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Formal Methods", "Algorithms", "Graph Connectivity"]
+            }
+        ],
+        "seminars": [
+            {
+                "title": "Quantum Speedups: From Shor to Beyond",
+                "description": "An accessible introduction to quantum algorithms and where speedups come from.",
+                "media": { "type": "video", "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" },
+                "date": "12.02.2024",
+                "time": "15:30"
+            },
+            {
+                "title": "Modern Graph Expanders",
+                "description": "Applications of expander graphs in algorithms and network design.",
+                "media": { "type": "image", "src": "https://images.unsplash.com/photo-1612359383347-245649cbb9d2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fHNlbWluYXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500" },
+                "date": "22.08.2024",
+                "time": "11:00"
+            }
+        ]
+    },
+    {
+        "domain":"AI/ML",
+        "id":2,
+        "research_publications":[
+            {
+                "title":"Attention Is All You Need",
+                "authors":"Ashish Vaswani",
+                "description":"Advances in Neural Information Processing Systems (NeurIPS)",
+                "dateofPublication":"01.06.2017",
+                "link":"https://arxiv.org/abs/1706.03762",
+                "typeofPublication":"conference"
+            },
+            {
+                "title":"Deep Residual Learning for Image Recognition",
+                "authors":"Kaiming He",
+                "description":"Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+                "dateofPublication":"26.05.2016",
+                "link":"https://arxiv.org/abs/1512.03385",
+                "typeofPublication":"conference"
+            },
+            {
+                "title":"BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+                "authors":"Jacob Devlin",
+                "description":"arXiv preprint arXiv:1810.04805",
+                "dateofPublication":"11.10.2018",
+                "link":"https://arxiv.org/abs/1810.04805",
+                "typeofPublication":"preprint"
+            }
+        ],
+    "professors": [
+            {
+                "name": "Dr. Geoffrey Hinton",
+                "designation": "Professor",
+                "image": "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Deep Learning", "Representation Learning", "Neural Networks"]
+            },
+            {
+                "name": "Dr. Fei-Fei Li",
+                "designation": "Associate Professor",
+                "image": "https://images.unsplash.com/photo-1527980965255-4bc3c5a8c3b6?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Computer Vision", "Multimodal AI", "Healthcare AI"]
+            },
+            {
+                "name": "Dr. Yann LeCun",
+                "designation": "Assistant Professor",
+                "image": "https://images.unsplash.com/photo-1527980965255-4931b2a77d9f?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Self-Supervised Learning", "Optimization", "AI Systems"]
+            }
+        ],
+        "seminars": [
+            {
+                "title": "Scaling Transformers Efficiently",
+                "description": "Techniques and tradeoffs for training large language models.",
+                "media": { "type": "video", "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" },
+                "date": "05.03.2025",
+                "time": "17:00"
+            },
+            {
+                "title": "Graph Neural Networks in Practice",
+                "description": "Production lessons from deploying GNNs at scale.",
+                "media": { "type": "image", "src": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1632" },
+                "date": "28.09.2024",
+                "time": "10:30"
+            }
+        ]
+    },
+    {
+        "domain":"Computer Systems (OS, Distributed and Parallel Computing, IoT, Edge Computing)",
+        "id":3,
+        "research_publications":[
+            {
+                "title":"Time, Clocks, and the Ordering of Events in a Distributed System",
+                "authors":"Leslie Lamport",
+                "description":"Communications of the ACM",
+                "dateofPublication":"01.07.1978",
+                "link":"https://dl.acm.org/doi/10.1145/359545.359563",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"The Google File System",
+                "authors":"Sanjay Ghemawat",
+                "description":"ACM SIGOPS Operating Systems Review",
+                "dateofPublication":"01.12.2003",
+                "link":"https://research.google/pubs/pub51/",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"The Internet of Things: A Survey",
+                "authors":"Luigi Atzori",
+                "description":"Computer Networks",
+                "dateofPublication":"01.06.2010",
+                "link":"https://www.sciencedirect.com/science/article/abs/pii/S1389128610001568",
+                "typeofPublication":"journal"
+            }
+        ],
+    "professors": [
+            {
+                "name": "Dr. Leslie Lamport",
+                "designation": "Professor",
+                "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Distributed Systems", "Formal Methods", "Consensus"]
+            },
+            {
+                "name": "Dr. Barbara Liskov",
+                "designation": "Associate Professor",
+                "image": "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Operating Systems", "Fault Tolerance", "Distributed Storage"]
+            },
+            {
+                "name": "Dr. Srinivasan Seshan",
+                "designation": "Assistant Professor",
+                "image": "https://images.unsplash.com/photo-1547425260-3a2f9b2b1b26?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Networking", "Edge Computing", "IoT"]
+            }
+        ],
+        "seminars": [
+            {
+                "title": "Consensus and Clocks Revisited",
+                "description": "Fresh perspectives on time, causality, and consistency in distributed systems.",
+                "media": { "type": "video", "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" },
+                "date": "19.01.2025",
+                "time": "14:00"
+            },
+            {
+                "title": "Edge Computing for IoT",
+                "description": "Architectures and orchestration patterns for edge-first deployments.",
+                "media": { "type": "image", "src": "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1200&auto=format&fit=crop&q=60" },
+                "date": "03.07.2024",
+                "time": "09:30"
+            }
+        ]
+    },
+    {
+        "domain":"Information Security (Privacy, Blockchain, Network & Hardware Security, Post-quantum Cryptography and related areas)",
+        "id":4,
+        "research_publications":[
+            {
+                "title":"New Directions in Cryptography",
+                "authors":"Whitfield Diffie",
+                "description":"IEEE Transactions on Information Theory",
+                "dateofPublication":"01.11.1976",
+                "link":"https://ieeexplore.ieee.org/document/1055638",
+                "typeofPublication":"journal"
+            },
+            {
+                "title":"Bitcoin: A Peer-to-Peer Electronic Cash System",
+                "authors":"Satoshi Nakamoto",
+                "description":"Whitepaper",
+                "dateofPublication":"31.10.2008",
+                "link":"https://bitcoin.org/bitcoin.pdf",
+                "typeofPublication":"preprint"
+            },
+            {
+                "title":"CRYSTALS-Kyber: A CCA-Secure Module-Lattice-Based KEM",
+                "authors":"Joppe W. Bos",
+                "description":"IACR Cryptology ePrint Archive: 2017/634",
+                "dateofPublication":"01.07.2017",
+                "link":"https://eprint.iacr.org/2017/634",
+                "typeofPublication":"preprint"
+            }
+        ],
+    "professors": [
+            {
+                "name": "Dr. Whitfield Diffie",
+                "designation": "Professor",
+                "image": "https://images.unsplash.com/photo-1546527868-ccb7ee7dfa6a?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Cryptography", "Key Exchange", "Security Protocols"]
+            },
+            {
+                "name": "Dr. Ross Anderson",
+                "designation": "Associate Professor",
+                "image": "https://images.unsplash.com/photo-1546527862-e9f7200de3f4?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Security Engineering", "Hardware Security", "Privacy"]
+            },
+            {
+                "name": "Dr. Daniel J. Bernstein",
+                "designation": "Assistant Professor",
+                "image": "https://images.unsplash.com/photo-1546527868-7d9f9a5114c3?w=800&auto=format&fit=crop&q=60",
+                "interests": ["Post-Quantum Cryptography", "Lattice Crypto", "Side-Channel Resistance"]
+            }
+        ],
+        "seminars": [
+            {
+                "title": "Post-Quantum Cryptography 101",
+                "description": "Overview of NIST PQC standardization and practical migration tips.",
+                "media": { "type": "video", "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" },
+                "date": "10.04.2025",
+                "time": "16:00"
+            },
+            {
+                "title": "Blockchain Security in Practice",
+                "description": "Smart contract vulnerabilities and secure development workflows.",
+                "media": { "type": "image", "src": "https://images.unsplash.com/photo-1560088613-1bc2c78b26c7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fHNlbWluYXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500" },
+                "date": "21.11.2024",
+                "time": "13:15"
+            }
+        ]
+    }
+]

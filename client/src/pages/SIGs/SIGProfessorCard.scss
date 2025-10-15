@@ -1,0 +1,53 @@
+.sig-prof{
+  background: var(--card-bg, #0e0f12);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  grid-gap: 12px 16px;
+  align-items: center;
+}
+
+.sig-prof__media img{
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+}
+
+.sig-prof__header{
+  display:flex;
+  flex-direction: column;
+}
+
+.sig-prof__name{
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.sig-prof__designation{
+  margin: 4px 0 0 0;
+  opacity: 0.8;
+  font-size: 0.85rem;
+}
+
+.sig-prof__interests{
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sig-prof__interest{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
