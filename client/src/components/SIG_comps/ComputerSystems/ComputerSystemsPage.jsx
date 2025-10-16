@@ -7,7 +7,7 @@ import SIGProfessorCard from "../../../pages/SIGs/SIGProfessorCard.jsx";
 import SIGSeminarCard from "../../../pages/SIGs/SIGSeminarCard.jsx";
 
 export default function BlockchainPage({ onBack, showBack = false }) {
-  const data = publications.find((d) => d.domain === "Computer Systems (OS, Distributed and Parallel Computing, IoT, Edge Computing)");
+  const data = publications.find((d) => d.domain === "Computing Systems (OS, Distributed and Parallel Computing, IoT, Edge Computing)");
   const [view, setView] = useState("publications");
 
   return (
@@ -20,7 +20,7 @@ export default function BlockchainPage({ onBack, showBack = false }) {
         <div className="bc__mesh" aria-hidden="true" />
         <div className="bc__fade" aria-hidden="true" />
         <div className="bc__content container">
-          <h1 className="bc__title">Computer Systems</h1>
+          <h1 className="bc__title">Computing Systems</h1>
           <p className="bc__subtitle">OS, distributed systems, IoT, and edge computing.</p>
           <div className="bc__chips" aria-label="Core concepts">
             <span className="bc-chip">Distributed Systems</span>

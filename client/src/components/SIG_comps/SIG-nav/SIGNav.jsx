@@ -3,7 +3,7 @@ import "./SIGNav.scss";
 
 const items = [
   { key: "mlai", label: "AI / ML" },
-  { key: "systems", label: "Computer Systems" },
+  { key: "systems", label: "Computing Systems" },
   { key: "infosec", label: "Information Security" },
   { key: "theory", label: "Theoretical CS" },
 ];
