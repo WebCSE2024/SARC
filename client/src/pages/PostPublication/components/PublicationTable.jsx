@@ -392,12 +392,6 @@ const PublicationTable = ({
           </div>
         </div>
       )}
-
-      <div className="table-actions">
-        <button type="button" onClick={onAddRow} disabled={disabled}>
-          Add publication
-        </button>
-      </div>
     </div>
   );
 };
