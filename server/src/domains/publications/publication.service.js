@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import { Publication } from "../models/publication.models.js";
-import { User } from "../models/user.models.js";
-import { client as redisClient } from "../connections/redisConnection.js";
+import { Publication } from "./publication.model.js";
+import { User } from "../user/user.model.js";
+import { client as redisClient } from "../../config/redisConnection.js";
 import {
   PUBLICATION_ENV,
   PUBLICATION_REDIS_KEYS,
-} from "../constants/publication.constants.js";
-import { ApiError } from "../utils/ApiError.js";
+} from "../../constants/publication.constants.js";
+import { ApiError } from "../../utils/ApiError.js";
 
 const normalizeString = (value) => {
   if (typeof value === "string") {

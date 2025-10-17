@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import {
   ReferralMode,
   ReferralStatus,
-} from "../../../../shared/types/referral.type.js";
+} from "../../../../../shared/types/referral.type.js";
 
 const referralSchema = new mongoose.Schema(
   {

@@ -1,11 +1,11 @@
 import fs from "fs/promises";
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
-import { Publication } from "../models/publication.models.js";
-import { asyncHandler } from "../utils/AsyncHandler.js";
-import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
-import { sendPDFToPDFExtractionEngine } from "../utils/publication.helper.js";
+import { Publication } from "./publication.model.js";
+import { asyncHandler } from "../../utils/AsyncHandler.js";
+import { ApiError } from "../../utils/ApiError.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
+import { sendPDFToPDFExtractionEngine } from "../../utils/publication.helper.js";
 import {
   finalizePublicationList,
   getPublicationSnapshot,
@@ -14,8 +14,8 @@ import {
   sanitizeEntries,
   storeJobState,
   upsertPublicationList,
-} from "../services/publication.service.js";
-import socketManager from "../connections/socket.connection.js";
+} from "./publication.service.js";
+import socketManager from "../../config/socket.connection.js";
 
 const extractAuthUserId = (user = {}) => {
   const candidate = user.id || user.userId || user._id;

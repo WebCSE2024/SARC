@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { NewsType } from "../../../../shared/types/news.type.js";
+import { NewsType } from "../../../../../shared/types/news.type.js";
 
 const seminarSchema = new mongoose.Schema(
   {

@@ -1,14 +1,14 @@
-import { ApiError } from "../utils/ApiError.js";
-import { asyncHandler } from "../utils/AsyncHandler.js";
-import { Referral } from "../models/referral.models.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
-import { client } from "../connections/redisConnection.js";
+import { ApiError } from "../../utils/ApiError.js";
+import { asyncHandler } from "../../utils/AsyncHandler.js";
+import { Referral } from "./referral.model.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
+import { client } from "../../config/redisConnection.js";
 import { v4 as uuidv4 } from "uuid";
-import { REDIS_CACHE_EXPIRY_REFERRAL } from "../constants/constants.js";
+import { REDIS_CACHE_EXPIRY_REFERRAL } from "../../constants/constants.js";
 import mongoose from "mongoose";
-import { User } from "../models/user.models.js";
-import { UserType } from "../../../../shared/types/user.type.js";
-import { ReferralStatus } from "../../../../shared/types/referral.type.js";
+import { User } from "../user/user.model.js";
+import { UserType } from "../../../../../shared/types/user.type.js";
+import { ReferralStatus } from "../../../../../shared/types/referral.type.js";
 
 export const createReferral = async (req, res) => {
   const user = req.user;

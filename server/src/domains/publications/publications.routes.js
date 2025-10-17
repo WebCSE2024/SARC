@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { upload } from "../../../../shared/middlewares/multer.middleware.js";
+import { upload } from "../../../../../shared/middlewares/multer.middleware.js";
 import {
   deletePublication,
   finalizePublication,
@@ -9,13 +9,13 @@ import {
   getPublicationJob,
   getPublicationState,
   uploadPublication,
-} from "../controllers/publication.controller.js";
-import { setUser } from "../middlewares/setUser.js";
+} from "./publication.controller.js";
+import { setUser } from "../../middlewares/setUser.js";
 import {
   authenticate,
   requireRole,
-} from "../../../../shared/middlewares/auth.middleware.js";
-import { UserType } from "../../../../shared/types/user.type.js";
+} from "../../../../../shared/middlewares/auth.middleware.js";
+import { UserType } from "../../../../../shared/types/user.type.js";
 
 const router = Router();
 

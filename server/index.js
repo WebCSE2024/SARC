@@ -1,10 +1,10 @@
 import http from "http";
 import dotenv from "dotenv";
-import { dbConnection } from "./src/connections/dbConnection.js";
+import { dbConnection } from "./src/config/dbConnection.js";
 import { app } from "./app.js";
-import { redis } from "./src/connections/redisConnection.js";
-import { initializeServices } from "./src/connections/rabbitmq.connnection.js";
-import socketManager from "./src/connections/socket.connection.js";
+import { redis } from "./src/config/redisConnection.js";
+import { initializeServices } from "./src/config/rabbitmq.connnection.js";
+import socketManager from "./src/config/socket.connection.js";
 dotenv.config({
   path: "./.env",
 });

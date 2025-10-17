@@ -1,6 +1,6 @@
-import config from "../../../../shared/rabbitmq/publication.configurations.js";
-import RabbitMQClient from "../../../../shared/rabbitmq/rabbit.setup.js";
-import { createPublication } from "../controllers/publication.controller.js";
+import config from "../../../../../shared/rabbitmq/publication.configurations.js";
+import RabbitMQClient from "../../../../../shared/rabbitmq/rabbit.setup.js";
+import { createPublication } from "./publication.controller.js";
 
 class PublicationServiceSARC {
   constructor() {

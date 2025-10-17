@@ -1,11 +1,11 @@
 import {
   deleteFromCloudinary,
   uploadOnCloudinary,
-} from "../connections/coludinaryConnection.js";
-import Achievement from "../models/achievement.models.js";
-import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
-import { asyncHandler } from "../utils/AsyncHandler.js";
+} from "../../config/coludinaryConnection.js";
+import Achievement from "./achievement.model.js";
+import { ApiError } from "../../utils/ApiError.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
+import { asyncHandler } from "../../utils/AsyncHandler.js";
 import { v4 as uuidv4 } from "uuid";
 
 const generateReferralId = () => {
@@ -14,7 +14,6 @@ const generateReferralId = () => {
 
 export const createAchievement = asyncHandler(async (req, res) => {
   if (!req.user) throw new ApiError(400, "Unauthenticated");
-
 
   const {
     title,
@@ -74,7 +73,6 @@ export const createAchievement = asyncHandler(async (req, res) => {
 
 export const getAllAchievements = asyncHandler(async (req, res) => {
   try {
-
     const achievements = await Achievement.find();
 
     if (!achievements) throw new ApiError(400, "No achievements found");
@@ -85,15 +83,14 @@ export const getAllAchievements = asyncHandler(async (req, res) => {
       );
   } catch (error) {
     console.log("ERROR", error);
-    throw new ApiError(500, "Internal server error");   
-    
+    throw new ApiError(500, "Internal server error");
   }
 });
 
 export const getAchievementDetails = asyncHandler(async (req, res) => {
   const { achievementId } = req.params;
   if (!achievementId) throw new ApiError(400, "Achievement ID is required");
-  const achievement = await Achievement.findOne({ _id : achievementId });
+  const achievement = await Achievement.findOne({ _id: achievementId });
   if (!achievement) throw new ApiError(404, "Achievement not found");
   return res
     .status(200)
@@ -110,7 +107,6 @@ export const deleteAchievement = asyncHandler(async (req, res) => {
   const { achievementId } = req.params;
   const achievement = await Achievement.findOne({ achievementId });
   if (!achievement) throw new ApiError(404, "Achievement not found");
-
 
   if (achievement.gallery?.length > 0) {
     for (const img of achievement.gallery) {

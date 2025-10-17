@@ -2,7 +2,7 @@ import express from "express";
 import {
   getAllAchievements,
   getAchievementDetails,
-} from "../controllers/achievement.controller.js";
+} from "./achievement.controller.js";
 const router = express.Router();
 
 router.get("/achievement-list", getAllAchievements);

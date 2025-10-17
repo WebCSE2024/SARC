@@ -1,5 +1,5 @@
-import newsService from "../rabbitmq/news.rabbitmq.js";
-import publicationService from "../rabbitmq/publication.rabbitmq.js";
+import newsService from "../setup/rabbitmq/news.rabbitmq.js";
+import publicationService from "../domains/publications/publication.rabbitmq.js";
 
 export const initializeServices = async () => {
   try {

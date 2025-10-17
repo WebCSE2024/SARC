@@ -1,9 +1,8 @@
-import Seminar from "../models/seminar.models.js";
-import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
-import { asyncHandler } from "../utils/AsyncHandler.js";
-import { client } from "../connections/redisConnection.js";
-
+import Seminar from "./seminar.model.js";
+import { ApiError } from "../../utils/ApiError.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
+import { asyncHandler } from "../../utils/AsyncHandler.js";
+import { client } from "../../config/redisConnection.js";
 
 export const createSeminar = asyncHandler(async (req, res) => {
   // if (!req.user) throw new ApiError(400, 'Unauthenticated');
@@ -36,7 +35,7 @@ export const createSeminar = asyncHandler(async (req, res) => {
 export const getAllSeminars = asyncHandler(async (req, res) => {
   try {
     const seminars = await Seminar.find();
-    
+
     if (!seminars.length) throw new ApiError(400, "No seminars found");
     return res
       .status(200)
@@ -47,11 +46,9 @@ export const getAllSeminars = asyncHandler(async (req, res) => {
 });
 
 export const getSeminarDetails = asyncHandler(async (req, res) => {
-
   const { seminarId } = req.params;
   if (!seminarId) throw new ApiError(400, "Seminar ID is required");
 
-  
   const seminar = await Seminar.findById(seminarId);
   if (!seminar) throw new ApiError(404, "Seminar not found");
 

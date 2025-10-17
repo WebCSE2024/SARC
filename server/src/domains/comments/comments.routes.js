@@ -5,9 +5,9 @@ import {
   getComments,
   deleteComment,
   deleteReply,
-} from "../controllers/comment.controllers.js";
-import { setUser } from "../middlewares/setUser.js";
-import { authenticate } from "../../../../shared/middlewares/auth.middleware.js";
+} from "./comment.controller.js";
+import { setUser } from "../../middlewares/setUser.js";
+import { authenticate } from "../../../../../shared/middlewares/auth.middleware.js";
 
 const router = express.Router();
 

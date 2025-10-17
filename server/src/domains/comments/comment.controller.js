@@ -1,8 +1,8 @@
-import { Comment } from "../models/comments.models.js";
-import { Reply } from "../models/replies.models.js";
-import { asyncHandler } from "../utils/AsyncHandler.js";
-import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
+import { Comment } from "./comments.model.js";
+import { Reply } from "./replies.model.js";
+import { asyncHandler } from "../../utils/AsyncHandler.js";
+import { ApiError } from "../../utils/ApiError.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
 import mongoose from "mongoose";
 
 export const addComment = asyncHandler(async (req, res) => {
@@ -65,7 +65,7 @@ export const addReply = asyncHandler(async (req, res) => {
 
   res
     .status(201)
-    .json(new ApiResponse(201, newReply,"Reply added successfully"));
+    .json(new ApiResponse(201, newReply, "Reply added successfully"));
 });
 
 export const getComments = asyncHandler(async (req, res) => {
@@ -133,8 +133,6 @@ export const deleteReply = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Not authenticated");
   }
 
-  
-  
   if (!req.params.replyId) {
     throw new ApiError(400, "ReplyId is required");
   }

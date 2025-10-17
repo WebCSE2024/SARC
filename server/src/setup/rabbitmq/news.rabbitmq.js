@@ -1,13 +1,13 @@
-import config from "../../../../shared/rabbitmq/news.configuration.js";
-import RabbitMQClient from "../../../../shared/rabbitmq/rabbit.setup.js";
-import { NewsType } from "../../../../shared/types/news.type.js";
-import Achievement from "../models/achievement.models.js";
-import { UserType } from "../../../../shared/types/user.type.js";
-import Seminar from "../models/seminar.models.js";
+import config from "../../../../../shared/rabbitmq/news.configuration.js";
+import RabbitMQClient from "../../../../../shared/rabbitmq/rabbit.setup.js";
+import { NewsType } from "../../../../../shared/types/news.type.js";
+import Achievement from "../../domains/achievements/achievement.model.js";
+import { UserType } from "../../../../../shared/types/user.type.js";
+import Seminar from "../../domains/seminars/seminar.model.js";
 import {
   deleteFromCloudinary,
   uploadOnCloudinary,
-} from "../connections/coludinaryConnection.js";
+} from "../../config/coludinaryConnection.js";
 
 class NewsService {
   constructor() {
@@ -140,11 +140,8 @@ class NewsService {
           return { success: false, error: "Achievement not found" };
         }
 
-
         let imagesToDelete = [];
         if (newsData.imagesToDelete) {
-
-
           try {
             imagesToDelete =
               typeof newsData.imagesToDelete === "string"
@@ -167,13 +164,11 @@ class NewsService {
 
         // Delete only the images that were removed by the user
         if (imagesToDelete.length > 0) {
-
           try {
             const deletePromises = imagesToDelete.map((img) =>
               deleteFromCloudinary(img.publicId)
             );
             await Promise.all(deletePromises);
-
           } catch (error) {
             console.error(
               "❌ Error deleting removed achievement images:",
@@ -181,7 +176,7 @@ class NewsService {
             );
             // Continue with update even if image deletion fails
           }
-        } 
+        }
 
         // Format and update achievement data
         const updateData = {

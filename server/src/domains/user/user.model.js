@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { UserType } from "../../../../shared/types/user.type.js";
+import { UserType } from "../../../../../shared/types/user.type.js";
 
 //MCP: User modal defined only to store the metadata of the user
 
