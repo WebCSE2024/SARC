@@ -310,7 +310,7 @@ const PostPublication = () => {
         </div>
       </header>
 
-      <section className="upload-panel">
+      {/* <section className="upload-panel">
         <div className="upload-actions">
           <button
             type="button"
@@ -335,7 +335,7 @@ const PostPublication = () => {
             publications.
           </div>
         )}
-      </section>
+      </section> */}
 
       <section className="table-panel">
         <div className="panel-header">
