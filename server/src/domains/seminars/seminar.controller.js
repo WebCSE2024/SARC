@@ -2,11 +2,8 @@ import Seminar from "./seminar.model.js";
 import { ApiError } from "../../utils/ApiError.js";
 import { ApiResponse } from "../../utils/ApiResponse.js";
 import { asyncHandler } from "../../utils/AsyncHandler.js";
-import { client } from "../../config/redisConnection.js";
 
 export const createSeminar = asyncHandler(async (req, res) => {
-  // if (!req.user) throw new ApiError(400, 'Unauthenticated');
-
   if (!req.user) throw new ApiError(400, "Unauthenticated");
 
   const { title, speaker, date, venue, description } = req.body;
@@ -26,7 +23,6 @@ export const createSeminar = asyncHandler(async (req, res) => {
   });
   if (!newSeminar) throw new ApiError(400, "Error creating seminar");
 
-  await client.del("seminars"); // Clear the cache for seminars
   return res
     .status(200)
     .json(new ApiResponse(200, newSeminar, "Seminar created successfully"));
@@ -52,12 +48,6 @@ export const getSeminarDetails = asyncHandler(async (req, res) => {
   const seminar = await Seminar.findById(seminarId);
   if (!seminar) throw new ApiError(404, "Seminar not found");
 
-  await client.set(
-    `seminar:${seminarId}`,
-    JSON.stringify(seminar),
-    "EX",
-    60 * 60 * 24
-  );
   return res
     .status(200)
     .json(
@@ -86,8 +76,6 @@ export const updateSeminar = asyncHandler(async (req, res) => {
 
   if (!updatedSeminar) throw new ApiError(400, "Error updating seminar");
 
-  await client.del("seminars"); // Clear the cache for seminars
-  await client.del(`seminar:${seminarId}`); // Clear the cache for this seminar
   return res
     .status(200)
     .json(new ApiResponse(200, updatedSeminar, "Seminar updated successfully"));
@@ -108,8 +96,6 @@ export const deleteSeminar = asyncHandler(async (req, res) => {
 
   if (!response) throw new ApiError(400, "Error deleting seminar");
 
-  await client.del("seminars"); // Clear the cache for seminars
-  await client.del(`seminar:${seminarId}`); // Clear the cache for this seminar
   return res
     .status(200)
     .json(new ApiResponse(200, null, "Seminar deleted successfully"));

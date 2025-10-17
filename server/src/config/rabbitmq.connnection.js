@@ -1,4 +1,3 @@
-import newsService from "../setup/rabbitmq/news.rabbitmq.js";
 import publicationService from "../domains/publications/publication.rabbitmq.js";
 
 export const initializeServices = async () => {
@@ -7,10 +6,6 @@ export const initializeServices = async () => {
 
     // Initialize existing services
     // ...
-
-    // Initialize news service
-    await newsService.initialize(rabbitMQUrl);
-    console.log("News service initialized");
 
     await publicationService.initialize(rabbitMQUrl);
     console.log("Publication service initialized");

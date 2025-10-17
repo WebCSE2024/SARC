@@ -36,11 +36,6 @@ const Header = () => {
                 Referrals
               </NavLink>
             </li>
-            {/* <li role="none">
-              <NavLink role="menuitem" to="/news">
-                News
-              </NavLink>
-            </li> */}
           </ul>
         ) : null}
 
