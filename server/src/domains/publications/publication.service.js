@@ -72,6 +72,32 @@ const normalizeArrayOfStrings = (value) => {
   return [];
 };
 
+const hasOwn = (object, key) =>
+  Object.prototype.hasOwnProperty.call(object, key);
+
+const applyStringField = (target, source, key) => {
+  if (!hasOwn(source, key)) {
+    return;
+  }
+  const normalized = normalizeString(source[key]);
+  target[key] = normalized;
+};
+
+const applyAuthorsField = (target, source) => {
+  if (!hasOwn(source, "authors")) {
+    return;
+  }
+  target.authors = normalizeArrayOfStrings(source.authors);
+};
+
+const applyYearField = (target, source) => {
+  if (!hasOwn(source, "year")) {
+    return;
+  }
+  const normalized = normalizeYear(source.year);
+  target.year = normalized;
+};
+
 export const toPublicationEntry = (record) => {
   const title = normalizeString(record.title);
   if (!title) {
@@ -195,67 +221,88 @@ export const upsertPublicationList = async ({
 
 export const finalizePublicationList = async ({
   ownerAuthId,
-  entryUpdates,
+  entryUpdates = [],
+  newEntries = [],
 }) => {
   const userProfile = await resolveUserProfile(ownerAuthId);
 
-  const publication = await Publication.findOne({
+  if (entryUpdates.length === 0 && newEntries.length === 0) {
+    throw new ApiError(400, "At least one entry is required to finalize");
+  }
+
+  let publication = await Publication.findOne({
     ownerAuthId: userProfile.userId,
   });
 
-  if (!publication) {
-    throw new ApiError(404, "No publication list found to finalize");
-  }
+  let finalUpdatedEntries = [];
 
-  if (!entryUpdates || entryUpdates.length === 0) {
-    throw new ApiError(
-      400,
-      "At least one entry update is required to finalize"
+  // If publication exists, process updates to existing entries
+  if (publication) {
+    const updatedEntries = publication.entries.map((entry) => {
+      const update = entryUpdates.find(
+        (u) => u.entryId === entry._id.toString()
+      );
+      if (!update) {
+        return entry.toObject();
+      }
+
+      const nextEntry = entry.toObject();
+
+      applyStringField(nextEntry, update, "title");
+      applyAuthorsField(nextEntry, update);
+      applyStringField(nextEntry, update, "publicationType");
+      applyStringField(nextEntry, update, "publisherName");
+      applyYearField(nextEntry, update);
+      applyStringField(nextEntry, update, "volume");
+      applyStringField(nextEntry, update, "issue");
+      applyStringField(nextEntry, update, "pages");
+      applyStringField(nextEntry, update, "issn");
+      applyStringField(nextEntry, update, "isbn");
+      applyStringField(nextEntry, update, "description");
+
+      return nextEntry;
+    });
+
+    const entryIds = new Set(entryUpdates.map((u) => u.entryId));
+    finalUpdatedEntries = updatedEntries.filter((entry) =>
+      entryIds.has(entry._id.toString())
     );
   }
 
-  // Update entries with all user-provided fields
-  const updatedEntries = publication.entries.map((entry) => {
-    const update = entryUpdates.find((u) => u.entryId === entry._id.toString());
-    if (update) {
-      return {
-        ...entry.toObject(),
-        title: normalizeString(update.title) ?? entry.title,
-        authors:
-          update.authors && update.authors.length > 0
-            ? normalizeArrayOfStrings(update.authors)
-            : entry.authors,
-        publicationType:
-          normalizeString(update.publicationType) ?? entry.publicationType,
-        publisherName:
-          normalizeString(update.publisherName) ?? entry.publisherName,
-        year: normalizeYear(update.year) ?? entry.year,
-        volume: normalizeString(update.volume) ?? entry.volume,
-        issue: normalizeString(update.issue) ?? entry.issue,
-        pages: normalizeString(update.pages) ?? entry.pages,
-        issn: normalizeString(update.issn) ?? entry.issn,
-        isbn: normalizeString(update.isbn) ?? entry.isbn,
-        description: normalizeString(update.description) ?? entry.description,
-      };
-    }
-    return entry.toObject();
-  });
+  // Sanitize and add new entries
+  const sanitizedNewEntries = sanitizeEntries(newEntries);
 
-  // Filter to only entries that were included in the update
-  const entryIds = new Set(entryUpdates.map((u) => u.entryId));
-  const finalEntries = updatedEntries.filter((entry) =>
-    entryIds.has(entry._id.toString())
-  );
+  // Combine updated existing entries with new entries
+  const finalEntries = [...finalUpdatedEntries, ...sanitizedNewEntries];
 
   if (finalEntries.length === 0) {
     throw new ApiError(400, "No valid entries to finalize");
   }
 
-  publication.entries = finalEntries;
-  publication.status = "FINALIZED";
-  publication.finalizedAt = new Date();
+  const invalidEntry = finalEntries.find(
+    (entry) => !normalizeString(entry.title)
+  );
+  if (invalidEntry) {
+    throw new ApiError(400, "Each publication entry requires a title");
+  }
 
-  await publication.save();
+  // Create or update publication
+  if (!publication) {
+    // Create new publication for manual-only entries
+    publication = await Publication.create({
+      ownerAuthId: userProfile.userId,
+      ownerProfileId: userProfile._id,
+      entries: finalEntries,
+      status: "FINALIZED",
+      finalizedAt: new Date(),
+    });
+  } else {
+    // Update existing publication
+    publication.entries = finalEntries;
+    publication.status = "FINALIZED";
+    publication.finalizedAt = new Date();
+    await publication.save();
+  }
 
   return publication;
 };

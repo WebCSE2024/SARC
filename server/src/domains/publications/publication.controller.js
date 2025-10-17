@@ -176,15 +176,25 @@ export const getPublicationState = asyncHandler(async (req, res) => {
 });
 
 export const finalizePublication = asyncHandler(async (req, res) => {
-  const { entryUpdates } = req.body;
+  const { entryUpdates = [], newEntries = [] } = req.body;
+
   if (!Array.isArray(entryUpdates)) {
-    throw new ApiError(400, "Finalization requires entry updates");
+    throw new ApiError(400, "Entry updates must be an array");
+  }
+
+  if (!Array.isArray(newEntries)) {
+    throw new ApiError(400, "New entries must be an array");
+  }
+
+  if (entryUpdates.length === 0 && newEntries.length === 0) {
+    throw new ApiError(400, "At least one entry is required to finalize");
   }
 
   const authUserId = extractAuthUserId(req.user);
   const publication = await finalizePublicationList({
     ownerAuthId: authUserId,
     entryUpdates,
+    newEntries,
   });
 
   emitToUser(authUserId, "publication:finalized", {

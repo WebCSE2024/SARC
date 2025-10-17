@@ -72,7 +72,7 @@ const toEntryUpdate = (entry) => {
   return {
     entryId: entry.mongoId,
     title: entry.title?.trim() || undefined,
-    authors: authorsArray.length > 0 ? authorsArray : undefined,
+    authors: authorsArray,
     publicationType: entry.publicationType?.trim() || undefined,
     publisherName: entry.publisherName?.trim() || undefined,
     year: yearValue && !isNaN(yearValue) ? yearValue : undefined,
@@ -190,14 +190,41 @@ const PostPublication = () => {
   const handleFinalize = async () => {
     try {
       setFinalizing(true);
-      const entryUpdates = entries.map(toEntryUpdate).filter(Boolean);
 
-      if (entryUpdates.length === 0) {
+      // Separate new entries (no mongoId) from existing entries (has mongoId)
+      const newEntries = entries
+        .filter((entry) => !entry.mongoId)
+        .map((entry) => ({
+          title: entry.title?.trim() || undefined,
+          authors: entry.authors
+            ? entry.authors
+                .split(",")
+                .map((a) => a.trim())
+                .filter((a) => a.length > 0)
+            : [],
+          publicationType: entry.publicationType?.trim() || undefined,
+          publisherName: entry.publisherName?.trim() || undefined,
+          year: entry.year || undefined,
+          volume: entry.volume?.trim() || undefined,
+          issue: entry.issue?.trim() || undefined,
+          pages: entry.pages?.trim() || undefined,
+          issn: entry.issn?.trim() || undefined,
+          isbn: entry.isbn?.trim() || undefined,
+          description: entry.description?.trim() || undefined,
+        }));
+
+      const entryUpdates = entries
+        .filter((entry) => entry.mongoId)
+        .map(toEntryUpdate)
+        .filter(Boolean);
+
+      if (newEntries.length === 0 && entryUpdates.length === 0) {
         toast.error("No entries to finalize");
         return;
       }
 
       const response = await sarcAPI.post("sarc/v0/publication/finalize", {
+        newEntries,
         entryUpdates,
       });
       const pub = response.data?.data;
