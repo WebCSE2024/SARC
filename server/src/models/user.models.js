@@ -16,6 +16,12 @@ const UserSchema = new mongoose.Schema({
     enum: Object.values(UserType),
     required: true,
   },
+  username: {
+    type: String,
+    unique: true,
+    trim: true,
+    lowercase: true,
+  },
   referralPosted: [
     {
       type: mongoose.Schema.Types.ObjectId,

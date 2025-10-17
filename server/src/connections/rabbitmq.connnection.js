@@ -1,4 +1,5 @@
 import newsService from "../rabbitmq/news.rabbitmq.js";
+import publicationService from "../rabbitmq/publication.rabbitmq.js";
 
 export const initializeServices = async () => {
   try {
@@ -11,7 +12,8 @@ export const initializeServices = async () => {
     await newsService.initialize(rabbitMQUrl);
     console.log("News service initialized");
 
-    // Initialize user registration consumer
+    await publicationService.initialize(rabbitMQUrl);
+    console.log("Publication service initialized");
 
     console.log("Services initialized successfully");
   } catch (error) {

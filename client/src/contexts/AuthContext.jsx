@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
   const [linkedinError, setLinkedinError] = useState(false);
   const [linkedinProfile, setLinkedinProfile] = useState(null);
 
-  console.log(user)
 
   // Check if user is already logged in (token in localStorage)
   useEffect(() => {

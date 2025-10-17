@@ -77,31 +77,16 @@
 }
 
 .header-navbar .right-side {
-  position: absolute;
-  right: 10px;
-  z-index: 2;
   display: flex;
   align-items: center;
   gap: 12px;
+  padding-right: 1vw;
 }
 
 .header-navbar .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 8rem;
   list-style: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  margin-top: auto;
-  margin-bottom: auto;
-
-  width: 35%;
-  height: 70%;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -294,7 +279,7 @@
 
   font-family: Roboto;
   font-weight: 300;
-  font-size: 1rem ;
+  font-size: 1rem;
   line-height: 24px;
   letter-spacing: 0%;
   vertical-align: middle;

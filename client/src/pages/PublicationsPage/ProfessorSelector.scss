@@ -1,0 +1,201 @@
+.professor-selector {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+
+  &.empty {
+    padding: 32px 20px;
+    text-align: center;
+
+    .empty-message {
+      color: #666;
+      font-size: 14px;
+    }
+  }
+
+  .selector-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f0f7ff;
+
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0;
+    }
+
+    .count-badge {
+      background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
+
+  .professors-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 4px;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f3f5;
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #cbd5e0;
+      border-radius: 3px;
+
+      &:hover {
+        background: #a0aec0;
+      }
+    }
+
+    .professor-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #fafbfc;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      width: 100%;
+
+      &:hover {
+        background: #f0f7ff;
+        border-color: #d6ebff;
+        transform: translateX(4px);
+      }
+
+      &.selected {
+        background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+        border-color: #0077b5;
+        box-shadow: 0 2px 8px rgba(0, 119, 181, 0.15);
+
+        .professor-name {
+          color: #0077b5;
+          font-weight: 700;
+        }
+
+        .selected-indicator {
+          display: flex;
+        }
+      }
+
+      .professor-avatar {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #e1e4e8;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .avatar-placeholder {
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 18px;
+        }
+      }
+
+      .professor-info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .professor-name {
+          font-size: 14px;
+          font-weight: 600;
+          color: #1a1a1a;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .publication-count {
+          font-size: 12px;
+          color: #666;
+        }
+      }
+
+      .selected-indicator {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background: #0077b5;
+        color: white;
+        border-radius: 50%;
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .professor-selector {
+    position: static;
+    max-height: none;
+    margin-bottom: 24px;
+
+    .professors-list {
+      max-height: 300px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .professor-selector {
+    padding: 16px;
+
+    .professors-list {
+      max-height: 250px;
+
+      .professor-item {
+        padding: 10px;
+
+        .professor-avatar {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+}

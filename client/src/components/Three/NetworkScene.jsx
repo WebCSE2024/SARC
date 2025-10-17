@@ -14,6 +14,42 @@ import * as THREE from "three";
 import { authAPI } from "shared/axios/axiosInstance";
 import "./NetworkScene.scss";
 
+const TYPE_STYLES = {
+  alumni: {
+    baseColor: "#5a49ff",
+    glowColor: "#b1a8ff",
+    emissiveBase: "#1b1464",
+    connectionColor: "#786fff",
+  },
+  student: {
+    baseColor: "#0091ff",
+    glowColor: "#6bd3ff",
+    emissiveBase: "#0a3e74",
+    connectionColor: "#35b4ff",
+  },
+  professor: {
+    baseColor: "#2cc760",
+    glowColor: "#8ff3a6",
+    emissiveBase: "#123b24",
+    connectionColor: "#44e082",
+  },
+  sarc: {
+    baseColor: "#ff4d57",
+    glowColor: "#ff9aa0",
+    emissiveBase: "#3f0a0c",
+    connectionColor: "#ff6b74",
+  },
+  default: {
+    baseColor: "#6b7280",
+    glowColor: "#d1d5db",
+    emissiveBase: "#1f2937",
+    connectionColor: "#9ca3af",
+  },
+};
+
+const getTypeStyle = (type = "default") =>
+  TYPE_STYLES[type] || TYPE_STYLES.default;
+
 // Network Node Component with enhanced interactivity
 const NetworkNode = ({
   position,
@@ -25,8 +61,10 @@ const NetworkNode = ({
   data,
 }) => {
   const meshRef = useRef();
+  const auraRef = useRef();
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const typeStyle = useMemo(() => getTypeStyle(type), [type]);
 
   useFrame((state) => {
     if (!meshRef.current) return;
@@ -54,15 +92,25 @@ const NetworkNode = ({
       new THREE.Vector3(targetScale, targetScale, targetScale),
       0.15
     );
+
+    if (meshRef.current.material) {
+      const targetEmissive = hovered || clicked ? 0.55 : 0.25;
+      meshRef.current.material.emissiveIntensity +=
+        (targetEmissive - meshRef.current.material.emissiveIntensity) * 0.08;
+    }
+
+    if (auraRef.current) {
+      const pulse = 1 + Math.sin(state.clock.elapsedTime * 1.4) * 0.12;
+      auraRef.current.scale.set(pulse, pulse, pulse);
+      auraRef.current.material.opacity =
+        0.22 + Math.cos(state.clock.elapsedTime * 1.4) * 0.1;
+    }
   });
 
   const nodeColor = useMemo(() => {
-    if (type === "alumni") return color || "#2f295f";
-    if (type === "student") return color || "#4285f4";
-    if (type === "professor") return color || "#34a853";
-    if (type === "sarc") return color || "#ea4335";
-    return color || "#6b7280";
-  }, [type, color]);
+    if (color) return color;
+    return typeStyle.baseColor;
+  }, [typeStyle, color]);
 
   const handleClick = (e) => {
     e.stopPropagation();
@@ -88,12 +136,12 @@ const NetworkNode = ({
       >
         <meshStandardMaterial
           color={nodeColor}
-          metalness={type === "sarc" ? 0.9 : 0.7}
-          roughness={type === "sarc" ? 0.1 : 0.3}
-          emissive={hovered || clicked ? nodeColor : "#000000"}
-          emissiveIntensity={
-            hovered || clicked ? (type === "sarc" ? 0.4 : 0.2) : 0
+          metalness={type === "sarc" ? 0.85 : 0.65}
+          roughness={type === "sarc" ? 0.18 : 0.32}
+          emissive={
+            hovered || clicked ? typeStyle.glowColor : typeStyle.emissiveBase
           }
+          emissiveIntensity={hovered || clicked ? 0.6 : 0.25}
         />
       </Sphere>
 
@@ -103,7 +151,7 @@ const NetworkNode = ({
           <mesh rotation={[Math.PI / 2, 0, 0]}>
             <ringGeometry args={[size * 1.4, size * 1.7, 32]} />
             <meshBasicMaterial
-              color={nodeColor}
+              color={typeStyle.glowColor}
               transparent
               opacity={0.4}
               side={THREE.DoubleSide}
@@ -112,13 +160,25 @@ const NetworkNode = ({
           <mesh rotation={[Math.PI / 2, 0, 0]}>
             <ringGeometry args={[size * 1.8, size * 2.1, 32]} />
             <meshBasicMaterial
-              color={nodeColor}
+              color={typeStyle.glowColor}
               transparent
               opacity={0.2}
               side={THREE.DoubleSide}
             />
           </mesh>
         </>
+      )}
+
+      {type === "sarc" && (
+        <mesh ref={auraRef} scale={[1.4, 1.4, 1.4]}>
+          <sphereGeometry args={[size * 1.2, 32, 32]} />
+          <meshBasicMaterial
+            color={typeStyle.glowColor}
+            transparent
+            opacity={0.25}
+            wireframe
+          />
+        </mesh>
       )}
 
       {/* Label for SARC hub */}
@@ -150,34 +210,71 @@ const NetworkNode = ({
 };
 
 // Enhanced Connection Line with data flow animation
-const ConnectionLine = ({ start, end, animated = true, strength = 1 }) => {
+const ConnectionLine = ({
+  start,
+  end,
+  animated = true,
+  strength = 1,
+  startType,
+  endType,
+}) => {
   const lineRef = useRef();
-  const particlesRef = useRef();
+  const travelerRef = useRef();
 
-  useFrame((state) => {
-    if (!lineRef.current || !animated) return;
-
-    // Animated line with strength-based opacity
-    const baseOpacity = 0.2 + strength * 0.3;
-    const material = lineRef.current.material;
-    material.opacity =
-      baseOpacity + Math.sin(state.clock.elapsedTime * 2 + start[0]) * 0.1;
-  });
-
+  const startVector = useMemo(() => new THREE.Vector3(...start), [start]);
+  const endVector = useMemo(() => new THREE.Vector3(...end), [end]);
   const points = useMemo(
-    () => [new THREE.Vector3(...start), new THREE.Vector3(...end)],
-    [start, end]
+    () => [startVector, endVector],
+    [startVector, endVector]
   );
 
+  const lineColor = useMemo(() => {
+    const startStyle = getTypeStyle(startType);
+    const endStyle = getTypeStyle(endType);
+    const mixed = new THREE.Color(startStyle.connectionColor);
+    mixed.lerp(new THREE.Color(endStyle.connectionColor), 0.5);
+    return `#${mixed.getHexString()}`;
+  }, [startType, endType]);
+
+  useFrame((state) => {
+    if (lineRef.current && animated) {
+      const baseOpacity = 0.24 + strength * 0.26;
+      const material = lineRef.current.material;
+      material.opacity =
+        baseOpacity + Math.sin(state.clock.elapsedTime * 2 + start[0]) * 0.08;
+    }
+
+    if (travelerRef.current && animated) {
+      const speed = 0.4 + strength * 0.25;
+      const progress = (state.clock.elapsedTime * speed) % 1;
+      const easedProgress = 0.5 - 0.5 * Math.cos(progress * Math.PI * 2);
+      travelerRef.current.position.copy(startVector);
+      travelerRef.current.position.lerp(endVector, easedProgress);
+      travelerRef.current.material.opacity =
+        0.2 + Math.sin(progress * Math.PI * 2) * 0.2;
+    }
+  });
+
   return (
-    <Line
-      ref={lineRef}
-      points={points}
-      color="#4285f4"
-      lineWidth={1 + strength}
-      transparent
-      opacity={0.3}
-    />
+    <>
+      <Line
+        ref={lineRef}
+        points={points}
+        color={lineColor}
+        lineWidth={1 + strength}
+        dashed
+        dashSize={0.25 + strength * 0.1}
+        gapSize={0.55}
+        transparent
+        opacity={0.3}
+      />
+      {animated && (
+        <mesh ref={travelerRef}>
+          <sphereGeometry args={[0.08 + strength * 0.05, 16, 16]} />
+          <meshBasicMaterial color={lineColor} transparent opacity={0.3} />
+        </mesh>
+      )}
+    </>
   );
 };
 
@@ -199,13 +296,14 @@ const ParticleField = () => {
 
       // Colors
       const colorChoice = Math.random();
-      if (colorChoice < 0.3) {
-        colors.push(0.18, 0.16, 0.37); // SARC purple
-      } else if (colorChoice < 0.6) {
-        colors.push(0.26, 0.52, 0.96); // Blue
-      } else {
-        colors.push(0.2, 0.66, 0.33); // Green
-      }
+      const palette =
+        colorChoice < 0.33
+          ? TYPE_STYLES.alumni.baseColor
+          : colorChoice < 0.66
+          ? TYPE_STYLES.student.baseColor
+          : TYPE_STYLES.professor.baseColor;
+      const colorVec = new THREE.Color(palette);
+      colors.push(colorVec.r, colorVec.g, colorVec.b);
     }
     return {
       positions: new Float32Array(temp),
@@ -265,31 +363,24 @@ const InstancedNodes = ({ nodes, onClick }) => {
   const professor = nodes.filter((n) => n.type === "professor");
   const [hoverInfo, setHoverInfo] = useState(null);
 
-  const materials = useMemo(
-    () => ({
-      alumni: new THREE.MeshStandardMaterial({
-        color: "#2f295f",
-        metalness: 0.7,
-        roughness: 0.3,
-      }),
-      student: new THREE.MeshStandardMaterial({
-        color: "#4285f4",
-        metalness: 0.7,
-        roughness: 0.3,
-      }),
-      professor: new THREE.MeshStandardMaterial({
-        color: "#34a853",
-        metalness: 0.7,
-        roughness: 0.3,
-      }),
-      other: new THREE.MeshStandardMaterial({
-        color: "#6b7280",
-        metalness: 0.7,
-        roughness: 0.3,
-      }),
-    }),
-    []
-  );
+  const materials = useMemo(() => {
+    const createMaterial = (style) =>
+      new THREE.MeshStandardMaterial({
+        color: style.baseColor,
+        emissive: style.emissiveBase,
+        emissiveIntensity: 0.18,
+        metalness: 0.68,
+        roughness: 0.32,
+      });
+
+    return {
+      alumni: createMaterial(TYPE_STYLES.alumni),
+      student: createMaterial(TYPE_STYLES.student),
+      professor: createMaterial(TYPE_STYLES.professor),
+      other: createMaterial(TYPE_STYLES.default),
+    };
+  }, []);
+
   const materialFor = (type) => materials[type] || materials.other;
 
   // Render a group of instances for one type
@@ -307,7 +398,12 @@ const InstancedNodes = ({ nodes, onClick }) => {
           }}
           onPointerOver={(e) => {
             e.stopPropagation();
-            setHoverInfo({ position: n.position, data: n.data, type });
+            setHoverInfo({
+              position: n.position,
+              data: n.data,
+              type,
+              size: n.size,
+            });
             document.body.style.cursor = "pointer";
           }}
           onPointerOut={() => {
@@ -328,26 +424,47 @@ const InstancedNodes = ({ nodes, onClick }) => {
       )}
 
       {hoverInfo && (
-        <Html
-          distanceFactor={10}
-          position={[
-            hoverInfo.position[0],
-            hoverInfo.position[1] + 1.2,
-            hoverInfo.position[2],
-          ]}
-        >
-          <div className="node-tooltip">
-            <div className="tooltip-type">
-              {hoverInfo.type.charAt(0).toUpperCase() + hoverInfo.type.slice(1)}
+        <>
+          <mesh
+            position={[
+              hoverInfo.position[0],
+              hoverInfo.position[1],
+              hoverInfo.position[2],
+            ]}
+            rotation={[Math.PI / 2, 0, 0]}
+          >
+            <ringGeometry
+              args={[hoverInfo.size * 1.15, hoverInfo.size * 1.45, 48]}
+            />
+            <meshBasicMaterial
+              color={getTypeStyle(hoverInfo.type).glowColor}
+              transparent
+              opacity={0.35}
+              side={THREE.DoubleSide}
+            />
+          </mesh>
+          <Html
+            distanceFactor={10}
+            position={[
+              hoverInfo.position[0],
+              hoverInfo.position[1] + 1.2,
+              hoverInfo.position[2],
+            ]}
+          >
+            <div className="node-tooltip">
+              <div className="tooltip-type">
+                {hoverInfo.type.charAt(0).toUpperCase() +
+                  hoverInfo.type.slice(1)}
+              </div>
+              {hoverInfo.data?.name && (
+                <div className="tooltip-name">{hoverInfo.data.name}</div>
+              )}
+              {hoverInfo.data?.department && (
+                <div className="tooltip-dept">{hoverInfo.data.department}</div>
+              )}
             </div>
-            {hoverInfo.data?.name && (
-              <div className="tooltip-name">{hoverInfo.data.name}</div>
-            )}
-            {hoverInfo.data?.department && (
-              <div className="tooltip-dept">{hoverInfo.data.department}</div>
-            )}
-          </div>
-        </Html>
+          </Html>
+        </>
       )}
     </group>
   );
@@ -382,6 +499,7 @@ const NetworkScene = () => {
             "studentDetails.admissionNumber",
             "alumniDetails.gradYear",
             "professorDetails.position",
+            "professorDetails.specialInterestGroups",
             "profilePicture.url",
           ],
           sortBy: "updatedAt",

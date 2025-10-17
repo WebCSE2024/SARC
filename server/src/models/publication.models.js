@@ -1,25 +1,81 @@
 import mongoose from "mongoose";
 
+const PublicationEntrySchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    authors: {
+      type: [String],
+      default: [],
+    },
+    publicationType: {
+      type: String,
+      trim: true,
+    },
+    publisherName: {
+      type: String,
+      trim: true,
+    },
+    year: {
+      type: Number,
+      min: 1900,
+      max: 2100,
+    },
+    volume: {
+      type: String,
+      trim: true,
+    },
+    issue: {
+      type: String,
+      trim: true,
+    },
+    pages: {
+      type: String,
+      trim: true,
+    },
+    issn: {
+      type: String,
+      trim: true,
+    },
+    isbn: {
+      type: String,
+      trim: true,
+    },
+    description: {
+      type: String,
+      trim: true,
+    },
+  },
+  { _id: true, timestamps: false }
+);
+
 const PublicationSchema = new mongoose.Schema(
   {
-    publisher: {
+    ownerAuthId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      unique: true,
+      index: true,
+    },
+    ownerProfileId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    title: {
+    status: {
       type: String,
-      required: true,
+      enum: ["PENDING_REVIEW", "FINALIZED"],
+      default: "PENDING_REVIEW",
     },
-    publicationURL: {
-      type: String,
-      required: true,
+    entries: {
+      type: [PublicationEntrySchema],
+      default: [],
     },
-    previewPages: {
-      type: Number,
-      default: 3,
-      min: 1,
-      max: 10,
+    finalizedAt: {
+      type: Date,
     },
   },
   { timestamps: true }

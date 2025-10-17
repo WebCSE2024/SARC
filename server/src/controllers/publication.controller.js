@@ -1,289 +1,268 @@
+import fs from "fs/promises";
+import mongoose from "mongoose";
+import { v4 as uuidv4 } from "uuid";
 import { Publication } from "../models/publication.models.js";
 import { asyncHandler } from "../utils/AsyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
-import {
-  deleteFromCloudinary,
-  uploadOnCloudinary,
-  uploadOnCloudinaryPublication,
-} from "../connections/coludinaryConnection.js";
-import { v4 as uuidv4 } from "uuid";
 import { ApiResponse } from "../utils/ApiResponse.js";
-// import { client } from "../connections/redisConnection.js";
-import { REDIS_CACHE_EXPIRY_PUBLICATIONS } from "../constants/constants.js";
-import mongoose from "mongoose";
-import { User } from "../models/user.models.js";
-// import { title } from "process";
+import { sendPDFToPDFExtractionEngine } from "../utils/publication.helper.js";
+import {
+  finalizePublicationList,
+  getPublicationSnapshot,
+  getJobState,
+  resolveUserProfile,
+  sanitizeEntries,
+  storeJobState,
+  upsertPublicationList,
+} from "../services/publication.service.js";
+import socketManager from "../connections/socket.connection.js";
 
-export const createPublication = asyncHandler(async (req, res) => {
-  // Check if user is authenticated
-  if (!req.user) {
-    throw new ApiError(401, "Authentication required");
+const extractAuthUserId = (user = {}) => {
+  const candidate = user.id || user.userId || user._id;
+  if (!candidate) {
+    throw new ApiError(401, "Unable to resolve authenticated user");
+  }
+  if (typeof candidate === "string") {
+    if (!mongoose.Types.ObjectId.isValid(candidate)) {
+      throw new ApiError(400, "Invalid user identifier");
+    }
+    return candidate;
+  }
+  if (candidate instanceof mongoose.Types.ObjectId) {
+    return candidate.toString();
+  }
+  throw new ApiError(400, "Unsupported user identifier type");
+};
+
+const emitToUser = (userId, event, payload) => {
+  try {
+    socketManager.emitToUser(userId, event, payload);
+  } catch (error) {
+    console.error("Failed to emit socket event", { event, userId, error });
+  }
+};
+
+export const uploadPublication = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    throw new ApiError(400, "No file uploaded");
   }
 
-  // Check if user is a professor (case-insensitive comparison)
-  const userType = req.user.userType ? req.user.userType.toUpperCase() : "";
-  if (userType !== "PROFESSOR") {
-    throw new ApiError(403, "Only professors can create publications");
-  }
+  const authUserId = extractAuthUserId(req.user);
+  const userProfile = await resolveUserProfile(authUserId);
+  const jobId = uuidv4();
 
-  const { title, previewPages } = req.body;
+  const jobPayload = {
+    jobId,
+    status: "PENDING",
+    ownerAuthId: userProfile.userId.toString(),
+    ownerProfileId: userProfile._id.toString(),
+    fileName: req.file.originalname,
+    filePath: req.file.path,
+    fileStorageKey: req.file.storageKey,
+    fileType: req.file.mimetype,
+    fileSize: req.file.size,
+    receivedAt: new Date().toISOString(),
+  };
 
-  // Validate title
-  if (!title || title.trim() === "") {
-    throw new ApiError(400, "Publication title is required");
-  }
+  await storeJobState(jobId, jobPayload);
 
-  // Validate preview pages
-  if (
-    previewPages &&
-    (parseInt(previewPages) < 1 || parseInt(previewPages) > 10)
-  ) {
-    throw new ApiError(400, "Preview pages must be between 1 and 10");
-  }
-
-  // Check for PDF file
-  const pdf_path = req.file?.path;
-  if (!pdf_path) {
-    throw new ApiError(400, "PDF file is required");
-  }
-
-  // Upload to Cloudinary
-  const uploadedPdf = await uploadOnCloudinaryPublication(pdf_path);
-  
-  if (!uploadedPdf || !uploadedPdf.url) {
-    throw new ApiError(500, "Failed to upload PDF to cloud storage");
-  }
-
-  const newPublication = await Publication.create({
-    title: title.trim(),
-    publicationURL: uploadedPdf.url,
-    publisher: req.user.id,
-    previewPages: previewPages ? parseInt(previewPages) : 3,
-  });
-
-  if (!newPublication) {
-    await deleteFromCloudinary(uploadedPdf.publicId);
-    throw new ApiError(400, "Error on creating publication");
-  }
-
-  await User.findByIdAndUpdate(req.user.id, {
-    $push: { publicationPosted: newPublication._id },
-  });
-
-  const created_publication = await Publication.aggregate([
-    {
-      $match: {
-        _id: newPublication._id,
-      },
-    },
-    {
-      $lookup: {
-        from: "users",
-        localField: "publisher",
-        foreignField: "_id",
-        as: "publisher",
-      },
-    },
-  ]);
-
-//   await client.del("publication-list");
-  return res
-    .status(200)
+  res
+    .status(202)
     .json(
       new ApiResponse(
-        200,
-        created_publication,
-        "Publication created successfully"
+        202,
+        { jobId, status: "PENDING" },
+        "Publication ingestion started"
       )
     );
+
+  sendPDFToPDFExtractionEngine(jobId, req.file.path, authUserId, {
+    originalFilename: req.file.originalname,
+    storageKey: req.file.storageKey,
+  }).catch(async (error) => {
+    console.error("Error sending PDF to extraction engine:", error);
+    await storeJobState(jobId, {
+      ...jobPayload,
+      status: "FAILED",
+      error: error.message,
+      failedAt: new Date().toISOString(),
+    });
+    emitToUser(authUserId, "publication:extraction-failed", {
+      jobId,
+      error: error.message,
+    });
+  });
+});
+
+export const createPublication = async (content) => {
+  const { jobId, status, publications = [], error } = content;
+
+  const jobState = await getJobState(jobId);
+  if (!jobState) {
+    throw new ApiError(404, "Publication job metadata not found");
+  }
+
+  const ownerAuthId = jobState.ownerAuthId || jobState.userId;
+  if (!ownerAuthId) {
+    throw new ApiError(400, "Publication job missing owner reference");
+  }
+
+  const ownerProfile = await resolveUserProfile(ownerAuthId);
+
+  const persistJobFailure = async (reason) => {
+    await storeJobState(jobId, {
+      ...jobState,
+      status: "FAILED",
+      error: reason,
+      failedAt: new Date().toISOString(),
+    });
+    emitToUser(ownerAuthId.toString(), "publication:extraction-failed", {
+      jobId,
+      error: reason,
+    });
+  };
+
+  if (status !== "COMPLETED") {
+    await persistJobFailure(error || "Extraction failed");
+    if (jobState.filePath) {
+      await fs.rm(jobState.filePath, { force: true });
+    }
+    return { success: false, error: error || "Extraction failed" };
+  }
+
+  const sanitizedEntries = sanitizeEntries(publications);
+
+  if (sanitizedEntries.length === 0) {
+    await persistJobFailure("No publications detected in uploaded document");
+    if (jobState.filePath) {
+      await fs.rm(jobState.filePath, { force: true });
+    }
+    return { success: false, error: "No publications detected" };
+  }
+
+  const publication = await upsertPublicationList({
+    ownerAuthId: ownerProfile.userId,
+    ownerProfileId: ownerProfile._id,
+    entries: sanitizedEntries,
+    status: "PENDING_REVIEW",
+  });
+
+  await storeJobState(jobId, {
+    ...jobState,
+    status: "COMPLETED",
+    completedAt: new Date().toISOString(),
+    extractedCount: sanitizedEntries.length,
+  });
+
+  if (jobState.filePath) {
+    await fs.rm(jobState.filePath, { force: true });
+  }
+
+  emitToUser(ownerAuthId.toString(), "publication:extraction-complete", {
+    jobId,
+    status: "PENDING_REVIEW",
+    count: sanitizedEntries.length,
+    publicationId: publication._id.toString(),
+  });
+
+  return { success: true, message: "Publication list updated" };
+};
+
+export const getPublicationState = asyncHandler(async (req, res) => {
+  const authUserId = extractAuthUserId(req.user);
+  const publication = await getPublicationSnapshot(authUserId);
+
+  res.status(200).json(new ApiResponse(200, publication));
+});
+
+export const finalizePublication = asyncHandler(async (req, res) => {
+  const { entryUpdates } = req.body;
+  if (!Array.isArray(entryUpdates)) {
+    throw new ApiError(400, "Finalization requires entry updates");
+  }
+
+  const authUserId = extractAuthUserId(req.user);
+  const publication = await finalizePublicationList({
+    ownerAuthId: authUserId,
+    entryUpdates,
+  });
+
+  emitToUser(authUserId, "publication:finalized", {
+    publicationId: publication._id.toString(),
+    finalizedAt: publication.finalizedAt,
+  });
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, publication, "Publication list finalized"));
+});
+
+export const getPublicationJob = asyncHandler(async (req, res) => {
+  const { jobId } = req.params;
+  if (!jobId) {
+    throw new ApiError(400, "Job identifier is required");
+  }
+
+  const job = await getJobState(jobId);
+  if (!job) {
+    throw new ApiError(404, "Job not found");
+  }
+
+  const authUserId = extractAuthUserId(req.user);
+  if ((job.ownerAuthId || "").toString() !== authUserId.toString()) {
+    throw new ApiError(403, "You are not authorized to access this job");
+  }
+
+  res.status(200).json(new ApiResponse(200, job, "Job fetched successfully"));
 });
 
 export const getAllPublications = asyncHandler(async (req, res) => {
-//   const cacheResult = await client.get("publication-list");
-//   if (cacheResult)
-//     return res
-//       .status(200)
-//       .json(
-//         new ApiResponse(
-//           200,
-//           JSON.parse(cacheResult),
-//           "all publications fetched successfully"
-//         )
-//       );
-
-  const response = await Publication.find();
-
-  if (!response) throw new ApiError(400, "no publications found");
-
-//   await client.set(
-//     "publication-list",
-//     JSON.stringify(response),
-//     "EX",
-//     REDIS_CACHE_EXPIRY_PUBLICATIONS
-//   );
-  return res
+  const publications = await Publication.find();
+  res
     .status(200)
     .json(
-      new ApiResponse(200, response, "publication-list fetched successfully")
+      new ApiResponse(200, publications, "Publications fetched successfully")
     );
 });
 
 export const getPublicationDetails = asyncHandler(async (req, res) => {
-  const publicationid = req.params.publicationid;
+  const { publicationid } = req.params;
+  if (!publicationid || !mongoose.Types.ObjectId.isValid(publicationid)) {
+    throw new ApiError(400, "Invalid publication identifier");
+  }
 
-  if (!publicationid) throw new ApiError(400, "Publication-ID not available");
+  const publication = await Publication.findById(publicationid).populate(
+    "ownerProfileId"
+  );
+  if (!publication) {
+    throw new ApiError(404, "Publication not found");
+  }
 
-//   const cacheResult = await client.get(`publication:${publicationid}`);
-  if (cacheResult)
-    return res
-      .status(200)
-      .json(
-        new ApiResponse(
-          200,
-          JSON.parse(cacheResult),
-          " publication details fetched successfully"
-        )
-      );
-
-  const publication_data = await Publication.aggregate([
-    {
-      $match: {
-        _id: new mongoose.Types.ObjectId(publicationid),
-      },
-    },
-    {
-      $lookup: {
-        from: "users",
-        localField: "publisher",
-        foreignField: "_id",
-        as: "publisher",
-      },
-    },
-
-    {
-      $project: {
-        publicationId: 1,
-        publicationURL: 1,
-        "publisher.full_name": 1,
-        "publisher.email": 1,
-        "publisher.professorDetails": 1,
-        _id: 0,
-      },
-    },
-  ]);
-
-//   await client.set(
-//     `publication:${publicationid}`,
-//     JSON.stringify(publication_data),
-//     "EX",
-//     REDIS_CACHE_EXPIRY_PUBLICATIONS
-//   );
-  return res
+  res
     .status(200)
     .json(
-      new ApiResponse(
-        200,
-        publication_data,
-        "publication data fetched successfully"
-      )
+      new ApiResponse(200, publication, "Publication fetched successfully")
     );
 });
 
 export const deletePublication = asyncHandler(async (req, res) => {
-  const publicationid = req.params.publicationid;
-
-  // Check authentication
-  if (!req.user) {
-    throw new ApiError(401, "Authentication required");
+  const authUserId = extractAuthUserId(req.user);
+  const publication = await Publication.findOne({ ownerAuthId: authUserId });
+  if (!publication) {
+    throw new ApiError(404, "Publication list not found");
   }
 
-  // Check authorization with case-insensitive comparison
-  const userType = req.user.userType ? req.user.userType.toUpperCase() : "";
-  const isAuthorized = userType === "PROFESSOR" || userType === "ADMIN";
+  await Publication.deleteOne({ _id: publication._id });
 
-  if (!isAuthorized) {
-    throw new ApiError(
-      403,
-      "Only professors and admins can delete publications"
-    );
-  }
-
-  if (!publicationid) {
-    throw new ApiError(400, "Publication ID is required");
-  }
-
-  const fetchPublication = await Publication.findOne({
-    _id: new mongoose.Types.ObjectId(publicationid),
-  });
-
-  if (!fetchPublication) {
-    throw new ApiError(404, "Publication not found");
-  }
-
-  if (fetchPublication.publisher.toString() !== req.user.id.toString()) {
-    throw new ApiError(403, "You can only delete your own publications");
-  }
-
-  // Clear from cache
-//   await client.del(`publication:${publicationid}`);
-
-  const response = await Publication.deleteOne({
-    _id: new mongoose.Types.ObjectId(publicationid),
-  });
-
-  if (!response) {
-    throw new ApiError(500, "Failed to delete publication");
-  }
-
-  return res
-    .status(200)
-    .json(new ApiResponse(200, null, "Publication deleted successfully"));
+  res.status(200).json(new ApiResponse(200, null, "Publication list deleted"));
 });
 
 export const getMyPublications = asyncHandler(async (req, res) => {
-  const userId = req.user.id;
-
-  if (!userId) throw new ApiError(400, "No user exists");
-
-//   const cacheResult = await client.get(`mypublication:${userId}`);
-
-  if (cacheResult) {
-    return res
-      .status(200)
-      .json(
-        new ApiResponse(
-          200,
-          JSON.parse(cacheResult),
-          "Publication details fetched successfully"
-        )
-      );
-  }
-
-  const result = await Publication.aggregate([
-    {
-      $match: {
-        publisher: new mongoose.Types.ObjectId(userId),
-      },
-    },
-    {
-      $project: {
-        //   publicationId:1,
-        publicationURL: 1,
-        title: 1,
-      },
-    },
-  ]);
-
-//   await client.set(
-//     `mypublication:${userId}`,
-//     JSON.stringify(result),
-//     "EX",
-//     REDIS_CACHE_EXPIRY_PUBLICATIONS
-//   );
-
-  return res
+  const authUserId = extractAuthUserId(req.user);
+  const publication = await Publication.findOne({ ownerAuthId: authUserId });
+  res
     .status(200)
     .json(
-      new ApiResponse(200, result, "Publication details fetched successfully")
+      new ApiResponse(200, publication, "Publications fetched successfully")
     );
 });

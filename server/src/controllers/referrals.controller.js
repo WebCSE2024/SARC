@@ -90,23 +90,9 @@ export const createReferral = async (req, res) => {
 };
 
 export const getAllReferrals = asyncHandler(async (req, res) => {
-  // const cacheReferral = await client.get("referral-list");
-  // if (cacheReferral)
-  //   return res
-  //     .status(200)
-  //     .send(new ApiResponse(200, JSON.parse(cacheReferral), "referral list "));
-
   const allReferrals = await Referral.find({});
 
   if (!allReferrals) throw new ApiError(400, "Refrrals list not found");
-
-  // await client.set(
-  //   "referral-list",
-  //   JSON.stringify(allReferrals),
-  //   "EX",
-  //   REDIS_CACHE_EXPIRY_REFERRAL
-  // );
-
   return res
     .status(200)
     .json(new ApiResponse(200, allReferrals, "List of all referrals"));
@@ -116,16 +102,11 @@ export const toggleReferralState = asyncHandler(async (req, res) => {
   const referralId = req.params.id;
   const { status } = req.body;
 
-
-  
-  
   if (!referralId || !status) throw new ApiError(400, "Data incomplete");
 
   const referral = await Referral.findOne({
     _id: new mongoose.Types.ObjectId(referralId),
   });
-
-  console.log(referral);
 
   if (!referral) throw new ApiError(400, "Referral not found");
 
@@ -234,15 +215,12 @@ export const getMyReferrals = asyncHandler(async (req, res) => {
 });
 
 export const deleteReferral = asyncHandler(async (req, res) => {
-  const refid = req.params.refid;
+  const refid = req.params.id;
 
   if (!refid) throw new ApiError(400, "Referral-ID not available");
 
-  await client.del(`referral/:${refid}`);
-
   const response = await Referral.deleteOne({
-    _id: new mongoose.Types.ObjectId(refid),
-    addedBy: req.user._id,
+    _id: refid,
   });
 
   if (!response) throw new ApiError(400, "can not delete the referral");

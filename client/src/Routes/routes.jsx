@@ -13,14 +13,14 @@ export const appRoutes = [
     path: "/",
     element: <HomePage />,
   },
-  {
-    path: "/news",
-    element: <Navigate to="/news/events" replace />,
-  },
-  {
-    path: "/news/:tab",
-    element: <News />,
-  },
+  // {
+  //   path: "/news",
+  //   element: <Navigate to="/news/events" replace />,
+  // },
+  // {
+  //   path: "/news/:tab",
+  //   element: <News />,
+  // },
   {
     path: "/referrals",
     element: <ReferralPage />,

@@ -57,8 +57,8 @@ const HomePage = () => {
           referrals, and opportunities to grow.
         </p>
         <div className="cta" role="group" aria-label="Primary actions">
-          <NavLink to="/news" className="btn primary">
-            Explore News
+          <NavLink to="/referrals" className="btn primary">
+            Explore Referrals
           </NavLink>
           <NavLink to="/publications" className="btn ghost">
             Read Publications

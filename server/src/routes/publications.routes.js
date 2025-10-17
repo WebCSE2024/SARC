@@ -1,29 +1,72 @@
 import { Router } from "express";
 import { upload } from "../../../../shared/middlewares/multer.middleware.js";
-import { compressionMiddleware } from "../../../../shared/middlewares/compressor.middleware.js";
 import {
-  createPublication,
   deletePublication,
+  finalizePublication,
   getAllPublications,
   getMyPublications,
   getPublicationDetails,
+  getPublicationJob,
+  getPublicationState,
+  uploadPublication,
 } from "../controllers/publication.controller.js";
 import { setUser } from "../middlewares/setUser.js";
-import {authenticate} from "../../../../shared/middlewares/auth.middleware.js"
+import {
+  authenticate,
+  requireRole,
+} from "../../../../shared/middlewares/auth.middleware.js";
+import { UserType } from "../../../../shared/types/user.type.js";
 
 const router = Router();
 
 router.post(
-  "/create-publication",
+  "/upload",
   authenticate,
+  requireRole([UserType.PROFESSOR, UserType.ADMIN]),
   setUser,
-  compressionMiddleware,
   upload.single("publication_pdf"),
-  createPublication
+  uploadPublication
 );
+
+router.get(
+  "/me",
+  authenticate,
+  requireRole([UserType.PROFESSOR, UserType.ADMIN]),
+  setUser,
+  getPublicationState
+);
+
+router.post(
+  "/finalize",
+  authenticate,
+  requireRole([UserType.PROFESSOR, UserType.ADMIN]),
+  setUser,
+  finalizePublication
+);
+
+router.get(
+  "/jobs/:jobId",
+  authenticate,
+  requireRole([UserType.PROFESSOR, UserType.ADMIN]),
+  setUser,
+  getPublicationJob
+);
+
 router.get("/publication-list", getAllPublications);
 router.get("/:publicationid", getPublicationDetails);
-router.delete("/delete/:publicationid", authenticate, setUser, deletePublication);
-router.post("/get-my-publications", authenticate, getMyPublications);
+router.delete(
+  "/delete",
+  authenticate,
+  requireRole([UserType.PROFESSOR, UserType.ADMIN]),
+  setUser,
+  deletePublication
+);
+router.get(
+  "/my/list",
+  authenticate,
+  requireRole([UserType.PROFESSOR, UserType.ADMIN]),
+  setUser,
+  getMyPublications
+);
 
 export default router;
