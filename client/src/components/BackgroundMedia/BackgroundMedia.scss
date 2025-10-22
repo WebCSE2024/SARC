@@ -1,0 +1,60 @@
+.background-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 800ms ease;
+
+  &.is-loaded {
+    opacity: 1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    z-index: 1;
+  }
+}
+
+.background-media__video,
+.background-media__gif,
+.background-media__image,
+.background-media__fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: var(--media-opacity, 0.3);
+  filter: blur(0px);
+}
+
+.background-media__video {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .background-media__video,
+  .background-media__gif,
+  .background-media__image,
+  .background-media__fallback {
+    opacity: calc(var(--media-opacity, 0.3) * 0.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .background-media {
+    transition: none;
+  }
+
+  .background-media__video {
+    display: none;
+  }
+}
