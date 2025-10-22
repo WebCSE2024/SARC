@@ -1,7 +1,7 @@
 .sig-card {
   background: var(--bg-surface, #ffffff);
   border: 1px solid var(--border, #e5e7eb);
-  border-radius: var(--radius-md, 12px);
+  border-radius: var(--radius-md, 0.75rem);
   box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
   overflow: hidden;
   display: flex;
@@ -11,8 +11,11 @@
   height: 100%;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+    transform: translateY(-0.1875rem);
+    box-shadow: var(
+      --shadow-lg,
+      0 0.625rem 0.9375rem -0.1875rem rgba(0, 0, 0, 0.1)
+    );
     border-color: rgba(16, 24, 40, 0.14);
   }
 
@@ -24,7 +27,7 @@
 
 .sig-card__media {
   width: 100%;
-  height: 200px;
+  height: 12.5rem;
   overflow: hidden;
   background: #f8fafc;
   position: relative;
@@ -49,44 +52,44 @@
 
 .sig-card--professor {
   .sig-card__media {
-    height: 40vh;
+    height: clamp(18rem, 25vw, 22rem);
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 
     img {
       object-fit: cover;
-      object-position: top center;
+      object-position: center top;
     }
   }
 }
 
 .sig-card__content {
-  padding: 20px;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0.75rem;
   flex: 1;
 }
 
 .sig-card__header {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .sig-card__meta {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
   flex-wrap: wrap;
 }
 
 .sig-card__badge {
   display: inline-block;
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 4px 10px;
+  padding: 0.25rem 0.625rem;
   border-radius: 999px;
   border: 1px solid rgba(16, 24, 40, 0.08);
   background: #eef2ff;
@@ -119,13 +122,13 @@
 }
 
 .sig-card__citations {
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--text-muted, #64748b);
   font-weight: 500;
 }
 
 .sig-card__title {
-  font-size: 18px;
+  font-size: clamp(1rem, 2vw, 1.125rem);
   font-weight: 700;
   line-height: 1.4;
   color: var(--text-strong, #0f172a);
@@ -134,7 +137,7 @@
 
 .sig-card__authors,
 .sig-card__email {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-muted, #475569);
   margin: 0;
 }
@@ -144,6 +147,7 @@
   text-decoration: none;
   color: var(--brand-600, #2563eb);
   transition: color 150ms ease;
+  word-break: break-word;
 
   &:hover {
     color: var(--brand-700, #1d4ed8);
@@ -152,7 +156,7 @@
 }
 
 .sig-card__description {
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.6;
   color: var(--text, #334155);
   margin: 0;
@@ -161,15 +165,15 @@
 .sig-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .sig-card__tag {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
   background: #f1f5f9;
   color: #475569;
   border: 1px solid #e2e8f0;
@@ -180,20 +184,20 @@
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-  padding-top: 12px;
+  padding-top: 0.75rem;
   border-top: 1px solid var(--border, #e5e7eb);
 }
 
 .sig-card__date {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: var(--text-muted, #64748b);
 }
 
 .sig-card__link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
+  gap: 0.375rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--brand-600, #2563eb);
   text-decoration: none;
@@ -201,14 +205,15 @@
 
   svg {
     transition: transform 150ms ease;
+    flex-shrink: 0;
   }
 
   &:hover {
     color: var(--brand-700, #1d4ed8);
-    gap: 8px;
+    gap: 0.5rem;
 
     svg {
-      transform: translateX(2px);
+      transform: translateX(0.125rem);
     }
   }
 }
@@ -216,7 +221,7 @@
 .sig-card__seminar-info {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0.375rem;
   width: 100%;
 }
 
@@ -224,8 +229,8 @@
 .sig-card__duration {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  gap: 0.375rem;
+  font-size: 0.75rem;
   color: var(--text-muted, #64748b);
 
   svg {
@@ -240,22 +245,111 @@
   }
 }
 
-@media (max-width: 768px) {
+/* Responsive breakpoints using modern CSS */
+/* Small mobile devices */
+@media (max-width: 480px) {
   .sig-card__media {
-    height: 60vh;
+    height: 11rem;
+  }
+
+  .sig-card--professor {
+    .sig-card__media {
+      height: clamp(16rem, 50vw, 18rem);
+    }
   }
 
   .sig-card__content {
-    padding: 16px;
+    padding: 1rem;
+    gap: 0.625rem;
   }
 
   .sig-card__title {
-    font-size: 16px;
+    font-size: 0.9375rem;
+  }
+
+  .sig-card__badge {
+    font-size: 0.625rem;
+    padding: 0.1875rem 0.5rem;
+  }
+
+  .sig-card__description {
+    font-size: 0.8125rem;
   }
 
   .sig-card__footer {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 0.5rem;
+  }
+}
+
+/* Mobile devices */
+@media (min-width: 481px) and (max-width: 768px) {
+  .sig-card__media {
+    height: 12rem;
+  }
+
+  .sig-card--professor {
+    .sig-card__media {
+      height: clamp(17rem, 35vw, 20rem);
+    }
+  }
+
+  .sig-card__content {
+    padding: 1.125rem;
+  }
+
+  .sig-card__footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sig-card__media {
+    height: 13rem;
+  }
+
+  .sig-card--professor {
+    .sig-card__media {
+      height: clamp(18rem, 28vw, 21rem);
+    }
+  }
+}
+
+/* Large tablets and small desktops */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .sig-card__media {
+    height: 13.5rem;
+  }
+
+  .sig-card--professor {
+    .sig-card__media {
+      height: clamp(19rem, 24vw, 21.5rem);
+    }
+  }
+}
+
+/* Large desktops */
+@media (min-width: 1281px) {
+  .sig-card__media {
+    height: 14rem;
+  }
+
+  .sig-card--professor {
+    .sig-card__media {
+      height: clamp(20rem, 22vw, 22rem);
+    }
+  }
+}
+
+/* Orientation-based adjustments for professor cards */
+@media (orientation: landscape) and (max-width: 1024px) {
+  .sig-card--professor {
+    .sig-card__media {
+      height: clamp(15rem, 40vh, 20rem);
+    }
   }
 }

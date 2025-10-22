@@ -7,29 +7,6 @@ export const SIG_DOMAINS = {
 
 export const SIG_CONFIG = [
   {
-    id: SIG_DOMAINS.THEORETICAL_CS,
-    slug: SIG_DOMAINS.THEORETICAL_CS,
-    name: "Theoretical Computer Science",
-    shortName: "Theoretical CS",
-    description:
-      "Exploring quantum algorithms, graph theory, and computational complexity for solving fundamental problems",
-    tags: [
-      "Quantum Algorithms",
-      "Graph Theory",
-      "Complexity Analysis",
-      "Combinatorial Optimization",
-      "Formal Verification",
-    ],
-    color: "#8B5CF6",
-    backgroundMedia: {
-      type: "video",
-      url: "https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4",
-      poster:
-        "https://images.pexels.com/videos/3129671/pexels-photo-3129671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      opacity: 0.25,
-    },
-  },
-  {
     id: SIG_DOMAINS.AI_ML,
     slug: SIG_DOMAINS.AI_ML,
     name: "Artificial Intelligence & Machine Learning",
@@ -95,6 +72,29 @@ export const SIG_CONFIG = [
       url: "https://videos.pexels.com/video-files/5711017/5711017-uhd_2560_1440_25fps.mp4",
       poster:
         "https://images.pexels.com/videos/5711017/pexels-photo-5711017.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      opacity: 0.25,
+    },
+  },
+  {
+    id: SIG_DOMAINS.THEORETICAL_CS,
+    slug: SIG_DOMAINS.THEORETICAL_CS,
+    name: "Theoretical Computer Science",
+    shortName: "Theoretical CS",
+    description:
+      "Exploring quantum algorithms, graph theory, and computational complexity for solving fundamental problems",
+    tags: [
+      "Quantum Algorithms",
+      "Graph Theory",
+      "Complexity Analysis",
+      "Combinatorial Optimization",
+      "Formal Verification",
+    ],
+    color: "#8B5CF6",
+    backgroundMedia: {
+      type: "video",
+      url: "https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4",
+      poster:
+        "https://images.pexels.com/videos/3129671/pexels-photo-3129671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       opacity: 0.25,
     },
   },

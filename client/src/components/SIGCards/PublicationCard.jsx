@@ -1,6 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./SIGCards.scss";
+import {
+  isYouTubeUrl,
+  getYouTubeEmbedUrl,
+  getFallbackImage,
+} from "../../utils/mediaUtils";
 
 const PublicationCard = ({ publication }) => {
   const {
@@ -43,16 +48,24 @@ const PublicationCard = ({ publication }) => {
               loading="lazy"
               onError={(e) => {
                 e.currentTarget.onerror = null;
-                e.currentTarget.src =
-                  "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=1200&auto=format&fit=crop&q=40";
+                e.currentTarget.src = getFallbackImage("publication");
               }}
             />
           )}
-          {media.type === "video" && (
+          {media.type === "video" && !isYouTubeUrl(media.url) && (
             <video controls preload="metadata">
               <source src={media.url} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+          )}
+          {media.type === "video" && isYouTubeUrl(media.url) && (
+            <iframe
+              src={getYouTubeEmbedUrl(media.url)}
+              title={title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           )}
         </div>
       )}

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./SIGCards.scss";
+import { getFallbackImage } from "../../utils/mediaUtils";
 
 const ProfessorCard = ({ professor }) => {
   const { name, designation, image, interests, email, bio } = professor;
@@ -14,8 +15,7 @@ const ProfessorCard = ({ professor }) => {
           loading="lazy"
           onError={(e) => {
             e.currentTarget.onerror = null;
-            e.currentTarget.src =
-              "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&auto=format&fit=crop&q=50";
+            e.currentTarget.src = getFallbackImage("professor");
           }}
         />
       </div>

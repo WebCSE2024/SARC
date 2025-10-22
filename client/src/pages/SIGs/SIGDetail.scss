@@ -1,10 +1,10 @@
 .sig-detail {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 5rem);
 }
 
 .sig-detail__hero {
   position: relative;
-  padding: 80px 0 60px;
+  padding: 5rem 0 3.75rem;
   background: linear-gradient(
     135deg,
     var(--sig-color, #3b82f6) 0%,
@@ -40,18 +40,18 @@
 .sig-detail__back {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0.625rem);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 200ms ease;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 
   svg {
     transition: transform 200ms ease;
@@ -59,77 +59,81 @@
 
   &:hover {
     background: rgba(255, 255, 255, 0.25);
-    transform: translateX(-4px);
+    transform: translateX(-0.25rem);
 
     svg {
-      transform: translateX(-2px);
+      transform: translateX(-0.125rem);
     }
   }
 }
 
 .sig-detail__title {
-  font-size: 48px;
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
   line-height: 1.2;
-  margin: 0 0 16px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 0 1rem;
+  text-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
 }
 
 .sig-detail__description {
   color: var(--bg-app);
-  font-size: 20px;
+  font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.6;
-  margin: 0 0 24px;
-  max-width: 700px;
+  margin: 0 0 1.5rem;
+  max-width: 43.75rem;
   opacity: 0.95;
 }
 
 .sig-detail__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .sig-detail__tag {
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
   background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0.625rem);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #ffffff;
 }
 
 .sig-detail__content {
-  padding: 40px 0;
+  padding: 2.5rem 0;
 }
 
 .sig-detail__tabs {
   display: flex;
-  gap: 8px;
-  margin-bottom: 32px;
-  padding: 6px;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.375rem;
   background: #f8fafc;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   border: 1px solid #e2e8f0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .sig-detail__tab {
   flex: 1;
+  min-width: max-content;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px 20px;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
   background: transparent;
   border: none;
-  border-radius: 8px;
-  font-size: 15px;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: #64748b;
   cursor: pointer;
   transition: all 200ms ease;
+  white-space: nowrap;
 
   &:hover {
     background: rgba(59, 130, 246, 0.08);
@@ -147,12 +151,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 24px;
-  height: 24px;
-  padding: 0 8px;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.5rem;
   background: rgba(100, 116, 139, 0.1);
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 700;
   color: inherit;
 
@@ -163,62 +167,101 @@
 }
 
 .sig-detail__panel {
-  min-height: 400px;
+  min-height: 25rem;
 }
 
 .sig-detail__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 24px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 21.25rem), 1fr));
+  gap: 1.5rem;
 }
 
 .sig-detail__empty {
   grid-column: 1 / -1;
   text-align: center;
-  padding: 60px 20px;
-  font-size: 16px;
+  padding: 3.75rem 1.25rem;
+  font-size: 1rem;
   color: #64748b;
 }
 
 .sig-detail__error {
-  padding: 60px 20px;
+  padding: 3.75rem 1.25rem;
   text-align: center;
 
   h1 {
-    font-size: 32px;
-    margin-bottom: 16px;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 1rem;
     color: #1e293b;
   }
 
   p {
-    font-size: 18px;
+    font-size: clamp(1rem, 2vw, 1.125rem);
     color: #64748b;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
   }
 }
 
-@media (max-width: 768px) {
+/* Responsive breakpoints */
+@media (max-width: 480px) {
   .sig-detail__hero {
-    padding: 60px 0 40px;
+    padding: 3rem 0 2rem;
   }
 
-  .sig-detail__title {
-    font-size: 32px;
-  }
-
-  .sig-detail__description {
-    font-size: 16px;
+  .sig-detail__content {
+    padding: 1.5rem 0;
   }
 
   .sig-detail__tabs {
     flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.25rem;
   }
 
   .sig-detail__tab {
     justify-content: space-between;
+    padding: 0.625rem 1rem;
+  }
+
+  .sig-detail__grid {
+    gap: 1rem;
+  }
+
+  .sig-detail__panel {
+    min-height: 18rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .sig-detail__hero {
+    padding: 3.75rem 0 2.5rem;
+  }
+
+  .sig-detail__content {
+    padding: 2rem 0;
+  }
+
+  .sig-detail__tabs {
+    overflow-x: auto;
+  }
+
+  .sig-detail__tab {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .sig-detail__grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sig-detail__grid {
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  }
+}
+
+@media (min-width: 1025px) {
+  .sig-detail__grid {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   }
 }

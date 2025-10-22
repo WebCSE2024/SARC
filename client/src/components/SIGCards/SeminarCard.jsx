@@ -1,6 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./SIGCards.scss";
+import {
+  isYouTubeUrl,
+  getYouTubeEmbedUrl,
+  getFallbackImage,
+} from "../../utils/mediaUtils";
 
 const SeminarCard = ({ seminar }) => {
   const { title, description, date, time, media, location, duration } = seminar;
@@ -12,20 +17,6 @@ const SeminarCard = ({ seminar }) => {
       month: "long",
       day: "numeric",
     });
-  };
-
-  const isYouTubeUrl = (url) => {
-    return url && (url.includes("youtube.com") || url.includes("youtu.be"));
-  };
-
-  const getYouTubeEmbedUrl = (url) => {
-    if (!url) return null;
-    const regExp =
-      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[2].length === 11
-      ? `https://www.youtube.com/embed/${match[2]}`
-      : null;
   };
 
   return (
@@ -54,8 +45,7 @@ const SeminarCard = ({ seminar }) => {
               loading="lazy"
               onError={(e) => {
                 e.currentTarget.onerror = null;
-                e.currentTarget.src =
-                  "https://images.unsplash.com/photo-1558980394-0f36c6f7c87d?w=1200&auto=format&fit=crop&q=60";
+                e.currentTarget.src = getFallbackImage("seminar");
               }}
             />
           )}

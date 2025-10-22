@@ -1,14 +1,6 @@
 {
   "sigs": [
     {
-      "id": "theoretical-cs",
-      "name": "Theoretical Computer Science",
-      "description": "Quantum Computing, Discrete Mathematics & Graph Theory",
-      "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2025-10-21T00:00:00.000Z",
-      "isActive": true
-    },
-    {
       "id": "ai-ml",
       "name": "Artificial Intelligence & Machine Learning",
       "description": "Deep Learning, Neural Networks, and Intelligent Systems",
@@ -31,15 +23,23 @@
       "createdAt": "2024-01-01T00:00:00.000Z",
       "updatedAt": "2025-10-21T00:00:00.000Z",
       "isActive": true
+    },
+    {
+      "id": "theoretical-cs",
+      "name": "Theoretical Computer Science",
+      "description": "Quantum Computing, Discrete Mathematics & Graph Theory",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z",
+      "isActive": true
     }
   ],
   "professors": [
     {
       "id": "prof-001",
-      "name": "Prof. Dharavath Ramesh",
+      "name": "Prof. Marcus Anderson",
       "designation": "Professor (HAG)",
-      "email": "dharavath@iitism.ac.in",
-      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465299726819eeb44db07.jpg",
+      "email": "marcus.anderson@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&auto=format&fit=crop&q=80",
       "interests": ["Quantum Computing", "Algorithms", "Discrete Mathematics"],
       "sigId": "theoretical-cs",
       "bio": "Senior Professor specializing in theoretical computer science and quantum algorithms",
@@ -48,11 +48,15 @@
     },
     {
       "id": "prof-002",
-      "name": "Prof. Rahul Gangoopadhyay",
+      "name": "Prof. Elena Rodriguez",
       "designation": "Professor (HAG)",
-      "email": "rahulg@iitism.ac.in",
-      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465327276819f977d5db4.jpg",
-      "interests": ["Graph Theory", "Combinatorial Optimization", "Computational Geometry"],
+      "email": "elena.rodriguez@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80",
+      "interests": [
+        "Graph Theory",
+        "Combinatorial Optimization",
+        "Computational Geometry"
+      ],
       "sigId": "theoretical-cs",
       "bio": "Expert in graph algorithms and combinatorial optimization problems",
       "createdAt": "2024-01-15T00:00:00.000Z",
@@ -60,11 +64,15 @@
     },
     {
       "id": "prof-003",
-      "name": "Prof. Ayan Das",
+      "name": "Prof. David Chen",
       "designation": "Associate Professor",
-      "email": "ayandas@iitism.ac.in",
-      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465320756819f6eb4419c.jpg",
-      "interests": ["Complexity Theory", "Formal Verification", "Algorithm Analysis"],
+      "email": "david.chen@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&auto=format&fit=crop&q=80",
+      "interests": [
+        "Complexity Theory",
+        "Formal Verification",
+        "Algorithm Analysis"
+      ],
       "sigId": "theoretical-cs",
       "bio": "Research focused on computational complexity and formal methods",
       "createdAt": "2024-01-15T00:00:00.000Z",
@@ -72,10 +80,10 @@
     },
     {
       "id": "prof-004",
-      "name": "Prof. Pranav Bisht",
+      "name": "Prof. Sarah Mitchell",
       "designation": "Professor",
-      "email": "pranavbisht@iitism.ac.in",
-      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_173857809967a098b3d40d4.jpg",
+      "email": "sarah.mitchell@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&auto=format&fit=crop&q=80",
       "interests": ["Deep Learning", "Computer Vision", "Pattern Recognition"],
       "sigId": "ai-ml",
       "bio": "Leading researcher in computer vision and deep learning applications",
@@ -84,9 +92,9 @@
     },
     {
       "id": "prof-005",
-      "name": "Prof. John Dow",
+      "name": "Prof. James Wilson",
       "designation": "Associate Professor",
-      "email": "johndow@iitism.ac.in",
+      "email": "james.wilson@iitism.ac.in",
       "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=80",
       "interests": ["Machine Learning", "Bioinformatics", "Data Mining"],
       "sigId": "ai-ml",
@@ -96,11 +104,15 @@
     },
     {
       "id": "prof-006",
-      "name": "Prof. Random Smith",
+      "name": "Prof. Michael Thompson",
       "designation": "Assistant Professor",
-      "email": "randomsmith@iitism.ac.in",
+      "email": "michael.thompson@iitism.ac.in",
       "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
-      "interests": ["Natural Language Processing", "Reinforcement Learning", "AI Systems"],
+      "interests": [
+        "Natural Language Processing",
+        "Reinforcement Learning",
+        "AI Systems"
+      ],
       "sigId": "ai-ml",
       "bio": "Research interests in NLP and reinforcement learning for intelligent systems",
       "createdAt": "2024-01-15T00:00:00.000Z",
@@ -108,10 +120,10 @@
     },
     {
       "id": "prof-007",
-      "name": "Prof. Haider Banka",
+      "name": "Prof. Robert Harris",
       "designation": "Associate Professor",
-      "email": "haiderb@iitism.ac.in",
-      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465142206819b12c1bb1f.jpg",
+      "email": "robert.harris@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&auto=format&fit=crop&q=80",
       "interests": ["Distributed Systems", "Cloud Computing", "IoT"],
       "sigId": "computing-systems",
       "bio": "Specializes in distributed computing and cloud infrastructure",
@@ -120,10 +132,10 @@
     },
     {
       "id": "prof-008",
-      "name": "Prof. Anjan Chowdhury",
+      "name": "Prof. Jennifer Lee",
       "designation": "Associate Professor",
-      "email": "anjanc@iitism.ac.in",
-      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465327026819f95ee08cb.jpg",
+      "email": "jennifer.lee@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=800&auto=format&fit=crop&q=80",
       "interests": ["Wireless Sensor Networks", "IoT", "Edge Computing"],
       "sigId": "computing-systems",
       "bio": "Expert in IoT systems and wireless sensor network architectures",
@@ -132,11 +144,15 @@
     },
     {
       "id": "prof-009",
-      "name": "Prof. Partha Pratim Roy",
+      "name": "Prof. Thomas Brown",
       "designation": "Assistant Professor",
-      "email": "parthapratim@iitism.ac.in",
-      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_175145309668650da8b0c2b.jpg",
-      "interests": ["Operating Systems", "Parallel Computing", "System Performance"],
+      "email": "thomas.brown@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800&auto=format&fit=crop&q=80",
+      "interests": [
+        "Operating Systems",
+        "Parallel Computing",
+        "System Performance"
+      ],
       "sigId": "computing-systems",
       "bio": "Research focus on OS optimization and parallel computing architectures",
       "createdAt": "2024-01-15T00:00:00.000Z",
@@ -144,10 +160,10 @@
     },
     {
       "id": "prof-010",
-      "name": "Prof. Subhrangshu Mandal",
+      "name": "Prof. Daniel Martinez",
       "designation": "Associate Professor",
-      "email": "subhrangshu@iitism.ac.in",
-      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465324566819f86855059.jpg",
+      "email": "daniel.martinez@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&auto=format&fit=crop&q=80",
       "interests": ["Cryptography", "Blockchain", "Network Security"],
       "sigId": "information-security",
       "bio": "Expert in cryptographic protocols and blockchain technologies",
@@ -156,10 +172,10 @@
     },
     {
       "id": "prof-011",
-      "name": "Prof. Random Larry",
+      "name": "Prof. Patricia Davis",
       "designation": "Assistant Professor",
-      "email": "randomlarry@iitism.ac.in",
-      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&auto=format&fit=crop&q=80",
+      "email": "patricia.davis@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&auto=format&fit=crop&q=80",
       "interests": ["Information Security", "Privacy", "Secure Systems"],
       "sigId": "information-security",
       "bio": "Research in privacy-preserving technologies and secure system design",
@@ -168,14 +184,74 @@
     },
     {
       "id": "prof-012",
-      "name": "Prof. Random Bard",
+      "name": "Prof. Christopher Taylor",
       "designation": "Associate Professor",
-      "email": "randombard@iitism.ac.in",
-      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&auto=format&fit=crop&q=80",
-      "interests": ["Post-Quantum Cryptography", "Hardware Security", "Applied Cryptography"],
+      "email": "christopher.taylor@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=800&auto=format&fit=crop&q=80",
+      "interests": [
+        "Post-Quantum Cryptography",
+        "Hardware Security",
+        "Applied Cryptography"
+      ],
       "sigId": "information-security",
       "bio": "Leading researcher in post-quantum cryptographic systems and hardware security",
       "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-013",
+      "name": "Prof. Amanda Peterson",
+      "designation": "Professor",
+      "email": "amanda.peterson@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=800&auto=format&fit=crop&q=80",
+      "interests": [
+        "Automata Theory",
+        "Computational Complexity",
+        "Algorithm Design"
+      ],
+      "sigId": "theoretical-cs",
+      "bio": "Renowned expert in automata theory and computational complexity classes",
+      "createdAt": "2024-02-10T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-014",
+      "name": "Prof. Kevin Johnson",
+      "designation": "Associate Professor",
+      "email": "kevin.johnson@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=800&auto=format&fit=crop&q=80",
+      "interests": [
+        "Generative AI",
+        "Large Language Models",
+        "Neural Architecture"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Pioneer in generative AI research and transformer-based architectures",
+      "createdAt": "2024-02-20T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-015",
+      "name": "Prof. Lisa Anderson",
+      "designation": "Assistant Professor",
+      "email": "lisa.anderson@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&auto=format&fit=crop&q=80",
+      "interests": ["Robotics", "Embedded Systems", "Real-time Computing"],
+      "sigId": "computing-systems",
+      "bio": "Specialist in robotics and embedded real-time system architectures",
+      "createdAt": "2024-03-05T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-016",
+      "name": "Prof. Nathan Clark",
+      "designation": "Professor",
+      "email": "nathan.clark@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=800&auto=format&fit=crop&q=80",
+      "interests": ["Cybersecurity", "Penetration Testing", "Ethical Hacking"],
+      "sigId": "information-security",
+      "bio": "Expert in offensive security and penetration testing methodologies",
+      "createdAt": "2024-03-15T00:00:00.000Z",
       "updatedAt": "2025-10-21T00:00:00.000Z"
     }
   ],
@@ -183,7 +259,7 @@
     {
       "id": "pub-001",
       "title": "Quantum Algorithms for Graph Coloring Problems",
-      "authors": ["Chiranjeev Kumar", "Prasanta K. Jana"],
+      "authors": ["Marcus Anderson", "Elena Rodriguez"],
       "description": "IEEE Transactions on Quantum Engineering",
       "publishedDate": "2024-03-15",
       "url": "https://ieeexplore.ieee.org/",
@@ -202,7 +278,7 @@
     {
       "id": "pub-002",
       "title": "Efficient Algorithms for Network Optimization in Smart Grids",
-      "authors": ["Prasanta K. Jana", "Arup Kumar Pal"],
+      "authors": ["Elena Rodriguez", "David Chen"],
       "description": "Journal of Network and Computer Applications",
       "publishedDate": "2024-06-20",
       "url": "https://www.sciencedirect.com/",
@@ -210,8 +286,8 @@
       "sigId": "theoretical-cs",
       "professorId": "prof-002",
       "media": {
-        "type": "image",
-        "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&auto=format&fit=crop&q=80"
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
       },
       "tags": ["Network Optimization", "Smart Grids", "Algorithms"],
       "citations": 78,
@@ -221,7 +297,7 @@
     {
       "id": "pub-003",
       "title": "Complexity Analysis of Distributed Consensus Protocols",
-      "authors": ["Arup Kumar Pal"],
+      "authors": ["David Chen"],
       "description": "ACM Symposium on Principles of Distributed Computing",
       "publishedDate": "2024-08-10",
       "url": "https://dl.acm.org/",
@@ -229,8 +305,8 @@
       "sigId": "theoretical-cs",
       "professorId": "prof-003",
       "media": {
-        "type": "image",
-        "url": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&auto=format&fit=crop&q=80"
+        "type": "gif",
+        "url": "https://media.giphy.com/media/l0HlHFRbmaZtBRhXG/giphy.gif"
       },
       "tags": ["Complexity Theory", "Distributed Systems", "Consensus"],
       "citations": 32,
@@ -239,8 +315,8 @@
     },
     {
       "id": "pub-004",
-      "title": "Deep Learning for Indian Sign Language Recognition",
-      "authors": ["Partha Pratim Roy", "Haider Banka"],
+      "title": "Deep Learning for Sign Language Recognition",
+      "authors": ["Sarah Mitchell", "James Wilson"],
       "description": "Pattern Recognition Letters",
       "publishedDate": "2024-04-25",
       "url": "https://www.sciencedirect.com/",
@@ -258,8 +334,8 @@
     },
     {
       "id": "pub-005",
-      "title": "Machine Learning Approaches for Disease Prediction in Indian Healthcare",
-      "authors": ["Haider Banka", "Ayan Das"],
+      "title": "Machine Learning Approaches for Disease Prediction in Healthcare",
+      "authors": ["James Wilson", "Sarah Mitchell"],
       "description": "Journal of Biomedical Informatics",
       "publishedDate": "2024-07-12",
       "url": "https://www.sciencedirect.com/",
@@ -267,8 +343,8 @@
       "sigId": "ai-ml",
       "professorId": "prof-005",
       "media": {
-        "type": "image",
-        "url": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80"
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
       },
       "tags": ["Machine Learning", "Healthcare", "Bioinformatics"],
       "citations": 92,
@@ -277,8 +353,8 @@
     },
     {
       "id": "pub-006",
-      "title": "Transformer-based Models for Hindi-English Code-Mixed Text Analysis",
-      "authors": ["Ayan Das", "Partha Pratim Roy"],
+      "title": "Transformer-based Models for Code-Mixed Text Analysis",
+      "authors": ["Michael Thompson", "Kevin Johnson"],
       "description": "International Conference on Natural Language Processing",
       "publishedDate": "2024-09-05",
       "url": "https://aclanthology.org/",
@@ -297,7 +373,7 @@
     {
       "id": "pub-007",
       "title": "Energy-Efficient Task Scheduling in Cloud Data Centers",
-      "authors": ["Dharavath Ramesh", "Amgoth Tarachand"],
+      "authors": ["Robert Harris", "Jennifer Lee"],
       "description": "IEEE Transactions on Cloud Computing",
       "publishedDate": "2024-05-18",
       "url": "https://ieeexplore.ieee.org/",
@@ -305,8 +381,8 @@
       "sigId": "computing-systems",
       "professorId": "prof-007",
       "media": {
-        "type": "image",
-        "url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80"
+        "type": "gif",
+        "url": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
       },
       "tags": ["Cloud Computing", "Task Scheduling", "Energy Efficiency"],
       "citations": 118,
@@ -315,8 +391,8 @@
     },
     {
       "id": "pub-008",
-      "title": "IoT-based Smart Agriculture System for Indian Farmers",
-      "authors": ["Amgoth Tarachand", "Nikhil Tripathi"],
+      "title": "IoT-based Smart Agriculture System",
+      "authors": ["Jennifer Lee", "Thomas Brown"],
       "description": "IEEE Internet of Things Journal",
       "publishedDate": "2024-08-22",
       "url": "https://ieeexplore.ieee.org/",
@@ -335,7 +411,7 @@
     {
       "id": "pub-009",
       "title": "Performance Optimization in Multi-core Operating Systems",
-      "authors": ["Nikhil Tripathi", "Dharavath Ramesh"],
+      "authors": ["Thomas Brown", "Robert Harris"],
       "description": "ACM SIGOPS Operating Systems Review",
       "publishedDate": "2024-10-08",
       "url": "https://dl.acm.org/",
@@ -343,8 +419,8 @@
       "sigId": "computing-systems",
       "professorId": "prof-009",
       "media": {
-        "type": "image",
-        "url": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&auto=format&fit=crop&q=80"
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
       },
       "tags": ["Operating Systems", "Performance", "Multi-core"],
       "citations": 53,
@@ -353,8 +429,8 @@
     },
     {
       "id": "pub-010",
-      "title": "Blockchain-based Secure Voting System for Indian Elections",
-      "authors": ["Soumen Bag", "Hari Om"],
+      "title": "Blockchain-based Secure Voting System",
+      "authors": ["Daniel Martinez", "Patricia Davis"],
       "description": "International Journal of Information Security",
       "publishedDate": "2024-02-28",
       "url": "https://link.springer.com/",
@@ -372,8 +448,8 @@
     },
     {
       "id": "pub-011",
-      "title": "Privacy-Preserving Techniques for Aadhaar-based Systems",
-      "authors": ["Hari Om", "Sachin Tripathi"],
+      "title": "Privacy-Preserving Techniques for Identity Management Systems",
+      "authors": ["Patricia Davis", "Christopher Taylor"],
       "description": "Computers & Security",
       "publishedDate": "2024-06-14",
       "url": "https://www.sciencedirect.com/",
@@ -381,8 +457,8 @@
       "sigId": "information-security",
       "professorId": "prof-011",
       "media": {
-        "type": "image",
-        "url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&auto=format&fit=crop&q=80"
+        "type": "gif",
+        "url": "https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif"
       },
       "tags": ["Privacy", "Biometric Security", "Identity Management"],
       "citations": 76,
@@ -392,7 +468,7 @@
     {
       "id": "pub-012",
       "title": "Post-Quantum Cryptographic Protocols for 5G Networks",
-      "authors": ["Sachin Tripathi", "Soumen Bag"],
+      "authors": ["Christopher Taylor", "Daniel Martinez"],
       "description": "IEEE Communications Magazine",
       "publishedDate": "2024-09-30",
       "url": "https://ieeexplore.ieee.org/",
@@ -407,13 +483,437 @@
       "citations": 58,
       "createdAt": "2024-09-30T00:00:00.000Z",
       "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-013",
+      "title": "Quantum Error Correction in Noisy Intermediate-Scale Quantum Devices",
+      "authors": ["Marcus Anderson", "Amanda Peterson"],
+      "description": "Nature Quantum Information",
+      "publishedDate": "2024-01-20",
+      "url": "https://www.nature.com/",
+      "type": "journal",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-001",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "tags": ["Quantum Computing", "Error Correction", "NISQ"],
+      "citations": 203,
+      "createdAt": "2024-01-20T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-014",
+      "title": "Graph Neural Networks for Social Network Analysis",
+      "authors": ["Elena Rodriguez", "Amanda Peterson"],
+      "description": "ACM SIGKDD Conference on Knowledge Discovery and Data Mining",
+      "publishedDate": "2024-05-10",
+      "url": "https://dl.acm.org/",
+      "type": "conference",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-002",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1639762681057-408e52192e55?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Graph Neural Networks", "Social Networks", "Deep Learning"],
+      "citations": 134,
+      "createdAt": "2024-05-10T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-015",
+      "title": "Automated Theorem Proving using Reinforcement Learning",
+      "authors": ["Amanda Peterson", "David Chen"],
+      "description": "International Joint Conference on Artificial Intelligence",
+      "publishedDate": "2024-07-05",
+      "url": "https://www.ijcai.org/",
+      "type": "conference",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-013",
+      "media": {
+        "type": "gif",
+        "url": "https://media.giphy.com/media/3o7bu3XilJ5BOiSGic/giphy.gif"
+      },
+      "tags": ["Theorem Proving", "Reinforcement Learning", "Automation"],
+      "citations": 89,
+      "createdAt": "2024-07-05T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-016",
+      "title": "Large Language Models for Code Generation and Optimization",
+      "authors": ["Kevin Johnson", "Michael Thompson"],
+      "description": "Conference on Neural Information Processing Systems",
+      "publishedDate": "2024-10-15",
+      "url": "https://neurips.cc/",
+      "type": "conference",
+      "sigId": "ai-ml",
+      "professorId": "prof-014",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "tags": ["LLM", "Code Generation", "Neural Networks"],
+      "citations": 267,
+      "createdAt": "2024-10-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-017",
+      "title": "Multimodal Learning for Medical Image Diagnosis",
+      "authors": ["Sarah Mitchell", "Kevin Johnson"],
+      "description": "Medical Image Computing and Computer Assisted Intervention",
+      "publishedDate": "2024-09-18",
+      "url": "https://www.miccai.org/",
+      "type": "conference",
+      "sigId": "ai-ml",
+      "professorId": "prof-004",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Medical Imaging", "Multimodal Learning", "Diagnosis"],
+      "citations": 178,
+      "createdAt": "2024-09-18T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-018",
+      "title": "Federated Learning for Privacy-Preserving Healthcare Analytics",
+      "authors": ["James Wilson", "Patricia Davis"],
+      "description": "IEEE Journal of Biomedical and Health Informatics",
+      "publishedDate": "2024-11-05",
+      "url": "https://ieeexplore.ieee.org/",
+      "type": "journal",
+      "sigId": "ai-ml",
+      "professorId": "prof-005",
+      "media": {
+        "type": "gif",
+        "url": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
+      },
+      "tags": ["Federated Learning", "Privacy", "Healthcare"],
+      "citations": 145,
+      "createdAt": "2024-11-05T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-019",
+      "title": "Autonomous Robotic Systems for Industrial Applications",
+      "authors": ["Lisa Anderson", "Thomas Brown"],
+      "description": "IEEE Transactions on Robotics",
+      "publishedDate": "2024-04-12",
+      "url": "https://ieeexplore.ieee.org/",
+      "type": "journal",
+      "sigId": "computing-systems",
+      "professorId": "prof-015",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "tags": ["Robotics", "Automation", "Industrial Systems"],
+      "citations": 112,
+      "createdAt": "2024-04-12T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-020",
+      "title": "Edge Computing Architectures for Real-Time IoT Applications",
+      "authors": ["Jennifer Lee", "Lisa Anderson"],
+      "description": "ACM Transactions on Internet Technology",
+      "publishedDate": "2024-03-22",
+      "url": "https://dl.acm.org/",
+      "type": "journal",
+      "sigId": "computing-systems",
+      "professorId": "prof-008",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Edge Computing", "IoT", "Real-Time Systems"],
+      "citations": 96,
+      "createdAt": "2024-03-22T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-021",
+      "title": "Containerization and Orchestration in Modern Cloud Platforms",
+      "authors": ["Robert Harris", "Thomas Brown"],
+      "description": "IEEE Cloud Computing",
+      "publishedDate": "2024-08-15",
+      "url": "https://ieeexplore.ieee.org/",
+      "type": "journal",
+      "sigId": "computing-systems",
+      "professorId": "prof-007",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Containerization", "Kubernetes", "Cloud Computing"],
+      "citations": 128,
+      "createdAt": "2024-08-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-022",
+      "title": "Zero Trust Architecture for Enterprise Security",
+      "authors": ["Nathan Clark", "Christopher Taylor"],
+      "description": "ACM Computing Surveys",
+      "publishedDate": "2024-06-28",
+      "url": "https://dl.acm.org/",
+      "type": "journal",
+      "sigId": "information-security",
+      "professorId": "prof-016",
+      "media": {
+        "type": "gif",
+        "url": "https://media.giphy.com/media/l0HlHFRbmaZtBRhXG/giphy.gif"
+      },
+      "tags": ["Zero Trust", "Enterprise Security", "Network Architecture"],
+      "citations": 189,
+      "createdAt": "2024-06-28T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-023",
+      "title": "Advanced Persistent Threat Detection using Machine Learning",
+      "authors": ["Nathan Clark", "Daniel Martinez"],
+      "description": "IEEE Transactions on Information Forensics and Security",
+      "publishedDate": "2024-09-12",
+      "url": "https://ieeexplore.ieee.org/",
+      "type": "journal",
+      "sigId": "information-security",
+      "professorId": "prof-016",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "tags": ["APT Detection", "Machine Learning", "Threat Intelligence"],
+      "citations": 156,
+      "createdAt": "2024-09-12T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-024",
+      "title": "Homomorphic Encryption for Secure Cloud Computing",
+      "authors": ["Christopher Taylor", "Patricia Davis"],
+      "description": "Journal of Cryptology",
+      "publishedDate": "2024-11-20",
+      "url": "https://link.springer.com/",
+      "type": "journal",
+      "sigId": "information-security",
+      "professorId": "prof-012",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Homomorphic Encryption", "Cloud Security", "Cryptography"],
+      "citations": 214,
+      "createdAt": "2024-11-20T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    }
+  ],
+  "patents": [
+    {
+      "id": "pat-001",
+      "title": "Quantum Key Distribution System for Secure Communications",
+      "inventors": ["Marcus Anderson", "Christopher Taylor"],
+      "patentNumber": "US-2024-0012345",
+      "filingDate": "2023-06-15",
+      "grantDate": "2024-03-20",
+      "description": "A novel quantum key distribution protocol leveraging entangled photon pairs for unconditionally secure communication channels",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-001",
+      "status": "granted",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Quantum Computing", "Cryptography", "Communication"],
+      "createdAt": "2024-03-20T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pat-002",
+      "title": "AI-Powered Medical Image Analysis Platform",
+      "inventors": ["Sarah Mitchell", "James Wilson"],
+      "patentNumber": "US-2024-0023456",
+      "filingDate": "2023-08-10",
+      "grantDate": "2024-05-15",
+      "description": "Deep learning-based platform for automated detection and classification of multiple diseases from medical imaging data",
+      "sigId": "ai-ml",
+      "professorId": "prof-004",
+      "status": "granted",
+      "media": {
+        "type": "gif",
+        "url": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
+      },
+      "tags": ["AI", "Medical Imaging", "Healthcare"],
+      "createdAt": "2024-05-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pat-003",
+      "title": "Energy-Efficient Task Scheduling Algorithm for Cloud Computing",
+      "inventors": ["Robert Harris", "Jennifer Lee"],
+      "patentNumber": "US-2024-0034567",
+      "filingDate": "2023-09-22",
+      "grantDate": "2024-07-10",
+      "description": "Novel algorithm for optimizing task allocation in cloud data centers to minimize energy consumption while maintaining QoS",
+      "sigId": "computing-systems",
+      "professorId": "prof-007",
+      "status": "granted",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "tags": ["Cloud Computing", "Energy Efficiency", "Algorithms"],
+      "createdAt": "2024-07-10T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pat-004",
+      "title": "Blockchain-Based Secure Voting Infrastructure",
+      "inventors": ["Daniel Martinez", "Nathan Clark"],
+      "patentNumber": "US-2024-0045678",
+      "filingDate": "2023-11-05",
+      "grantDate": "2024-08-25",
+      "description": "Distributed voting system utilizing blockchain technology to ensure transparency, immutability, and voter privacy",
+      "sigId": "information-security",
+      "professorId": "prof-010",
+      "status": "granted",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Blockchain", "E-Voting", "Security"],
+      "createdAt": "2024-08-25T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pat-005",
+      "title": "Autonomous Navigation System for Mobile Robots",
+      "inventors": ["Lisa Anderson"],
+      "patentNumber": "US-2024-0056789",
+      "filingDate": "2024-01-18",
+      "grantDate": "2024-09-30",
+      "description": "Real-time path planning and obstacle avoidance system for autonomous mobile robots in dynamic environments",
+      "sigId": "computing-systems",
+      "professorId": "prof-015",
+      "status": "granted",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "tags": ["Robotics", "Autonomous Systems", "Navigation"],
+      "createdAt": "2024-09-30T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pat-006",
+      "title": "Neural Network Compression for Edge Devices",
+      "inventors": ["Kevin Johnson", "Lisa Anderson"],
+      "patentNumber": "US-2024-0067890",
+      "filingDate": "2024-02-25",
+      "grantDate": "2024-10-15",
+      "description": "Novel compression technique for deploying deep neural networks on resource-constrained edge devices without significant accuracy loss",
+      "sigId": "ai-ml",
+      "professorId": "prof-014",
+      "status": "granted",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Neural Networks", "Edge Computing", "Model Compression"],
+      "createdAt": "2024-10-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pat-007",
+      "title": "Post-Quantum Cryptographic Hardware Accelerator",
+      "inventors": ["Christopher Taylor", "Marcus Anderson"],
+      "patentNumber": "US-2024-0078901",
+      "filingDate": "2023-12-10",
+      "grantDate": "2024-11-08",
+      "description": "Hardware accelerator design for efficient implementation of post-quantum cryptographic algorithms on embedded systems",
+      "sigId": "information-security",
+      "professorId": "prof-012",
+      "status": "granted",
+      "media": {
+        "type": "gif",
+        "url": "https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif"
+      },
+      "tags": [
+        "Post-Quantum Cryptography",
+        "Hardware Security",
+        "Accelerators"
+      ],
+      "createdAt": "2024-11-08T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pat-008",
+      "title": "Federated Learning Framework for Healthcare Data",
+      "inventors": ["James Wilson", "Patricia Davis", "Sarah Mitchell"],
+      "patentNumber": "US-2024-0089012",
+      "filingDate": "2024-03-15",
+      "grantDate": null,
+      "description": "Privacy-preserving federated learning system for training machine learning models on distributed healthcare datasets",
+      "sigId": "ai-ml",
+      "professorId": "prof-005",
+      "status": "pending",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Federated Learning", "Healthcare", "Privacy"],
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pat-009",
+      "title": "Smart Grid Optimization Using Graph Algorithms",
+      "inventors": ["Elena Rodriguez", "Robert Harris"],
+      "patentNumber": "US-2024-0090123",
+      "filingDate": "2024-04-20",
+      "grantDate": null,
+      "description": "Graph-based optimization framework for efficient energy distribution and load balancing in smart grid networks",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-002",
+      "status": "pending",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "tags": ["Graph Theory", "Smart Grid", "Optimization"],
+      "createdAt": "2024-04-20T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pat-010",
+      "title": "Zero-Knowledge Proof System for Identity Verification",
+      "inventors": ["Patricia Davis", "Daniel Martinez"],
+      "patentNumber": "US-2024-0101234",
+      "filingDate": "2024-05-30",
+      "grantDate": null,
+      "description": "Efficient zero-knowledge proof protocol for verifying user identity without revealing sensitive personal information",
+      "sigId": "information-security",
+      "professorId": "prof-011",
+      "status": "pending",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Zero-Knowledge Proofs", "Identity", "Privacy"],
+      "createdAt": "2024-05-30T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
     }
   ],
   "seminars": [
     {
       "id": "sem-001",
       "title": "Quantum Computing: Foundations and Future",
-      "speaker": "Prof. Chiranjeev Kumar",
+      "speaker": "Prof. Marcus Anderson",
       "date": "2024-11-15T14:00:00.000Z",
       "description": "An introduction to quantum computing principles and their applications in solving complex computational problems.",
       "location": "CSE Auditorium, IIT (ISM) Dhanbad",
@@ -430,26 +930,26 @@
     {
       "id": "sem-002",
       "title": "Graph Algorithms for Smart City Networks",
-      "speaker": "Prof. Prasanta K. Jana",
+      "speaker": "Prof. Elena Rodriguez",
       "date": "2024-11-22T15:30:00.000Z",
-      "description": "Exploring efficient graph algorithms for optimizing transportation and utility networks in Indian smart cities.",
+      "description": "Exploring efficient graph algorithms for optimizing transportation and utility networks in smart cities.",
       "location": "Conference Hall, Department of CSE",
       "duration": "75 minutes",
       "sigId": "theoretical-cs",
       "professorId": "prof-002",
       "media": {
-        "type": "image",
-        "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&auto=format&fit=crop&q=80"
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
       },
       "createdAt": "2024-10-05T00:00:00.000Z",
       "updatedAt": "2025-10-21T00:00:00.000Z"
     },
     {
       "id": "sem-003",
-      "title": "Computer Vision for Indic Scripts",
-      "speaker": "Prof. Partha Pratim Roy",
+      "title": "Computer Vision for Complex Pattern Recognition",
+      "speaker": "Prof. Sarah Mitchell",
       "date": "2024-12-05T10:00:00.000Z",
-      "description": "Latest advancements in computer vision techniques for recognizing and processing Indian languages and scripts.",
+      "description": "Latest advancements in computer vision techniques for recognizing and processing complex visual patterns.",
       "location": "Seminar Room 301, CSE Building",
       "duration": "60 minutes",
       "sigId": "ai-ml",
@@ -463,27 +963,27 @@
     },
     {
       "id": "sem-004",
-      "title": "AI in Healthcare: Indian Perspectives",
-      "speaker": "Prof. Haider Banka",
+      "title": "AI in Healthcare: Modern Perspectives",
+      "speaker": "Prof. James Wilson",
       "date": "2024-12-12T14:30:00.000Z",
-      "description": "Machine learning applications in addressing healthcare challenges specific to India, including disease prediction and diagnostics.",
+      "description": "Machine learning applications in addressing healthcare challenges, including disease prediction and diagnostics.",
       "location": "CSE Auditorium, IIT (ISM) Dhanbad",
       "duration": "90 minutes",
       "sigId": "ai-ml",
       "professorId": "prof-005",
       "media": {
-        "type": "image",
-        "url": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80"
+        "type": "gif",
+        "url": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
       },
       "createdAt": "2024-10-15T00:00:00.000Z",
       "updatedAt": "2025-10-21T00:00:00.000Z"
     },
     {
       "id": "sem-005",
-      "title": "Cloud Computing for Indian Enterprises",
-      "speaker": "Prof. Dharavath Ramesh",
+      "title": "Cloud Computing for Modern Enterprises",
+      "speaker": "Prof. Robert Harris",
       "date": "2024-11-28T11:00:00.000Z",
-      "description": "Strategies for implementing cloud infrastructure in Indian businesses with focus on cost optimization and scalability.",
+      "description": "Strategies for implementing cloud infrastructure in businesses with focus on cost optimization and scalability.",
       "location": "Conference Hall, Department of CSE",
       "duration": "75 minutes",
       "sigId": "computing-systems",
@@ -497,27 +997,27 @@
     },
     {
       "id": "sem-006",
-      "title": "IoT Solutions for Agriculture in India",
-      "speaker": "Prof. Amgoth Tarachand",
+      "title": "IoT Solutions for Smart Agriculture",
+      "speaker": "Prof. Jennifer Lee",
       "date": "2024-12-18T16:00:00.000Z",
-      "description": "Practical implementations of IoT and sensor networks to improve agricultural productivity for Indian farmers.",
+      "description": "Practical implementations of IoT and sensor networks to improve agricultural productivity.",
       "location": "Seminar Room 301, CSE Building",
       "duration": "60 minutes",
       "sigId": "computing-systems",
       "professorId": "prof-008",
       "media": {
-        "type": "image",
-        "url": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&auto=format&fit=crop&q=80"
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
       },
       "createdAt": "2024-10-25T00:00:00.000Z",
       "updatedAt": "2025-10-21T00:00:00.000Z"
     },
     {
       "id": "sem-007",
-      "title": "Blockchain for Secure Digital India",
-      "speaker": "Prof. Soumen Bag",
+      "title": "Blockchain for Secure Digital Infrastructure",
+      "speaker": "Prof. Daniel Martinez",
       "date": "2024-11-20T13:00:00.000Z",
-      "description": "Exploring blockchain applications for secure e-governance, voting systems, and digital identity in India.",
+      "description": "Exploring blockchain applications for secure e-governance, voting systems, and digital identity management.",
       "location": "CSE Auditorium, IIT (ISM) Dhanbad",
       "duration": "90 minutes",
       "sigId": "information-security",
@@ -532,7 +1032,7 @@
     {
       "id": "sem-008",
       "title": "Post-Quantum Cryptography: Preparing for the Future",
-      "speaker": "Prof. Sachin Tripathi",
+      "speaker": "Prof. Christopher Taylor",
       "date": "2024-12-20T15:00:00.000Z",
       "description": "Understanding post-quantum cryptographic algorithms and their importance for securing future communication networks.",
       "location": "Conference Hall, Department of CSE",
@@ -540,10 +1040,146 @@
       "sigId": "information-security",
       "professorId": "prof-012",
       "media": {
-        "type": "image",
-        "url": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&auto=format&fit=crop&q=80"
+        "type": "gif",
+        "url": "https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif"
       },
       "createdAt": "2024-11-01T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-009",
+      "title": "Large Language Models and Their Applications",
+      "speaker": "Prof. Kevin Johnson",
+      "date": "2025-01-10T14:00:00.000Z",
+      "description": "Exploring the architecture, training, and real-world applications of large language models in various domains.",
+      "location": "CSE Auditorium, IIT (ISM) Dhanbad",
+      "duration": "90 minutes",
+      "sigId": "ai-ml",
+      "professorId": "prof-014",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "createdAt": "2024-11-05T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-010",
+      "title": "Automata Theory and Formal Languages",
+      "speaker": "Prof. Amanda Peterson",
+      "date": "2025-01-15T10:30:00.000Z",
+      "description": "Deep dive into automata theory, formal languages, and their applications in compiler design and verification.",
+      "location": "Seminar Room 301, CSE Building",
+      "duration": "75 minutes",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-013",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-11-10T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-011",
+      "title": "Autonomous Robotics in Industry 4.0",
+      "speaker": "Prof. Lisa Anderson",
+      "date": "2025-01-22T13:30:00.000Z",
+      "description": "Exploring the role of autonomous robots in modern industrial applications and manufacturing processes.",
+      "location": "Conference Hall, Department of CSE",
+      "duration": "60 minutes",
+      "sigId": "computing-systems",
+      "professorId": "prof-015",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "createdAt": "2024-11-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-012",
+      "title": "Ethical Hacking and Penetration Testing",
+      "speaker": "Prof. Nathan Clark",
+      "date": "2025-01-28T15:00:00.000Z",
+      "description": "Introduction to ethical hacking methodologies, penetration testing frameworks, and cybersecurity best practices.",
+      "location": "CSE Auditorium, IIT (ISM) Dhanbad",
+      "duration": "90 minutes",
+      "sigId": "information-security",
+      "professorId": "prof-016",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "createdAt": "2024-11-20T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-013",
+      "title": "Natural Language Processing in the Age of Transformers",
+      "speaker": "Prof. Michael Thompson",
+      "date": "2025-02-05T11:00:00.000Z",
+      "description": "Understanding transformer architectures and their impact on modern NLP tasks including translation and summarization.",
+      "location": "Seminar Room 301, CSE Building",
+      "duration": "75 minutes",
+      "sigId": "ai-ml",
+      "professorId": "prof-006",
+      "media": {
+        "type": "gif",
+        "url": "https://media.giphy.com/media/l0HlHFRbmaZtBRhXG/giphy.gif"
+      },
+      "createdAt": "2024-11-25T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-014",
+      "title": "Parallel Computing and GPU Programming",
+      "speaker": "Prof. Thomas Brown",
+      "date": "2025-02-12T14:30:00.000Z",
+      "description": "Techniques for parallel algorithm design and efficient GPU programming for high-performance computing applications.",
+      "location": "Conference Hall, Department of CSE",
+      "duration": "90 minutes",
+      "sigId": "computing-systems",
+      "professorId": "prof-009",
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/lRTtMcx6rSM"
+      },
+      "createdAt": "2024-12-01T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-015",
+      "title": "Privacy-Preserving Machine Learning",
+      "speaker": "Prof. Patricia Davis",
+      "date": "2025-02-18T16:00:00.000Z",
+      "description": "Techniques for training machine learning models while preserving data privacy, including federated learning and differential privacy.",
+      "location": "CSE Auditorium, IIT (ISM) Dhanbad",
+      "duration": "75 minutes",
+      "sigId": "information-security",
+      "professorId": "prof-011",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-12-05T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-016",
+      "title": "Computational Complexity: P vs NP and Beyond",
+      "speaker": "Prof. David Chen",
+      "date": "2025-02-25T10:00:00.000Z",
+      "description": "Exploring fundamental questions in computational complexity theory and their implications for algorithm design.",
+      "location": "Seminar Room 301, CSE Building",
+      "duration": "90 minutes",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-003",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1635070041409-e63e783b13f8?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-12-10T00:00:00.000Z",
       "updatedAt": "2025-10-21T00:00:00.000Z"
     }
   ]
