@@ -1,0 +1,550 @@
+{
+  "sigs": [
+    {
+      "id": "theoretical-cs",
+      "name": "Theoretical Computer Science",
+      "description": "Quantum Computing, Discrete Mathematics & Graph Theory",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "ai-ml",
+      "name": "Artificial Intelligence & Machine Learning",
+      "description": "Deep Learning, Neural Networks, and Intelligent Systems",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "computing-systems",
+      "name": "Computing Systems",
+      "description": "OS, Distributed and Parallel Computing, IoT, Edge Computing",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "information-security",
+      "name": "Information Security",
+      "description": "Privacy, Blockchain, Network & Hardware Security, Post-quantum Cryptography",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z",
+      "isActive": true
+    }
+  ],
+  "professors": [
+    {
+      "id": "prof-001",
+      "name": "Prof. Dharavath Ramesh",
+      "designation": "Professor (HAG)",
+      "email": "dharavath@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465299726819eeb44db07.jpg",
+      "interests": ["Quantum Computing", "Algorithms", "Discrete Mathematics"],
+      "sigId": "theoretical-cs",
+      "bio": "Senior Professor specializing in theoretical computer science and quantum algorithms",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-002",
+      "name": "Prof. Rahul Gangoopadhyay",
+      "designation": "Professor (HAG)",
+      "email": "rahulg@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465327276819f977d5db4.jpg",
+      "interests": ["Graph Theory", "Combinatorial Optimization", "Computational Geometry"],
+      "sigId": "theoretical-cs",
+      "bio": "Expert in graph algorithms and combinatorial optimization problems",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-003",
+      "name": "Prof. Ayan Das",
+      "designation": "Associate Professor",
+      "email": "ayandas@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465320756819f6eb4419c.jpg",
+      "interests": ["Complexity Theory", "Formal Verification", "Algorithm Analysis"],
+      "sigId": "theoretical-cs",
+      "bio": "Research focused on computational complexity and formal methods",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-004",
+      "name": "Prof. Pranav Bisht",
+      "designation": "Professor",
+      "email": "pranavbisht@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_173857809967a098b3d40d4.jpg",
+      "interests": ["Deep Learning", "Computer Vision", "Pattern Recognition"],
+      "sigId": "ai-ml",
+      "bio": "Leading researcher in computer vision and deep learning applications",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-005",
+      "name": "Prof. John Dow",
+      "designation": "Associate Professor",
+      "email": "johndow@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=80",
+      "interests": ["Machine Learning", "Bioinformatics", "Data Mining"],
+      "sigId": "ai-ml",
+      "bio": "Expertise in machine learning applications in bioinformatics and healthcare",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-006",
+      "name": "Prof. Random Smith",
+      "designation": "Assistant Professor",
+      "email": "randomsmith@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
+      "interests": ["Natural Language Processing", "Reinforcement Learning", "AI Systems"],
+      "sigId": "ai-ml",
+      "bio": "Research interests in NLP and reinforcement learning for intelligent systems",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-007",
+      "name": "Prof. Haider Banka",
+      "designation": "Associate Professor",
+      "email": "haiderb@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465142206819b12c1bb1f.jpg",
+      "interests": ["Distributed Systems", "Cloud Computing", "IoT"],
+      "sigId": "computing-systems",
+      "bio": "Specializes in distributed computing and cloud infrastructure",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-008",
+      "name": "Prof. Anjan Chowdhury",
+      "designation": "Associate Professor",
+      "email": "anjanc@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465327026819f95ee08cb.jpg",
+      "interests": ["Wireless Sensor Networks", "IoT", "Edge Computing"],
+      "sigId": "computing-systems",
+      "bio": "Expert in IoT systems and wireless sensor network architectures",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-009",
+      "name": "Prof. Partha Pratim Roy",
+      "designation": "Assistant Professor",
+      "email": "parthapratim@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_175145309668650da8b0c2b.jpg",
+      "interests": ["Operating Systems", "Parallel Computing", "System Performance"],
+      "sigId": "computing-systems",
+      "bio": "Research focus on OS optimization and parallel computing architectures",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-010",
+      "name": "Prof. Subhrangshu Mandal",
+      "designation": "Associate Professor",
+      "email": "subhrangshu@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465324566819f86855059.jpg",
+      "interests": ["Cryptography", "Blockchain", "Network Security"],
+      "sigId": "information-security",
+      "bio": "Expert in cryptographic protocols and blockchain technologies",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-011",
+      "name": "Prof. Random Larry",
+      "designation": "Assistant Professor",
+      "email": "randomlarry@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&auto=format&fit=crop&q=80",
+      "interests": ["Information Security", "Privacy", "Secure Systems"],
+      "sigId": "information-security",
+      "bio": "Research in privacy-preserving technologies and secure system design",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "prof-012",
+      "name": "Prof. Random Bard",
+      "designation": "Associate Professor",
+      "email": "randombard@iitism.ac.in",
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&auto=format&fit=crop&q=80",
+      "interests": ["Post-Quantum Cryptography", "Hardware Security", "Applied Cryptography"],
+      "sigId": "information-security",
+      "bio": "Leading researcher in post-quantum cryptographic systems and hardware security",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    }
+  ],
+  "publications": [
+    {
+      "id": "pub-001",
+      "title": "Quantum Algorithms for Graph Coloring Problems",
+      "authors": ["Chiranjeev Kumar", "Prasanta K. Jana"],
+      "description": "IEEE Transactions on Quantum Engineering",
+      "publishedDate": "2024-03-15",
+      "url": "https://ieeexplore.ieee.org/",
+      "type": "journal",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-001",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Quantum Computing", "Graph Theory", "Algorithms"],
+      "citations": 45,
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-002",
+      "title": "Efficient Algorithms for Network Optimization in Smart Grids",
+      "authors": ["Prasanta K. Jana", "Arup Kumar Pal"],
+      "description": "Journal of Network and Computer Applications",
+      "publishedDate": "2024-06-20",
+      "url": "https://www.sciencedirect.com/",
+      "type": "journal",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-002",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Network Optimization", "Smart Grids", "Algorithms"],
+      "citations": 78,
+      "createdAt": "2024-06-20T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-003",
+      "title": "Complexity Analysis of Distributed Consensus Protocols",
+      "authors": ["Arup Kumar Pal"],
+      "description": "ACM Symposium on Principles of Distributed Computing",
+      "publishedDate": "2024-08-10",
+      "url": "https://dl.acm.org/",
+      "type": "conference",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-003",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Complexity Theory", "Distributed Systems", "Consensus"],
+      "citations": 32,
+      "createdAt": "2024-08-10T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-004",
+      "title": "Deep Learning for Indian Sign Language Recognition",
+      "authors": ["Partha Pratim Roy", "Haider Banka"],
+      "description": "Pattern Recognition Letters",
+      "publishedDate": "2024-04-25",
+      "url": "https://www.sciencedirect.com/",
+      "type": "journal",
+      "sigId": "ai-ml",
+      "professorId": "prof-004",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Deep Learning", "Computer Vision", "Sign Language"],
+      "citations": 156,
+      "createdAt": "2024-04-25T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-005",
+      "title": "Machine Learning Approaches for Disease Prediction in Indian Healthcare",
+      "authors": ["Haider Banka", "Ayan Das"],
+      "description": "Journal of Biomedical Informatics",
+      "publishedDate": "2024-07-12",
+      "url": "https://www.sciencedirect.com/",
+      "type": "journal",
+      "sigId": "ai-ml",
+      "professorId": "prof-005",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Machine Learning", "Healthcare", "Bioinformatics"],
+      "citations": 92,
+      "createdAt": "2024-07-12T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-006",
+      "title": "Transformer-based Models for Hindi-English Code-Mixed Text Analysis",
+      "authors": ["Ayan Das", "Partha Pratim Roy"],
+      "description": "International Conference on Natural Language Processing",
+      "publishedDate": "2024-09-05",
+      "url": "https://aclanthology.org/",
+      "type": "conference",
+      "sigId": "ai-ml",
+      "professorId": "prof-006",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["NLP", "Transformers", "Code-Mixed Text"],
+      "citations": 64,
+      "createdAt": "2024-09-05T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-007",
+      "title": "Energy-Efficient Task Scheduling in Cloud Data Centers",
+      "authors": ["Dharavath Ramesh", "Amgoth Tarachand"],
+      "description": "IEEE Transactions on Cloud Computing",
+      "publishedDate": "2024-05-18",
+      "url": "https://ieeexplore.ieee.org/",
+      "type": "journal",
+      "sigId": "computing-systems",
+      "professorId": "prof-007",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Cloud Computing", "Task Scheduling", "Energy Efficiency"],
+      "citations": 118,
+      "createdAt": "2024-05-18T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-008",
+      "title": "IoT-based Smart Agriculture System for Indian Farmers",
+      "authors": ["Amgoth Tarachand", "Nikhil Tripathi"],
+      "description": "IEEE Internet of Things Journal",
+      "publishedDate": "2024-08-22",
+      "url": "https://ieeexplore.ieee.org/",
+      "type": "journal",
+      "sigId": "computing-systems",
+      "professorId": "prof-008",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["IoT", "Smart Agriculture", "Wireless Sensors"],
+      "citations": 87,
+      "createdAt": "2024-08-22T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-009",
+      "title": "Performance Optimization in Multi-core Operating Systems",
+      "authors": ["Nikhil Tripathi", "Dharavath Ramesh"],
+      "description": "ACM SIGOPS Operating Systems Review",
+      "publishedDate": "2024-10-08",
+      "url": "https://dl.acm.org/",
+      "type": "journal",
+      "sigId": "computing-systems",
+      "professorId": "prof-009",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Operating Systems", "Performance", "Multi-core"],
+      "citations": 53,
+      "createdAt": "2024-10-08T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-010",
+      "title": "Blockchain-based Secure Voting System for Indian Elections",
+      "authors": ["Soumen Bag", "Hari Om"],
+      "description": "International Journal of Information Security",
+      "publishedDate": "2024-02-28",
+      "url": "https://link.springer.com/",
+      "type": "journal",
+      "sigId": "information-security",
+      "professorId": "prof-010",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Blockchain", "Security", "E-Voting"],
+      "citations": 142,
+      "createdAt": "2024-02-28T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-011",
+      "title": "Privacy-Preserving Techniques for Aadhaar-based Systems",
+      "authors": ["Hari Om", "Sachin Tripathi"],
+      "description": "Computers & Security",
+      "publishedDate": "2024-06-14",
+      "url": "https://www.sciencedirect.com/",
+      "type": "journal",
+      "sigId": "information-security",
+      "professorId": "prof-011",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Privacy", "Biometric Security", "Identity Management"],
+      "citations": 76,
+      "createdAt": "2024-06-14T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "pub-012",
+      "title": "Post-Quantum Cryptographic Protocols for 5G Networks",
+      "authors": ["Sachin Tripathi", "Soumen Bag"],
+      "description": "IEEE Communications Magazine",
+      "publishedDate": "2024-09-30",
+      "url": "https://ieeexplore.ieee.org/",
+      "type": "journal",
+      "sigId": "information-security",
+      "professorId": "prof-012",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&auto=format&fit=crop&q=80"
+      },
+      "tags": ["Post-Quantum Cryptography", "5G", "Network Security"],
+      "citations": 58,
+      "createdAt": "2024-09-30T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    }
+  ],
+  "seminars": [
+    {
+      "id": "sem-001",
+      "title": "Quantum Computing: Foundations and Future",
+      "speaker": "Prof. Chiranjeev Kumar",
+      "date": "2024-11-15T14:00:00.000Z",
+      "description": "An introduction to quantum computing principles and their applications in solving complex computational problems.",
+      "location": "CSE Auditorium, IIT (ISM) Dhanbad",
+      "duration": "90 minutes",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-001",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-10-01T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-002",
+      "title": "Graph Algorithms for Smart City Networks",
+      "speaker": "Prof. Prasanta K. Jana",
+      "date": "2024-11-22T15:30:00.000Z",
+      "description": "Exploring efficient graph algorithms for optimizing transportation and utility networks in Indian smart cities.",
+      "location": "Conference Hall, Department of CSE",
+      "duration": "75 minutes",
+      "sigId": "theoretical-cs",
+      "professorId": "prof-002",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-003",
+      "title": "Computer Vision for Indic Scripts",
+      "speaker": "Prof. Partha Pratim Roy",
+      "date": "2024-12-05T10:00:00.000Z",
+      "description": "Latest advancements in computer vision techniques for recognizing and processing Indian languages and scripts.",
+      "location": "Seminar Room 301, CSE Building",
+      "duration": "60 minutes",
+      "sigId": "ai-ml",
+      "professorId": "prof-004",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-10-10T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-004",
+      "title": "AI in Healthcare: Indian Perspectives",
+      "speaker": "Prof. Haider Banka",
+      "date": "2024-12-12T14:30:00.000Z",
+      "description": "Machine learning applications in addressing healthcare challenges specific to India, including disease prediction and diagnostics.",
+      "location": "CSE Auditorium, IIT (ISM) Dhanbad",
+      "duration": "90 minutes",
+      "sigId": "ai-ml",
+      "professorId": "prof-005",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-10-15T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-005",
+      "title": "Cloud Computing for Indian Enterprises",
+      "speaker": "Prof. Dharavath Ramesh",
+      "date": "2024-11-28T11:00:00.000Z",
+      "description": "Strategies for implementing cloud infrastructure in Indian businesses with focus on cost optimization and scalability.",
+      "location": "Conference Hall, Department of CSE",
+      "duration": "75 minutes",
+      "sigId": "computing-systems",
+      "professorId": "prof-007",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-10-20T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-006",
+      "title": "IoT Solutions for Agriculture in India",
+      "speaker": "Prof. Amgoth Tarachand",
+      "date": "2024-12-18T16:00:00.000Z",
+      "description": "Practical implementations of IoT and sensor networks to improve agricultural productivity for Indian farmers.",
+      "location": "Seminar Room 301, CSE Building",
+      "duration": "60 minutes",
+      "sigId": "computing-systems",
+      "professorId": "prof-008",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-10-25T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-007",
+      "title": "Blockchain for Secure Digital India",
+      "speaker": "Prof. Soumen Bag",
+      "date": "2024-11-20T13:00:00.000Z",
+      "description": "Exploring blockchain applications for secure e-governance, voting systems, and digital identity in India.",
+      "location": "CSE Auditorium, IIT (ISM) Dhanbad",
+      "duration": "90 minutes",
+      "sigId": "information-security",
+      "professorId": "prof-010",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-10-30T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "sem-008",
+      "title": "Post-Quantum Cryptography: Preparing for the Future",
+      "speaker": "Prof. Sachin Tripathi",
+      "date": "2024-12-20T15:00:00.000Z",
+      "description": "Understanding post-quantum cryptographic algorithms and their importance for securing future communication networks.",
+      "location": "Conference Hall, Department of CSE",
+      "duration": "75 minutes",
+      "sigId": "information-security",
+      "professorId": "prof-012",
+      "media": {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&auto=format&fit=crop&q=80"
+      },
+      "createdAt": "2024-11-01T00:00:00.000Z",
+      "updatedAt": "2025-10-21T00:00:00.000Z"
+    }
+  ]
+}
