@@ -1,5 +1,7 @@
 import { Navigate } from "react-router-dom";
 import HomePage from "../pages/HomePage/HomePage";
+import SIGOverview from "../pages/SIGs/SIGOverview";
+import SIGDetail from "../pages/SIGs/SIGDetail";
 import ReferralPage from "../pages/Referrals/ReferralPage";
 import PublicationsPage from "../pages/PublicationsPage/PublicationsPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
@@ -11,6 +13,14 @@ export const appRoutes = [
   {
     path: "/",
     element: <HomePage />,
+  },
+  {
+    path: "/sig",
+    element: <SIGOverview />,
+  },
+  {
+    path: "/sig/:domain",
+    element: <SIGDetail />,
   },
   {
     path: "/referrals",

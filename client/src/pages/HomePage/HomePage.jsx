@@ -60,8 +60,8 @@ const HomePage = () => {
           <NavLink to="/referrals" className="btn primary">
             Explore Referrals
           </NavLink>
-          <NavLink to="/publications" className="btn ghost">
-            Read Publications
+          <NavLink to="/sig" className="btn ghost">
+            Explore SIGs
           </NavLink>
         </div>
       </section>

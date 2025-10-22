@@ -147,7 +147,7 @@ p {
 
 /* Utilities */
 .container {
-  width: min(1200px, 90%);
+  width: 80%;
   margin-inline: auto;
 }
 .surface {
