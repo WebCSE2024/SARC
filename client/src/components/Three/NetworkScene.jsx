@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useMemo, useState } from "react";
+import React, { useRef, useEffect, useMemo, useState, useCallback } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
   OrbitControls,
@@ -13,6 +13,7 @@ import {
 import * as THREE from "three";
 import { authAPI } from "shared/axios/axiosInstance";
 import "./NetworkScene.scss";
+import { jwtDecode } from "jwt-decode";
 
 // Network Node Component with enhanced interactivity
 const NetworkNode = ({
@@ -259,7 +260,7 @@ const ParticleField = () => {
 };
 
 // Instanced renderer for scalable nodes (excluding SARC hub)
-const InstancedNodes = ({ nodes, onClick }) => {
+const InstancedNodes = React.memo(({ nodes, onClick }) => {
   const alumni = nodes.filter((n) => n.type === "alumni");
   const student = nodes.filter((n) => n.type === "student");
   const professor = nodes.filter((n) => n.type === "professor");
@@ -351,7 +352,7 @@ const InstancedNodes = ({ nodes, onClick }) => {
       )}
     </group>
   );
-};
+}, (prev, next) => prev.nodes === next.nodes && prev.onClick === next.onClick);
 
 // Main Network Scene
 const NetworkScene = () => {
@@ -361,6 +362,73 @@ const NetworkScene = () => {
   const [countsByType, setCountsByType] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // Stopwatch game state
+  const [gameStatus, setGameStatus] = useState("idle"); // idle | running | finished
+  const [elapsedMs, setElapsedMs] = useState(0);
+  const [finalTimeMs, setFinalTimeMs] = useState(null);
+  const [bestMs, setBestMs] = useState(null);
+  const timerRef = useRef(null);
+  const startTimeRef = useRef(0);
+  const gameStatusRef = useRef("idle");
+  const handleNodeClickRef = useRef(null);
+
+  // Load best time from localStorage on mount
+  useEffect(() => {
+    const savedBest = localStorage.getItem("networkGameBestMs");
+    if (savedBest) {
+      const n = parseInt(savedBest, 10);
+      if (!isNaN(n)) setBestMs(n);
+    }
+  }, []);
+
+  // Timer ticker
+  useEffect(() => {
+    if (gameStatus === "running") {
+      if (!startTimeRef.current) startTimeRef.current = Date.now();
+      timerRef.current = setInterval(() => {
+        setElapsedMs(Date.now() - startTimeRef.current);
+      }, 50);
+      return () => {
+        if (timerRef.current) clearInterval(timerRef.current);
+      };
+    } else {
+      if (timerRef.current) clearInterval(timerRef.current);
+    }
+  }, [gameStatus]);
+
+  const startGame = () => {
+    setSelectedNode(null);
+    setFinalTimeMs(null);
+    setElapsedMs(0);
+    startTimeRef.current = Date.now();
+    setGameStatus("running");
+  };
+
+  const stopGame = (finishNow = true) => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    if (finishNow) {
+      const total = Date.now() - startTimeRef.current;
+      setFinalTimeMs(total);
+      setElapsedMs(total);
+      // Save best
+      if (bestMs == null || total < bestMs) {
+        setBestMs(total);
+        localStorage.setItem("networkGameBestMs", String(total));
+      }
+    }
+    setGameStatus("finished");
+  };
+
+  const formatTime = (ms) => {
+    if (ms == null) return "00:00.00";
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    const centis = Math.floor((ms % 1000) / 10);
+    const mm = String(minutes).padStart(2, "0");
+    const ss = String(seconds).padStart(2, "0");
+    const cc = String(centis).padStart(2, "0");
+    return `${mm}:${ss}.${cc}`;
+  };
 
   // Fetch users from Auth service using shared axios
   useEffect(() => {
@@ -495,12 +563,75 @@ const NetworkScene = () => {
     return { nodes, connections };
   }, [users]);
 
-  const handleNodeClick = (nodeData) => {
+  // Keep a stable click handler using a ref so Instanced components don't need rerenders
+  const handleNodeClick = async (nodeData) => {
     setSelectedNode(nodeData);
     console.log("Selected node:", nodeData);
+    // Quick local check using decoded token (no network latency)
+    const storedToken = localStorage.getItem("token");
+    let decoded = null;
+    try {
+      if (storedToken) decoded = jwtDecode(storedToken);
+    } catch (_) {}
+
+    const myEmail = decoded?.email || decoded?.user?.email;
+    const myUsername = decoded?.username || decoded?.user?.username;
+
+    const isOwnNodeQuick =
+      (myEmail && nodeData?.email && nodeData.email === myEmail) ||
+      (myUsername && nodeData?.username && nodeData.username === myUsername);
+
+    if (isOwnNodeQuick) {
+      console.log("YAYYYYYYY! Clicked on own node:", nodeData);
+      if (gameStatus === "running") stopGame(true);
+      return;
+    }
+
+    // Fallback to server verification if needed
+    try {
+      if (storedToken) {
+        const response = await authAPI.get("/auth-system/v0/auth/me", {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
+        if (response?.data?.success) {
+          const current_user = response.data.user;
+          if (
+            (current_user?.email && nodeData?.email === current_user.email) ||
+            (current_user?.username &&
+              nodeData?.username === current_user.username)
+          ) {
+            console.log("YAYYYYYYY! Clicked on own node:", nodeData);
+            if (gameStatus === "running") stopGame(true);
+          }
+        } else {
+          // If token is invalid, clear it
+          localStorage.removeItem("token");
+        }
+      }
+    } catch (err) {
+      // ignore network errors for the game logic
+    }
   };
 
+  // Update latest game status in a ref so the handler can read fresh value
+  useEffect(() => {
+    gameStatusRef.current = gameStatus;
+  }, [gameStatus]);
+
+  // Keep the latest implementation in a ref, but expose a stable function to children
+  useEffect(() => {
+    handleNodeClickRef.current = handleNodeClick;
+  });
+
+  const handleNodeClickStable = useCallback((nodeData) => {
+    if (handleNodeClickRef.current) {
+      handleNodeClickRef.current(nodeData);
+    }
+  }, []);
+
   const networkData = layout;
+  // Ensure stable reference for instanced nodes to preserve raycasting handlers while timer re-renders
+  const instancedNodes = useMemo(() => networkData.nodes.slice(1), [networkData]);
 
   const resetMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -509,6 +640,92 @@ const NetworkScene = () => {
   return (
     <div className="network-scene">
       {error && <div className="network-error">{String(error)}</div>}
+      {/* Stopwatch Overlay */}
+      <div
+        className="stopwatch-overlay"
+        style={{
+          position: "absolute",
+          top: 12,
+          right: "40%",
+          zIndex: 20,
+          background: "rgba(255,255,255,0.8)",
+          backdropFilter: "blur(6px)",
+          border: "1px solid rgba(0,0,0,0.06)",
+          borderRadius: 10,
+          padding: "10px 12px",
+          boxShadow: "0 6px 18px rgba(27,31,35,0.08)",
+          color: "#111827",
+          minWidth: 180,
+          pointerEvents: "none",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span
+            style={{
+              fontVariantNumeric: "tabular-nums",
+              fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+              fontSize: 18,
+              fontWeight: 700,
+              color: gameStatus === "finished" ? "#059669" : "#1f2937",
+            }}
+            title={
+              bestMs != null ? `Best: ${formatTime(bestMs)}` : "No best time yet"
+            }
+          >
+            {formatTime(gameStatus === "running" ? elapsedMs : finalTimeMs ?? elapsedMs)}
+          </span>
+          {bestMs != null && (
+            <span style={{ marginLeft: "auto", fontSize: 12, color: "#6b7280" }}>
+              Best: {formatTime(bestMs)}
+            </span>
+          )}
+        </div>
+        <div style={{ marginTop: 8, display: "flex", gap: 8 }}>
+          {gameStatus !== "running" ? (
+            <button
+              onClick={startGame}
+              style={{
+                padding: "6px 10px",
+                borderRadius: 8,
+                border: "1px solid #e5e7eb",
+                background: "#111827",
+                color: "#fff",
+                cursor: "pointer",
+                pointerEvents: "auto",
+              }}
+              title="Start the timer and find your node"
+            >
+              {gameStatus === "finished" ? "Restart" : "Start"}
+            </button>
+          ) : (
+            <button
+              onClick={() => stopGame(false)}
+              style={{
+                padding: "6px 10px",
+                borderRadius: 8,
+                border: "1px solid #e5e7eb",
+                background: "#f59e0b",
+                color: "#111827",
+                cursor: "pointer",
+                pointerEvents: "auto",
+              }}
+              title="Stop the timer without finishing"
+            >
+              Stop
+            </button>
+          )}
+          {gameStatus === "running" && (
+            <span style={{ fontSize: 12, color: "#6b7280", alignSelf: "center" }}>
+              Click your own node to finish
+            </span>
+          )}
+          {gameStatus === "finished" && (
+            <span style={{ fontSize: 12, color: "#059669", alignSelf: "center" }}>
+              Finished!
+            </span>
+          )}
+        </div>
+      </div>
       <Canvas
         camera={{ position: [15, 10, 15], fov: 60 }}
         style={{ background: "transparent" }}
@@ -542,15 +759,12 @@ const NetworkScene = () => {
             type={node.type}
             size={node.size}
             data={node.data}
-            onClick={handleNodeClick}
+            onClick={handleNodeClickStable}
           />
         ))}
 
         {/* Instanced nodes for scalability */}
-        <InstancedNodes
-          nodes={networkData.nodes.slice(1)}
-          onClick={handleNodeClick}
-        />
+        <InstancedNodes nodes={instancedNodes} onClick={handleNodeClickStable} />
 
         {/* Network connections */}
         {networkData.connections.map(({ from, to, strength }, index) => {
