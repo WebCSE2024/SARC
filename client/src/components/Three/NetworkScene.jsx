@@ -486,7 +486,7 @@ const NetworkScene = () => {
       try {
         setLoading(true);
         setError(null);
-        // Request up to 5000 users, projection handled on server
+        
         const { data } = await authAPI.post("auth-system/v0/user/all", {
           page: 1,
           limit: 100,
@@ -502,8 +502,6 @@ const NetworkScene = () => {
             "professorDetails.specialInterestGroups",
             "profilePicture.url",
           ],
-          sortBy: "updatedAt",
-          sortOrder: "desc",
         });
         if (!cancelled && data?.success) {
           setUsers(Array.isArray(data.users) ? data.users : []);
