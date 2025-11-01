@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Navigation/header";
 import Footer from "./components/Navigation/footer";
-import { appRoutes, protectedRoutes } from "./Routes/routes";
+import { protectedRoutes } from "./Routes/routes";
 import "./App.css";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
@@ -34,22 +34,23 @@ const AppRoutes = () => {
 
           {/* All routes are protected */}
           <Route element={<ProtectedRoute />}>
-            {/* Previously "public" routes */}
-            {appRoutes.map((route, index) => (
+            {protectedRoutes.map((route, index) => (
               <Route
                 key={index || route.path}
                 path={route.path}
                 element={route.element}
-              />
-            ))}
-
-            {/* Explicitly protected routes */}
-            {protectedRoutes.map((route, index) => (
-              <Route
-                key={`protected-${index}`}
-                path={route.path}
-                element={route.element}
-              />
+              >
+                {/* TEMPORARY: Support for nested routes with children (for role-based routing) */}
+                {route.children &&
+                  route.children.map((childRoute, childIndex) => (
+                    <Route
+                      key={childIndex || childRoute.path}
+                      index={childRoute.index}
+                      path={childRoute.path}
+                      element={childRoute.element}
+                    />
+                  ))}
+              </Route>
             ))}
           </Route>
 

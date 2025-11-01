@@ -8,32 +8,56 @@ import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import PostReferral from "../pages/PostReferral/PostReferral";
 import PostPublication from "../pages/PostPublication/PostPublication";
 
-// These routes are now also protected but categorized as "main content"
-export const appRoutes = [
+// TEMPORARY: Import RoleBasedRoute for restricting SIG routes
+// TODO: Remove this import when role-based access is no longer needed
+import RoleBasedRoute from "../components/RoleBasedRoute/RoleBasedRoute";
+import { UserType } from "../../../../shared/types/user.type";
+
+export const protectedRoutes = [
+  // Main content
   {
     path: "/",
     element: <HomePage />,
   },
+
+  // TEMPORARY: Special Interest Groups (SIGs) - Restricted to ADMIN and PROFESSOR
+  // TODO: Uncomment the original routes below and remove this section when restriction is lifted
+  // Original routes (commented out):
+  // {
+  //   path: "/sig",
+  //   element: <SIGOverview />,
+  // },
+  // {
+  //   path: "/sig/:domain",
+  //   element: <SIGDetail />,
+  // },
+
+  // Temporary role-restricted SIG routes
   {
     path: "/sig",
-    element: <SIGOverview />,
+    element: (
+      <RoleBasedRoute allowedRoles={[UserType.ADMIN, UserType.PROFESSOR]} />
+    ),
+    children: [
+      {
+        index: true,
+        element: <SIGOverview />,
+      },
+      {
+        path: ":domain",
+        element: <SIGDetail />,
+      },
+    ],
   },
-  {
-    path: "/sig/:domain",
-    element: <SIGDetail />,
-  },
+  // Referrals
   {
     path: "/referrals",
     element: <ReferralPage />,
   },
   {
-    path: "/publications",
-    element: <PublicationsPage />,
+    path: "/post-referral",
+    element: <PostReferral />,
   },
-];
-
-// User-specific and content creation routes
-export const protectedRoutes = [
   // User profile
   {
     path: "/profile",
@@ -44,23 +68,13 @@ export const protectedRoutes = [
     element: <ProfilePage />,
   },
 
-  // Content creation
+  // Publications
   {
-    path: "/post-referral",
-    element: <PostReferral />,
+    path: "/publications",
+    element: <PublicationsPage />,
   },
   {
     path: "/post-publication",
     element: <PostPublication />,
-  },
-
-  // Legacy URL support
-  {
-    path: "/PostReferrals",
-    element: <Navigate to="/post-referral" replace />,
-  },
-  {
-    path: "/PostPublication",
-    element: <Navigate to="/post-publication" replace />,
   },
 ];
