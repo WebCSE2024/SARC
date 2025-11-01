@@ -50,7 +50,7 @@ const HomePage = () => {
         <h1 className="tagline">
           Where Legacy Meets Opportunity
           <br />
-          Connect with the IIT ISM Alumni Network.
+          Connect with the CSES Network.
         </h1>
         <p className="subtitle">
           Collaborate with alumni, professors, and peers. Access research,

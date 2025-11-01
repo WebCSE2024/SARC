@@ -1,7 +1,6 @@
 // import React from "react";
 import "./ProfilePage.scss";
 // import profileImg from '../../../public/NoProfileImg.png'
-// import eduLogo from "../../../public/TempImages/wallpaperflare.com_wallpaper (1).jpg";
 // import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 // import ActivityCard from "../../features/ProfilePageActivity/ActivityCard";
