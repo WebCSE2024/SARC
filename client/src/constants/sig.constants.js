@@ -9,7 +9,7 @@ export const SIG_CONFIG = [
   {
     id: SIG_DOMAINS.AI_ML,
     slug: SIG_DOMAINS.AI_ML,
-    name: "Artificial Intelligence & Machine Learning",
+    name: "ANVESH",
     shortName: "AI / ML",
     description:
       "Deep learning, computer vision, NLP for Indic languages, and healthcare AI applications",
