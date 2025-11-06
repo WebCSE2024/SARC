@@ -12,13 +12,14 @@ export const SIG_CONFIG = [
     name: "ANVESH",
     shortName: "AI / ML",
     description:
-      "Deep learning, computer vision, NLP for Indic languages, and healthcare AI applications",
+      "'Exploring' intelligence through innovation—advancing ethical, human-centric AI and machine learning for global impact.",
     tags: [
+      "Foundational AI",
       "Deep Learning",
       "Computer Vision",
       "Natural Language Processing",
-      "Healthcare AI",
-      "Pattern Recognition",
+      "Human Centric AI",
+      "AI For Scientific Impact",
     ],
     color: "#3B82F6",
     backgroundMedia: {

@@ -18,7 +18,7 @@ import "./SIGDetail.scss";
 const SIGDetail = () => {
   const { domain } = useParams();
   const navigate = useNavigate();
-  const [activeView, setActiveView] = useState("publications");
+  const [activeView, setActiveView] = useState("professors");
 
   const sigConfig = useMemo(() => getSIGBySlug(domain), [domain]);
   const sigData = useMemo(() => getSIGById(domain), [domain]);
@@ -113,7 +113,7 @@ const SIGDetail = () => {
           </button>
 
           <h1 className="sig-detail__title">{sigConfig.name}</h1>
-          <p className="sig-detail__description">{sigConfig.description}</p>
+          <p className="sig-detail__description">{sigData.description}</p>
 
           {sigConfig.tags && sigConfig.tags.length > 0 && (
             <div className="sig-detail__tags" aria-label="Key topics">
@@ -135,18 +135,6 @@ const SIGDetail = () => {
         >
           <button
             className={`sig-detail__tab ${
-              activeView === "publications" ? "is-active" : ""
-            }`}
-            onClick={() => setActiveView("publications")}
-            role="tab"
-            aria-selected={activeView === "publications"}
-            aria-controls="publications-panel"
-          >
-            Publications
-            <span className="sig-detail__tab-count">{publications.length}</span>
-          </button>
-          <button
-            className={`sig-detail__tab ${
               activeView === "professors" ? "is-active" : ""
             }`}
             onClick={() => setActiveView("professors")}
@@ -156,6 +144,18 @@ const SIGDetail = () => {
           >
             Professors
             <span className="sig-detail__tab-count">{professors.length}</span>
+          </button>
+          <button
+            className={`sig-detail__tab ${
+              activeView === "publications" ? "is-active" : ""
+            }`}
+            onClick={() => setActiveView("publications")}
+            role="tab"
+            aria-selected={activeView === "publications"}
+            aria-controls="publications-panel"
+          >
+            Publications
+            <span className="sig-detail__tab-count">{publications.length}</span>
           </button>
           <button
             className={`sig-detail__tab ${

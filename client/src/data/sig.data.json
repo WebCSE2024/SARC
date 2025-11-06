@@ -3,7 +3,7 @@
     {
       "id": "ai-ml",
       "name": "ANVESH",
-      "description": "Deep Learning, Neural Networks, and Intelligent Systems",
+      "description": "AI-driven Neural and Visionary Exploration for Scientific Horizons",
       "createdAt": "2024-01-01T00:00:00.000Z",
       "updatedAt": "2025-10-21T00:00:00.000Z",
       "isActive": true
@@ -79,44 +79,347 @@
       "updatedAt": "2025-10-21T00:00:00.000Z"
     },
     {
-      "id": "prof-004",
-      "name": "Prof. Sarah Mitchell",
-      "designation": "Professor",
-      "email": "sarah.mitchell@iitism.ac.in",
-      "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&auto=format&fit=crop&q=80",
-      "interests": ["Deep Learning", "Computer Vision", "Pattern Recognition"],
-      "sigId": "ai-ml",
-      "bio": "Leading researcher in computer vision and deep learning applications",
-      "createdAt": "2024-01-15T00:00:00.000Z",
-      "updatedAt": "2025-10-21T00:00:00.000Z"
-    },
-    {
-      "id": "prof-005",
-      "name": "Prof. James Wilson",
-      "designation": "Associate Professor",
-      "email": "james.wilson@iitism.ac.in",
-      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=80",
-      "interests": ["Machine Learning", "Bioinformatics", "Data Mining"],
-      "sigId": "ai-ml",
-      "bio": "Expertise in machine learning applications in bioinformatics and healthcare",
-      "createdAt": "2024-01-15T00:00:00.000Z",
-      "updatedAt": "2025-10-21T00:00:00.000Z"
-    },
-    {
-      "id": "prof-006",
-      "name": "Prof. Michael Thompson",
+      "id": "prof-aiml-001",
+      "name": "Prof. Anjan Chowdhury",
       "designation": "Assistant Professor",
-      "email": "michael.thompson@iitism.ac.in",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
+      "email": "anjanchowdhury@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465327026819f95ee08cb.jpg",
+      "interests": [
+        "Complex Network",
+        "Human Brain",
+        "Machine Learning",
+        "Deep Learning"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Specializes in complex network analysis and human brain with focus on machine learning applications",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-002",
+      "name": "Prof. A.C.S. Rao",
+      "designation": "Associate Professor",
+      "email": "acsrao@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465298546819ee3eb829e.jpg",
+      "interests": [
+        "Bioinformatics",
+        "Evolutionary Algorithms",
+        "Data Mining",
+        "Machine Learning",
+        "Data and Knowledge Based Systems"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Expert in bioinformatics and machine learning with focus on biological data analysis",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-003",
+      "name": "Prof. Arup Kumar Pal",
+      "designation": "Associate Professor",
+      "email": "arupkrpal@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465299996819eecfdf57a.jpg",
+      "interests": [
+        "Information Security",
+        "Blockchain",
+        "Multimedia Security",
+        "Image Analysis",
+        "Cryptography"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Research focus on information security, blockchain technology and multimedia security with machine learning applications",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-004",
+      "name": "Prof. Ayan Das",
+      "designation": "Assistant Professor",
+      "email": "ayandas@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465320756819f6eb4419c.jpg",
       "interests": [
         "Natural Language Processing",
-        "Reinforcement Learning",
+        "Machine Learning",
+        "Cross-lingual NLP",
+        "Dependency Parsing"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Specializes in natural language processing with focus on low-resource and cross-lingual NLP",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-005",
+      "name": "Prof. Chiranjeev Kumar",
+      "designation": "Professor (HAG)",
+      "email": "chiranjeev@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465140136819b05d43990.JPG",
+      "interests": [
+        "Wireless Networks",
+        "Computer Networks",
+        "Mobility Management",
+        "Distributed Systems"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Head of CSE Department with expertise in wireless networks and distributed computing",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-006",
+      "name": "Prof. Haider Banka",
+      "designation": "Associate Professor",
+      "email": "haider@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465142206819b12c1bb1f.jpg",
+      "interests": [
+        "Soft Computing",
+        "Machine Intelligence",
+        "Machine Learning",
+        "Data Mining",
+        "Nature Inspired Computing"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Expert in soft computing and machine intelligence with applications in data mining and nature-inspired algorithms",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-007",
+      "name": "Prof. Hari Om",
+      "designation": "Assistant Professor",
+      "email": "hariom@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/facultyImages/Dr%20Hari%20Om.jpg",
+      "interests": [
+        "Machine Learning",
+        "Data Mining",
+        "Network Security",
+        "Information Security"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Research interests in machine learning and its applications in security systems",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-008",
+      "name": "Prof. Mauajama Firdaus",
+      "designation": "Assistant Professor",
+      "email": "mauajama@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465325586819f8ce06a9e.jpg",
+      "interests": [
+        "Machine Learning",
+        "Deep Learning",
+        "Computer Vision",
+        "Pattern Recognition"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Specializing in machine learning and computer vision applications",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-009",
+      "name": "Prof. Partha Pratim Roy",
+      "designation": "Professor",
+      "email": "proy@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_175145309668650da8b0c2b.jpg",
+      "interests": [
+        "Pattern Recognition",
+        "Document Analysis",
+        "Machine Learning",
+        "Computer Vision"
+      ],
+      "sigId": "ai-ml",
+      "bio": "AExpertise in pattern recognition and document image analysis",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-010",
+      "name": "Prof. Pranay Kumar Saha",
+      "designation": "Assistant Professor",
+      "email": "pranaykumar@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465323326819f7ec21456.jpg",
+      "interests": [
+        "Machine Learning",
+        "Artificial Intelligence",
+        "Data Analytics",
+        "Neural Networks"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Focusing on machine learning and artificial intelligence applications",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-011",
+      "name": "Prof. Pranav Bisht",
+      "designation": "Assistant Professor",
+      "email": "pranavbisht@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_173857809967a098b3d40d4.jpg",
+      "interests": [
+        "Deep Learning",
+        "Machine Learning",
+        "Computer Vision",
         "AI Systems"
       ],
       "sigId": "ai-ml",
-      "bio": "Research interests in NLP and reinforcement learning for intelligent systems",
+      "bio": "Research interests in deep learning and AI systems",
       "createdAt": "2024-01-15T00:00:00.000Z",
-      "updatedAt": "2025-10-21T00:00:00.000Z"
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-012",
+      "name": "Prof. Prasnata K. Jana",
+      "designation": "Professor (HAG)",
+      "email": "prasanta@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465138476819afb73d659.jpg",
+      "interests": [
+        "Machine Learning",
+        "Distributed Computing",
+        "Wireless Sensor Networks",
+        "IoT"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Expertise in machine learning applications in distributed systems and IoT",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-013",
+      "name": "Prof. Rahul Gangopadhyay",
+      "designation": "Assistant Professor",
+      "email": "rahulgang@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465327276819f977d5db4.jpg",
+      "interests": [
+        "Machine Learning",
+        "Algorithms",
+        "Computational Complexity",
+        "Optimization"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Specializing in machine learning and algorithmic optimization",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-014",
+      "name": "Prof. Rajendra Pamula",
+      "designation": "Associate Professor",
+      "email": "rajendra@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/facultyImages/Dr%20Rajendra%20Pamula.jpg",
+      "interests": [
+        "Machine Learning",
+        "Data Mining",
+        "Business Intelligence",
+        "Big Data Analytics"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Focus on machine learning and big data analytics",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-015",
+      "name": "Prof. Sachin Tripathi",
+      "designation": "Associate Professor",
+      "email": "sachint@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/facultyImages/Prof.%20Sachin%20Tripathi.jpg",
+      "interests": [
+        "Machine Learning",
+        "Deep Learning",
+        "Computer Vision",
+        "Image Processing"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Focusing on machine learning and computer vision research",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-016",
+      "name": "Prof. Saurabh Srivastava",
+      "designation": "Assistant Professor",
+      "email": "saurabhs@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/facultyImages/Prof.%20Saurabh%20Srivastava.jpg",
+      "interests": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Neural Networks",
+        "Deep Learning"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Research in artificial intelligence and neural network architectures",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-017",
+      "name": "Prof. Soumen Bag",
+      "designation": "Associate Professor",
+      "email": "soumen@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_17465305416819f0edcca74.JPG",
+      "interests": [
+        "Machine Learning",
+        "Natural Language Processing",
+        "Information Retrieval",
+        "Text Mining"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Specializing in NLP and information retrieval using machine learning",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-018",
+      "name": "Prof. Sushanta Mukhopadhyay",
+      "designation": "Associate Professor",
+      "email": "sushanta@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/facultyImages/Prof.%20Sushanta%20Mukhopadhyay.jpg",
+      "interests": [
+        "Machine Learning",
+        "Data Science",
+        "Pattern Recognition",
+        "AI Applications"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Expertise in machine learning and data science applications",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-019",
+      "name": "Prof. Tanusree Kaibartta",
+      "designation": "Assistant Professor",
+      "email": "tanusree@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/facultyImages/Dr%20Tanusree%20Kaibartta.jpg",
+      "interests": [
+        "Machine Learning",
+        "Deep Learning",
+        "Computer Vision",
+        "Image Analysis"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Focusing on machine learning and computer vision research",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
+    },
+    {
+      "id": "prof-aiml-020",
+      "name": "Prof. Tarachand Amgoth",
+      "designation": "Associate Professor",
+      "email": "tarachand@iitism.ac.in",
+      "image": "https://www.iitism.ac.in/storage/FacultyDetails/IMG_175031033768539dc191d9c.jpg",
+      "interests": [
+        "Machine Learning",
+        "IoT",
+        "Wireless Sensor Networks",
+        "Edge Computing"
+      ],
+      "sigId": "ai-ml",
+      "bio": "Research in machine learning applications for IoT and WSN",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2025-11-06T00:00:00.000Z"
     },
     {
       "id": "prof-007",
@@ -212,22 +515,6 @@
       "sigId": "theoretical-cs",
       "bio": "Renowned expert in automata theory and computational complexity classes",
       "createdAt": "2024-02-10T00:00:00.000Z",
-      "updatedAt": "2025-10-21T00:00:00.000Z"
-    },
-    {
-      "id": "prof-014",
-      "name": "Prof. Kevin Johnson",
-      "designation": "Associate Professor",
-      "email": "kevin.johnson@iitism.ac.in",
-      "image": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=800&auto=format&fit=crop&q=80",
-      "interests": [
-        "Generative AI",
-        "Large Language Models",
-        "Neural Architecture"
-      ],
-      "sigId": "ai-ml",
-      "bio": "Pioneer in generative AI research and transformer-based architectures",
-      "createdAt": "2024-02-20T00:00:00.000Z",
       "updatedAt": "2025-10-21T00:00:00.000Z"
     },
     {
