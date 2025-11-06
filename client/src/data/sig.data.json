@@ -1,7 +1,7 @@
 {
   "sigs": [
     {
-      "id": "ai-ml",
+      "id": "ai",
       "name": "ANVESH",
       "description": "AI-driven Neural and Visionary Exploration for Scientific Horizons",
       "createdAt": "2024-01-01T00:00:00.000Z",
@@ -90,7 +90,7 @@
         "Machine Learning",
         "Deep Learning"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Specializes in complex network analysis and human brain with focus on machine learning applications",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -108,7 +108,7 @@
         "Machine Learning",
         "Data and Knowledge Based Systems"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Expert in bioinformatics and machine learning with focus on biological data analysis",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -126,7 +126,7 @@
         "Image Analysis",
         "Cryptography"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Research focus on information security, blockchain technology and multimedia security with machine learning applications",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -143,7 +143,7 @@
         "Cross-lingual NLP",
         "Dependency Parsing"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Specializes in natural language processing with focus on low-resource and cross-lingual NLP",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -160,7 +160,7 @@
         "Mobility Management",
         "Distributed Systems"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Head of CSE Department with expertise in wireless networks and distributed computing",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -178,7 +178,7 @@
         "Data Mining",
         "Nature Inspired Computing"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Expert in soft computing and machine intelligence with applications in data mining and nature-inspired algorithms",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -195,7 +195,7 @@
         "Network Security",
         "Information Security"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Research interests in machine learning and its applications in security systems",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -212,7 +212,7 @@
         "Computer Vision",
         "Pattern Recognition"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Specializing in machine learning and computer vision applications",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -229,7 +229,7 @@
         "Machine Learning",
         "Computer Vision"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "AExpertise in pattern recognition and document image analysis",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -246,7 +246,7 @@
         "Data Analytics",
         "Neural Networks"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Focusing on machine learning and artificial intelligence applications",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -263,7 +263,7 @@
         "Computer Vision",
         "AI Systems"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Research interests in deep learning and AI systems",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -280,7 +280,7 @@
         "Wireless Sensor Networks",
         "IoT"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Expertise in machine learning applications in distributed systems and IoT",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -297,7 +297,7 @@
         "Computational Complexity",
         "Optimization"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Specializing in machine learning and algorithmic optimization",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -314,7 +314,7 @@
         "Business Intelligence",
         "Big Data Analytics"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Focus on machine learning and big data analytics",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -331,7 +331,7 @@
         "Computer Vision",
         "Image Processing"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Focusing on machine learning and computer vision research",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -348,7 +348,7 @@
         "Neural Networks",
         "Deep Learning"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Research in artificial intelligence and neural network architectures",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -365,7 +365,7 @@
         "Information Retrieval",
         "Text Mining"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Specializing in NLP and information retrieval using machine learning",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -382,7 +382,7 @@
         "Pattern Recognition",
         "AI Applications"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Expertise in machine learning and data science applications",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -399,7 +399,7 @@
         "Computer Vision",
         "Image Analysis"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Focusing on machine learning and computer vision research",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -416,7 +416,7 @@
         "Wireless Sensor Networks",
         "Edge Computing"
       ],
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "bio": "Research in machine learning applications for IoT and WSN",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2025-11-06T00:00:00.000Z"
@@ -608,7 +608,7 @@
       "publishedDate": "2024-04-25",
       "url": "https://www.sciencedirect.com/",
       "type": "journal",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-004",
       "media": {
         "type": "image",
@@ -627,7 +627,7 @@
       "publishedDate": "2024-07-12",
       "url": "https://www.sciencedirect.com/",
       "type": "journal",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-005",
       "media": {
         "type": "video",
@@ -646,7 +646,7 @@
       "publishedDate": "2024-09-05",
       "url": "https://aclanthology.org/",
       "type": "conference",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-006",
       "media": {
         "type": "image",
@@ -836,7 +836,7 @@
       "publishedDate": "2024-10-15",
       "url": "https://neurips.cc/",
       "type": "conference",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-014",
       "media": {
         "type": "video",
@@ -855,7 +855,7 @@
       "publishedDate": "2024-09-18",
       "url": "https://www.miccai.org/",
       "type": "conference",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-004",
       "media": {
         "type": "image",
@@ -874,7 +874,7 @@
       "publishedDate": "2024-11-05",
       "url": "https://ieeexplore.ieee.org/",
       "type": "journal",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-005",
       "media": {
         "type": "gif",
@@ -1028,7 +1028,7 @@
       "filingDate": "2023-08-10",
       "grantDate": "2024-05-15",
       "description": "Deep learning-based platform for automated detection and classification of multiple diseases from medical imaging data",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-004",
       "status": "granted",
       "media": {
@@ -1104,7 +1104,7 @@
       "filingDate": "2024-02-25",
       "grantDate": "2024-10-15",
       "description": "Novel compression technique for deploying deep neural networks on resource-constrained edge devices without significant accuracy loss",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-014",
       "status": "granted",
       "media": {
@@ -1146,7 +1146,7 @@
       "filingDate": "2024-03-15",
       "grantDate": null,
       "description": "Privacy-preserving federated learning system for training machine learning models on distributed healthcare datasets",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-005",
       "status": "pending",
       "media": {
@@ -1239,7 +1239,7 @@
       "description": "Latest advancements in computer vision techniques for recognizing and processing complex visual patterns.",
       "location": "Seminar Room 301, CSE Building",
       "duration": "60 minutes",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-004",
       "media": {
         "type": "image",
@@ -1256,7 +1256,7 @@
       "description": "Machine learning applications in addressing healthcare challenges, including disease prediction and diagnostics.",
       "location": "CSE Auditorium, IIT (ISM) Dhanbad",
       "duration": "90 minutes",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-005",
       "media": {
         "type": "gif",
@@ -1341,7 +1341,7 @@
       "description": "Exploring the architecture, training, and real-world applications of large language models in various domains.",
       "location": "CSE Auditorium, IIT (ISM) Dhanbad",
       "duration": "90 minutes",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-014",
       "media": {
         "type": "video",
@@ -1409,7 +1409,7 @@
       "description": "Understanding transformer architectures and their impact on modern NLP tasks including translation and summarization.",
       "location": "Seminar Room 301, CSE Building",
       "duration": "75 minutes",
-      "sigId": "ai-ml",
+      "sigId": "ai",
       "professorId": "prof-006",
       "media": {
         "type": "gif",

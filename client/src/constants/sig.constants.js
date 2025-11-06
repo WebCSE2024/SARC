@@ -1,5 +1,5 @@
 export const SIG_DOMAINS = {
-  AI_ML: "ai-ml",
+  AI_ML: "ai",
   COMPUTING_SYSTEMS: "computing-systems",
   INFORMATION_SECURITY: "information-security",
   THEORETICAL_CS: "theoretical-cs",
