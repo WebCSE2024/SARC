@@ -56,7 +56,13 @@ export const protectedRoutes = [
   },
   {
     path: "/post-referral",
-    element: <PostReferral />,
+    element: (<RoleBasedRoute allowedRoles={[UserType.ADMIN, UserType.PROFESSOR, UserType.ALUMNI]} />),
+    children: [
+      {
+        index: true,
+        element: <PostReferral />,  
+      }
+    ],
   },
   // User profile
   {
@@ -75,6 +81,10 @@ export const protectedRoutes = [
   },
   {
     path: "/post-publication",
-    element: <PostPublication />,
+    element: (<RoleBasedRoute allowedRoles={[UserType.ADMIN, UserType.PROFESSOR, UserType.ALUMNI]} />),
+    children: [{
+      index: true,
+      element: <PostPublication />,
+    }],
   },
 ];
