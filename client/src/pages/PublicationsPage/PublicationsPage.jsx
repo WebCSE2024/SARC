@@ -1,10 +1,15 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback, useRef } from "react";
 import {
   FaSearch,
   FaSpinner,
   FaExclamationTriangle,
   FaChevronLeft,
   FaChevronRight,
+  FaBookOpen,
+  FaTimes,
+  FaFilter,
+  FaSortAmountDown,
+  FaGraduationCap,
 } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { sarcAPI } from "../../../../../shared/axios/axiosInstance";
@@ -28,6 +33,9 @@ const PublicationsPage = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProfessorId, setSelectedProfessorId] = useState(null);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [sortOrder, setSortOrder] = useState("newest");
+  const searchInputRef = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -108,27 +116,52 @@ const PublicationsPage = () => {
 
   const publicationEntries = selectedPublication?.entries || [];
 
+  // Sort entries based on sortOrder
+  const sortedEntries = useMemo(() => {
+    const entries = [...publicationEntries];
+    if (sortOrder === "newest") {
+      return entries.sort((a, b) => (b.year || 0) - (a.year || 0));
+    } else if (sortOrder === "oldest") {
+      return entries.sort((a, b) => (a.year || 0) - (b.year || 0));
+    } else if (sortOrder === "citations") {
+      return entries.sort((a, b) => (b.citations || 0) - (a.citations || 0));
+    }
+    return entries;
+  }, [publicationEntries, sortOrder]);
+
   const paginatedData = useMemo(
-    () => paginateEntries(publicationEntries, currentPage, itemsPerPage),
-    [publicationEntries, currentPage, itemsPerPage]
+    () => paginateEntries(sortedEntries, currentPage, itemsPerPage),
+    [sortedEntries, currentPage, itemsPerPage]
   );
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedProfessorId, searchQuery]);
+  }, [selectedProfessorId, searchQuery, sortOrder]);
 
-  const handleProfessorSelect = (professorId) => {
+  const handleProfessorSelect = useCallback((professorId) => {
     setSelectedProfessorId(professorId);
     setCurrentPage(1);
-  };
+  }, []);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    searchInputRef.current?.focus();
+  };
+
+  const handleSortChange = (e) => {
+    setSortOrder(e.target.value);
+  };
+
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const pubsContainer = document.querySelector(".publications-container");
+    if (pubsContainer) {
+      pubsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   const handleItemsPerPageChange = (e) => {
@@ -136,12 +169,81 @@ const PublicationsPage = () => {
     setCurrentPage(1);
   };
 
+  const renderPaginationNumbers = () => {
+    const { totalPages } = paginatedData;
+    const maxVisible = 5;
+    const pages = [];
+
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+    if (endPage - startPage + 1 < maxVisible) {
+      startPage = Math.max(1, endPage - maxVisible + 1);
+    }
+
+    if (startPage > 1) {
+      pages.push(
+        <button
+          key={1}
+          className="page-number-btn"
+          onClick={() => handlePageChange(1)}
+        >
+          1
+        </button>
+      );
+      if (startPage > 2) {
+        pages.push(
+          <span key="ellipsis-start" className="page-ellipsis">
+            …
+          </span>
+        );
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          className={`page-number-btn ${currentPage === i ? "active" : ""}`}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        pages.push(
+          <span key="ellipsis-end" className="page-ellipsis">
+            …
+          </span>
+        );
+      }
+      pages.push(
+        <button
+          key={totalPages}
+          className="page-number-btn"
+          onClick={() => handlePageChange(totalPages)}
+        >
+          {totalPages}
+        </button>
+      );
+    }
+
+    return pages;
+  };
+
   if (loading) {
     return (
       <div className="PublicationsPage loading-state">
         <div className="loading-content">
-          <FaSpinner className="spinner" />
-          <p>Loading publications...</p>
+          <div className="loader-wrapper">
+            <div className="loader-ring"></div>
+            <FaGraduationCap className="loader-icon" />
+          </div>
+          <h3>Loading Publications</h3>
+          <p>Fetching research papers from our faculty...</p>
         </div>
       </div>
     );
@@ -151,11 +253,13 @@ const PublicationsPage = () => {
     return (
       <div className="PublicationsPage error-state">
         <div className="error-content">
-          <FaExclamationTriangle className="error-icon" />
-          <h3>Error Loading Publications</h3>
+          <div className="error-icon-wrapper">
+            <FaExclamationTriangle className="error-icon" />
+          </div>
+          <h3>Unable to Load Publications</h3>
           <p>{error}</p>
           <button className="retry-btn" onClick={fetchPublications}>
-            Retry
+            Try Again
           </button>
         </div>
       </div>
@@ -166,187 +270,207 @@ const PublicationsPage = () => {
     return (
       <div className="PublicationsPage empty-state">
         <div className="empty-content">
-          <h3>No Publications Available</h3>
+          <div className="empty-icon-wrapper">
+            <FaBookOpen className="empty-icon" />
+          </div>
+          <h3>No Publications Yet</h3>
           <p>There are currently no publications to display.</p>
         </div>
       </div>
     );
   }
 
+  const totalPublicationsCount = allPublications.reduce(
+    (acc, pub) => acc + (pub.entries?.length || 0),
+    0
+  );
+
   return (
     <div className="PublicationsPage">
-      <div className="page-header">
-        <div className="header-content">
-          <h1>Publications</h1>
-          <p className="subtitle">
-            Browse academic publications from our faculty members
+      {/* Hero Section */}
+      <section className="page-hero">
+        <div className="hero-content">
+          <div className="hero-badge">
+            <FaGraduationCap />
+            <span>Research Repository</span>
+          </div>
+          <h1 className="hero-title">Research Publications</h1>
+          <p className="hero-subtitle">
+            Explore {totalPublicationsCount}+ publications from{" "}
+            {professors.length} faculty members in computer science research
           </p>
-        </div>
 
-        <div className="search-container">
-          <FaSearch className="search-icon" />
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Search by title, author, publisher, year..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-          {searchQuery && (
-            <button
-              className="clear-search-btn"
-              onClick={() => setSearchQuery("")}
-              aria-label="Clear search"
-            >
-              ×
-            </button>
-          )}
-        </div>
-      </div>
-
-      <div className="publications-content">
-        <aside className="professors-sidebar">
-          <ProfessorSelector
-            professors={professors}
-            selectedProfessorId={selectedProfessorId}
-            onSelectProfessor={handleProfessorSelect}
-          />
-        </aside>
-
-        <main className="publications-main">
-          {selectedProfessorInfo && (
-            <div className="selected-professor-header">
-              <div className="professor-profile">
-                {selectedProfessorInfo.profilePicture?.url ? (
-                  <img
-                    src={selectedProfessorInfo.profilePicture.url}
-                    alt={
-                      selectedProfessorInfo.name ||
-                      selectedProfessorInfo.username
-                    }
-                    className="professor-avatar-large"
-                  />
-                ) : (
-                  <div className="avatar-placeholder-large">
-                    {(selectedProfessorInfo.name ||
-                      selectedProfessorInfo.username ||
-                      "?")[0].toUpperCase()}
-                  </div>
-                )}
-                <div className="professor-details">
-                  <h2>
-                    {selectedProfessorInfo.name ||
-                      selectedProfessorInfo.username}
-                  </h2>
-                  <p className="publication-count-text">
-                    {paginatedData.totalCount}{" "}
-                    {paginatedData.totalCount === 1
-                      ? "Publication"
-                      : "Publications"}
-                    {searchQuery && ` (filtered)`}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {paginatedData.totalCount === 0 ? (
-            <div className="no-publications">
-              <p>
-                {searchQuery
-                  ? `No publications found matching "${searchQuery}"`
-                  : "No publications available for this professor"}
-              </p>
-            </div>
-          ) : (
-            <>
-              <div className="publications-list">
-                {paginatedData.entries.map((entry, idx) => (
-                  <PublicationEntry
-                    key={entry._id || idx}
-                    entry={entry}
-                    index={paginatedData.startIndex + idx}
-                  />
-                ))}
-              </div>
-
-              {paginatedData.totalPages > 1 && (
-                <div className="pagination-controls">
-                  <div className="pagination-info">
-                    <span>
-                      Showing {paginatedData.startIndex} -{" "}
-                      {paginatedData.endIndex} of {paginatedData.totalCount}
-                    </span>
-                    <select
-                      value={itemsPerPage}
-                      onChange={handleItemsPerPageChange}
-                      className="items-per-page-select"
-                    >
-                      <option value={5}>5 per page</option>
-                      <option value={10}>10 per page</option>
-                      <option value={20}>20 per page</option>
-                      <option value={50}>50 per page</option>
-                    </select>
-                  </div>
-
-                  <div className="pagination-buttons">
-                    <button
-                      className="pagination-btn"
-                      onClick={() => handlePageChange(currentPage - 1)}
-                      disabled={!paginatedData.hasPrev}
-                    >
-                      <FaChevronLeft />
-                      Previous
-                    </button>
-
-                    <div className="page-numbers">
-                      {Array.from(
-                        { length: Math.min(5, paginatedData.totalPages) },
-                        (_, i) => {
-                          let pageNum;
-                          if (paginatedData.totalPages <= 5) {
-                            pageNum = i + 1;
-                          } else if (currentPage <= 3) {
-                            pageNum = i + 1;
-                          } else if (
-                            currentPage >=
-                            paginatedData.totalPages - 2
-                          ) {
-                            pageNum = paginatedData.totalPages - 4 + i;
-                          } else {
-                            pageNum = currentPage - 2 + i;
-                          }
-
-                          return (
-                            <button
-                              key={pageNum}
-                              className={`page-number-btn ${
-                                currentPage === pageNum ? "active" : ""
-                              }`}
-                              onClick={() => handlePageChange(pageNum)}
-                            >
-                              {pageNum}
-                            </button>
-                          );
-                        }
-                      )}
-                    </div>
-
-                    <button
-                      className="pagination-btn"
-                      onClick={() => handlePageChange(currentPage + 1)}
-                      disabled={!paginatedData.hasNext}
-                    >
-                      Next
-                      <FaChevronRight />
-                    </button>
-                  </div>
-                </div>
+          {/* Search Box */}
+          <div className={`search-wrapper ${isSearchFocused ? "focused" : ""}`}>
+            <div className="search-container">
+              <FaSearch className="search-icon" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                className="search-input"
+                placeholder="Search by title, author, keyword, or DOI..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setIsSearchFocused(false)}
+                aria-label="Search publications"
+              />
+              {searchQuery && (
+                <button
+                  className="clear-search-btn"
+                  onClick={handleClearSearch}
+                  aria-label="Clear search"
+                >
+                  <FaTimes />
+                </button>
               )}
-            </>
-          )}
-        </main>
-      </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Professor Selector */}
+      <section className="professor-tabs-section">
+        <ProfessorSelector
+          professors={professors}
+          selectedProfessorId={selectedProfessorId}
+          onSelectProfessor={handleProfessorSelect}
+        />
+      </section>
+
+      {/* Main Content */}
+      <main className="publications-container">
+        {paginatedData.totalCount === 0 ? (
+          <div className="no-publications">
+            <div className="no-results-illustration">
+              <FaSearch className="no-results-icon" />
+            </div>
+            <h4>No Results Found</h4>
+            <p>
+              {searchQuery
+                ? `No publications match "${searchQuery}"`
+                : "No publications available for this faculty member"}
+            </p>
+            {searchQuery && (
+              <button className="clear-filters-btn" onClick={handleClearSearch}>
+                <FaTimes />
+                Clear Search
+              </button>
+            )}
+          </div>
+        ) : (
+          <>
+            {/* Results Header */}
+            <div className="results-header">
+              <div className="results-info">
+                <span className="results-count">
+                  <strong>{paginatedData.totalCount}</strong>
+                  {paginatedData.totalCount === 1
+                    ? " publication"
+                    : " publications"}
+                  {selectedProfessorInfo && (
+                    <span className="professor-indicator">
+                      by{" "}
+                      {selectedProfessorInfo.name ||
+                        selectedProfessorInfo.username}
+                    </span>
+                  )}
+                </span>
+                {searchQuery && (
+                  <span className="filter-badge">
+                    <FaFilter className="filter-icon" />
+                    Filtered: "{searchQuery}"
+                    <button
+                      className="remove-filter"
+                      onClick={handleClearSearch}
+                      aria-label="Remove filter"
+                    >
+                      <FaTimes />
+                    </button>
+                  </span>
+                )}
+              </div>
+
+              <div className="view-controls">
+                <div className="sort-control">
+                  <FaSortAmountDown className="sort-icon" />
+                  <select
+                    value={sortOrder}
+                    onChange={handleSortChange}
+                    className="sort-select"
+                    aria-label="Sort publications"
+                  >
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="citations">Most Cited</option>
+                  </select>
+                </div>
+                <div className="items-control">
+                  <label htmlFor="items-per-page" className="sr-only">
+                    Items per page
+                  </label>
+                  <select
+                    id="items-per-page"
+                    value={itemsPerPage}
+                    onChange={handleItemsPerPageChange}
+                    className="items-per-page-select"
+                  >
+                    <option value={5}>5 per page</option>
+                    <option value={10}>10 per page</option>
+                    <option value={20}>20 per page</option>
+                    <option value={50}>50 per page</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* Publications List */}
+            <div className="publications-list">
+              {paginatedData.entries.map((entry, idx) => (
+                <PublicationEntry
+                  key={entry._id || idx}
+                  entry={entry}
+                  index={paginatedData.startIndex + idx}
+                  professorInfo={selectedProfessorInfo}
+                />
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {paginatedData.totalPages > 1 && (
+              <nav className="pagination-controls" aria-label="Pagination">
+                <button
+                  className="pagination-btn prev-btn"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={!paginatedData.hasPrev}
+                  aria-label="Previous page"
+                >
+                  <FaChevronLeft />
+                  <span className="btn-text">Previous</span>
+                </button>
+
+                <div className="page-numbers">{renderPaginationNumbers()}</div>
+
+                <button
+                  className="pagination-btn next-btn"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={!paginatedData.hasNext}
+                  aria-label="Next page"
+                >
+                  <span className="btn-text">Next</span>
+                  <FaChevronRight />
+                </button>
+              </nav>
+            )}
+
+            <div className="pagination-summary">
+              Showing <strong>{paginatedData.startIndex}</strong> -{" "}
+              <strong>{paginatedData.endIndex}</strong> of{" "}
+              <strong>{paginatedData.totalCount}</strong> publications
+            </div>
+          </>
+        )}
+      </main>
     </div>
   );
 };

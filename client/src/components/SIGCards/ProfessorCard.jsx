@@ -4,13 +4,13 @@ import "./SIGCards.scss";
 import { getFallbackImage } from "../../utils/mediaUtils";
 
 const ProfessorCard = ({ professor }) => {
-  const { name, designation, image, interests, email, bio } = professor;
+  const { name, position, profilePicture, interests, email, bio } = professor;
 
   return (
     <article className="sig-card sig-card--professor">
       <div className="sig-card__media">
         <img
-          src={image}
+          src={profilePicture?.url || getFallbackImage("professor")}
           alt={name}
           loading="lazy"
           onError={(e) => {
@@ -23,7 +23,7 @@ const ProfessorCard = ({ professor }) => {
       <div className="sig-card__content">
         <header className="sig-card__header">
           <span className="sig-card__badge sig-card__badge--professor">
-            {designation}
+            {position}
           </span>
           <h3 className="sig-card__title">{name}</h3>
           {email && (
@@ -56,8 +56,8 @@ const ProfessorCard = ({ professor }) => {
 ProfessorCard.propTypes = {
   professor: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    designation: PropTypes.string.isRequired,
-    image: PropTypes.string,
+    position: PropTypes.string.isRequired,
+    profilePicture: PropTypes.objectOf(PropTypes.string),
     interests: PropTypes.arrayOf(PropTypes.string),
     email: PropTypes.string,
     bio: PropTypes.string,

@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "./referral_card.css";
 import { formatDate } from "../../utils/dateFormatter";
 import { formatAmount } from "../../utils/numberFormatter";
-// import profilePic from "../../assets/NoProfileImg.png";
-import ProfileHeader from "../../components/ProfileHeader/profileHeader";
+import { formatDistanceToNow, parseISO } from "date-fns";
+import defaultProfileImg from "../../../public/NoProfileImg.png";
+import {
+  FaMapMarkerAlt,
+  FaMoneyBillWave,
+  FaClock,
+  FaExternalLinkAlt,
+  FaPhone,
+  FaEnvelope,
+  FaChevronDown,
+  FaChevronUp,
+  FaBuilding,
+  FaBriefcase,
+  FaCheckCircle,
+} from "react-icons/fa";
+import { HiOutlineSparkles } from "react-icons/hi";
 
-const ReferralCard = ({ data }) => {
+const ReferralCard = ({ data, index = 0 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   const titleId = `ref-title-${data?.referralId || "item"}`;
 
   // Safe derived fields and fallbacks
   const personInfo = data?.addedBy?.[0];
   const createdAt = data?.createdAt;
-  const eventId = data?.referralId;
   const jobProfile = data?.jobProfile || "";
   const companyName = data?.companyName || "";
   const description = data?.description || "";
@@ -27,126 +41,218 @@ const ReferralCard = ({ data }) => {
   const email = data?.email || "";
 
   const locationText =
-    locationCity || locationCountry || mode
+    locationCity || locationCountry
       ? `${locationCity || ""}${locationCity && locationCountry ? ", " : ""}${
           locationCountry || ""
-        }${mode ? ` (${mode})` : ""}`
-      : "";
+        }`
+      : "Not specified";
+
+  const getTimeAgo = (dateString) => {
+    try {
+      const date = parseISO(dateString);
+      return formatDistanceToNow(date, { addSuffix: true });
+    } catch {
+      return "";
+    }
+  };
+
+  const isDeadlineSoon = () => {
+    if (!deadline) return false;
+    const deadlineDate = new Date(deadline);
+    const now = new Date();
+    const diffDays = Math.ceil((deadlineDate - now) / (1000 * 60 * 60 * 24));
+    return diffDays <= 7 && diffDays > 0;
+  };
+
+  const isDeadlinePassed = () => {
+    if (!deadline) return false;
+    return new Date(deadline) < new Date();
+  };
+
+  const getWorkModeClass = () => {
+    if (!mode) return "";
+    const modeLC = mode.toLowerCase();
+    if (modeLC.includes("remote")) return "mode-remote";
+    if (modeLC.includes("hybrid")) return "mode-hybrid";
+    return "mode-onsite";
+  };
 
   return (
-    <div className="card-container" role="article" aria-labelledby={titleId}>
-      <div className="top-block">
-        {/* Header Section */}
-        <ProfileHeader
-          personInfo={personInfo}
-          createdAt={createdAt}
-          eventId={eventId}
-        />
-      </div>
-
-      {/* Job Description */}
-      <div className="company">
-        <div className="greet">
-          <p>Greeting everyone! {companyName} has released a job opening.</p>
+    <article
+      className={`referral-card ${isExpanded ? "referral-card--expanded" : ""}`}
+      role="article"
+      aria-labelledby={titleId}
+      style={{ animationDelay: `${index * 0.1}s` }}
+    >
+      {/* Card Header */}
+      <header className="referral-card__header">
+        <div className="referral-card__poster">
+          <img
+            src={personInfo?.profilePicture || defaultProfileImg}
+            alt={personInfo?.name || "Profile"}
+            className="referral-card__avatar"
+          />
+          <div className="referral-card__poster-info">
+            <span className="referral-card__poster-name">
+              {personInfo?.name || "Team CSES"}
+            </span>
+            <span className="referral-card__poster-time">
+              {getTimeAgo(createdAt)}
+            </span>
+          </div>
         </div>
-        <div className="second-block">
-          <div className="post">
-            <div className="post-box">
-              <div className="post-name">
-                <p className="p">POST</p>
-                <span className="post-title" id={titleId}>
-                  {jobProfile} ({companyName})
-                </span>
-              </div>{" "}
-              <div className="post-description">
-                <div dangerouslySetInnerHTML={{ __html: description }} />
-              </div>
-            </div>
+        {mode && (
+          <span className={`referral-card__mode-badge ${getWorkModeClass()}`}>
+            {mode}
+          </span>
+        )}
+      </header>
 
-            <div className="requirements">
-              <h6 className="subtitle">Requirements:</h6>
-              <div
-                className="requirements-list"
-                dangerouslySetInnerHTML={{ __html: requirements }}
-              />
-            </div>
+      {/* Main Content */}
+      <div className="referral-card__body">
+        {/* Company & Role Section */}
+        <div className="referral-card__role-section">
+          <div className="referral-card__company-icon">
+            <FaBuilding />
+          </div>
+          <div className="referral-card__role-details">
+            <h3 className="referral-card__job-title" id={titleId}>
+              {jobProfile || "Position Available"}
+            </h3>
+            <p className="referral-card__company-name">
+              <FaBriefcase className="referral-card__inline-icon" />
+              {companyName || "Company"}
+            </p>
+          </div>
+        </div>
 
-            <div className="job-details">
-              <div className="detail">
-                <p className="job-heading">Location:</p>
-                <span className="job-text"> {locationText}</span>
-              </div>
-              <div className="detail">
-                <p className="job-heading">Stipend:</p>
-                <span className="job-text">
-                  {stipendAmount != null
-                    ? `${formatAmount(stipendAmount)} ${stipendCurrency || ""}`
-                    : "—"}
-                </span>
-              </div>
-              <div className="detail">
-                <p className="job-heading">Deadline:</p>
-                <span className="job-text">
-                  {deadline ? formatDate(deadline) : "(To Be Informed)"}
-                </span>
-              </div>
-              <div className="detail">
-                <p className="job-heading">
-                  <a href={website} target="_blank" rel="noreferrer noopener">
-                    Website Link
-                  </a>
-                </p>
-              </div>
+        {/* Quick Info Cards */}
+        <div className="referral-card__quick-info">
+          <div className="referral-card__info-item">
+            <div className="referral-card__info-icon">
+              <FaMapMarkerAlt />
+            </div>
+            <div className="referral-card__info-content">
+              <span className="referral-card__info-label">Location</span>
+              <span className="referral-card__info-value">{locationText}</span>
             </div>
           </div>
 
-          <div className="contact-details">
-            <div className="phone-number">
-              <div className="img-phone">
-                <svg
-                  width="21"
-                  height="20"
-                  viewBox="0 0 21 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18.9211 20C19.3398 20 19.7414 19.8336 20.0375 19.5375C20.3336 19.2414 20.5 18.8398 20.5 18.4211V14.7368C20.5 14.3181 20.3336 13.9165 20.0375 13.6204C19.7414 13.3242 19.3398 13.1579 18.9211 13.1579C17.6895 13.1579 16.4789 12.9684 15.3211 12.5789C15.0442 12.4916 14.7487 12.4817 14.4667 12.5503C14.1846 12.619 13.9268 12.7636 13.7211 12.9684L12.2053 14.4842C9.58657 13.0552 7.4343 10.9029 6.00526 8.28421L7.51053 6.77895C7.94211 6.36842 8.1 5.75789 7.91053 5.16842C7.53158 4.02105 7.34211 2.81053 7.34211 1.57895C7.34211 1.16018 7.17575 0.758573 6.87964 0.462463C6.58353 0.166353 6.18192 0 5.76316 0H2.07895C1.66018 0 1.25857 0.166353 0.962463 0.462463C0.666353 0.758573 0.5 1.16018 0.5 1.57895C0.5 11.7368 8.76316 20 18.9211 20ZM2.07895 1.05263H5.76316C5.90275 1.05263 6.03662 1.10808 6.13532 1.20679C6.23402 1.30549 6.28947 1.43936 6.28947 1.57895C6.28947 2.92632 6.5 4.24211 6.91053 5.49474C6.9631</svg>6 5.64211 6.95263 5.85263 6.78421 6.02105L4.71053 8.08421C6.44737 11.4842 8.99474 14.0316 12.4053 15.7895L14.4579 13.7158C14.6053 13.5684 14.8053 13.5263 14.9947 13.5789C16.2579 14 17.5737 14.2105 18.9211 14.2105C19.0606 14.2105 19.1945 14.266 19.2932 14.3647C19.3919 14.4634 19.4474 14.5973 19.4474 14.7368V18.4211C19.4474 18.5606 19.3919 18.6945 19.2932 18.7932C19.1945 18.8919 19.0606 18.9474 18.9211 18.9474C9.3421 18.9474 1.55263 11.1579 1.55263 1.57895C1.55263 1.43936 1.60808 1.30549 1.70679 1.20679C1.80549 1.10808 1.93936 1.05263 2.07895 1.05263Z"
-                    fill="#8D91B0"
-                  />
-                </svg>
-              </div>
-
-              <div className="number">
-                <p className="number-text">{contact}</p>
-              </div>
+          <div className="referral-card__info-item">
+            <div className="referral-card__info-icon referral-card__info-icon--money">
+              <FaMoneyBillWave />
             </div>
-            <div className="email">
-              <div className="emailpic">
-                <svg
-                  width="25"
-                  height="13"
-                  viewBox="0 0 25 13"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1.13184 1.1001L12.5003 11.9001L23.8687 1.1001"
-                    stroke="#8D91B0"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              <div className="emailid">
-                <p className="id">{email}</p>
-              </div>
+            <div className="referral-card__info-content">
+              <span className="referral-card__info-label">Stipend</span>
+              <span className="referral-card__info-value">
+                {stipendAmount != null
+                  ? `${stipendCurrency || "₹"} ${formatAmount(stipendAmount)}`
+                  : "Not disclosed"}
+              </span>
+            </div>
+          </div>
+
+          <div className="referral-card__info-item">
+            <div
+              className={`referral-card__info-icon ${
+                isDeadlineSoon()
+                  ? "referral-card__info-icon--urgent"
+                  : isDeadlinePassed()
+                  ? "referral-card__info-icon--expired"
+                  : ""
+              }`}
+            >
+              <FaClock />
+            </div>
+            <div className="referral-card__info-content">
+              <span className="referral-card__info-label">Deadline</span>
+              <span
+                className={`referral-card__info-value ${
+                  isDeadlineSoon() ? "referral-card__deadline--urgent" : ""
+                } ${
+                  isDeadlinePassed() ? "referral-card__deadline--expired" : ""
+                }`}
+              >
+                {deadline ? formatDate(deadline) : "TBI"}
+                {isDeadlineSoon() && (
+                  <span className="referral-card__urgent-tag">Soon!</span>
+                )}
+              </span>
             </div>
           </div>
         </div>
+
+        {/* Description Preview */}
+        <div className="referral-card__description">
+          <div
+            className={`referral-card__description-content ${
+              !isExpanded ? "referral-card__description-content--truncated" : ""
+            }`}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
+        </div>
+
+        {/* Expandable Requirements Section */}
+        {isExpanded && requirements && (
+          <div className="referral-card__requirements">
+            <h4 className="referral-card__section-title">
+              <FaCheckCircle className="referral-card__section-icon" />
+              Requirements
+            </h4>
+            <div
+              className="referral-card__requirements-list"
+              dangerouslySetInnerHTML={{ __html: requirements }}
+            />
+          </div>
+        )}
+
+        {/* Expand/Collapse Button */}
+        <button
+          className="referral-card__expand-btn"
+          onClick={() => setIsExpanded(!isExpanded)}
+          aria-expanded={isExpanded}
+        >
+          {isExpanded ? (
+            <>
+              <FaChevronUp /> Show Less
+            </>
+          ) : (
+            <>
+              <FaChevronDown /> Show More Details
+            </>
+          )}
+        </button>
       </div>
-    </div>
-    // <div>Hello</div>
+
+      {/* Footer with Actions */}
+      <footer className="referral-card__footer">
+        <div className="referral-card__contact-info">
+          {contact && (
+            <a href={`tel:${contact}`} className="referral-card__contact-link">
+              <FaPhone />
+              <span>{contact}</span>
+            </a>
+          )}
+          {email && (
+            <a href={`mailto:${email}`} className="referral-card__contact-link">
+              <FaEnvelope />
+              <span>{email}</span>
+            </a>
+          )}
+        </div>
+
+        <a
+          href={website}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="referral-card__apply-btn"
+        >
+          <HiOutlineSparkles />
+          Apply Now
+          <FaExternalLinkAlt className="referral-card__external-icon" />
+        </a>
+      </footer>
+    </article>
   );
 };
 

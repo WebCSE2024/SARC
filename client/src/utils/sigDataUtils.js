@@ -1,45 +1,37 @@
-import sigData from "../data/sig.data.json";
+import { authAPI, sarcAPI } from "../../../../shared/axios/axiosInstance";
 
-export const getSIGData = () => {
-  return sigData.sigs;
+// Fetch all SIGs from SARC API
+export const fetchAllSIGs = async () => {
+  const response = await sarcAPI.get("/sig");
+  return response.data;
 };
 
-export const getSIGById = (sigId) => {
-  return sigData.sigs.find((sig) => sig.id === sigId);
+// Fetch SIG by ID from SARC API
+export const fetchSIGById = async (sigId) => {
+  const response = await sarcAPI.get(`sarc/v0/sig/${sigId}`);
+  return response.data;
 };
 
-export const getProfessorsBySIG = (sigId) => {
-  return sigData.professors.filter((prof) => prof.sigId === sigId);
+// Fetch professors by SIG from auth-system API
+export const fetchProfessorsBySIG = async (sigId) => {
+  const response = await authAPI.get(`auth-system/v0/user/professors/sig/${sigId}`);  
+  return response.data;
 };
 
-export const getPublicationsBySIG = (sigId) => {
-  return sigData.publications.filter((pub) => pub.sigId === sigId);
+// Fetch projects by SIG from SARC API
+export const fetchProjectsBySIG = async (sigId) => {
+  const response = await sarcAPI.get(`sarc/v0/sig/${sigId}/projects`);
+  return response.data;
 };
 
-export const getSeminarsBySIG = (sigId) => {
-  return sigData.seminars.filter((sem) => sem.sigId === sigId);
+// Fetch project years by SIG
+export const fetchProjectYearsBySIG = async (sigId) => {
+  const response = await sarcAPI.get(`sarc/v0/sig/${sigId}/projects/years`);
+  return response.data;
 };
 
-export const getProfessorById = (professorId) => {
-  return sigData.professors.find((prof) => prof.id === professorId);
-};
-
-export const getPublicationsByProfessor = (professorId) => {
-  return sigData.publications.filter((pub) => pub.professorId === professorId);
-};
-
-export const getSeminarsByProfessor = (professorId) => {
-  return sigData.seminars.filter((sem) => sem.professorId === professorId);
-};
-
-export const getAllPublications = () => {
-  return sigData.publications;
-};
-
-export const getAllSeminars = () => {
-  return sigData.seminars;
-};
-
-export const getAllProfessors = () => {
-  return sigData.professors;
+// Fetch single project by ID
+export const fetchProjectById = async (projectId) => {
+  const response = await sarcAPI.get(`sarc/v0/sig/project/${projectId}`);
+  return response.data;
 };

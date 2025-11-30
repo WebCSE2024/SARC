@@ -1,15 +1,10 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { ProfessorCard, ProjectCard } from "../../components/SIGCards";
 import {
-  PublicationCard,
-  ProfessorCard,
-  SeminarCard,
-} from "../../components/SIGCards";
-import {
-  getSIGById,
-  getPublicationsBySIG,
-  getProfessorsBySIG,
-  getSeminarsBySIG,
+  fetchSIGById,
+  fetchProfessorsBySIG,
+  fetchProjectsBySIG,
 } from "../../utils/sigDataUtils";
 import { getSIGBySlug } from "../../constants/sig.constants";
 import BackgroundMedia from "../../components/BackgroundMedia";
@@ -19,18 +14,64 @@ const SIGDetail = () => {
   const { domain } = useParams();
   const navigate = useNavigate();
   const [activeView, setActiveView] = useState("professors");
+  const [sigData, setSigData] = useState(null);
+  const [sigConfig, setSigConfig] = useState(null);
+  const [professors, setProfessors] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const sigConfig = useMemo(() => getSIGBySlug(domain), [domain]);
-  const sigData = useMemo(() => getSIGById(domain), [domain]);
-  const publications = useMemo(() => getPublicationsBySIG(domain), [domain]);
-  const professors = useMemo(() => getProfessorsBySIG(domain), [domain]);
-  const seminars = useMemo(() => getSeminarsBySIG(domain), [domain]);
+  useEffect(() => {
+    const loadSIGData = async () => {
+      if (!domain) return;
 
-  if (!sigConfig || !sigData) {
+      setLoading(true);
+      setError(null);
+
+      const config = getSIGBySlug(domain);
+      if (!config) {
+        setError("Invalid SIG domain");
+        setLoading(false);
+        return;
+      }
+      setSigConfig(config);
+
+      try {
+        const [sigResponse, professorsResponse, projectsResponse] =
+          await Promise.all([
+            fetchSIGById(domain),
+            fetchProfessorsBySIG(domain),
+            fetchProjectsBySIG(domain),
+          ]);
+
+        setSigData(sigResponse.data);
+        setProfessors(professorsResponse.professors || []);
+        setProjects(projectsResponse.data || []);
+      } catch (err) {
+        console.error("Error loading SIG data:", err);
+        setError("Failed to load SIG data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadSIGData();
+  }, [domain]);
+
+  if (loading) {
+    return (
+      <div className="sig-detail__loading container">
+        <div className="loading-spinner" />
+        <p>Loading SIG details...</p>
+      </div>
+    );
+  }
+
+  if (error || !sigConfig || !sigData) {
     return (
       <div className="sig-detail__error container">
         <h1>SIG Not Found</h1>
-        <p>The requested Special Interest Group does not exist.</p>
+        <p>{error || "The requested Special Interest Group does not exist."}</p>
         <button onClick={() => navigate("/sig")} className="btn primary">
           Back to SIGs
         </button>
@@ -40,21 +81,6 @@ const SIGDetail = () => {
 
   const renderTabContent = () => {
     switch (activeView) {
-      case "publications":
-        return (
-          <div className="sig-detail__grid">
-            {publications.length > 0 ? (
-              publications.map((pub) => (
-                <PublicationCard key={pub.id} publication={pub} />
-              ))
-            ) : (
-              <p className="sig-detail__empty">
-                No publications available yet.
-              </p>
-            )}
-          </div>
-        );
-
       case "professors":
         return (
           <div className="sig-detail__grid">
@@ -68,13 +94,15 @@ const SIGDetail = () => {
           </div>
         );
 
-      case "seminars":
+      case "projects":
         return (
           <div className="sig-detail__grid">
-            {seminars.length > 0 ? (
-              seminars.map((sem) => <SeminarCard key={sem.id} seminar={sem} />)
+            {projects.length > 0 ? (
+              projects.map((project) => (
+                <ProjectCard key={project._id} project={project} />
+              ))
             ) : (
-              <p className="sig-detail__empty">No seminars scheduled yet.</p>
+              <p className="sig-detail__empty">No projects available yet.</p>
             )}
           </div>
         );
@@ -112,7 +140,7 @@ const SIGDetail = () => {
             All SIGs
           </button>
 
-          <h1 className="sig-detail__title">{sigConfig.name}</h1>
+          <h1 className="sig-detail__title">{sigData.name}</h1>
           <p className="sig-detail__description">{sigData.description}</p>
 
           {sigConfig.tags && sigConfig.tags.length > 0 && (
@@ -147,27 +175,15 @@ const SIGDetail = () => {
           </button>
           <button
             className={`sig-detail__tab ${
-              activeView === "publications" ? "is-active" : ""
+              activeView === "projects" ? "is-active" : ""
             }`}
-            onClick={() => setActiveView("publications")}
+            onClick={() => setActiveView("projects")}
             role="tab"
-            aria-selected={activeView === "publications"}
-            aria-controls="publications-panel"
+            aria-selected={activeView === "projects"}
+            aria-controls="projects-panel"
           >
-            Publications
-            <span className="sig-detail__tab-count">{publications.length}</span>
-          </button>
-          <button
-            className={`sig-detail__tab ${
-              activeView === "seminars" ? "is-active" : ""
-            }`}
-            onClick={() => setActiveView("seminars")}
-            role="tab"
-            aria-selected={activeView === "seminars"}
-            aria-controls="seminars-panel"
-          >
-            Seminars
-            <span className="sig-detail__tab-count">{seminars.length}</span>
+            Projects
+            <span className="sig-detail__tab-count">{projects.length}</span>
           </button>
         </nav>
 

@@ -1,14 +1,9 @@
-export const SIG_DOMAINS = {
-  AI_ML: "ai",
-  COMPUTING_SYSTEMS: "computing-systems",
-  INFORMATION_SECURITY: "information-security",
-  THEORETICAL_CS: "theoretical-cs",
-};
+import { SIGType } from "../../../../shared/types/user.type.js";
 
 export const SIG_CONFIG = [
   {
-    id: SIG_DOMAINS.AI_ML,
-    slug: SIG_DOMAINS.AI_ML,
+    id: SIGType.AI,
+    slug: SIGType.AI,
     name: "ANVESH",
     shortName: "AI / ML",
     description:
@@ -31,8 +26,8 @@ export const SIG_CONFIG = [
     },
   },
   {
-    id: SIG_DOMAINS.COMPUTING_SYSTEMS,
-    slug: SIG_DOMAINS.COMPUTING_SYSTEMS,
+    id: SIGType.SYSTEMS,
+    slug: SIGType.SYSTEMS,
     name: "Computing Systems",
     shortName: "Computing Systems",
     description:
@@ -54,8 +49,8 @@ export const SIG_CONFIG = [
     },
   },
   {
-    id: SIG_DOMAINS.INFORMATION_SECURITY,
-    slug: SIG_DOMAINS.INFORMATION_SECURITY,
+    id: SIGType.SECURITY,
+    slug: SIGType.SECURITY,
     name: "Information Security",
     shortName: "Information Security",
     description:
@@ -77,8 +72,8 @@ export const SIG_CONFIG = [
     },
   },
   {
-    id: SIG_DOMAINS.THEORETICAL_CS,
-    slug: SIG_DOMAINS.THEORETICAL_CS,
+    id: SIGType.THEORY,
+    slug: SIGType.THEORY,
     name: "Theoretical Computer Science",
     shortName: "Theoretical CS",
     description:

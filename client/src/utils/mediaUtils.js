@@ -35,24 +35,6 @@ export const getYouTubeEmbedUrl = (url) => {
 };
 
 /**
- * Check if a URL is a video URL (supports various video platforms)
- * @param {string} url - The URL to check
- * @returns {boolean} - True if the URL is a video URL
- */
-export const isVideoUrl = (url) => {
-  if (!url || typeof url !== "string") return false;
-
-  const videoExtensions = [".mp4", ".webm", ".ogg", ".mov", ".avi"];
-  const lowercaseUrl = url.toLowerCase();
-
-  return (
-    isYouTubeUrl(url) ||
-    url.includes("vimeo.com") ||
-    videoExtensions.some((ext) => lowercaseUrl.includes(ext))
-  );
-};
-
-/**
  * Get appropriate fallback image based on content type
  * @param {string} type - The type of content (publication, seminar, professor)
  * @returns {string} - The fallback image URL

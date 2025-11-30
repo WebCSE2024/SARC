@@ -1,201 +1,341 @@
+// Professor Selector - Enhanced Design
+// Elegant horizontal scrollable tabs with smooth animations
+
 .professor-selector {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  height: fit-content;
-  position: sticky;
-  top: 24px;
-  max-height: calc(100vh - 100px);
-  display: flex;
-  flex-direction: column;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0;
+  font-family: var(--font-sans, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
 
+  // Empty State
   &.empty {
-    padding: 32px 20px;
-    text-align: center;
+    padding: 1.5rem 2rem;
 
-    .empty-message {
-      color: #666;
-      font-size: 14px;
-    }
-  }
-
-  .selector-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid #f0f7ff;
-
-    h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: #1a1a1a;
-      margin: 0;
-    }
-
-    .count-badge {
-      background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
-      color: white;
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-  }
-
-  .professors-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-right: 4px;
-
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: #f1f3f5;
-      border-radius: 3px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #cbd5e0;
-      border-radius: 3px;
-
-      &:hover {
-        background: #a0aec0;
-      }
-    }
-
-    .professor-item {
+    .empty-state {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 12px;
-      background: #fafbfc;
-      border: 2px solid transparent;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: left;
-      width: 100%;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem;
 
-      &:hover {
-        background: #f0f7ff;
-        border-color: #d6ebff;
-        transform: translateX(4px);
+      .empty-icon {
+        color: #9ca3af;
+        font-size: 1rem;
       }
 
-      &.selected {
-        background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
-        border-color: #0077b5;
-        box-shadow: 0 2px 8px rgba(0, 119, 181, 0.15);
+      .empty-message {
+        color: var(--text-muted, #475467);
+        font-size: 0.875rem;
+        margin: 0;
+      }
+    }
+  }
 
-        .professor-name {
-          color: #0077b5;
-          font-weight: 700;
-        }
+  .selector-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
 
-        .selected-indicator {
-          display: flex;
-        }
+  // Scroll Buttons
+  .scroll-btn {
+    position: absolute;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    color: var(--text-strong, #101828);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
+
+    &.visible {
+      opacity: 1;
+      pointer-events: all;
+      transform: scale(1);
+    }
+
+    &:hover {
+      background: var(--brand-500, #0a66c2);
+      border-color: var(--brand-500, #0a66c2);
+      color: white;
+      box-shadow: 0 6px 20px rgba(10, 102, 194, 0.3);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    svg {
+      font-size: 0.875rem;
+    }
+
+    &.scroll-btn-left {
+      left: 0.75rem;
+    }
+
+    &.scroll-btn-right {
+      right: 0.75rem;
+    }
+  }
+
+  // Gradient Overlays for better UX
+  .gradient-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4rem;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.visible {
+      opacity: 1;
+    }
+
+    &.gradient-left {
+      left: 0;
+      background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    &.gradient-right {
+      right: 0;
+      background: linear-gradient(to left, white 0%, rgba(255, 255, 255, 0) 100%);
+    }
+  }
+
+  // Tabs Container
+  .tabs-container {
+    display: flex;
+    gap: 0.25rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 0.875rem 2rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x proximity;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  // Individual Professor Tab
+  .professor-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 1.25rem;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    color: var(--text-muted, #475467);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    font-family: inherit;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    scroll-snap-align: start;
+    animation: tabFadeIn 0.3s ease-out backwards;
+    animation-delay: calc(var(--tab-index, 0) * 30ms);
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--brand-500, #0a66c2);
+      border-radius: 2px 2px 0 0;
+      transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:hover {
+      color: var(--text-strong, #101828);
+      background: rgba(10, 102, 194, 0.04);
+
+      .tab-count {
+        background: #e5e7eb;
+        color: var(--text-strong, #101828);
+      }
+    }
+
+    &.selected {
+      color: var(--brand-500, #0a66c2);
+
+      &::after {
+        width: 100%;
       }
 
-      .professor-avatar {
-        width: 44px;
-        height: 44px;
-        flex-shrink: 0;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 2px solid #e1e4e8;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .avatar-placeholder {
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-size: 18px;
-        }
+      .tab-name {
+        font-weight: 600;
       }
 
-      .professor-info {
-        flex: 1;
-        min-width: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-
-        .professor-name {
-          font-size: 14px;
-          font-weight: 600;
-          color: #1a1a1a;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .publication-count {
-          font-size: 12px;
-          color: #666;
-        }
-      }
-
-      .selected-indicator {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        width: 24px;
-        height: 24px;
-        background: #0077b5;
+      .tab-count {
+        background: linear-gradient(135deg, var(--brand-500, #0a66c2) 0%, var(--brand-600, #075aa9) 100%);
         color: white;
-        border-radius: 50%;
-        font-size: 12px;
-        flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(10, 102, 194, 0.3);
       }
+    }
+
+    .tab-name {
+      transition: font-weight 0.15s ease;
+    }
+
+    .tab-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.625rem;
+      height: 1.5rem;
+      padding: 0 0.5rem;
+      background: #f3f4f6;
+      color: var(--text-muted, #475467);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .selection-indicator {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--brand-500, #0a66c2);
+      border-radius: 2px 2px 0 0;
     }
   }
 }
 
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// Responsive Styles
+// ============================================
 @media (max-width: 1024px) {
   .professor-selector {
-    position: static;
-    max-height: none;
-    margin-bottom: 24px;
+    .tabs-container {
+      padding: 0.75rem 1.5rem;
+    }
 
-    .professors-list {
-      max-height: 300px;
+    .scroll-btn {
+      width: 2.25rem;
+      height: 2.25rem;
+
+      &.scroll-btn-left {
+        left: 0.5rem;
+      }
+
+      &.scroll-btn-right {
+        right: 0.5rem;
+      }
     }
   }
 }
 
 @media (max-width: 768px) {
   .professor-selector {
-    padding: 16px;
+    .tabs-container {
+      padding: 0.625rem 1rem;
+    }
 
-    .professors-list {
-      max-height: 250px;
+    .professor-tab {
+      padding: 0.625rem 1rem;
+      font-size: 0.875rem;
+      gap: 0.5rem;
 
-      .professor-item {
-        padding: 10px;
-
-        .professor-avatar {
-          width: 40px;
-          height: 40px;
-        }
+      .tab-count {
+        min-width: 1.5rem;
+        height: 1.375rem;
+        font-size: 0.6875rem;
+        padding: 0 0.375rem;
       }
+    }
+
+    .scroll-btn {
+      width: 2rem;
+      height: 2rem;
+
+      svg {
+        font-size: 0.75rem;
+      }
+
+      &.scroll-btn-left {
+        left: 0.375rem;
+      }
+
+      &.scroll-btn-right {
+        right: 0.375rem;
+      }
+    }
+
+    .gradient-overlay {
+      width: 2.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .professor-selector {
+    .tabs-container {
+      padding: 0.5rem 0.75rem;
+    }
+
+    .professor-tab {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8125rem;
+      gap: 0.375rem;
+
+      .tab-count {
+        min-width: 1.375rem;
+        height: 1.25rem;
+        font-size: 0.625rem;
+      }
+    }
+
+    .gradient-overlay {
+      width: 2rem;
+    }
+  }
+}
+
+// Reduced Motion Support
+@media (prefers-reduced-motion: reduce) {
+  .professor-selector {
+    .professor-tab {
+      animation: none;
+    }
+
+    .scroll-btn,
+    .professor-tab,
+    .tab-count,
+    .gradient-overlay {
+      transition-duration: 0.01ms !important;
     }
   }
 }

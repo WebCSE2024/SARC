@@ -1,65 +1,153 @@
+// Publications Page - Enhanced UI/UX
+// Using CSS Custom Properties from the theme
+
 .PublicationsPage {
   min-height: 100vh;
-  background: #f2f6ff;
-  padding: 32px;
-  max-width: 1600px;
-  margin: 0 auto;
+  background: var(--bg-app, #f2f6ff);
+  font-family: var(
+    --font-sans,
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif
+  );
 
+  // Screen reader only utility
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  // ============================================
+  // Loading, Error, and Empty States
+  // ============================================
   &.loading-state,
   &.error-state,
   &.empty-state {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 60vh;
+    min-height: calc(100vh - 5rem);
+    padding: 2rem;
 
     .loading-content,
     .error-content,
     .empty-content {
       text-align: center;
-      padding: 48px;
+      padding: 3.5rem 3rem;
       background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      max-width: 26rem;
+      width: 100%;
+      animation: fadeInUp 0.5s ease-out;
 
-      .spinner {
-        font-size: 48px;
-        color: #0077b5;
-        animation: spin 1s linear infinite;
+      .loader-wrapper {
+        position: relative;
+        width: 5rem;
+        height: 5rem;
+        margin: 0 auto 1.75rem;
+
+        .loader-ring {
+          position: absolute;
+          inset: 0;
+          border: 3px solid #e5e7eb;
+          border-top-color: var(--brand-500, #0a66c2);
+          border-radius: 50%;
+          animation: spin 1s ease-in-out infinite;
+        }
+
+        .loader-icon {
+          position: absolute;
+          inset: 0;
+          margin: auto;
+          font-size: 1.75rem;
+          color: var(--brand-500, #0a66c2);
+          animation: pulse 1.5s ease-in-out infinite;
+        }
       }
 
-      .error-icon {
-        font-size: 48px;
-        color: #e74c3c;
-        margin-bottom: 16px;
+      .error-icon-wrapper,
+      .empty-icon-wrapper {
+        width: 5rem;
+        height: 5rem;
+        margin: 0 auto 1.75rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .error-icon-wrapper {
+        background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+        box-shadow: 0 8px 24px rgba(220, 38, 38, 0.15);
+
+        .error-icon {
+          font-size: 2rem;
+          color: #dc2626;
+        }
+      }
+
+      .empty-icon-wrapper {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        box-shadow: 0 8px 24px rgba(5, 124, 213, 0.15);
+
+        .empty-icon {
+          font-size: 2rem;
+          color: var(--brand-500, #0a66c2);
+        }
       }
 
       h3 {
-        font-size: 24px;
-        color: #1a1a1a;
-        margin: 16px 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-strong, #101828);
+        margin-bottom: 0.625rem;
+        letter-spacing: -0.01em;
       }
 
       p {
-        color: #666;
-        margin-bottom: 24px;
+        font-size: 0.9375rem;
+        color: var(--text-muted, #475467);
+        margin-bottom: 1.75rem;
+        line-height: 1.6;
       }
 
       .retry-btn {
-        background: #0077b5;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--brand-500, #0a66c2) 0%,
+          var(--brand-600, #075aa9) 100%
+        );
         color: white;
-        padding: 12px 32px;
+        padding: 0.875rem 2rem;
         border: none;
-        border-radius: 8px;
-        font-size: 16px;
+        border-radius: 50px;
+        font-size: 0.9375rem;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 14px rgba(10, 102, 194, 0.35);
 
         &:hover {
-          background: #005885;
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3);
+          box-shadow: 0 8px 25px rgba(10, 102, 194, 0.4);
+        }
+
+        &:active {
+          transform: translateY(0);
         }
       }
     }
@@ -74,372 +162,651 @@
     }
   }
 
-  .page-header {
-    margin-bottom: 32px;
-
-    .header-content {
-      margin-bottom: 24px;
-
-      h1 {
-        font-size: 36px;
-        font-weight: 800;
-        color: #1a1a1a;
-        margin-bottom: 8px;
-        background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .subtitle {
-        font-size: 16px;
-        color: #666;
-      }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
     }
-
-    .search-container {
-      position: relative;
-      max-width: 600px;
-
-      .search-icon {
-        position: absolute;
-        left: 22px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #999;
-        font-size: 18px;
-      }
-
-      .search-input {
-        width: 100%;
-        padding: 14px 48px 14px 48px;
-        border: 2px solid #e1e4e8;
-        border-radius: 36px;
-        font-size: 15px;
-        transition: all 0.3s ease;
-        background: white;
-
-        &:focus {
-          outline: none;
-          border-color: #0077b5;
-          box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.1);
-        }
-
-        &::placeholder {
-          color: #999;
-        }
-      }
-
-      .clear-search-btn {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: #e1e4e8;
-        color: #666;
-        border: none;
-        border-radius: 50%;
-        width: 28px;
-        height: 28px;
-        font-size: 20px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s ease;
-
-        &:hover {
-          background: #cbd5e0;
-        }
-      }
+    50% {
+      opacity: 0.7;
+      transform: scale(0.95);
     }
   }
 
-  .publications-content {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 32px;
-    align-items: start;
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-    .professors-sidebar {
-      width: 100%;
+  // ============================================
+  // Hero Section
+  // ============================================
+  .page-hero {
+    position: relative;
+    background: linear-gradient(135deg, #5b21b6 0%, #4c1d95 50%, #2e1065 100%);
+    color: #ffffff;
+    padding: 2rem 0 3rem;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+          circle at 10% 30%,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 40%
+        ),
+        radial-gradient(
+          circle at 90% 70%,
+          rgba(255, 255, 255, 0.08) 0%,
+          transparent 40%
+        ),
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(167, 139, 250, 0.15) 0%,
+          transparent 60%
+        );
+      pointer-events: none;
     }
 
-    .publications-main {
-      background: white;
-      border-radius: 16px;
-      padding: 32px;
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
-      min-height: 400px;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6rem;
+      background: linear-gradient(
+        to top,
+        var(--bg-app, #f2f6ff) 0%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
 
-      .selected-professor-header {
-        margin-bottom: 32px;
-        padding-bottom: 24px;
-        border-bottom: 2px solid #f0f7ff;
+    .hero-background {
+      display: none;
+    }
 
-        .professor-profile {
+    .hero-content {
+      position: relative;
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 2rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 1.25rem;
+        animation: fadeInUp 0.5s ease-out;
+
+        svg {
+          font-size: 1rem;
+          color: #fbbf24;
+        }
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        animation: fadeInUp 0.5s ease-out 0.1s backwards;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1rem, 2vw, 1.125rem);
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 40rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.5s ease-out 0.2s backwards;
+        padding: 0 1rem;
+      }
+
+      .search-wrapper {
+        width: 100%;
+        max-width: 40rem;
+        animation: fadeInUp 0.5s ease-out 0.3s backwards;
+
+        &.focused .search-container {
+          border-color: #a78bfa;
+          box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15),
+            0 0 0 4px rgba(167, 139, 250, 0.15);
+        }
+
+        .search-container {
+          position: relative;
           display: flex;
           align-items: center;
-          gap: 20px;
+          gap: 0.75rem;
+          padding: 1rem 1.25rem;
+          background: #ffffff;
+          border: 2px solid transparent;
+          border-radius: 1rem;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08),
+            0 1px 3px rgba(0, 0, 0, 0.05);
 
-          .professor-avatar-large,
-          .avatar-placeholder-large {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
+          .search-icon {
+            color: #94a3b8;
+            font-size: 1.125rem;
             flex-shrink: 0;
           }
 
-          .professor-avatar-large {
-            object-fit: cover;
-            border: 3px solid #0077b5;
-          }
-
-          .avatar-placeholder-large {
-            background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: 700;
-          }
-
-          .professor-details {
+          .search-input {
             flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-family: inherit;
+            background: transparent;
+            color: var(--text-strong, #101828);
 
-            h2 {
-              font-size: 28px;
-              font-weight: 700;
-              color: #1a1a1a;
-              margin-bottom: 8px;
+            &::placeholder {
+              color: #94a3b8;
             }
-
-            .publication-count-text {
-              font-size: 15px;
-              color: #666;
-              font-weight: 500;
-            }
-          }
-        }
-      }
-
-      .no-publications {
-        text-align: center;
-        padding: 64px 32px;
-        color: #666;
-        font-size: 16px;
-
-        p {
-          background: #f8f9fa;
-          padding: 24px;
-          border-radius: 12px;
-          border: 2px dashed #cbd5e0;
-        }
-      }
-
-      .publications-list {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .pagination-controls {
-        margin-top: 32px;
-        padding-top: 24px;
-        border-top: 2px solid #f0f7ff;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-
-        .pagination-info {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 12px;
-
-          span {
-            color: #666;
-            font-size: 14px;
-            font-weight: 500;
-          }
-
-          .items-per-page-select {
-            padding: 8px 12px;
-            border: 2px solid #e1e4e8;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            background: white;
-            transition: all 0.2s ease;
 
             &:focus {
               outline: none;
-              border-color: #0077b5;
             }
           }
-        }
 
-        .pagination-buttons {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 12px;
-          flex-wrap: wrap;
-
-          .pagination-btn {
-            display: flex;
+          .clear-search-btn {
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: white;
-            border: 2px solid #e1e4e8;
-            border-radius: 8px;
-            color: #1a1a1a;
-            font-size: 14px;
-            font-weight: 600;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border: none;
+            background: #f1f5f9;
+            color: #64748b;
+            border-radius: 0.5rem;
             cursor: pointer;
             transition: all 0.2s ease;
 
-            &:hover:not(:disabled) {
-              background: #f0f7ff;
-              border-color: #0077b5;
-              color: #0077b5;
-            }
-
-            &:disabled {
-              opacity: 0.4;
-              cursor: not-allowed;
-            }
-          }
-
-          .page-numbers {
-            display: flex;
-            gap: 6px;
-
-            .page-number-btn {
-              width: 40px;
-              height: 40px;
-              border-radius: 8px;
-              border: 2px solid #e1e4e8;
-              background: white;
-              color: #1a1a1a;
-              font-size: 14px;
-              font-weight: 600;
-              cursor: pointer;
-              transition: all 0.2s ease;
-
-              &:hover {
-                background: #f0f7ff;
-                border-color: #0077b5;
-                color: #0077b5;
-              }
-
-              &.active {
-                background: linear-gradient(135deg, #0077b5 0%, #005885 100%);
-                border-color: #0077b5;
-                color: white;
-              }
+            &:hover {
+              background: #e2e8f0;
+              color: #0f172a;
             }
           }
         }
       }
     }
   }
-}
 
-@media (max-width: 1200px) {
-  .PublicationsPage {
-    padding: 24px;
+  // ============================================
+  // Professor Tabs Section
+  // ============================================
+  .professor-tabs-section {
+    background: white;
+    border-bottom: 1px solid var(--border, #e5e7eb);
+    position: sticky;
+    top: 5rem;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
 
-    .publications-content {
-      grid-template-columns: 280px 1fr;
-      gap: 24px;
+  // ============================================
+  // Publications Container
+  // ============================================
+  .publications-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem;
+    animation: fadeInUp 0.5s ease-out;
+
+    // No Results State
+    .no-publications {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: white;
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+
+      .no-results-illustration {
+        width: 6rem;
+        height: 6rem;
+        margin: 0 auto 1.5rem;
+        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .no-results-icon {
+          font-size: 2.5rem;
+          color: #9ca3af;
+        }
+      }
+
+      h4 {
+        font-size: 1.375rem;
+        font-weight: 700;
+        color: var(--text-strong, #101828);
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 0.9375rem;
+        color: var(--text-muted, #475467);
+        margin-bottom: 1.75rem;
+        max-width: 24rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .clear-filters-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--brand-500, #0a66c2);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: var(--brand-600, #075aa9);
+          transform: translateY(-1px);
+        }
+      }
+    }
+
+    // ============================================
+    // Results Header
+    // ============================================
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding: 1rem 1.5rem;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      .results-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+
+        .results-count {
+          font-size: 0.9375rem;
+          color: var(--text-muted, #475467);
+
+          strong {
+            color: var(--text-strong, #101828);
+            font-weight: 700;
+          }
+
+          .professor-indicator {
+            color: var(--brand-500, #0a66c2);
+            margin-left: 0.25rem;
+          }
+        }
+
+        .filter-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.375rem 0.75rem;
+          background: linear-gradient(
+            135deg,
+            rgba(10, 102, 194, 0.1) 0%,
+            rgba(10, 102, 194, 0.05) 100%
+          );
+          border: 1px solid rgba(10, 102, 194, 0.2);
+          border-radius: 50px;
+          font-size: 0.8125rem;
+          color: var(--brand-500, #0a66c2);
+          font-weight: 500;
+
+          .filter-icon {
+            font-size: 0.6875rem;
+          }
+
+          .remove-filter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.25rem;
+            height: 1.25rem;
+            background: rgba(10, 102, 194, 0.15);
+            border: none;
+            border-radius: 50%;
+            color: var(--brand-500, #0a66c2);
+            cursor: pointer;
+            margin-left: 0.25rem;
+            font-size: 0.625rem;
+            transition: all 0.15s ease;
+
+            &:hover {
+              background: var(--brand-500, #0a66c2);
+              color: white;
+            }
+          }
+        }
+      }
+
+      .view-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        .sort-control,
+        .items-control {
+          position: relative;
+
+          .sort-icon {
+            position: absolute;
+            left: 0.875rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 0.75rem;
+            pointer-events: none;
+          }
+        }
+
+        .sort-select {
+          padding: 0.625rem 1rem 0.625rem 2.25rem;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+          font-size: 0.875rem;
+          font-family: inherit;
+          color: var(--text-strong, #101828);
+          background: white;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 0.75rem center;
+          padding-right: 2rem;
+
+          &:hover {
+            border-color: #d1d5db;
+          }
+
+          &:focus {
+            outline: none;
+            border-color: var(--brand-500, #0a66c2);
+            box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.1);
+          }
+        }
+
+        .items-per-page-select {
+          padding: 0.625rem 2rem 0.625rem 0.875rem;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+          font-size: 0.875rem;
+          font-family: inherit;
+          color: var(--text-strong, #101828);
+          background: white;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 0.75rem center;
+
+          &:hover {
+            border-color: #d1d5db;
+          }
+
+          &:focus {
+            outline: none;
+            border-color: var(--brand-500, #0a66c2);
+            box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.1);
+          }
+        }
+      }
+    }
+
+    // ============================================
+    // Publications List
+    // ============================================
+    .publications-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    // ============================================
+    // Pagination Controls
+    // ============================================
+    .pagination-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      flex-wrap: wrap;
+
+      .pagination-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem 1.25rem;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        color: var(--text-strong, #101828);
+        font-size: 0.875rem;
+        font-weight: 500;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        svg {
+          font-size: 0.75rem;
+        }
+
+        &:hover:not(:disabled) {
+          background: #f9fafb;
+          border-color: var(--brand-500, #0a66c2);
+          color: var(--brand-500, #0a66c2);
+        }
+
+        &:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+        }
+      }
+
+      .page-numbers {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+
+        .page-number-btn {
+          min-width: 2.5rem;
+          height: 2.5rem;
+          padding: 0;
+          background: white;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+          color: var(--text-strong, #101828);
+          font-size: 0.875rem;
+          font-weight: 500;
+          font-family: inherit;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover:not(.active) {
+            background: #f9fafb;
+            border-color: var(--brand-500, #0a66c2);
+            color: var(--brand-500, #0a66c2);
+          }
+
+          &.active {
+            background: linear-gradient(
+              135deg,
+              var(--brand-500, #0a66c2) 0%,
+              var(--brand-600, #075aa9) 100%
+            );
+            border-color: var(--brand-500, #0a66c2);
+            color: white;
+            box-shadow: 0 4px 12px rgba(10, 102, 194, 0.3);
+          }
+        }
+
+        .page-ellipsis {
+          padding: 0 0.375rem;
+          color: #9ca3af;
+          font-size: 0.875rem;
+        }
+      }
+    }
+
+    .pagination-summary {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-muted, #475467);
+      margin-top: 1rem;
+
+      strong {
+        color: var(--text-strong, #101828);
+        font-weight: 600;
+      }
     }
   }
 }
 
+// ============================================
+// Responsive Styles
+// ============================================
 @media (max-width: 1024px) {
   .PublicationsPage {
-    padding: 20px;
+    .page-hero {
+      padding: 2.5rem 0 2rem;
 
-    .page-header {
-      .header-content {
-        h1 {
-          font-size: 32px;
-        }
+      .hero-content {
+        padding: 0 1.5rem;
       }
     }
 
-    .publications-content {
-      grid-template-columns: 1fr;
-      gap: 20px;
+    .professor-tabs-section {
+      top: 4.5rem;
+    }
 
-      .publications-main {
-        padding: 24px;
-      }
+    .publications-container {
+      padding: 1.5rem;
     }
   }
 }
 
 @media (max-width: 768px) {
   .PublicationsPage {
-    padding: 16px;
+    .page-hero {
+      padding: 2rem 0 1.75rem;
 
-    .page-header {
-      margin-bottom: 24px;
+      .hero-content {
+        padding: 0 1rem;
 
-      .header-content {
-        h1 {
-          font-size: 28px;
+        .hero-badge {
+          padding: 0.375rem 0.75rem;
+          font-size: 0.75rem;
         }
 
-        .subtitle {
-          font-size: 14px;
+        .hero-subtitle {
+          font-size: 0.9375rem;
+          margin-bottom: 1.5rem;
         }
-      }
 
-      .search-container {
-        .search-input {
-          padding: 12px 40px 12px 40px;
-          font-size: 14px;
+        .search-wrapper .search-container {
+          .search-icon {
+            left: 1.25rem;
+            font-size: 1rem;
+          }
+
+          .search-input {
+            padding: 1rem 3rem 1rem 3rem;
+            font-size: 0.9375rem;
+          }
         }
       }
     }
 
-    .publications-content {
-      .publications-main {
-        padding: 20px;
+    .professor-tabs-section {
+      top: 4rem;
+    }
 
-        .selected-professor-header {
-          .professor-profile {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 16px;
+    .publications-container {
+      padding: 1rem;
 
-            .professor-details {
-              h2 {
-                font-size: 24px;
-              }
-            }
+      .results-header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+
+        .results-info {
+          justify-content: center;
+        }
+
+        .view-controls {
+          justify-content: center;
+          width: 100%;
+
+          .sort-select,
+          .items-per-page-select {
+            flex: 1;
+            min-width: 0;
+          }
+        }
+      }
+
+      .pagination-controls {
+        gap: 0.375rem;
+        padding: 1rem;
+
+        .pagination-btn {
+          padding: 0.5rem 0.875rem;
+
+          .btn-text {
+            display: none;
           }
         }
 
-        .pagination-controls {
-          .pagination-buttons {
-            .pagination-btn {
-              padding: 8px 16px;
-              font-size: 13px;
-            }
-
-            .page-numbers {
-              .page-number-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 13px;
-              }
-            }
-          }
+        .page-numbers .page-number-btn {
+          min-width: 2.25rem;
+          height: 2.25rem;
         }
       }
     }
@@ -448,55 +815,72 @@
 
 @media (max-width: 480px) {
   .PublicationsPage {
-    .publications-content {
-      .publications-main {
-        padding: 16px;
+    .page-hero {
+      padding: 1.5rem 0;
 
-        .selected-professor-header {
-          margin-bottom: 24px;
+      .hero-content {
+        padding: 0 0.75rem;
 
-          .professor-profile {
-            .professor-avatar-large,
-            .avatar-placeholder-large {
-              width: 60px;
-              height: 60px;
-            }
-
-            .professor-details {
-              h2 {
-                font-size: 20px;
-              }
-
-              .publication-count-text {
-                font-size: 14px;
-              }
-            }
-          }
+        .hero-title {
+          font-size: 1.75rem;
         }
 
-        .pagination-controls {
-          .pagination-info {
-            flex-direction: column;
-            align-items: flex-start;
+        .search-wrapper .search-container {
+          .search-icon {
+            left: 1rem;
           }
 
-          .pagination-buttons {
-            flex-direction: column;
-            width: 100%;
+          .search-input {
+            padding: 0.875rem 2.5rem;
+            font-size: 0.875rem;
+          }
 
-            .pagination-btn {
-              width: 100%;
-              justify-content: center;
-            }
-
-            .page-numbers {
-              order: -1;
-              justify-content: center;
-              width: 100%;
-            }
+          .clear-search-btn {
+            width: 1.75rem;
+            height: 1.75rem;
+            right: 0.75rem;
           }
         }
       }
+    }
+
+    .publications-container {
+      padding: 0.75rem;
+
+      .publications-list {
+        gap: 0.75rem;
+      }
+
+      .results-header {
+        border-radius: 0.75rem;
+
+        .view-controls {
+          flex-direction: column;
+
+          .sort-control,
+          .items-control {
+            width: 100%;
+          }
+
+          .sort-select,
+          .items-per-page-select {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// Reduced Motion Support
+// ============================================
+@media (prefers-reduced-motion: reduce) {
+  .PublicationsPage {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
   }
 }
