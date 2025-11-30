@@ -16,8 +16,19 @@ import {
 import { UserType } from "../../../../../shared/types/user.type.js";
 const router = Router();
 
-router.post("/create-referral", authenticate, setUser, createReferral);
-router.get("/referral-list", authenticate, requireRole(UserType.ADMIN), getAllReferrals);
+router.post(
+  "/create-referral",
+  authenticate,
+  requireRole([UserType.ADMIN, UserType.PROFESSOR, UserType.ALUMNI]),
+  setUser,
+  createReferral
+);
+router.get(
+  "/referral-list",
+  authenticate,
+  requireRole(UserType.ADMIN),
+  getAllReferrals
+);
 router.patch(
   "/toggle-status/:id",
   authenticate,
@@ -31,7 +42,12 @@ router.delete(
   deleteReferral
 );
 router.post("/:referralId", authenticate, getReferralDetails);
-router.get("/get-my-referral", authenticate, requireRole([UserType.ALUMNI, UserType.ADMIN, UserType.PROFESSOR]), getMyReferrals);
+router.get(
+  "/get-my-referral",
+  authenticate,
+  requireRole([UserType.ALUMNI, UserType.ADMIN, UserType.PROFESSOR]),
+  getMyReferrals
+);
 router.get("/active", authenticate, getActiveReferrals);
 
 export default router;
