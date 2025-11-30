@@ -3,7 +3,6 @@ import "./ProfilePage.scss";
 // import profileImg from '../../../public/NoProfileImg.png'
 // import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-// import ActivityCard from "../../features/ProfilePageActivity/ActivityCard";
 import ExperienceItem from "../../components/ExperienceBox/ExperienceItem";
 import EducationItem from "../../components/EducationBox/EducationItem";
 import defaultProfileImg from "../../../public/NoProfileImg.png";
@@ -116,8 +115,6 @@ const ProfilePage = () => {
               {/* <EducationItem /> */}
             </section>
           )}
-
-          {/* <ActivityCard /> */}
 
           <div className="logout-section">
             <button className="logout-btn" onClick={handleLogout}>
