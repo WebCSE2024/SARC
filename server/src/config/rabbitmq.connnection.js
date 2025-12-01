@@ -13,7 +13,7 @@ export const initializeServices = async () => {
 
     // Initialize SIG service and seed data
     await sigService.initialize(rabbitMQUrl);
-    await sigService.seedSIGs();
+    // await sigService.seedSIGs();
     console.log("SIG RabbitMQ service initialized");
 
     console.log("Services initialized successfully");
