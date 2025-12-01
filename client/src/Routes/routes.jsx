@@ -36,7 +36,7 @@ export const protectedRoutes = [
   {
     path: "/sig",
     element: (
-      <RoleBasedRoute allowedRoles={[UserType.ADMIN, UserType.PROFESSOR]} />
+      <RoleBasedRoute allowedRoles={[UserType.ADMIN, UserType.PROFESSOR, UserType.STUDENT]} />
     ),
     children: [
       {
